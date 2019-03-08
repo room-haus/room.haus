@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Favorit";
+    src: url('./Favorit-Regular.otf');
+}
+
+@font-face {
+    font-family: "NeueHaasGrotDisp";
+    src: url('./NeueHaasGrotDisp-55Roman.otf');
+}
+
+@font-face {
+    font-family: "NeueHaasGrotDisp-Medium";
+    src: url('./NeueHaasGrotDisp-65Medium.otf');
+}
