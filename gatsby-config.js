@@ -21,10 +21,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
-        endpoint:
-          'https://haus.us19.list-manage.com/subscribe/post?u=0f6742d7b6230e568f9a7e812&amp;id=23a9efd881',
+        endpoint: 'https://haus.us19.list-manage.com/subscribe/post?u=0f6742d7b6230e568f9a7e812&amp;id=23a9efd881',
       },
     },
-    'gatsby-plugin-offline',
+    'gatsby-plugin-remove-serviceworker',
   ],
 };
