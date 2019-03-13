@@ -9,6 +9,7 @@ jobs:
       - checkout
       - run: npm install
       - run: sudo npm install -g gatsby
+      - run: ls
       - run: gatsby build
     # #   - run: |
     # #      docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
