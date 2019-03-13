@@ -4,7 +4,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run: |
          docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
     # build the application image
