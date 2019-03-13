@@ -4,7 +4,6 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:10.15
-    machine: true
     steps:
       - checkout
       - run: npm install
