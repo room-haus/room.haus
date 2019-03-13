@@ -8,5 +8,4 @@ jobs:
       - run: echo "A first hello"
     branches:
       only:
-        - master
         - docker
