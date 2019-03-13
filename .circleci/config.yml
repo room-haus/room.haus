@@ -1,11 +1,17 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.4.1
+    machine: true
     steps:
       - checkout
-      - run: echo "A first hello"
+      - setup_remote_docker
+      - run: |
+         docker login $DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
+    # build the application image
+      - run: docker build -t $DOCKER_REGISTRY/app:latest .
+
+     # deploy the image
+      - run: docker push company/app:latest
     branches:
       only:
         - docker
