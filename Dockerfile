@@ -1,8 +1,5 @@
-FROM node:10.15
+FROM nginx:alpine
 
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-RUN npm install -g gatsby
-COPY . .
-ENTRYPOINT ["sh", "./start.sh"]
+RUN mkdir /www
+COPY public /www
+COPY nginx.conf /etc/nginx/nginx.conf

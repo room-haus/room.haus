@@ -1,2 +1,2 @@
-gatsby build
-gatsby serve
+gatsby build --prefix-paths
+gatsby serve --prefix-paths
