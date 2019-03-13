@@ -1,0 +1,2 @@
+gatsby build
+gatsby serve
