@@ -1,3 +1,5 @@
+![build](https://dev.azure.com/room-haus/room-haus/_apis/build/status/site-build)
+
 # gatsby-starter-default
 The default Gatsby starter.
 
