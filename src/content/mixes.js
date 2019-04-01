@@ -17,6 +17,7 @@ import mx020 from '../images/mx020.jpg';
 import mx021 from '../images/mx021.jpg';
 import mx022 from '../images/mx022.jpg';
 import mx023 from '../images/mx023.jpg';
+import rm001 from '../images/rm001.jpg';
 import mx019Label from '../images/cd_template_MX019.png';
 
 export const mixes = [
@@ -207,9 +208,9 @@ export const mixes = [
   },
   {
     id: 'RM001',
-    art: mx021,
+    art: rm001,
     artist: 'Tony Cruise',
-    name: 'Consensual',
+    name: 'Only Consensual',
     catalogueNumber: 'ROOM001',
     hidden: true,
   },

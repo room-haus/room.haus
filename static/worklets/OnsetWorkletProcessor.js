@@ -106,6 +106,7 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     this.sdHistory = [];
     this.threshold = 0;
     this.highestPeak = 0;
+    this.perf = [];
   }
 
   calculateODF() {
@@ -139,13 +140,24 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
   process(inputs) {
     const samples = inputs[1][0];
     this.buffer.write(samples);
+    const timeA = new Date().getTime();
     if (this.buffer.isFull()) {
+      // performance.mark('worklet-start');
       this.updateFrames();
-      const odf = this.calculateODF();
+      // const odf = this.calculateODF();
       const spectralDiff = this.spectralDifferenceODF();
       const threshold = this.calculateThreshold();
       const isPreviousPeak = this.isPreviousOnset();
-      this.port.postMessage({odf, spectralDiff, threshold, isPreviousPeak, debug: false});
+      this.port.postMessage({spectralDiff, threshold, isPreviousPeak, debug: false});
+      // performance.mark('worklet-end');
+      // performance.measure('worklet', 'worklet-start', 'worklet-end');
+    }
+    const timeB = new Date().getTime();
+    this.port.postMessage({time: timeB - timeA, debug: true});
+    if (currentTime > 20) {
+      // performance.clearMarks();
+      // performance.clearMeasures();
+      return false;
     }
     return true;
   }

@@ -17,8 +17,7 @@ const Video = styled.video`
   position: absolute;
   left: 0;
   top: 0;
-  width: 50%;
-  height: 100%;
+  opacity: 0;
 `;
 
 const Canvas = styled.canvas`

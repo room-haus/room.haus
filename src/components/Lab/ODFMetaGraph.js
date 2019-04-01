@@ -52,7 +52,7 @@ class ODFMetaGraph extends React.Component {
       .domain([0, 2])
       .range([height, 0]);
     const odfLine = line()
-      .defined((d) => d.odf !== undefined)
+      .defined((d) => d.spectralDiff !== undefined)
       .x((d, i) => x(i))
       .y((d) => y(d.spectralDiff));
     const thresholdLine = line()

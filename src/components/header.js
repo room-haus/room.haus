@@ -135,7 +135,7 @@ const CarouselContainer = styled.div`
   background: #f5f6f6;
   top: 81px;
   left: 0;
-  width: 500px;
+  width: 100%;
 `;
 
 const Header = (props) => {

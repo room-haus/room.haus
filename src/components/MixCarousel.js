@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'gatsby';
-import Carousel from 'nuka-carousel';
 import MixWidget from './MixWidget';
 import {liveMixes} from '../content/mixes';
 import AudioMetaContext from './contexts/audio/AudioMetaContext';
@@ -29,9 +28,13 @@ const getMixWidgetLink = ({className}, meta, mx) => {
 };
 
 const CarouselWrapper = styled.div`
-  padding: 0.5em 5px;
+  padding: 0.5em 1em;
   border-bottom: 1px solid gray;
   border-top: 1px solid gray;
+  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
   ${MixWidget} {
     transform: opacity grayscale;
@@ -55,13 +58,23 @@ export default (props) => {
   const mixGetter = navigate ? getMixWidgetLink : getMixWidgetLoader;
   return (
     <AudioMetaContext.Consumer>
-      {({meta}) => (
-        <CarouselWrapper>
-          <Carousel withoutControls speed={2000} {...props} wrapAround={false}>
-            {liveMixes.map((mx) => mixGetter(props, meta, mx))}
-          </Carousel>
-        </CarouselWrapper>
-      )}
+      {({meta}) => <CarouselWrapper>{liveMixes.map((mx) => mixGetter(props, meta, mx))}</CarouselWrapper>}
     </AudioMetaContext.Consumer>
   );
 };
+
+// export default (props) => {
+//   const {navigate} = props;
+//   const mixGetter = navigate ? getMixWidgetLink : getMixWidgetLoader;
+//   return (
+//     <AudioMetaContext.Consumer>
+//       {({meta}) => (
+//         <CarouselWrapper>
+//           <Carousel withoutControls speed={2000} {...props} wrapAround={false}>
+//             {liveMixes.map((mx) => mixGetter(props, meta, mx))}
+//           </Carousel>
+//         </CarouselWrapper>
+//       )}
+//     </AudioMetaContext.Consumer>
+//   );
+// };

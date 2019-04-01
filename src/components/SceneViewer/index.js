@@ -49,6 +49,15 @@ class SceneViewer extends React.Component {
     this.state = {Background: null, ready: false, loaded: false};
   }
 
+  componentDidMount() {
+    const {scene} = this.props;
+    this.sceneManager.init(this.canvas.current);
+    this.sceneManager.runScene(scene);
+    this.setState({
+      Background: this.sceneManager.background,
+    });
+  }
+
   componentDidUpdate(prevProps) {
     const {source, scene, setter} = this.props;
     this.sceneManager.audio = source;
@@ -77,14 +86,6 @@ class SceneViewer extends React.Component {
         setter(mix.id);
       }
     }
-  }
-
-  componentDidMount() {
-    this.sceneManager.init(this.canvas.current);
-    this.sceneManager.runScene(this.props.scene);
-    this.setState({
-      Background: this.sceneManager.background,
-    });
   }
 
   componentWillUnmount() {
