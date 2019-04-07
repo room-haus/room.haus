@@ -27,19 +27,53 @@ const getMixWidgetLink = ({className}, meta, mx) => {
   );
 };
 
+const RelativeWrapper = styled.div`
+  position: relative;
+  box-sizing: content-box;
+  padding-top: 12px;
+  height: 100%;
+`;
+
 const CarouselWrapper = styled.div`
-  padding: 0.5em 1em;
-  border-bottom: 1px solid gray;
-  border-top: 1px solid gray;
-  overflow: auto;
-  display: flex;
-  justify-content: space-between;
   width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 0px 20px;
 
   ${MixWidget} {
+    display: inline-block;
     transform: opacity grayscale;
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
+  }
+
+  &:before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    height: 100%;
+    width: 20px;
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+  }
+
+  &:after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    height: 100%;
+    width: 20px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
+  }
+
+  * + * {
+    margin-left: 2em;
   }
 
   &:hover ${MixWidget} {
@@ -58,23 +92,11 @@ export default (props) => {
   const mixGetter = navigate ? getMixWidgetLink : getMixWidgetLoader;
   return (
     <AudioMetaContext.Consumer>
-      {({meta}) => <CarouselWrapper>{liveMixes.map((mx) => mixGetter(props, meta, mx))}</CarouselWrapper>}
+      {({meta}) => (
+        <RelativeWrapper>
+          <CarouselWrapper>{liveMixes.map((mx) => mixGetter(props, meta, mx))}</CarouselWrapper>
+        </RelativeWrapper>
+      )}
     </AudioMetaContext.Consumer>
   );
 };
-
-// export default (props) => {
-//   const {navigate} = props;
-//   const mixGetter = navigate ? getMixWidgetLink : getMixWidgetLoader;
-//   return (
-//     <AudioMetaContext.Consumer>
-//       {({meta}) => (
-//         <CarouselWrapper>
-//           <Carousel withoutControls speed={2000} {...props} wrapAround={false}>
-//             {liveMixes.map((mx) => mixGetter(props, meta, mx))}
-//           </Carousel>
-//         </CarouselWrapper>
-//       )}
-//     </AudioMetaContext.Consumer>
-//   );
-// };

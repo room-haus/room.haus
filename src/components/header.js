@@ -67,7 +67,6 @@ const RoomIcon = styled.img`
 const IconContainer = styled.div`
   position: absolute;
   right: 0;
-  /* margin: 0.3em 0 0 0.3em; */
   height: 100%;
   width: 25%;
   display: flex;
@@ -132,10 +131,14 @@ const PageDescription = styled.span`
 
 const CarouselContainer = styled.div`
   position: absolute;
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
   background: #f5f6f6;
-  top: 81px;
+  top: 4.5em;
   left: 0;
-  width: 100%;
+  width: 100vw;
+  overflow: hidden;
+  height: 74px;
 `;
 
 const Header = (props) => {

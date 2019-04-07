@@ -3,7 +3,7 @@ import * as BABYLON from 'babylonjs';
 import useWindowSize from '@rehooks/window-size';
 import VideoGrid from '../../components/VideoGrid';
 
-export const sceneAssetsPath = 'mixes/RM001/Abstract.babylon';
+// export const sceneAssetsPath = 'mixes/RM001/Abstract.babylon';
 // import CaseTexture from '../../images/mx021.jpg';
 // import CDLabelTexture from '../../images/cd_template_MX021.png';
 
@@ -15,11 +15,11 @@ export const build = ({scene}) => {
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
-  scene.meshes.forEach((mesh) => {
-    mesh.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
-    mesh.rotate(BABYLON.Axis.X, -Math.PI / 3);
-    mesh.rotate(BABYLON.Axis.Y, -Math.PI / 2);
-  });
+  // scene.meshes.forEach((mesh) => {
+  //   mesh.scaling = new BABYLON.Vector3(0.05, 0.05, 0.05);
+  //   mesh.rotate(BABYLON.Axis.X, -Math.PI / 3);
+  //   mesh.rotate(BABYLON.Axis.Y, -Math.PI / 2);
+  // });
 
   const CAMERA_DISTANCE = 30;
   scene.activeCamera.lowerRadiusLimit = CAMERA_DISTANCE;

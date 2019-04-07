@@ -91,7 +91,9 @@ class VideoGrid extends React.Component {
 
   animate() {
     tileVideoCanvas(this.ctx, this.videos, this.canvas, this.videoMatrix);
-    requestAnimationFrame(this.animate.bind(this));
+    if (this.canvas && this.videos && this.videos.every((v) => Boolean(v.ref.current))) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
   }
 
   loadVideos() {

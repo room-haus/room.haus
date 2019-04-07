@@ -6,14 +6,15 @@ const BUFFERS_PER_FRAME = 4;
 const FRAME_SIZE = BUFFER_SIZE * BUFFERS_PER_FRAME;
 
 const scaleTransform = (trans, size) => {
+  const buffer = new Float32Array(size);
   let i = 0;
   const bSi = 1.0 / size;
   const x = trans;
   while (i < x.length) {
-    x[i] *= bSi;
+    buffer[i] = x[i] * bSi;
     i++;
   }
-  return x;
+  return buffer;
 };
 
 class MyAudioBuffer {
@@ -58,9 +59,7 @@ class AudioFrame {
   samples() {
     const buffer = new Float32Array(FRAME_SIZE);
     for (let b = 0; b < this.buffers.length; b++) {
-      for (let i = 0; i < BUFFER_SIZE; i++) {
-        buffer[b * BUFFER_SIZE + i] = this.buffers[b].buffer[i];
-      }
+      buffer.set(this.buffers[b].buffer, BUFFER_SIZE * b);
     }
     return buffer;
   }
@@ -74,7 +73,7 @@ class AudioFrame {
     const fft = new FFTR(samples.length);
     const transformed = fft.forward(samples);
     fft.dispose();
-    return [...scaleTransform(transformed, samples.length)];
+    return scaleTransform(transformed, samples.length);
   }
 }
 
@@ -140,24 +139,13 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
   process(inputs) {
     const samples = inputs[1][0];
     this.buffer.write(samples);
-    const timeA = new Date().getTime();
     if (this.buffer.isFull()) {
-      // performance.mark('worklet-start');
       this.updateFrames();
       // const odf = this.calculateODF();
       const spectralDiff = this.spectralDifferenceODF();
       const threshold = this.calculateThreshold();
       const isPreviousPeak = this.isPreviousOnset();
       this.port.postMessage({spectralDiff, threshold, isPreviousPeak, debug: false});
-      // performance.mark('worklet-end');
-      // performance.measure('worklet', 'worklet-start', 'worklet-end');
-    }
-    const timeB = new Date().getTime();
-    this.port.postMessage({time: timeB - timeA, debug: true});
-    if (currentTime > 20) {
-      // performance.clearMarks();
-      // performance.clearMeasures();
-      return false;
     }
     return true;
   }

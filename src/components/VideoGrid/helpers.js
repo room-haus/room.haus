@@ -20,7 +20,7 @@ export const tileVideoCanvas = (context, videos, canvas, matrix) => {
     for (let y = 0; y < rows; y++) {
       const index = matrix[y][x];
       const video = videos[index].ref.current;
-      context.drawImage(video, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+      video && context.drawImage(video, x * tileWidth, y * tileHeight, tileWidth, tileHeight);
     }
   }
 };
