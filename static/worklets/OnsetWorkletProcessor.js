@@ -100,7 +100,6 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
   constructor({processorOptions: {mode}}) {
     super();
     this.mode = mode;
-    console.log(this.mode);
     this.buffer = new MyAudioBuffer();
     this.frames = [new AudioFrame(), new AudioFrame()];
     this.odfHistory = [];
