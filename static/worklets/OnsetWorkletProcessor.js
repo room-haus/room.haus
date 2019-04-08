@@ -100,6 +100,7 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
   constructor({processorOptions: {mode}}) {
     super();
     this.mode = mode;
+    console.log(this.mode);
     this.buffer = new MyAudioBuffer();
     this.frames = [new AudioFrame(), new AudioFrame()];
     this.odfHistory = [];
@@ -150,19 +151,23 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     return true;
   }
 
+  getHistory() {
+    return this.mode === 'SPECTRAL_DIFFERENCE' ? this.sdHistory : this.odfHistory;
+  }
+
   calculateThreshold() {
     // σn = λ × median(O[nm]) + α × mean(O[nm]) + N
     const lambda = 1.0;
     const alpha = 0.7;
     const m = 10;
     const weightedHighestPeak = this.highestPeak * 0.05;
-    const prevODFValues = this.sdHistory.slice(0, m);
+    const prevODFValues = this.getHistory().slice(0, m);
     this.threshold = lambda * median(prevODFValues) + alpha * mean(prevODFValues) + weightedHighestPeak;
     return this.threshold;
   }
 
   isPreviousOnset() {
-    const [curr = 0, prev = 0, prevprev = 0] = this.sdHistory.slice(0, 3);
+    const [curr = 0, prev = 0, prevprev = 0] = this.getHistory().slice(0, 3);
     if (prev > curr && prev > prevprev) {
       if (prev > this.threshold) {
         this.highestPeak = prev > this.highestPeak ? prev : this.highestPeak;

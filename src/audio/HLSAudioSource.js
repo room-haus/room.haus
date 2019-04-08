@@ -55,8 +55,9 @@ export default class HLSAudioSource {
     this.analyser.fft = FREQ_BIN_COUNT * 2;
     this.frequencyBuffer = new Uint8Array(this.analyser.frequencyBinCount);
     this.timeDomainBuffer = new Uint8Array(this.analyser.frequencyBinCount);
-    if (this.ctx.audioWorklet) {
-      const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
+    const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
+    console.log(`CPU corse: ${cpuCores}`);
+    if (this.ctx.audioWorklet && cpuCores > 1) {
       this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
       try {
         await this.bpmAnalyzerNode.init();
