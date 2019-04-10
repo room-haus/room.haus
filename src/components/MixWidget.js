@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const MixContainer = styled.div`
   position: relative;
   height: ${(props) => props.height || '50px'};
-  width: ${(props) => props.width || '200px'};
   margin: auto;
   overflow: hidden;
 `;

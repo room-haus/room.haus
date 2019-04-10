@@ -17,8 +17,7 @@ const Video = styled.video`
   position: absolute;
   left: 0;
   top: 0;
-  width: 50%;
-  height: 100%;
+  opacity: 0;
 `;
 
 const Canvas = styled.canvas`
@@ -92,7 +91,9 @@ class VideoGrid extends React.Component {
 
   animate() {
     tileVideoCanvas(this.ctx, this.videos, this.canvas, this.videoMatrix);
-    requestAnimationFrame(this.animate.bind(this));
+    if (this.canvas && this.videos && this.videos.every((v) => Boolean(v.ref.current))) {
+      requestAnimationFrame(this.animate.bind(this));
+    }
   }
 
   loadVideos() {

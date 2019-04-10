@@ -1,8 +1,12 @@
 import {withPrefix} from 'gatsby';
 
+const ENERGY = 'ENERGY';
+const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
+
 export default class BPMDetectorWorkletNode {
-  constructor(context, onMessage) {
+  constructor(context, onMessage, {cpuCores = 1} = {}) {
     this.context = context;
+    this.mode = cpuCores > 4 ? SPECTRAL_DIFFERENCE : ENERGY;
     this.onMessage = onMessage || function() {};
     this.filteredInputs = {
       analyser: context.createAnalyser(),
@@ -23,6 +27,9 @@ export default class BPMDetectorWorkletNode {
     await this.context.audioWorklet.addModule(withPrefix('worklets/OnsetWorkletProcessor.js'));
     this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
       numberOfInputs: 4,
+      processorOptions: {
+        mode: this.mode,
+      },
     });
     Object.values(this.filteredInputs).forEach((input, index) => input.connect(this.node, 0, index));
     this.node.connect(this.context.destination);

@@ -54,7 +54,7 @@ class ODFMetaGraph extends React.Component {
     const odfLine = line()
       .defined((d) => d.odf !== undefined)
       .x((d, i) => x(i))
-      .y((d) => y(d.spectralDiff));
+      .y((d) => y(d.odf));
     const thresholdLine = line()
       .defined((d) => d.threshold !== undefined)
       .x((d, i) => x(i))
@@ -62,7 +62,7 @@ class ODFMetaGraph extends React.Component {
     const odfArea = area()
       .x((d, i) => x(i))
       .y0(height)
-      .y1((d) => y(d.spectralDiff));
+      .y1((d) => y(d.odf));
 
     g.append('defs')
       .append('clipPath')
@@ -151,7 +151,7 @@ class ODFMetaGraph extends React.Component {
     const {source, onBeat} = this.props;
     const {source: prevSource} = prevProps;
     if (source && (!prevSource || prevSource.id !== source.id)) {
-      source.setODFUpdateCallback(({threshold, odf, spectralDiff, isPreviousPeak}) => {
+      source.setODFUpdateCallback(({threshold, odf, isPreviousPeak}) => {
         if (!source.isPlaying()) {
           return;
         }
@@ -161,7 +161,7 @@ class ODFMetaGraph extends React.Component {
           this.data[this.data.length - 1].onset = true;
           // this.onsetMarkers();
         }
-        this.data.push({odf, threshold, spectralDiff, onset: false});
+        this.data.push({odf, threshold, onset: false});
         if (this.data.length > this.MAX_FRAMES) {
           if (this.data[0].onset) {
             this.peakMarkers.shift();

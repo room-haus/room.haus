@@ -6,14 +6,15 @@ const BUFFERS_PER_FRAME = 4;
 const FRAME_SIZE = BUFFER_SIZE * BUFFERS_PER_FRAME;
 
 const scaleTransform = (trans, size) => {
+  const buffer = new Float32Array(size);
   let i = 0;
   const bSi = 1.0 / size;
   const x = trans;
   while (i < x.length) {
-    x[i] *= bSi;
+    buffer[i] = x[i] * bSi;
     i++;
   }
-  return x;
+  return buffer;
 };
 
 class MyAudioBuffer {
@@ -58,9 +59,7 @@ class AudioFrame {
   samples() {
     const buffer = new Float32Array(FRAME_SIZE);
     for (let b = 0; b < this.buffers.length; b++) {
-      for (let i = 0; i < BUFFER_SIZE; i++) {
-        buffer[b * BUFFER_SIZE + i] = this.buffers[b].buffer[i];
-      }
+      buffer.set(this.buffers[b].buffer, BUFFER_SIZE * b);
     }
     return buffer;
   }
@@ -74,7 +73,7 @@ class AudioFrame {
     const fft = new FFTR(samples.length);
     const transformed = fft.forward(samples);
     fft.dispose();
-    return [...scaleTransform(transformed, samples.length)];
+    return scaleTransform(transformed, samples.length);
   }
 }
 
@@ -98,17 +97,19 @@ const mean = (values) => {
 };
 
 class OnsetWorkletProcesser extends AudioWorkletProcessor {
-  constructor() {
+  constructor({processorOptions: {mode}}) {
     super();
+    this.mode = mode;
     this.buffer = new MyAudioBuffer();
     this.frames = [new AudioFrame(), new AudioFrame()];
     this.odfHistory = [];
     this.sdHistory = [];
     this.threshold = 0;
     this.highestPeak = 0;
+    this.perf = [];
   }
 
-  calculateODF() {
+  energyODF() {
     const [prevFrame, currFrame] = this.frames.slice(-2);
     const odf = Math.abs(currFrame.energy() - prevFrame.energy());
     this.odfHistory.unshift(odf);
@@ -141,13 +142,16 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     this.buffer.write(samples);
     if (this.buffer.isFull()) {
       this.updateFrames();
-      const odf = this.calculateODF();
-      const spectralDiff = this.spectralDifferenceODF();
+      const odf = this.mode === 'SPECTRAL_DIFFERENCE' ? this.spectralDifferenceODF() : this.energyODF();
       const threshold = this.calculateThreshold();
       const isPreviousPeak = this.isPreviousOnset();
-      this.port.postMessage({odf, spectralDiff, threshold, isPreviousPeak, debug: false});
+      this.port.postMessage({odf, threshold, isPreviousPeak, debug: false});
     }
     return true;
+  }
+
+  getHistory() {
+    return this.mode === 'SPECTRAL_DIFFERENCE' ? this.sdHistory : this.odfHistory;
   }
 
   calculateThreshold() {
@@ -156,13 +160,13 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     const alpha = 0.7;
     const m = 10;
     const weightedHighestPeak = this.highestPeak * 0.05;
-    const prevODFValues = this.sdHistory.slice(0, m);
+    const prevODFValues = this.getHistory().slice(0, m);
     this.threshold = lambda * median(prevODFValues) + alpha * mean(prevODFValues) + weightedHighestPeak;
     return this.threshold;
   }
 
   isPreviousOnset() {
-    const [curr = 0, prev = 0, prevprev = 0] = this.sdHistory.slice(0, 3);
+    const [curr = 0, prev = 0, prevprev = 0] = this.getHistory().slice(0, 3);
     if (prev > curr && prev > prevprev) {
       if (prev > this.threshold) {
         this.highestPeak = prev > this.highestPeak ? prev : this.highestPeak;
