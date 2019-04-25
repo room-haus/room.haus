@@ -3,6 +3,7 @@
   "env": {
       "browser": true
   },
+  "plugins": ["react-hooks"],
   "parser": "babel-eslint",
   "rules": {
       "arrow-parens": "off",

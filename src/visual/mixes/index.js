@@ -9,6 +9,7 @@ import * as MX020 from './MX020';
 import * as MX021 from './MX021';
 import * as MX022 from './MX022';
 import * as MX023 from './MX023';
+import * as MX029 from './MX029';
 import * as RM001 from './RM001';
 
 export const mixConfigs = {
@@ -55,6 +56,10 @@ export const mixConfigs = {
   MX023: {
     id: 'MX023',
     ...MX023,
+  },
+  MX029: {
+    id: 'MX029',
+    ...MX029,
   },
   RM001: {
     id: 'RM001',

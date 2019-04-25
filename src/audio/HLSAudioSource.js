@@ -96,7 +96,10 @@ export default class HLSAudioSource {
       }
     });
 
-    const manifestUrl = `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/${id}.m3u8`;
+    const manifestUrl =
+      id === 'MX029'
+        ? `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/audio/${id}.m3u8`
+        : `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/${id}.m3u8`;
 
     if (HLS.isSupported()) {
       this.hls && this.hls.destroy();
