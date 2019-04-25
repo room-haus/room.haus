@@ -226,6 +226,7 @@ export const mixes = [
     id: 'MX029',
     art: mx029,
     artist: 'Saad Ashraf',
+    name: 'Settle Another Day',
     catalogueNumber: 'MX029',
   },
 ];

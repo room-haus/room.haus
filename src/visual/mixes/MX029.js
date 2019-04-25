@@ -1,7 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
-import VideoGrid from '../../components/VideoGrid';
 import CaseTexture from '../../images/mx029.jpg';
 import CDLabelTexture from '../../images/cd_template_MX029.png';
 // import {withPrefix} from 'gatsby';
@@ -10,26 +10,24 @@ import CDLabelTexture from '../../images/cd_template_MX029.png';
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-export const build = ({scene, audio, engine}) => {
+export const build = ({scene, audio}) => {
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
   // makeSkybox(scene, withPrefix('skyboxes/space/blue/blue'));
 
-  const urls = [
-    // 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/water.m3u8',
-    'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/orange_particles.m3u8',
-    // 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/blue_particles.m3u8',
-  ];
+  const url = 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/warp.m3u8';
 
-  const vids = urls.map((url) => {
-    const vid = document.createElement('video');
-    const hls = new HLS();
-    hls.loadSource(url);
-    hls.attachMedia(vid);
-    // vid.play();
-    return vid;
-  });
+  const vid = document.createElement('video');
+  const hls = new HLS();
+  hls.loadSource(url);
+  hls.attachMedia(vid);
+  const mat = new BABYLON.StandardMaterial('mat', scene);
+  const videoTexture = new BABYLON.VideoTexture('video', vid, scene, true, true);
+  mat.diffuseTexture = videoTexture;
+  audio.callbacks.onPlay = () => videoTexture.video.play();
+  audio.callbacks.onPause = () => videoTexture.video.pause();
+
   const pl = new BABYLON.PointLight('pl', new BABYLON.Vector3(0, 0, 0), scene);
   pl.diffuse = new BABYLON.Color3(1, 1, 1);
   pl.intensity = 1.0;
@@ -62,13 +60,7 @@ export const build = ({scene, audio, engine}) => {
   };
 
   // model : triangle
-  const vid = vids[0];
   const box = BABYLON.Mesh.CreateBox('box', 1, scene, true);
-  const mat = new BABYLON.StandardMaterial('mat', scene);
-  const videoTexture = new BABYLON.VideoTexture('video', vid, scene, true, true);
-  mat.diffuseTexture = videoTexture;
-  audio.callbacks.onPlay = () => videoTexture.video.play();
-  audio.callbacks.onPause = () => videoTexture.video.pause();
 
   const SPS = new BABYLON.SolidParticleSystem('SPS', scene, {updatable: true});
   SPS.addShape(box, nb, {positionFunction: myPositionFunction});
@@ -105,15 +97,55 @@ export const build = ({scene, audio, engine}) => {
   return scene;
 };
 
-export const Background = (props) => (
-  <VideoGrid
-    {...props}
-    columns={2}
-    rows={2}
-    videos={[
-      'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/blue_particles.m3u8',
-      'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/blue.m3u8',
-      'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/clouds.m3u8',
-    ]}
-  />
-);
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+const Video = styled.video`
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+export class Background extends React.Component {
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.video = this.videoRef.current;
+    const manifestUrl = 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/bubbles.m3u8';
+
+    if (HLS.isSupported()) {
+      this.hls && this.hls.destroy();
+      this.hls = new HLS();
+      this.hls.loadSource(manifestUrl);
+      this.hls.attachMedia(this.video);
+    } else {
+      this.video.src = manifestUrl;
+    }
+  }
+
+  render() {
+    return (
+      <Container>
+        <Video
+          key="video"
+          innerRef={this.videoRef}
+          autoPlay
+          // type="video/mp4"
+          loop
+          muted
+        />
+      </Container>
+    );
+  }
+}
