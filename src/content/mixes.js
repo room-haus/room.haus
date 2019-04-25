@@ -17,6 +17,7 @@ import mx020 from '../images/mx020.jpg';
 import mx021 from '../images/mx021.jpg';
 import mx022 from '../images/mx022.jpg';
 import mx023 from '../images/mx023.jpg';
+import mx029 from '../images/mx029.jpg';
 import rm001 from '../images/rm001.jpg';
 import mx019Label from '../images/cd_template_MX019.png';
 
@@ -220,6 +221,12 @@ export const mixes = [
     artist: 'Ayesha',
     name: 'Does It Bring You Joy',
     catalogueNumber: 'MX023',
+  },
+  {
+    id: 'MX029',
+    art: mx029,
+    artist: 'Saad Ashraf',
+    catalogueNumber: 'MX029',
   },
 ];
 

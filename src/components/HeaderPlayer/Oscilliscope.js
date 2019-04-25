@@ -65,3 +65,5 @@ export const PlayerOscilliscope = (props) => {
     </OscilliscopeContainer>
   );
 };
+
+export default PlayerOscilliscope;
