@@ -21,6 +21,11 @@ class AudioSourceContext extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    const source = this.state.source;
+    source && source.pause();
+  }
+
   getOrCreate(trackId) {
     if (!trackId) {
       throw Error("Can't make source without track ID");
@@ -41,11 +46,6 @@ class AudioSourceContext extends React.Component {
     this.setState({source});
   }
 
-  componentWillUnmount() {
-    const source = this.state.source;
-    source && source.pause();
-  }
-
   meta() {
     const {source} = this.state;
     return source ? source.getMeta() : {};
@@ -54,9 +54,7 @@ class AudioSourceContext extends React.Component {
   render() {
     return (
       <AudioSourceContext.Provider value={this.state}>
-        <AudioMetaContext source={this.state.source}>
-          {this.props.children}
-        </AudioMetaContext>
+        <AudioMetaContext source={this.state.source}>{this.props.children}</AudioMetaContext>
       </AudioSourceContext.Provider>
     );
   }

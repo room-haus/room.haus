@@ -28,6 +28,12 @@ export default class Oscilloscope extends React.Component {
 
     const render = () => {
       const data = this.props.source ? this.props.source.getTimeDomainData() : [];
+      if (this.props.source.isPlaying()) {
+        console.group();
+        // console.log('TD', this.props.source.getFloatTimeDomainData());
+        console.log('FREQ', this.props.source.getFrequencyData());
+        console.groupEnd();
+      }
       const xScale = scaleLinear()
         .domain([0, data.length])
         .range([0, width]);

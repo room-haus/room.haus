@@ -22,13 +22,7 @@ class PlayButton extends React.Component {
   };
 
   render() {
-    return (
-      <PlayButtonWrapper
-        playing={this.props.playing}
-        onClick={this.onClick}
-        loading={this.props.loading}
-      />
-    );
+    return <PlayButtonWrapper playing={this.props.playing} onClick={this.onClick} loading={this.props.loading} />;
   }
 }
 

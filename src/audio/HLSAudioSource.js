@@ -5,29 +5,22 @@ import {getMix} from '../content/mixes';
 import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 
 export default class HLSAudioSource {
-  constructor({id} = {}, callbacks = {}) {
+  constructor({id} = {}) {
+    this.id = id;
     this.ready = false;
     this.meta = getMix(id) || {};
     this.callbacks = {
-      onInit: callbacks.onInit || function() {},
-      onPlay: callbacks.onPlay || function() {},
-      onPause: callbacks.onPause || function() {},
-      onToggle: callbacks.onToggle || function() {},
-      onEnd: callbacks.onEnd || function() {},
-      onLoaded: callbacks.onLoaded || function() {},
-      onProgress: callbacks.onProgress || function() {},
-      onTime: callbacks.onTime || function() {},
-      onReady: callbacks.onReady || function() {},
+      onInit: [],
+      onPlay: [],
+      onPause: [],
+      onToggle: [],
+      onEnd: [],
+      onLoaded: [],
+      onProgress: [],
+      onTime: [],
+      onReady: [],
+      onODFUpdate: [],
     };
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      this.ctx = new AudioContext();
-    } catch (e) {
-      this.ctx = null;
-    }
-    if (id) {
-      this.init(id);
-    }
 
     this.timeInterval = null;
     setInterval(() => {
@@ -40,25 +33,41 @@ export default class HLSAudioSource {
     // });
   }
 
-  async init(id) {
-    this.callbacks.onInit();
+  executeCallbacks(key, ...callbackArgs) {
+    const callbacks = this.callbacks[key];
+    if (callbacks && callbacks.length) {
+      this.callbacks[key].forEach((func) => func.call(this, callbackArgs));
+    }
+  }
+
+  registerCallback(key, func) {
+    this.callbacks[key].push(func);
+    return () => {
+      this.callbacks[key] = this.callbacks[key].filter((f) => f !== func);
+    };
+  }
+
+  async init() {
+    this.ready = false;
+    this.ctx = new AudioContext();
+    this.executeCallbacks('onInit');
 
     this.bands = {};
 
-    try {
-      this.audio = new Audio();
-    } catch (e) {
-      return;
-    }
+    this.audio = new Audio();
     this.element = this.ctx.createMediaElementSource(this.audio);
     this.analyser = this.ctx.createAnalyser();
     this.analyser.fft = FREQ_BIN_COUNT * 2;
     this.frequencyBuffer = new Uint8Array(this.analyser.frequencyBinCount);
     this.timeDomainBuffer = new Uint8Array(this.analyser.frequencyBinCount);
+    this.floatFrequencyBuffer = new Float32Array(this.analyser.frequencyBinCount);
+    this.floatTimeDomainBuffer = new Float32Array(this.analyser.frequencyBinCount);
     const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
-    console.log(`CPU cores: ${cpuCores}`);
+    console.info(`CPU cores: ${cpuCores}`);
     if (this.ctx.audioWorklet && cpuCores > 1) {
-      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
+      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.executeCallbacks.bind(this, 'onODFUpdate'), {
+        cpuCores,
+      });
       try {
         await this.bpmAnalyzerNode.init();
         this.bpmAnalyzerNode.attach(this.element);
@@ -73,11 +82,11 @@ export default class HLSAudioSource {
       this.playing = true;
 
       this.timeInterval = window.setInterval(() => {
-        this.callbacks.onTime(this.element.currentTime);
+        this.executeCallbacks('onTime', this.element.currentTime);
       }, 500);
 
-      this.callbacks.onPlay();
-      this.callbacks.onToggle();
+      this.executeCallbacks('onPlay');
+      this.executeCallbacks('onToggle');
     });
     this.audio.addEventListener('pause', () => {
       this.playing = false;
@@ -85,21 +94,21 @@ export default class HLSAudioSource {
       window.clearInterval(this.timeInterval);
       this.timeInterval = null;
 
-      this.callbacks.onPause();
-      this.callbacks.onToggle();
+      this.executeCallbacks('onPause');
+      this.executeCallbacks('onToggle');
     });
     this.audio.addEventListener('ended', () => {
       this.playing = false;
-      this.callbacks.onEnd();
+      this.executeCallbacks('onEnd');
       if (this.timeInterval) {
         window.clearInterval(this.timeInterval);
       }
     });
 
     const manifestUrl =
-      id === 'MX029'
-        ? `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/audio/${id}.m3u8`
-        : `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/${id}.m3u8`;
+      this.id === 'MX029'
+        ? `https://roomhauscdnprd.blob.core.windows.net/mixes/${this.id}/audio/${this.id}.m3u8`
+        : `https://roomhauscdnprd.blob.core.windows.net/mixes/${this.id}/${this.id}.m3u8`;
 
     if (HLS.isSupported()) {
       this.hls && this.hls.destroy();
@@ -110,6 +119,8 @@ export default class HLSAudioSource {
       this.audio.src = manifestUrl;
     }
     this.ready = true;
+    console.log(this.analyser.fftSize);
+    this.executeCallbacks('onReady');
   }
 
   setOnsetCallback(func) {
@@ -125,10 +136,11 @@ export default class HLSAudioSource {
   }
 
   play() {
-    if (this.audio) {
-      this.ctx.resume && this.ctx.resume();
-      this.audio.play();
+    if (!this.ready) {
+      this.init();
     }
+    this.ctx.resume && this.ctx.resume();
+    this.audio.play();
   }
 
   pause() {
@@ -165,7 +177,7 @@ export default class HLSAudioSource {
   }
 
   ready() {
-    return true;
+    return this.ready;
   }
 
   getTimeDomainData(band) {
@@ -177,6 +189,24 @@ export default class HLSAudioSource {
     }
     this.analyser.getByteTimeDomainData(this.timeDomainBuffer);
     return this.timeDomainBuffer ? this.timeDomainBuffer : [];
+  }
+
+  getFloatFrequencyData() {
+    if (!this.ready) {
+      return [];
+    }
+    console.log(this.analyser);
+    this.analyser.getFloatFrequencyData(this.floatFrequencyBuffer);
+    return this.floatFrequencyBuffer ? this.floatFrequencyBuffer : [];
+  }
+
+  getFloatTimeDomainData() {
+    if (!this.ready) {
+      return [];
+    }
+    console.log(this.analyser);
+    this.analyser.getFloatTimeDomainData(this.floatTimeDomainBuffer);
+    return this.floatTimeDomainBuffer ? this.floatTimeDomainBuffer : [];
   }
 
   getAverageFrequency(band) {
@@ -217,7 +247,9 @@ export default class HLSAudioSource {
   }
 
   makeBand(name, options) {
-    this.bands[name] = new AudioBand(this.ctx, this.element, options);
+    this.registerCallback('onReady', () => {
+      this.bands[name] = new AudioBand(this.ctx, this.element, options);
+    });
   }
 
   update(band) {

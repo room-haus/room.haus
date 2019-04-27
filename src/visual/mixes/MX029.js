@@ -25,8 +25,8 @@ export const build = ({scene, audio}) => {
   const mat = new BABYLON.StandardMaterial('mat', scene);
   const videoTexture = new BABYLON.VideoTexture('video', vid, scene, true, true);
   mat.diffuseTexture = videoTexture;
-  audio.callbacks.onPlay = () => videoTexture.video.play();
-  audio.callbacks.onPause = () => videoTexture.video.pause();
+  audio.registerCallback('onPlay', () => videoTexture.video.play());
+  audio.registerCallback('onPause', () => videoTexture.video.pause());
 
   const pl = new BABYLON.PointLight('pl', new BABYLON.Vector3(0, 0, 0), scene);
   pl.diffuse = new BABYLON.Color3(1, 1, 1);
