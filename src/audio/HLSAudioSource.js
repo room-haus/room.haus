@@ -58,10 +58,10 @@ export default class HLSAudioSource {
     const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
     console.log(`CPU cores: ${cpuCores}`);
     if (this.ctx.audioWorklet && cpuCores > 1) {
-      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
+      this.bpmAnalyserNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
       try {
-        await this.bpmAnalyzerNode.init();
-        this.bpmAnalyzerNode.attach(this.element);
+        await this.bpmAnalyserNode.init();
+        this.bpmAnalyserNode.attach(this.element);
       } catch (error) {
         console.error('Failed to load bpm analyzer processor!', error);
       }
@@ -113,14 +113,14 @@ export default class HLSAudioSource {
   }
 
   setOnsetCallback(func) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onsetCallback = func;
+    if (this.bpmAnalyserNode) {
+      this.bpmAnalyserNode.onsetCallback = func;
     }
   }
 
   setODFUpdateCallback(func) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onMessage = func;
+    if (this.bpmAnalyserNode) {
+      this.bpmAnalyserNode.onMessage = func;
     }
   }
 

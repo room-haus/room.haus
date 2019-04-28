@@ -6,6 +6,7 @@ const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
 export default class BPMDetectorWorkletNode {
   constructor(context, onMessage, {cpuCores = 1} = {}) {
     this.context = context;
+    this.parameters = {};
     this.mode = cpuCores > 4 ? SPECTRAL_DIFFERENCE : ENERGY;
     this.onMessage = onMessage || function() {};
     this.filteredInputs = {
@@ -23,6 +24,13 @@ export default class BPMDetectorWorkletNode {
     this.filteredInputs.high.frequency.value = 10000;
   }
 
+  setParamValue(paramName, value) {
+    const param = this.node.parameters.get(paramName);
+    if (param) {
+      param.value = value;
+    }
+  }
+
   async init() {
     await this.context.audioWorklet.addModule(withPrefix('worklets/OnsetWorkletProcessor.js'));
     this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
@@ -36,13 +44,27 @@ export default class BPMDetectorWorkletNode {
     this.node.port.onmessage = (event) => {
       const {data} = event;
       if (data.debug) {
-        console.log(event.data);
+        console.info(event.data);
       }
       if (data.isPreviousPeak && this.onsetCallback) {
         this.onsetCallback(data);
       }
       this.onMessage(data);
     };
+
+    const addMeta = (name, stepSize = 1) => {
+      const param = this.node.parameters.get(name);
+      param.name = name;
+      param.stepSize = stepSize;
+      return param;
+    };
+    this.parameters = {
+      sampleSize: addMeta('sampleSize'),
+      medianWeight: addMeta('medianWeight', 0.1),
+      meanWeight: addMeta('meanWeight', 0.1),
+      maxPeakWeight: addMeta('maxPeakWeight', 0.1),
+    };
+    console.log(this.parameters);
   }
 
   attach(source) {

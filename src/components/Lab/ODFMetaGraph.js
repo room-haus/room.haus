@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {active, area, axisLeft, easeLinear, line, scaleLinear, select} from 'd3';
+import {debounce, memoize} from 'lodash';
+import AudioParamInput from './AudioParamInput';
 // import ODFMetaContext from '../contexts/audio/ODFMetaContext';
 
 const GraphContainer = styled.svg`
@@ -8,9 +10,25 @@ const GraphContainer = styled.svg`
   height: 400px; */
 `;
 
+const BPMMeta = styled.div`
+  grid-column: 2 / span 4;
+  grid-row: 11;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const Controls = styled.div`
+  grid-column: 6 / span 10;
+  grid-row: 11;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
+
 class ODFMetaGraph extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.container = React.createRef();
     this.thresholds = [];
     this.odfs = [];
@@ -29,6 +47,7 @@ class ODFMetaGraph extends React.Component {
     //   },
     // ];
     this.MAX_FRAMES = 500;
+    this.setAudioParam = memoize(this.setAudioParam);
   }
 
   componentDidMount() {
@@ -151,11 +170,13 @@ class ODFMetaGraph extends React.Component {
     const {source, onBeat} = this.props;
     const {source: prevSource} = prevProps;
     if (source && (!prevSource || prevSource.id !== source.id)) {
-      source.setODFUpdateCallback(({threshold, odf, isPreviousPeak}) => {
+      source.setODFUpdateCallback(({threshold, odf, isPreviousPeak, bpmData}) => {
         if (!source.isPlaying()) {
           return;
         }
         if (isPreviousPeak) {
+          // console.log(bpmData);
+          this.setState(bpmData);
           onBeat && onBeat();
           this.peakMarkers.push(this.data.length - 1);
           this.data[this.data.length - 1].onset = true;
@@ -172,9 +193,31 @@ class ODFMetaGraph extends React.Component {
     }
   }
 
+  setAudioParam(name) {
+    return debounce((e) => {
+      const param = this.props.source.bpmAnalyserNode.parameters[name];
+      param.value = event.target.value;
+    }, 300);
+  }
+
   render() {
-    const {className} = this.props;
-    return <GraphContainer className={className} innerRef={this.container} />;
+    const {className, source} = this.props;
+    const audioParams = source ? Object.values(source.bpmAnalyserNode.parameters) : [];
+    const {bpm = '-', confidence = 0} = this.state;
+    return (
+      <>
+        <GraphContainer className={className} innerRef={this.container} />
+        <BPMMeta>
+          <span>{bpm}</span>
+          <span>{confidence * 100}%</span>
+        </BPMMeta>
+        <Controls>
+          {audioParams.map((param) => (
+            <AudioParamInput key={param.name} audioParam={param} />
+          ))}
+        </Controls>
+      </>
+    );
   }
 }
 

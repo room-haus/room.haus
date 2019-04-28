@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Oscilliscope from '../../audio/visualizations/Oscilliscope';
 import PlayToggle from './PlayToggle';
@@ -48,9 +48,9 @@ class LabDashboard extends React.Component {
   setBeat = () => {
     const {beat} = this.state;
     if (!beat) {
-      this.setState({beat: true}, () => {
-        setTimeout(() => this.setState({beat: false}), 100);
-      });
+      // this.setState({beat: true}, () => {
+      //   setTimeout(() => this.setState({beat: false}), 100);
+      // });
     }
   };
 

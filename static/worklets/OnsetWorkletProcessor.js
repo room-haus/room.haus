@@ -1,5 +1,6 @@
 /* global currentTime */ // eslint-disable-line no-unused-vars
 import {FFTR} from './main.js'; // eslint-disable-line import/extensions
+import BPMAnalyser from './BPMAnalyser.js'; // eslint-disable-line import/extensions
 
 const BUFFER_SIZE = 512;
 const BUFFERS_PER_FRAME = 4;
@@ -97,6 +98,38 @@ const mean = (values) => {
 };
 
 class OnsetWorkletProcesser extends AudioWorkletProcessor {
+  static get parameterDescriptors() {
+    return [
+      {
+        name: 'medianWeight',
+        automationRate: 'k-rate',
+        defaultValue: 1.0,
+        minValue: 0,
+        maxValue: 2,
+      },
+      {
+        name: 'meanWeight',
+        automationRate: 'k-rate',
+        defaultValue: 1.0,
+        minValue: 0,
+        maxValue: 2,
+      },
+      {
+        name: 'sampleSize',
+        automationRate: 'k-rate',
+        defaultValue: 15,
+        minValue: 1,
+        maxValue: 50,
+      },
+      {
+        name: 'maxPeakWeight',
+        automationRate: 'k-rate',
+        defaultValue: 0.0,
+        minValue: 0,
+        maxValue: 1.5,
+      },
+    ];
+  }
   constructor({processorOptions: {mode}}) {
     super();
     this.mode = mode;
@@ -107,6 +140,7 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     this.threshold = 0;
     this.highestPeak = 0;
     this.perf = [];
+    this.bpmAnalyser = new BPMAnalyser({sampleRate: 44100, frameSize: BUFFER_SIZE, precision: 3, memory: 15});
   }
 
   energyODF() {
@@ -137,15 +171,17 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     this.buffer.reset();
   }
 
-  process(inputs) {
-    const samples = inputs[1][0];
+  process(inputs, outputs, parameters) {
+    const samples = inputs[0][0];
     this.buffer.write(samples);
     if (this.buffer.isFull()) {
       this.updateFrames();
       const odf = this.mode === 'SPECTRAL_DIFFERENCE' ? this.spectralDifferenceODF() : this.energyODF();
-      const threshold = this.calculateThreshold();
+      const {sampleSize, medianWeight, meanWeight, maxPeakWeight} = parameters;
+      const threshold = this.calculateThreshold(sampleSize[0], medianWeight[0], meanWeight[0], maxPeakWeight[0]);
       const isPreviousPeak = this.isPreviousOnset();
-      this.port.postMessage({odf, threshold, isPreviousPeak, debug: false});
+      this.bpmAnalyser.cycle(isPreviousPeak);
+      this.port.postMessage({odf, threshold, isPreviousPeak, bpmData: this.bpmAnalyser.data, debug: false});
     }
     return true;
   }
@@ -154,12 +190,9 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     return this.mode === 'SPECTRAL_DIFFERENCE' ? this.sdHistory : this.odfHistory;
   }
 
-  calculateThreshold() {
+  calculateThreshold(m, lambda, alpha, peakWeight) {
     // σn = λ × median(O[nm]) + α × mean(O[nm]) + N
-    const lambda = 1.0;
-    const alpha = 0.7;
-    const m = 10;
-    const weightedHighestPeak = this.highestPeak * 0.05;
+    const weightedHighestPeak = this.highestPeak * peakWeight;
     const prevODFValues = this.getHistory().slice(0, m);
     this.threshold = lambda * median(prevODFValues) + alpha * mean(prevODFValues) + weightedHighestPeak;
     return this.threshold;
