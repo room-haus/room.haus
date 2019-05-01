@@ -229,6 +229,13 @@ export const mixes = [
     name: 'Settle Another Day',
     catalogueNumber: 'MX029',
   },
+  {
+    id: 'MX030',
+    art: mx029,
+    artist: 'ART DLR',
+    name: '?????',
+    catalogueNumber: 'MX030',
+  },
 ];
 
 export const getMix = (mx) => mixes.find((mix) => mx === mix.id);

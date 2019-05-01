@@ -19,7 +19,7 @@ const getParams = (search) => {
 
 const MixPage = ({location}) => {
   let {mx} = getParams(location.search);
-  mx = getMix(mx) ? mx : 'MX029';
+  mx = getMix(mx) ? mx : 'MX030';
   return (
     <FullScreenLayout>
       <AudioSourceContext.Consumer>
