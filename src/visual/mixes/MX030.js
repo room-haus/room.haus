@@ -1,8 +1,8 @@
 // import React from 'react';
 // import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
-import CaseTexture from '../../images/mx029.jpg';
-import CDLabelTexture from '../../images/cd_template_MX029.png';
+import CaseTexture from '../../images/mx030.jpg';
+import CDLabelTexture from '../../images/cd_template_MX030.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
@@ -37,18 +37,12 @@ const makeParticles = (scene, mesh, particleCount) => {
       particle.rotationX = Math.random() * 0.01 - 0.005;
       particle.rotationY = Math.random() * 0.01 - 0.005;
       particle.rotationZ = Math.random() * 0.01 - 0.005;
-      particle.originalPosition = particle.position.clone();
     });
   };
-  // let t = 0;
   SPS.updateParticle = (particle) => {
-    // const {x, y, z} = particle.originalPosition;
     particle.rotation.x += particle.rotationX;
-    // particle.position.x = Math.cos(t) * x;
     particle.rotation.y += particle.rotationY;
-    // particle.position.y = Math.cos(t) * y;
     particle.rotation.z += particle.rotationZ;
-    // particle.position.z = Math.cos(t + 1) * z;
   };
   SPS.buildMesh();
   SPS.initParticles();
@@ -58,36 +52,38 @@ const makeParticles = (scene, mesh, particleCount) => {
   scene.registerBeforeRender(() => {
     SPS.setParticles();
     SPS.mesh.rotation.addInPlace(rotation);
-    // t += 0.001;
   });
 };
 
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
   const CD = scene.getMeshByName('CDChassis');
+  const cdLabel = scene.getMeshByName('CDLabel');
+  cdLabel.position.addInPlace(new BABYLON.Vector3(-0.5, -0.3, 0));
   // Make sure the CD is rendered in front of everything else i.e. top layer
   CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line
   scene.clearColor = new BABYLON.Color4(0.1, 0.1, 0.1, 1);
 
+  const color = new BABYLON.Color3(240 / 255, 230 / 255, 194 / 255);
   const top = new BABYLON.HemisphericLight('topLight', new BABYLON.Vector3(0, 5, 0), scene);
-  top.diffuse = new BABYLON.Color3(0, 1, 1);
+  top.diffuse = color;
   top.intensity = 1.0;
 
   const intensity = 0.5;
   const bottom = new BABYLON.HemisphericLight('bottomLight', new BABYLON.Vector3(0, -5, 0), scene);
-  bottom.diffuse = new BABYLON.Color3(1, 1, 0);
+  bottom.diffuse = color;
   bottom.intensity = intensity;
 
   const left = new BABYLON.HemisphericLight('leftLight', new BABYLON.Vector3(-5, 0, 0), scene);
-  left.diffuse = new BABYLON.Color3(1, 0, 1);
+  left.diffuse = color;
   left.intensity = intensity;
 
   const right = new BABYLON.HemisphericLight('bottomLight', new BABYLON.Vector3(5, 0, 0), scene);
-  right.diffuse = new BABYLON.Color3(0, 1, 0);
+  right.diffuse = color;
   right.intensity = intensity;
 
   const front = new BABYLON.DirectionalLight('frontLight', new BABYLON.Vector3(0, 0, -1), scene);
-  front.diffuse = new BABYLON.Color3(1, 1, 1);
+  front.diffuse = color;
   front.intensity = intensity;
 
   // model : triangle
