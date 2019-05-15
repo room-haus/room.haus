@@ -101,20 +101,14 @@ export const createGrid = (scene, color, xpos) => {
     horizontalGroup.add(line);
   }
   // horizontalGroup.chassis.rotate(BABYLON.Axis.Y, Math.PI / 2);
-  const gridGroup = new MeshGroup('Grid Group', scene, [
-    horizontalGroup.chassis,
-    verticalGroup.chassis,
-  ]);
+  const gridGroup = new MeshGroup('Grid Group', scene, [horizontalGroup.chassis, verticalGroup.chassis]);
   return gridGroup;
 };
 
 export const makeGridGroup = (scene, color, position) => {
   const gridLeft = createGrid(scene, color, -10);
   const gridRight = createGrid(scene, color, 10);
-  const gridGroup = new MeshGroup('Grid Collection', scene, [
-    gridLeft.chassis,
-    gridRight.chassis,
-  ]);
+  const gridGroup = new MeshGroup('Grid Collection', scene, [gridLeft.chassis, gridRight.chassis]);
   gridGroup.position = position || BABYLON.Vector3.Zero();
   return gridGroup;
 };
@@ -124,8 +118,7 @@ export const makeSkybox = (scene, location) => {
   const skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene);
   skyboxMaterial.backFaceCulling = false;
   skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(location, scene);
-  skyboxMaterial.reflectionTexture.coordinatesMode =
-    BABYLON.Texture.SKYBOX_MODE;
+  skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
   skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
   skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
   skybox.material = skyboxMaterial;
@@ -133,10 +126,7 @@ export const makeSkybox = (scene, location) => {
 };
 
 export const simpleMaterial = (scene, color) => {
-  const material = new BABYLON.StandardMaterial(
-    `material${Math.random}`,
-    scene,
-  );
+  const material = new BABYLON.StandardMaterial(`material${Math.random}`, scene);
   material.diffuseColor = color;
   material.emissiveColor = color;
   return material;
@@ -156,11 +146,7 @@ export const makeStreak = (scene, parent, updateCallback) => {
   );
   streak.__update = updateCallback.bind(streak);
   streak.material = simpleMaterial(scene, new BABYLON.Color3(0.6, 0.6, 0.6));
-  streak.position = new BABYLON.Vector3(
-    Math.random() * 10 - 5,
-    Math.random() * 10 - 5,
-    Math.random() * 100 + 100,
-  );
+  streak.position = new BABYLON.Vector3(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 100 + 100);
   parent.add(streak);
   return streak;
 };
@@ -177,7 +163,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   const CDMesh = scene.getMeshByName('MetalCD');
 
-  var metal = new BABYLON.PBRMetallicRoughnessMaterial('Metal', scene);
+  const metal = new BABYLON.PBRMetallicRoughnessMaterial('Metal', scene);
   CDMesh.material = metal;
 
   metal.baseColor = new BABYLON.Color3(0.5, 0.5, 0.5);
@@ -186,7 +172,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   const CDCover = scene.getMeshByName('Cover');
 
-  var cover = new BABYLON.PBRMaterial('cover', scene);
+  const cover = new BABYLON.PBRMaterial('cover', scene);
   CDCover.material = cover;
 
   cover.roughness = 0.8;
@@ -195,24 +181,18 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   if (cdLabelTexture) {
     const cdLabel = scene.getMeshByName('CDLabel');
-    cdLabel.material.opacityTexture = new BABYLON.Texture(
-      cdLabelTexture,
-      scene,
-    );
+    cdLabel.material.opacityTexture = new BABYLON.Texture(cdLabelTexture, scene);
     cdLabel.rotate(BABYLON.Axis.Y, Math.PI);
     cdLabel.rotate(BABYLON.Axis.Z, Math.PI);
     cdLabel.material.backFaceCulling = false;
   }
 
-  var hdrTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(
-    EnvironmentDDS,
-    scene,
-  );
+  const hdrTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(EnvironmentDDS, scene);
 
   const cdCaseFront = scene.getMeshByName('FrontPlastic');
   const cdCaseBack = scene.getMeshByName('BackPlastic');
 
-  var plastic = new BABYLON.PBRMaterial('plastic', scene);
+  const plastic = new BABYLON.PBRMaterial('plastic', scene);
   cdCaseFront.material = plastic;
   cdCaseBack.material = plastic;
 
@@ -236,19 +216,9 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   });
 };
 
-export async function loadCDModel(
-  scene,
-  modelPath,
-  caseTexture,
-  cdLabelTexture,
-) {
+export async function loadCDModel(scene, modelPath, caseTexture, cdLabelTexture) {
   const babylonFile = withPrefix('/models/CD/CD.babylon');
-  const {meshes} = await BABYLON.SceneLoader.ImportMeshAsync(
-    '',
-    babylonFile,
-    '',
-    scene,
-  );
+  const {meshes} = await BABYLON.SceneLoader.ImportMeshAsync('', babylonFile, '', scene);
 
   initCDModel(scene, meshes, caseTexture, cdLabelTexture);
 
@@ -266,14 +236,7 @@ export async function loadSceneAssets(scene, babylonFilePath) {
 export const initCamera = (scene, canvas) => {
   const camera =
     scene.activeCamera ||
-    new BABYLON.ArcRotateCamera(
-      'Camera',
-      (3 * Math.PI) / 2,
-      Math.PI / 2,
-      4.5,
-      new BABYLON.Vector3(0, 0, 0),
-      scene,
-    );
+    new BABYLON.ArcRotateCamera('Camera', (3 * Math.PI) / 2, Math.PI / 2, 4.5, new BABYLON.Vector3(0, 0, 0), scene);
   camera.lowerRadiusLimit = camera.upperRadiusLimit = camera.radius;
   camera.setTarget(new BABYLON.Vector3(0, 0, 0));
   camera.attachControl(canvas);

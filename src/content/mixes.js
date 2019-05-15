@@ -18,6 +18,7 @@ import mx021 from '../images/mx021.jpg';
 import mx022 from '../images/mx022.jpg';
 import mx023 from '../images/mx023.jpg';
 import mx029 from '../images/mx029.jpg';
+import mx030 from '../images/mx030.jpg';
 import rm001 from '../images/rm001.jpg';
 import mx019Label from '../images/cd_template_MX019.png';
 
@@ -228,6 +229,13 @@ export const mixes = [
     artist: 'Saad Ashraf',
     name: 'Settle Another Day',
     catalogueNumber: 'MX029',
+  },
+  {
+    id: 'MX030',
+    art: mx030,
+    artist: 'ART DLR',
+    name: 'W4',
+    catalogueNumber: 'MX030',
   },
 ];
 
