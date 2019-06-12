@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import Header from './Header';
+
+import Header from './header';
 import SiteContainer from './containers/SiteContainer';
 import './globalStyles';
 
