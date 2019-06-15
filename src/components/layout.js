@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Header from './Header';
+import Header from './header';
 import Footer from './Footer';
-import {ContentContainer} from '../components/containers';
-import SiteContainer from '../components/containers/SiteContainer';
+import {ContentContainer} from './containers';
+import SiteContainer from './containers/SiteContainer';
 import './layout.css';
 
 const Layout = ({children}) => (
