@@ -11,8 +11,13 @@ import * as MX022 from './MX022';
 import * as MX023 from './MX023';
 import * as MX029 from './MX029';
 import * as MX030 from './MX030';
+import * as MX031 from './MX031';
+import * as MX032 from './MX032';
+import * as MX033 from './MX033';
+import * as MX035 from './MX035';
 import * as RM001 from './RM001';
 
+// eslint-disable-next-line import/prefer-default-export
 export const mixConfigs = {
   MX009: {
     id: 'MX009',
@@ -65,6 +70,22 @@ export const mixConfigs = {
   MX030: {
     id: 'MX030',
     ...MX030,
+  },
+  MX031: {
+    id: 'MX031',
+    ...MX031,
+  },
+  MX032: {
+    id: 'MX032',
+    ...MX032,
+  },
+  MX033: {
+    id: 'MX033',
+    ...MX033,
+  },
+  MX035: {
+    id: 'MX035',
+    ...MX035,
   },
   RM001: {
     id: 'RM001',

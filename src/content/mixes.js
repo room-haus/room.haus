@@ -19,6 +19,11 @@ import mx022 from '../images/mx022.jpg';
 import mx023 from '../images/mx023.jpg';
 import mx029 from '../images/mx029.jpg';
 import mx030 from '../images/mx030.jpg';
+import mx031 from '../images/mx031.jpg';
+import mx032 from '../images/mx032.jpg';
+import mx033 from '../images/mx033.jpg';
+// import mx034 from '../images/mx034.jpg';
+import mx035 from '../images/mx035.jpg';
 import rm001 from '../images/rm001.jpg';
 import mx019Label from '../images/cd_template_MX019.png';
 
@@ -236,6 +241,34 @@ export const mixes = [
     artist: 'ART DLR',
     name: 'W4',
     catalogueNumber: 'MX030',
+  },
+  {
+    id: 'MX031',
+    art: mx031,
+    artist: 'PCPETE',
+    name: 'Farther Along',
+    catalogueNumber: 'MX031',
+  },
+  {
+    id: 'MX032',
+    art: mx032,
+    artist: 'GABBERBITCH69',
+    name: 'No Te Acerques A Mí',
+    catalogueNumber: 'MX032',
+  },
+  {
+    id: 'MX033',
+    art: mx033,
+    artist: 'OUTPUTMESSAGE',
+    name: 'The Octopus Room',
+    catalogueNumber: 'MX033',
+  },
+  {
+    id: 'MX035',
+    art: mx035,
+    artist: 'Tony G',
+    name: 'Global Warning',
+    catalogueNumber: 'MX035',
   },
 ];
 
