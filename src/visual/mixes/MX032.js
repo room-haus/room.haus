@@ -135,8 +135,8 @@ export const build = ({scene, audio}) => {
     scene,
   );
 
-  makeParticles(scene, shapeA, 500);
-  makeParticles(scene, shapeB, 500);
+  makeParticles(scene, shapeA, 100);
+  makeParticles(scene, shapeB, 100);
   shapeA.dispose();
   shapeB.dispose();
 
