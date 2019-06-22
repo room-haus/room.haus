@@ -5,7 +5,6 @@ import Header from './header';
 import Footer from './Footer';
 import {ContentContainer} from '../components/containers';
 import SiteContainer from '../components/containers/SiteContainer';
-import './layout.css';
 
 const Layout = ({children}) => (
   <>
