@@ -5,8 +5,8 @@ import SoundCloudIcon from 'src/images/soundcloud-icon.png';
 import InstagramIcon from 'src/images/instagram-icon.png';
 
 const RoomIcon = styled.img`
-  margin: 0;
-  height: 90%;
+  margin: 0 10px;
+  object-fit: contain;
   align-self: center;
 `;
 
@@ -16,13 +16,13 @@ const Container = styled.div`
 
   display: grid;
   grid-template-columns: minmax(auto, 15vw) minmax(50vw, 1fr) auto;
-  grid-template-rows: minmax(50px, 7vh);
+  grid-template-rows: 7vh;
 `;
 
 const SocialIcon = styled.img`
   margin: 0;
-  max-width: 30%;
-  max-height: 60px;
+  max-height: 40px;
+  object-fit: contain;
   display: inline-block;
 `;
 
@@ -34,7 +34,7 @@ const RightContainer = styled.div`
   padding: 0 10px;
 
   * + * {
-    margin-left: 5px;
+    margin-left: 2vw;
   }
 `;
 
@@ -43,8 +43,14 @@ const NavItems = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin: 0 10px;
+  padding: 0;
+  line-height: 0.9em;
   font-family: 'NeueHaasGrotDisp';
   font-size: 3vw;
+
+  span.active {
+    border-bottom: solid 3px black;
+  }
 `;
 
 const Header = () => {
@@ -52,7 +58,7 @@ const Header = () => {
     <Container>
       <RoomIcon src={RoomLogo} alt="Room logo" />
       <NavItems>
-        <span>MIXES</span>
+        <span className="active">MIXES</span>
         <span>RELEASES</span>
         <span>TEAM</span>
       </NavItems>
