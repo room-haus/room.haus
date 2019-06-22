@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import CaseTexture from '../../images/mx009.jpg';
+import CaseTexture from 'src/images/mix-art/mx009.jpg';
 
 export const cdModelPath = 'models/CD/CD.babylon';
 export const caseTexture = CaseTexture;

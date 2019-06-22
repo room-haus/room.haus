@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import CaseTexture from '../../images/mx018.jpg';
+import CaseTexture from 'src/images/mix-art/mx018.jpg';
 import CDLabelTexture from '../../images/cd_template_MX018.png';
 import {scaleLinear, scaleLog} from 'd3';
 

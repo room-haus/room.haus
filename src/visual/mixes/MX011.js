@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import * as Pts from 'pts';
 import PtsCanvas from '../../components/PtsCanvas';
-import CaseTexture from '../../images/mx011.jpg';
+import CaseTexture from 'src/images/mix-art/mx011.jpg';
 import CDLabelTexture from '../../images/cd_template_MX011.png';
 import {scaleLinear} from 'd3';
 
@@ -9,11 +9,7 @@ export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
 export const build = ({scene}) => {
-  const light = new BABYLON.HemisphericLight(
-    'light',
-    new BABYLON.Vector3(0, 1, 0),
-    scene,
-  );
+  const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
@@ -32,13 +28,7 @@ export class Background extends PtsCanvas {
         lines.push(
           new Pts.Group(
             ps[i],
-            ps[i]
-              .clone()
-              .toAngle(
-                Math.random() * Pts.Const.pi,
-                (Math.random() * space.size.y) / 2 + 20,
-                true,
-              ),
+            ps[i].clone().toAngle(Math.random() * Pts.Const.pi, (Math.random() * space.size.y) / 2 + 20, true),
           ),
         );
         rotations.push(Math.random() * 0.0002 + 0.0002);
@@ -66,9 +56,7 @@ export class Background extends PtsCanvas {
           let inPath = Pts.Circle.intersectRay2D(range, lines[i]);
           let inLine = Pts.Circle.intersectLine2D(range, lines[i]);
           if (inPath.length > 1) {
-            form
-              .stroke('rgba(255,255,255,.20)')
-              .line(lines[i].concat(inPath[0], inPath[1]));
+            form.stroke('rgba(255,255,255,.20)').line(lines[i].concat(inPath[0], inPath[1]));
             form.stroke('#fe6').line(lines[i]);
             form.fillOnly('#fff').points(inPath, 2, 'circle');
           }

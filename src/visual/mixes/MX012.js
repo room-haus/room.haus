@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-procedural-textures';
-import CaseTexture from '../../images/mx012.jpg';
+import CaseTexture from 'src/images/mix-art/mx012.jpg';
 import CDLabelTexture from '../../images/cd_template_MX012.png';
 
 export const caseTexture = CaseTexture;

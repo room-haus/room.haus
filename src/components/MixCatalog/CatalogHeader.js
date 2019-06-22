@@ -6,16 +6,17 @@ import InstagramIcon from 'src/images/instagram-icon.png';
 
 const RoomIcon = styled.img`
   margin: 0;
+  height: 90%;
   align-self: center;
 `;
 
 const Container = styled.div`
   background: #f5f6f6;
+  border-bottom: 1px solid gray;
+
   display: grid;
   grid-template-columns: minmax(auto, 15vw) minmax(50vw, 1fr) auto;
   grid-template-rows: minmax(50px, 7vh);
-  border-bottom: 1px solid gray;
-  font-family: 'NeueHaasGrotDisp';
 `;
 
 const SocialIcon = styled.img`
@@ -42,6 +43,8 @@ const NavItems = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin: 0 10px;
+  font-family: 'NeueHaasGrotDisp';
+  font-size: 3vw;
 `;
 
 const Header = () => {
@@ -49,9 +52,9 @@ const Header = () => {
     <Container>
       <RoomIcon src={RoomLogo} alt="Room logo" />
       <NavItems>
-        <span>Mixes</span>
-        <span>Releases</span>
-        <span>Team</span>
+        <span>MIXES</span>
+        <span>RELEASES</span>
+        <span>TEAM</span>
       </NavItems>
       <RightContainer>
         <SocialIcon src={SoundCloudIcon} alt="SoundCloud" />

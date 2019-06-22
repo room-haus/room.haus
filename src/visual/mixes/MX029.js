@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
-import CaseTexture from '../../images/mx029.jpg';
+import CaseTexture from 'src/images/mix-art/mx029.jpg';
 import CDLabelTexture from '../../images/cd_template_MX029.png';
 // import {withPrefix} from 'gatsby';
 // import {makeSkybox} from '../../utils/BabylonHelpers';

@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {withPrefix} from 'gatsby';
-import CaseTexture from '../../images/mx010.jpg';
+import CaseTexture from 'src/images/mix-art/mx010.jpg';
 import CDLabelTexture from '../../images/cd_template_MX010.png';
 import {scaleLinear} from 'd3';
 import {makeGridGroup, makeSkybox} from '../../utils/BabylonHelpers';
@@ -21,11 +21,7 @@ export const build = ({scene, engine, audio}) => {
 
   makeSkybox(scene, withPrefix('skyboxes/space/blue/blue'));
 
-  const light = new BABYLON.HemisphericLight(
-    'light',
-    new BABYLON.Vector3(0, 1, 0),
-    scene,
-  );
+  const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
 
   const parent = scene.getMeshByName('CDChassis');

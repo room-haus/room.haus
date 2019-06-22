@@ -1,7 +1,7 @@
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import VideoGrid from '../../components/VideoGrid';
-import CaseTexture from '../../images/mx022.jpg';
+import CaseTexture from 'src/images/mix-art/mx022.jpg';
 import CDLabelTexture from '../../images/cd_template_MX022.png';
 
 export const caseTexture = CaseTexture;
