@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'gatsby';
+import {mixConfigs} from '../../visual/mixes';
 
 const MixItem = styled.img`
   margin: 0;
@@ -18,7 +20,7 @@ const MixList = styled.div`
   }
 
   &:hover ${MixItem} {
-    opacity: 0.3;
+    opacity: 0.7;
     filter: grayscale(60%);
 
     &:hover {
@@ -28,12 +30,20 @@ const MixList = styled.div`
   }
 `;
 
-export default ({mixes = []}) => {
-  return (
-    <MixList>
-      {mixes.map((mix) => (
-        <MixItem key={mix.id} src={mix.art} />
-      ))}
-    </MixList>
+const getMixLink = ({className}, mix) => {
+  const hasExperience = Boolean(mixConfigs[mix.catalogueNumber]);
+  return hasExperience ? (
+    <Link key={mix.id} to={`/mixes/?mx=${mix.catalogueNumber}`}>
+      <MixItem src={mix.art} className={className} />
+    </Link>
+  ) : (
+    <a key={mix.id} href={mix.soundcloud} target="_blank" rel="noopener noreferrer">
+      <MixItem src={mix.art} className={className} />
+    </a>
   );
+};
+
+export default (props) => {
+  const {mixes = []} = props;
+  return <MixList>{mixes.map((mix) => getMixLink(props, mix))}</MixList>;
 };
