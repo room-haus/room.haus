@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
-import Header from './Header';
+import Header from './header';
 import SiteContainer from './containers/SiteContainer';
 import './globalStyles';
 
@@ -15,10 +15,7 @@ const Viewport = styled.div`
 
 const FullScreenLayout = ({children}) => (
   <>
-    <Helmet
-      title="ROOM"
-      meta={[{name: 'description', content: 'Virtual Imprints'}]}
-    />
+    <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
     <SiteContainer>
       <Header />
       <Viewport>{children}</Viewport>

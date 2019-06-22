@@ -1,11 +1,11 @@
-// import mx001 from '../images/mx001.jpg';
-// import mx002 from '../images/mx002.jpg';
-// import mx003 from '../images/mx003.jpg';
-// import mx004 from '../images/mx004.jpg';
-// import mx005 from '../images/mx005.jpg';
-// import mx006 from '../images/mx006.jpg';
-// import mx007 from '../images/mx007.jpg';
-// import mx008 from '../images/mx008.jpg';
+import mx001 from '../images/mx001.jpg';
+import mx002 from '../images/mx002.jpg';
+import mx003 from '../images/mx003.jpg';
+import mx004 from '../images/mx004.jpg';
+import mx005 from '../images/mx005.jpg';
+import mx006 from '../images/mx006.jpg';
+import mx007 from '../images/mx007.jpg';
+import mx008 from '../images/mx008.jpg';
 import mx009 from '../images/mx009.jpg';
 import mx010 from '../images/mx010.jpg';
 import mx011 from '../images/mx011.jpg';
@@ -34,88 +34,94 @@ export const mixes = [
   //         'https://soundcloud.com/mohicansun/mohican-sun-simian-premiere-r1-track-of-the-week',
   //     },
   //   },
-  // {
-  //   id: 'mx001',
-  //   art: mx001,
-  //   size: 35886146034,
-  //   soundcloud: {
-  //     id: 467225694,
-  //     url: 'https://soundcloud.com/room-haus/room-mx001-eddy-bauer',
-  //   },
-  // },
-  // {
-  //   id: 'mx002',
-  //   art: mx002,
-  //   size: 25292437781,
-  //   soundcloud: {
-  //     id: 470197878,
-  //     url: 'https://soundcloud.com/room-haus/room-mx002-35mm',
-  //   },
-  // },
-  // {
-  //   id: 'mx003',
-  //   art: mx003,
-  //   size: 28791250987,
-  //   soundcloud: {
-  //     id: 473200989,
-  //     url: 'https://soundcloud.com/room-haus/mx003-blackfoot-millie-live',
-  //   },
-  // },
-  // {
-  //   id: 'mx004',
-  //   art: mx004,
-  //   artist: 'Iwan Thickett',
-  //   name: 'MX004: Iwan Thickett',
-  //   size: 10020544788,
-  //   soundcloud: {
-  //     id: 476355510,
-  //     url: 'https://soundcloud.com/room-haus/room-mx004-iwan-thickett',
-  //   },
-  // },
-  // {
-  //   id: 'mx005',
-  //   art: mx005,
-  //   size: 4211237530,
-  //   soundcloud: {
-  //     id: 479700192,
-  //     url: 'https://soundcloud.com/room-haus/mx005-av',
-  //   },
-  // },
-  // {
-  //   id: 'mx006',
-  //   art: mx006,
-  //   size: 24998263252,
-  //   soundcloudUrl: 'https://soundcloud.com/room-haus/room-mx006-articil',
-  //   soundcloud: {
-  //     id: 482739705,
-  //     url: 'https://soundcloud.com/room-haus/room-mx006-articil',
-  //   },
-  // },
-  // {
-  //   id: 'mx007',
-  //   art: mx007,
-  //   size: 30436617887,
-  //   soundcloud: {
-  //     id: 485848077,
-  //     url: 'https://soundcloud.com/room-haus/mx007-wade-hammes',
-  //   },
-  // },
-  // {
-  //   id: 'mx008',
-  //   art: mx008,
-  //   size: 14735943091,
-  //   soundcloud: {
-  //     id: 489046161,
-  //     url: 'https://soundcloud.com/room-haus/mx008-big-chain',
-  //   },
-  // },
+  {
+    id: 'mx001',
+    art: mx001,
+    artist: 'Eddy Bauer',
+    catalogueNumber: 'MX001',
+    soundcloud: {
+      id: 467225694,
+      url: 'https://soundcloud.com/room-haus/room-mx001-eddy-bauer',
+    },
+  },
+  {
+    id: 'mx002',
+    art: mx002,
+    artist: '35mm',
+    catalogueNumber: 'MX002',
+    soundcloud: {
+      id: 470197878,
+      url: 'https://soundcloud.com/room-haus/room-mx002-35mm',
+    },
+  },
+  {
+    id: 'mx003',
+    art: mx003,
+    artist: 'Blackfoot Millie',
+    catalogueNumber: 'MX003',
+    soundcloud: {
+      id: 473200989,
+      url: 'https://soundcloud.com/room-haus/mx003-blackfoot-millie-live',
+    },
+  },
+  {
+    id: 'mx004',
+    art: mx004,
+    artist: 'Iwan Thickett',
+    name: 'MX004: Iwan Thickett',
+    catalogueNumber: 'MX004',
+    soundcloud: {
+      id: 476355510,
+      url: 'https://soundcloud.com/room-haus/room-mx004-iwan-thickett',
+    },
+  },
+  {
+    id: 'mx005',
+    art: mx005,
+    artist: 'AV',
+    catalogueNumber: 'MX005',
+    soundcloud: {
+      id: 479700192,
+      url: 'https://soundcloud.com/room-haus/mx005-av',
+    },
+  },
+  {
+    id: 'mx006',
+    art: mx006,
+    catalogueNumber: 'MX006',
+    artist: 'Articil',
+    soundcloudUrl: 'https://soundcloud.com/room-haus/room-mx006-articil',
+    soundcloud: {
+      id: 482739705,
+      url: 'https://soundcloud.com/room-haus/room-mx006-articil',
+    },
+  },
+  {
+    id: 'mx007',
+    art: mx007,
+    artist: 'Wade Hammes',
+    catalogueNumber: 'MX007',
+    soundcloud: {
+      id: 485848077,
+      url: 'https://soundcloud.com/room-haus/mx007-wade-hammes',
+    },
+  },
+  {
+    id: 'mx008',
+    art: mx008,
+    artist: 'Big Chain',
+    catalogueNumber: 'MX008',
+    soundcloud: {
+      id: 489046161,
+      url: 'https://soundcloud.com/room-haus/mx008-big-chain',
+    },
+  },
   {
     id: 'MX009',
     art: mx009,
     name: 'Music for Rain',
     artist: 'Sami',
     catalogueNumber: 'MX009',
-    size: 26507508187,
     soundcloud: {
       id: 515678430,
       url: 'https://soundcloud.com/room-haus/mx009-sami',

@@ -1,20 +1,9 @@
 import React from 'react';
 
-import FullScreenLayout from '../components/FullScreenLayout';
-import SplashScreen from '../components/SplashScreen';
+import MixCatalog from '../components/MixCatalog';
 
-class LandingPage extends React.Component {
-  componentDidMount() {
-    const {navigate} = require('gatsby'); // eslint-disable-line global-require
-    navigate('/mixes/?mx=MX030');
-  }
-  render() {
-    return (
-      <FullScreenLayout>
-        <SplashScreen />
-      </FullScreenLayout>
-    );
-  }
-}
+const LandingPage = () => {
+  return <MixCatalog />;
+};
 
 export default LandingPage;
