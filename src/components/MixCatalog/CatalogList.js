@@ -14,17 +14,17 @@ const MixList = styled.div`
 
   ${MixItem} {
     transform: opacity grayscale;
-    transition-duration: 0.5s;
+    transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
   }
 
   &:hover ${MixItem} {
-    opacity: 0.7;
-    filter: grayscale(60%);
+    opacity: 1;
+    filter: grayscale(0%);
 
     &:hover {
-      opacity: 1;
-      filter: grayscale(0%);
+      opacity: 0.3;
+      filter: grayscale(60%);
     }
   }
 `;
