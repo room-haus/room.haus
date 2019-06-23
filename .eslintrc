@@ -4,6 +4,15 @@
       "browser": true
   },
   "plugins": ["react-hooks"],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["src", "./src"]
+        ]
+      }
+    }
+  },
   "parser": "babel-eslint",
   "rules": {
       "arrow-parens": "off",
