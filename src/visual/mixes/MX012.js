@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import 'babylonjs-procedural-textures';
+import {FireProceduralTexture} from 'babylonjs-procedural-textures';
 import CaseTexture from 'src/images/mix-art/mx012.jpg';
 import CDLabelTexture from '../../images/cd_template_MX012.png';
 
@@ -12,23 +12,15 @@ export const build = ({scene, engine, audio}) => {
   // Make sure the CD is rendered in front of everything else i.e. top layer
   CD.getChildren().forEach((child) => (child.renderingGroupId = 1));
 
-  const light = new BABYLON.HemisphericLight(
-    'light',
-    new BABYLON.Vector3(0, 1, 0),
-    scene,
-  );
+  const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
 
   // fire material
-  var fireMaterial = new BABYLON.StandardMaterial('fireMaterial', scene);
-  var fireTexture = new BABYLON.FireProceduralTexture('fire', 256, scene);
+  const fireMaterial = new BABYLON.StandardMaterial('fireMaterial', scene);
+  const fireTexture = new FireProceduralTexture('fire', 256, scene);
   fireTexture.level = 2;
   fireTexture.vScale = 0.5;
-  fireMaterial.diffuseColor = new BABYLON.Color3(
-    Math.random() / 2,
-    Math.random() / 2,
-    Math.random() / 2,
-  );
+  fireMaterial.diffuseColor = new BABYLON.Color3(Math.random() / 2, Math.random() / 2, Math.random() / 2);
   fireMaterial.diffuseTexture = fireTexture;
   fireMaterial.alpha = 1;
   fireMaterial.specularTexture = fireTexture;
@@ -129,17 +121,7 @@ export const build = ({scene, engine, audio}) => {
           index++;
         }
       }
-      mesh = BABYLON.Mesh.CreateRibbon(
-        null,
-        paths,
-        null,
-        null,
-        null,
-        scene,
-        null,
-        null,
-        mesh,
-      );
+      mesh = BABYLON.Mesh.CreateRibbon(null, paths, null, null, null, scene, null, null, mesh);
     }
     counter++;
     return mesh;
@@ -147,15 +129,7 @@ export const build = ({scene, engine, audio}) => {
 
   // SH init & ribbon creation
   harmonic(m, lat, lng, paths);
-  var mesh = BABYLON.Mesh.CreateRibbon(
-    'ribbon',
-    paths,
-    true,
-    false,
-    0,
-    scene,
-    true,
-  );
+  var mesh = BABYLON.Mesh.CreateRibbon('ribbon', paths, true, false, 0, scene, true);
   mesh.freezeNormals();
   mesh.scaling = new BABYLON.Vector3(1, 1, 1);
   mesh.material = fireMaterial;

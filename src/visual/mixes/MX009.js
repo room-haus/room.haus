@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import 'babylonjs-materials';
+import {SkyMaterial} from 'babylonjs-materials';
 import CaseTexture from 'src/images/mix-art/mx009.jpg';
 import CDLabelTexture from '../../images/cd_template_MX009.png';
 
@@ -10,7 +10,7 @@ export const build = ({scene, audio}) => {
   const light = new BABYLON.HemisphericLight('hemilight', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
 
-  var skyboxMaterial = new BABYLON.SkyMaterial('skyMaterial', scene);
+  const skyboxMaterial = new SkyMaterial('skyMaterial', scene);
   // skyboxMaterial.backFaceCulling = false;
   skyboxMaterial.useSunPosition = true;
   skyboxMaterial.luminance = 1;
@@ -18,7 +18,7 @@ export const build = ({scene, audio}) => {
   skyboxMaterial.azimuth = 1;
 
   // Sky mesh (box)
-  var skybox = BABYLON.Mesh.CreateBox('skyBox', 1000.0, scene, false, BABYLON.Mesh.BACKSIDE);
+  const skybox = BABYLON.Mesh.CreateBox('skyBox', 1000.0, scene, false, BABYLON.Mesh.BACKSIDE);
   skybox.material = skyboxMaterial;
 
   let t = 0;
