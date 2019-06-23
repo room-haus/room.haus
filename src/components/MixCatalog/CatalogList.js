@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'gatsby';
-import {mixConfigs} from '../../visual/mixes';
 
 const MixItem = styled.img`
   margin: 0;
@@ -30,18 +29,11 @@ const MixList = styled.div`
   }
 `;
 
-const getMixLink = ({className}, mix) => {
-  const hasExperience = Boolean(mixConfigs[mix.catalogueNumber]);
-  return hasExperience ? (
-    <Link key={mix.id} to={`/mixes/?mx=${mix.catalogueNumber}`}>
-      <MixItem src={mix.art} className={className} />
-    </Link>
-  ) : (
-    <a key={mix.id} href={mix.soundcloud} target="_blank" rel="noopener noreferrer">
-      <MixItem src={mix.art} className={className} />
-    </a>
-  );
-};
+const getMixLink = ({className}, mix) => (
+  <Link key={mix.id} to={`/mixes/?mx=${mix.catalogueNumber}`}>
+    <MixItem src={mix.art} className={className} />
+  </Link>
+);
 
 export default (props) => {
   const {mixes = []} = props;

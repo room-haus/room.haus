@@ -1,3 +1,4 @@
+import {getMix} from 'src/content/mixes';
 import * as MX009 from './MX009';
 import * as MX010 from './MX010';
 import * as MX011 from './MX011';
@@ -12,6 +13,7 @@ import * as MX023 from './MX023';
 import * as MX029 from './MX029';
 import * as MX030 from './MX030';
 import * as RM001 from './RM001';
+import * as defaultConfig from './default';
 
 export const mixConfigs = {
   MX009: {
@@ -70,4 +72,15 @@ export const mixConfigs = {
     id: 'RM001',
     ...RM001,
   },
+};
+
+export const getMixConfig = (id) => {
+  let config = mixConfigs[id];
+  if (!config) {
+    config = {
+      ...defaultConfig,
+      caseTexture: getMix(id).art,
+    };
+  }
+  return config;
 };

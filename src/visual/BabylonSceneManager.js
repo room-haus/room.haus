@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
-import {mixConfigs} from './mixes';
+import {getMixConfig} from './mixes';
 import {loadCDModel, initCamera, loadSceneAssets} from '../utils/BabylonHelpers';
+import {getMix} from '../content/mixes';
 
 class BabylonSceneManager {
   constructor() {
-    this.sceneConfigs = mixConfigs;
     this.scenes = {};
   }
 
@@ -42,13 +42,10 @@ class BabylonSceneManager {
 
   async runScene(sceneId) {
     let scene = this.scenes[sceneId];
-    const config = this.sceneConfigs[sceneId];
+    const config = getMixConfig(sceneId);
     this.background = config.Background;
     if (!scene) {
-      if (!config) {
-        throw Error(`No Config for Scene: ${sceneId}`);
-      }
-      scene = await this.createScene(this.sceneConfigs[sceneId]);
+      scene = await this.createScene(config);
     }
     this.engine.stopRenderLoop();
     this.engine.runRenderLoop(() => scene.render());

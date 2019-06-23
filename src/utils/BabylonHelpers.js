@@ -154,7 +154,6 @@ export const makeStreak = (scene, parent, updateCallback) => {
 export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   const CDChassis = new BABYLON.Mesh.CreateBox('CDChassis', 1, scene);
   meshes.forEach((mesh) => {
-    // console.log(mesh.name);
     mesh.parent = CDChassis;
   });
   CDChassis.isVisible = false;
@@ -179,12 +178,14 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   cover.albedoTexture = new BABYLON.Texture(caseTexture, scene);
   cover.backFaceCulling = false;
 
+  const cdLabel = scene.getMeshByName('CDLabel');
   if (cdLabelTexture) {
-    const cdLabel = scene.getMeshByName('CDLabel');
     cdLabel.material.opacityTexture = new BABYLON.Texture(cdLabelTexture, scene);
     cdLabel.rotate(BABYLON.Axis.Y, Math.PI);
     cdLabel.rotate(BABYLON.Axis.Z, Math.PI);
     cdLabel.material.backFaceCulling = false;
+  } else {
+    cdLabel.dispose();
   }
 
   const hdrTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(EnvironmentDDS, scene);
@@ -230,7 +231,7 @@ export async function loadSceneAssets(scene, babylonFilePath) {
   const parts = filePath.split('/');
   const file = parts.pop();
   const root = parts.join('/') + '/';
-  return await BABYLON.SceneLoader.AppendAsync(root, file, scene);
+  return BABYLON.SceneLoader.AppendAsync(root, file, scene);
 }
 
 export const initCamera = (scene, canvas) => {
