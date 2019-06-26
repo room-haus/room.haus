@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import RoomLogo from 'src/images/logo.png';
-import SoundCloudIcon from 'src/images/soundcloud-icon.png';
-import InstagramIcon from 'src/images/instagram-icon.png';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faSoundcloud, faInstagram} from '@fortawesome/free-brands-svg-icons';
+import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 
 const RoomIcon = styled.img`
   margin: 0 10px;
@@ -19,11 +20,9 @@ const Container = styled.div`
   grid-template-rows: 7vh;
 `;
 
-const SocialIcon = styled.img`
+const StyledIcon = styled(FontAwesomeIcon)`
   margin: 0;
-  max-height: 40px;
-  object-fit: contain;
-  display: inline-block;
+  font-size: 3vw;
 `;
 
 const RightContainer = styled.div`
@@ -48,9 +47,14 @@ const NavItems = styled.div`
   font-family: 'NeueHaasGrotDisp';
   font-size: 3vw;
 
-  span.active {
+  .active {
     border-bottom: solid 3px black;
   }
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const Header = () => {
@@ -59,12 +63,19 @@ const Header = () => {
       <RoomIcon src={RoomLogo} alt="Room logo" />
       <NavItems>
         <span className="active">MIXES</span>
-        <span>RELEASES</span>
-        <span>TEAM</span>
       </NavItems>
       <RightContainer>
-        <SocialIcon src={SoundCloudIcon} alt="SoundCloud" />
-        <SocialIcon src={InstagramIcon} alt="Instagram" />
+        <Link href="mailto:info@room.haus">
+          <StyledIcon icon={faEnvelope} />
+        </Link>
+        <Link href="https://soundcloud.com/room-haus" target="_blank" rel="noopener noreferrer">
+          <StyledIcon icon={faSoundcloud} />
+        </Link>
+        <Link href="https://www.instagram.com/room.haus/" target="_blank" rel="noopener noreferrer">
+          <StyledIcon icon={faInstagram} />
+        </Link>
+        {/* <SocialIcon src={SoundCloudIcon} alt="SoundCloud" />
+        <SocialIcon src={InstagramIcon} alt="Instagram" /> */}
       </RightContainer>
     </Container>
   );

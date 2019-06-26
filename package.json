@@ -5,6 +5,12 @@
   "version": "1.0.0",
   "author": "Nicholas Licitra <nicholas.licitra@gmail.com>",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-brands-svg-icons": "^5.9.0",
+    "@fortawesome/free-regular-svg-icons": "^5.9.0",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@rehooks/window-size": "^1.0.2",
     "babel-plugin-styled-components": "^1.10.1",
     "babylonjs": "^4.0.3",
