@@ -67,10 +67,7 @@ const HeaderFlyout = (props) => {
   const transformOffset = mainHeight + flyoutHeight;
   const hoverZoneRef = useRef();
   const isHovering = useHover(hoverZoneRef);
-  // const menuHeight = 60 + 54;
-  // const threshold = menuHeight + 300;
-  // const {y} = useMousePosition(document);
-  // const active = y <= threshold;
+
   return (
     <FlyoutContainer {...rest} innerRef={hoverZoneRef}>
       {active && <ClickCatcher onClick={() => setActive((a) => !a)} />}
