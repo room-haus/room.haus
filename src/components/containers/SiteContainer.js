@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import AudioSourceContext from '../contexts/audio/AudioSourceContext';
-import MousePositionContext from '../contexts/MousePositionContext';
 import ErrorBoundary from '../ErrorBoundary';
 
 const SiteContainer = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  height: ${(props) => (props.fullScreen ? '100vh' : '100%')};
   margin: 0;
-  padding-top: 7.5em;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'viewport';
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  height: 100vh;
 `;
 
 export default (props) => (
   <ErrorBoundary>
     <AudioSourceContext>
-      <MousePositionContext>
-        <SiteContainer {...props} />
-      </MousePositionContext>
+      <SiteContainer {...props} />
     </AudioSourceContext>
   </ErrorBoundary>
 );

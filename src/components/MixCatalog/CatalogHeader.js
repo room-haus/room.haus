@@ -1,54 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Header, HeaderItem} from 'src/components/layout/Header';
 import RoomLogo from 'src/images/logo.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSoundcloud, faInstagram} from '@fortawesome/free-brands-svg-icons';
 import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 
 const RoomIcon = styled.img`
-  margin: 0 10px;
   object-fit: contain;
-  align-self: center;
-`;
-
-const Container = styled.div`
-  background: #f5f6f6;
-  border-bottom: 1px solid gray;
-
-  display: grid;
-  grid-template-columns: minmax(auto, 15vw) minmax(50vw, 1fr) auto;
-  grid-template-rows: 7vh;
-`;
-
-const StyledIcon = styled(FontAwesomeIcon)`
   margin: 0;
-  font-size: 3vw;
-`;
-
-const RightContainer = styled.div`
-  justify-self: end;
-  display: inline-flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 10px;
-
-  * + * {
-    margin-left: 2vw;
-  }
+  width: 40%;
 `;
 
 const NavItems = styled.div`
-  display: inline-flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 0 10px;
-  padding: 0;
-  line-height: 0.9em;
-  font-family: 'NeueHaasGrotDisp';
-  font-size: 3vw;
+  font-size: 4vw;
 
   .active {
     border-bottom: solid 3px black;
+  }
+`;
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  font-size: 4vw;
+  margin: 0;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 5vw;
   }
 `;
 
@@ -57,14 +34,54 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Header = () => {
+const SocialIcons = styled(HeaderItem)`
+  * + * {
+    margin-left: 1vw;
+  }
+`;
+
+const TactileContainer = styled.div`
+  width: 55px;
+  margin: auto;
+`;
+
+const Tactile = styled.div`
+  opacity: 1;
+  width: 100%;
+  height: 4px;
+  border: 1px solid #939296;
+
+  & + & {
+    margin-top: 3px;
+  }
+`;
+
+const Tactiles = (
+  <TactileContainer>
+    <Tactile />
+    <Tactile />
+    <Tactile />
+  </TactileContainer>
+);
+
+export default ({tactile}) => {
   return (
-    <Container>
-      <RoomIcon src={RoomLogo} alt="Room logo" />
-      <NavItems>
-        <span className="active">MIXES</span>
-      </NavItems>
-      <RightContainer>
+    <Header>
+      <HeaderItem position="left">
+        <Link href="/mixes/">
+          <RoomIcon src={RoomLogo} alt="Room logo" />
+        </Link>
+      </HeaderItem>
+      <HeaderItem position="middle">
+        {tactile ? (
+          Tactiles
+        ) : (
+          <NavItems>
+            <span className="active">MIXES</span>
+          </NavItems>
+        )}
+      </HeaderItem>
+      <SocialIcons position="right">
         <Link href="mailto:info@room.haus">
           <StyledIcon icon={faEnvelope} />
         </Link>
@@ -74,11 +91,7 @@ const Header = () => {
         <Link href="https://www.instagram.com/room.haus/" target="_blank" rel="noopener noreferrer">
           <StyledIcon icon={faInstagram} />
         </Link>
-        {/* <SocialIcon src={SoundCloudIcon} alt="SoundCloud" />
-        <SocialIcon src={InstagramIcon} alt="Instagram" /> */}
-      </RightContainer>
-    </Container>
+      </SocialIcons>
+    </Header>
   );
 };
-
-export default Header;

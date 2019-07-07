@@ -3,6 +3,7 @@ import AudioSourceContext from '../components/contexts/audio/AudioSourceContext'
 import FullScreenLayout from '../components/FullScreenLayout';
 import SceneViewer from '../components/SceneViewer';
 import {getMix} from '../content/mixes';
+import MixCatalog from '../components/MixCatalog';
 
 const getParams = (search) => {
   const params = {};
@@ -19,13 +20,15 @@ const getParams = (search) => {
 
 const MixPage = ({location}) => {
   let {mx} = getParams(location.search);
-  mx = getMix(mx) ? mx : 'MX030';
-  return (
+  mx = getMix(mx);
+  return mx ? (
     <FullScreenLayout>
       <AudioSourceContext.Consumer>
-        {({source, set}) => <SceneViewer scene={mx} source={source} setter={set} />}
+        {({source, set}) => <SceneViewer scene={mx.id} source={source} setter={set} />}
       </AudioSourceContext.Consumer>
     </FullScreenLayout>
+  ) : (
+    <MixCatalog />
   );
 };
 

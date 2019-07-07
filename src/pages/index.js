@@ -1,9 +1,11 @@
-import React from 'react';
-
-import MixCatalog from '../components/MixCatalog';
+import {useEffect} from 'react';
 
 const LandingPage = () => {
-  return <MixCatalog />;
+  useEffect(() => {
+    const {navigate} = require('gatsby'); // eslint-disable-line global-require
+    navigate('/mixes/');
+  });
+  return null;
 };
 
 export default LandingPage;

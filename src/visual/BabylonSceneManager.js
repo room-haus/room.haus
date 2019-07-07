@@ -1,7 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import {getMixConfig} from './mixes';
 import {loadCDModel, initCamera, loadSceneAssets} from '../utils/BabylonHelpers';
-import {getMix} from '../content/mixes';
 
 class BabylonSceneManager {
   constructor() {

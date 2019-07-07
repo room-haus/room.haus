@@ -6,25 +6,22 @@ import {getMix} from '../../content/mixes';
 
 const CanvasContainer = styled.div`
   background-color: #404040;
-  width: 100vw;
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 `;
 
 const Canvas = styled.canvas`
   display: block;
-  position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  margin: auto;
   padding: 0;
 `;
 
 const BackgroundContainer = styled.div`
   display: block;
   position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   margin: auto;
   padding: 0;

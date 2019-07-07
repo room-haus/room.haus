@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'gatsby';
+import {mixes as mixList} from 'src/content/mixes';
 
 const MixItem = styled.img`
   margin: 0;
@@ -9,8 +10,9 @@ const MixItem = styled.img`
 const MixList = styled.div`
   margin: 10px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5vmin;
+  grid-template-columns: repeat(${({columns}) => columns}, 1fr);
+  grid-gap: ${({density}) => `${density}vmin`};
+  /* grid-gap: 5vmin; */
 
   ${MixItem} {
     transform: opacity grayscale;
@@ -35,7 +37,10 @@ const getMixLink = ({className}, mix) => (
   </Link>
 );
 
-export default (props) => {
-  const {mixes = []} = props;
-  return <MixList>{mixes.map((mix) => getMixLink(props, mix))}</MixList>;
+export default ({mixes = mixList, columns = 5, density = 5, ...props}) => {
+  return (
+    <MixList columns={columns} density={density}>
+      {mixes.map((mix) => getMixLink(props, mix))}
+    </MixList>
+  );
 };

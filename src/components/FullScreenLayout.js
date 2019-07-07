@@ -8,16 +8,18 @@ import SiteContainer from './containers/SiteContainer';
 import './globalStyles';
 
 const Viewport = styled.div`
-  position: absolute;
-  bottom: 0;
-  top: 3em;
+  grid-area: viewport;
+`;
+
+const SiteHeader = styled(Header)`
+  grid-area: header;
 `;
 
 const FullScreenLayout = ({children}) => (
   <>
     <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
     <SiteContainer>
-      <Header />
+      <SiteHeader />
       <Viewport>{children}</Viewport>
     </SiteContainer>
   </>

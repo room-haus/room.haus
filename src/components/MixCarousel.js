@@ -69,7 +69,7 @@ const CarouselWrapper = styled.div`
     right: 0;
     pointer-events: none;
     height: 100%;
-    width: 20px;
+    width: 40px;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 90%);
   }
 

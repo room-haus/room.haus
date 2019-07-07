@@ -1,5 +1,5 @@
 import * as art from 'src/images/mix-art/';
-import rm001 from '../images/rm001.jpg';
+// import rm001 from '../images/rm001.jpg';
 
 export const mixes = [
   {
