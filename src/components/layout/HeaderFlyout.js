@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import styled from 'styled-components';
 import useDimensions from '../../hooks/useDimensions';
+import useHover from '../../hooks/useHover';
 import useMousePosition from '../../hooks/useMousePosition';
 import DebuggerWindow from '../utils/DebuggerWindow';
 
@@ -21,7 +22,7 @@ const opacityEasing = ({active}) => {
 const Flyout = styled.div`
   transform: translateY(${transformEasing});
   opacity: ${opacityEasing};
-  transition: transform 0.2s ease-in-out, opacity 0.3s ease-in;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in;
   position: absolute;
   z-index: 1;
   background: #f5f6f6;
@@ -43,8 +44,13 @@ const ClickCatcher = styled.div`
   z-index: 0;
 `;
 
+const HoverZone = styled.div`
+  position: absolute;
+  width: 100%;
+  height: ${({height}) => height};
+`;
+
 const FlyoutContainer = styled.header`
-  max-width: 100%;
   position: relative;
   z-index: 10;
   background: transparent;
@@ -59,19 +65,22 @@ const HeaderFlyout = (props) => {
   const flyoutRef = useRef();
   const {height: flyoutHeight = 0} = useDimensions(flyoutRef);
   const transformOffset = mainHeight + flyoutHeight;
+  const hoverZoneRef = useRef();
+  const isHovering = useHover(hoverZoneRef);
   // const menuHeight = 60 + 54;
   // const threshold = menuHeight + 300;
   // const {y} = useMousePosition(document);
   // const active = y <= threshold;
   return (
-    <FlyoutContainer {...rest}>
+    <FlyoutContainer {...rest} innerRef={hoverZoneRef}>
       {active && <ClickCatcher onClick={() => setActive((a) => !a)} />}
       <Main innerRef={mainRef} onClick={() => setActive((a) => !a)}>
         <MainComponent />
       </Main>
-      <Flyout innerRef={flyoutRef} active={active} transformOffset={transformOffset}>
+      <Flyout innerRef={flyoutRef} active={isHovering} transformOffset={transformOffset}>
         <FlyoutComponent />
       </Flyout>
+      <HoverZone height={`${Math.round(flyoutHeight)}px`} />
     </FlyoutContainer>
   );
 };
