@@ -19,7 +19,7 @@ const FullScreenLayout = ({children}) => (
   <>
     <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
     <SiteContainer>
-      <SiteHeader />
+      <SiteHeader tactile />
       <Viewport>{children}</Viewport>
     </SiteContainer>
   </>

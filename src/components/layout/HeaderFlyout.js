@@ -1,9 +1,7 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
 import styled from 'styled-components';
 import useDimensions from '../../hooks/useDimensions';
 import useHover from '../../hooks/useHover';
-import useMousePosition from '../../hooks/useMousePosition';
-import DebuggerWindow from '../utils/DebuggerWindow';
 
 const transformEasing = ({active, transformOffset}) => {
   if (active) {
@@ -22,7 +20,7 @@ const opacityEasing = ({active}) => {
 const Flyout = styled.div`
   transform: translateY(${transformEasing});
   opacity: ${opacityEasing};
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in;
+  transition: transform 0.3s ease-in-out, opacity 0.35s ease-in;
   position: absolute;
   z-index: 1;
   background: #f5f6f6;
@@ -58,7 +56,7 @@ const FlyoutContainer = styled.header`
 `;
 
 const HeaderFlyout = (props) => {
-  const {MainComponent, FlyoutComponent, flyoutType, ...rest} = props;
+  const {MainComponent, FlyoutComponent, flyoutType, tactile, ...rest} = props;
   const [active, setActive] = useState(false);
   const mainRef = useRef();
   const {height: mainHeight = 0} = useDimensions(mainRef);
@@ -67,14 +65,19 @@ const HeaderFlyout = (props) => {
   const transformOffset = mainHeight + flyoutHeight;
   const hoverZoneRef = useRef();
   const isHovering = useHover(hoverZoneRef);
+  const clickHandler = useCallback(() => {
+    if (!isHovering) {
+      setActive((a) => !a);
+    }
+  });
 
   return (
     <FlyoutContainer {...rest} innerRef={hoverZoneRef}>
-      {active && <ClickCatcher onClick={() => setActive((a) => !a)} />}
-      <Main innerRef={mainRef} onClick={() => setActive((a) => !a)}>
-        <MainComponent />
+      {active && <ClickCatcher onClick={clickHandler} />}
+      <Main innerRef={mainRef} onClick={clickHandler}>
+        <MainComponent tactile={tactile} />
       </Main>
-      <Flyout innerRef={flyoutRef} active={isHovering} transformOffset={transformOffset}>
+      <Flyout innerRef={flyoutRef} active={isHovering || active} transformOffset={transformOffset}>
         <FlyoutComponent />
       </Flyout>
       <HoverZone height={`${Math.round(flyoutHeight)}px`} />

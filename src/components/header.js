@@ -15,22 +15,18 @@ const CarouselContainer = styled.div`
   width: 100vw;
 `;
 
-const Main = () => <CatalogHeader tactile />;
+const Main = (props) => <CatalogHeader {...props} />;
 const Flyout = () => (
   <>
     <HeaderPlayer />
     <CarouselContainer>
-      <CatalogList mixes={mixes} columns={15} density={2} />
+      <CatalogList mixes={mixes} columns={20} density={2} />
     </CarouselContainer>
   </>
 );
 
 const Header = (props) => {
-  return (
-    <>
-      <HeaderFlyout MainComponent={Main} FlyoutComponent={Flyout} />
-    </>
-  );
+  return <HeaderFlyout {...props} MainComponent={Main} FlyoutComponent={Flyout} />;
 };
 
 export default Header;

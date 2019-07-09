@@ -5,6 +5,7 @@ import SplashScreen from '../SplashScreen';
 import {getMix} from '../../content/mixes';
 
 const CanvasContainer = styled.div`
+  position: relative;
   background-color: #404040;
   margin: 0;
   padding: 0;
@@ -20,7 +21,6 @@ const Canvas = styled.canvas`
 
 const BackgroundContainer = styled.div`
   display: block;
-  position: absolute;
   width: 100%;
   height: 100%;
   margin: auto;

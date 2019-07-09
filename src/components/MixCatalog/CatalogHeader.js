@@ -9,24 +9,17 @@ import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 const RoomIcon = styled.img`
   object-fit: contain;
   margin: 0;
-  width: 40%;
+  width: 50%;
+  max-width: 200px;
 `;
 
 const NavItems = styled.div`
-  font-size: 4vw;
-
-  .active {
-    border-bottom: solid 3px black;
-  }
+  font-size: 5vmin;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 4vw;
+  font-size: 4vmin;
   margin: 0;
-
-  @media screen and (max-width: 1200px) {
-    font-size: 5vw;
-  }
 `;
 
 const Link = styled.a`
@@ -36,24 +29,44 @@ const Link = styled.a`
 
 const SocialIcons = styled(HeaderItem)`
   * + * {
-    margin-left: 1vw;
+    margin-left: 2vw;
   }
 `;
 
 const TactileContainer = styled.div`
-  width: 55px;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
 `;
 
 const Tactile = styled.div`
-  opacity: 1;
-  width: 100%;
-  height: 4px;
   border: 1px solid #939296;
+  height: 4px;
+
+  :nth-child(3) {
+    opacity: 1;
+    width: 100%;
+  }
+
+  :nth-child(2) {
+    opacity: 0.8;
+    width: 80%;
+  }
+
+  :nth-child(1) {
+    opacity: 0.7;
+    width: 60%;
+  }
 
   & + & {
     margin-top: 3px;
   }
+`;
+
+const StyledHeader = styled(Header)`
+  min-height: 30px;
 `;
 
 const Tactiles = (
@@ -66,7 +79,7 @@ const Tactiles = (
 
 export default ({tactile}) => {
   return (
-    <Header>
+    <StyledHeader>
       <HeaderItem position="left">
         <Link href="/mixes/">
           <RoomIcon src={RoomLogo} alt="Room logo" />
@@ -77,7 +90,7 @@ export default ({tactile}) => {
           Tactiles
         ) : (
           <NavItems>
-            <span className="active">MIXES</span>
+            <span>MIXES</span>
           </NavItems>
         )}
       </HeaderItem>
@@ -92,6 +105,6 @@ export default ({tactile}) => {
           <StyledIcon icon={faInstagram} />
         </Link>
       </SocialIcons>
-    </Header>
+    </StyledHeader>
   );
 };

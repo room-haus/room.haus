@@ -15,10 +15,12 @@ const OscilliscopeContainer = styled.div`
 const Container = styled.div`
   box-sizing: border-box;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;
   justify-self: center;
+  padding: 5px 10px;
 `;
 
 const MediaTitle = styled.span`
@@ -32,10 +34,10 @@ const CatalougeNumber = styled.span`
 `;
 
 const MediaTime = styled.span`
-  flex: 1;
-  font-size: 1em;
+  font-size: 1.5em;
   text-align: center;
-  max-width: 75px;
+  /* max-width: 75px; */
+  display: inline-block;
 `;
 
 const MediaMetaWrapper = styled.div`
@@ -49,15 +51,13 @@ const MediaMetaWrapper = styled.div`
   font-family: 'NeueHaasGrotDisp';
   height: 80%;
   justify-content: space-between;
-  flex: 2;
+  margin: 0 0 0 10px;
 `;
 
 const MediaMetaContainer = styled.div`
-  flex: 2;
   display: flex;
   align-items: center;
   justify-items: center;
-  justify-content: space-between;
 
   @media (max-width: 700px) {
     margin-left: 1em;
@@ -68,9 +68,7 @@ const MediaImage = styled.img`
   object-fit: contain;
   max-height: 65px;
   max-width: 100px;
-  flex: 1;
   position: relative;
-  flex-shrink: 0;
   user-drag: none;
   vertical-align: middle;
   display: inline-block;
@@ -108,8 +106,7 @@ const Controls = styled.div`
   border: 1px solid rgba(19, 18, 20, 0.7);
   display: grid;
   grid-template-columns: 1fr 8fr;
-  grid-template-rows: 1.8em;
-  flex: 1;
+  grid-template-rows: 2em;
 
   @media (max-width: 700px) {
     flex: 2;
@@ -159,6 +156,18 @@ class HeaderPlayer extends React.Component {
             <AudioMetaContext.Consumer>
               {({isLoading, isPlaying, isReady, meta, loadProgress}) => (
                 <Container>
+                  {meta && (
+                    <MediaMetaContainer>
+                      <MediaImage src={meta.art} />
+                      <MediaMetaWrapper>
+                        <MediaTitle>{meta.artist}</MediaTitle>
+                        <MediaTitle>
+                          <i>{meta.name}</i>
+                        </MediaTitle>
+                        <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
+                      </MediaMetaWrapper>
+                    </MediaMetaContainer>
+                  )}
                   <Controls loading={isLoading && !isReady}>
                     <PlayButton
                       handleClick={((!isLoading && !isReady) || isReady) && this.handlePlay(source, this.props.onPlay)}
@@ -174,19 +183,7 @@ class HeaderPlayer extends React.Component {
                       {source.ready && <PlayheadProgressBar progress={source.playheadLocation()} color="#121212" />}
                     </OscilliscopeContainer>
                   </Controls>
-                  {meta && (
-                    <MediaMetaContainer>
-                      <MediaTime>{formatTime(source.currentTime())}</MediaTime>
-                      <MediaImage src={meta.art} />
-                      <MediaMetaWrapper>
-                        <MediaTitle>{meta.artist}</MediaTitle>
-                        <MediaTitle>
-                          <i>{meta.name}</i>
-                        </MediaTitle>
-                        <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
-                      </MediaMetaWrapper>
-                    </MediaMetaContainer>
-                  )}
+                  <MediaTime>{formatTime(source.currentTime())}</MediaTime>
                 </Container>
               )}
             </AudioMetaContext.Consumer>

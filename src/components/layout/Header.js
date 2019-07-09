@@ -16,7 +16,7 @@ export const Header = styled.div`
   display: grid;
   grid-template-areas: 'left middle right';
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 7vh;
+  grid-template-rows: 5vh;
   align-items: center;
   padding: 0 10px;
 `;
