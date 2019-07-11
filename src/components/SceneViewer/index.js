@@ -17,12 +17,16 @@ const Canvas = styled.canvas`
   width: 100%;
   height: 100%;
   padding: 0;
+  position: relative;
 `;
 
 const BackgroundContainer = styled.div`
+  position: absolute;
   display: block;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   margin: auto;
   padding: 0;
 `;

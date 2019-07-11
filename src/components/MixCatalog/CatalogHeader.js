@@ -18,7 +18,7 @@ const NavItems = styled.div`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 4vmin;
+  font-size: 3vmin;
   margin: 0;
 `;
 

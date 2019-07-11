@@ -36,8 +36,9 @@ const CatalougeNumber = styled.span`
 const MediaTime = styled.span`
   font-size: 1.5em;
   text-align: center;
-  /* max-width: 75px; */
   display: inline-block;
+  flex-basis: content;
+  width: 10vw;
 `;
 
 const MediaMetaWrapper = styled.div`
@@ -56,6 +57,7 @@ const MediaMetaWrapper = styled.div`
 
 const MediaMetaContainer = styled.div`
   display: flex;
+  flex-basis: content;
   align-items: center;
   justify-items: center;
 
@@ -102,11 +104,13 @@ const PlayheadProgressBar = styled.div`
 `;
 
 const Controls = styled.div`
+  flex-grow: 2;
   cursor: ${({loading}) => (loading ? 'wait' : 'pointer')};
   border: 1px solid rgba(19, 18, 20, 0.7);
   display: grid;
   grid-template-columns: 1fr 8fr;
   grid-template-rows: 2em;
+  margin: 0 3vw;
 
   @media (max-width: 700px) {
     flex: 2;

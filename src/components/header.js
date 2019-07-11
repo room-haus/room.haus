@@ -20,7 +20,7 @@ const Flyout = () => (
   <>
     <HeaderPlayer />
     <CarouselContainer>
-      <CatalogList mixes={mixes} columns={20} density={2} />
+      <CatalogList mixes={mixes} columns={20} density={2} fadeOnHover />
     </CarouselContainer>
   </>
 );

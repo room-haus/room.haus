@@ -1,10 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import {Link} from 'gatsby';
 import {mixes as mixList} from 'src/content/mixes';
 
 const MixItem = styled.img`
   margin: 0;
+`;
+
+const fadeStyles = css`
+  &:hover ${MixItem} {
+    opacity: 0.3;
+    filter: grayscale(60%);
+
+    &:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+  }
 `;
 
 const MixList = styled.div`
@@ -20,15 +32,7 @@ const MixList = styled.div`
     transition-timing-function: ease-in-out;
   }
 
-  &:hover ${MixItem} {
-    opacity: 1;
-    filter: grayscale(0%);
-
-    &:hover {
-      opacity: 0.3;
-      filter: grayscale(60%);
-    }
-  }
+  ${({fadeOnHover}) => (fadeOnHover ? fadeStyles : null)}
 `;
 
 const getMixLink = ({className}, mix) => (
