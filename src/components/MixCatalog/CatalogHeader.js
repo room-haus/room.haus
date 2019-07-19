@@ -44,21 +44,7 @@ const TactileContainer = styled.div`
 const Tactile = styled.div`
   border: 1px solid #939296;
   height: 4px;
-
-  :nth-child(3) {
-    opacity: 1;
-    width: 100%;
-  }
-
-  :nth-child(2) {
-    opacity: 0.8;
-    width: 80%;
-  }
-
-  :nth-child(1) {
-    opacity: 0.7;
-    width: 60%;
-  }
+  width: 100%;
 
   & + & {
     margin-top: 3px;
