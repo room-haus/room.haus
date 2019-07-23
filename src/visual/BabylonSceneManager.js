@@ -3,8 +3,9 @@ import {getMixConfig} from './mixes';
 import {loadCDModel, initCamera, loadSceneAssets} from '../utils/BabylonHelpers';
 
 class BabylonSceneManager {
-  constructor() {
+  constructor(canvas) {
     this.scenes = {};
+    this.init(canvas);
   }
 
   init(canvas) {
@@ -17,21 +18,21 @@ class BabylonSceneManager {
     window.addEventListener('resize', this.onResize);
   }
 
-  async createScene({id, cdModelPath, caseTexture, build, sceneAssetsPath, cdLabelTexture}) {
+  async createScene({id, caseTexture, build, sceneAssetsPath, cdLabelTexture, audio}) {
     let scene = new BABYLON.Scene(this.engine);
     this.scenes[id] = scene;
     if (sceneAssetsPath) {
       scene = await loadSceneAssets(scene, sceneAssetsPath);
     }
     if (caseTexture) {
-      scene = await loadCDModel(scene, cdModelPath, caseTexture, cdLabelTexture);
+      scene = await loadCDModel(scene, caseTexture, cdLabelTexture);
     }
     scene = initCamera(scene, this.canvas);
     build({
       scene,
       canvas: this.canvas,
       engine: this.engine,
-      audio: this.audio,
+      audio,
     });
     if (this.onReady) {
       scene.executeWhenReady(this.onReady);
@@ -39,12 +40,12 @@ class BabylonSceneManager {
     return scene;
   }
 
-  async runScene(sceneId) {
+  async runScene(sceneId, params) {
     let scene = this.scenes[sceneId];
     const config = getMixConfig(sceneId);
     this.background = config.Background;
     if (!scene) {
-      scene = await this.createScene(config);
+      scene = await this.createScene({...config, ...params});
     }
     this.engine.stopRenderLoop();
     this.engine.runRenderLoop(() => scene.render());

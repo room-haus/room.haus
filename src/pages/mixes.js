@@ -1,32 +1,23 @@
 import React from 'react';
-import AudioSourceContext from '../components/contexts/audio/AudioSourceContext';
+import AudioSourceContext from '../audio2/AudioSourceContext';
+import MixMetaContext from '../components/SceneViewer/MixMetaContext';
 import FullScreenLayout from '../components/FullScreenLayout';
 import SceneViewer from '../components/SceneViewer';
 import {getMix} from '../content/mixes';
 import MixCatalog from '../components/MixCatalog';
-
-const getParams = (search) => {
-  const params = {};
-  search
-    .split('?')
-    .pop()
-    .split('&')
-    .forEach((kvpair) => {
-      const [key, value] = kvpair.split('=');
-      params[key] = value;
-    });
-  return params;
-};
+import useURLParams from '../hooks/useURLParams';
 
 const MixPage = ({location}) => {
-  let {mx} = getParams(location.search);
+  let mx = useURLParams(location.search).get('mx');
   mx = getMix(mx);
   return mx ? (
-    <FullScreenLayout>
-      <AudioSourceContext.Consumer>
-        {({source, set}) => <SceneViewer scene={mx.id} source={source} setter={set} />}
-      </AudioSourceContext.Consumer>
-    </FullScreenLayout>
+    <AudioSourceContext>
+      <MixMetaContext>
+        <FullScreenLayout>
+          <SceneViewer sceneId={mx.id} mixId={mx.id} />
+        </FullScreenLayout>
+      </MixMetaContext>
+    </AudioSourceContext>
   ) : (
     <MixCatalog />
   );

@@ -217,7 +217,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   });
 };
 
-export async function loadCDModel(scene, modelPath, caseTexture, cdLabelTexture) {
+export async function loadCDModel(scene, caseTexture, cdLabelTexture) {
   const babylonFile = withPrefix('/models/CD/CD.babylon');
   const {meshes} = await BABYLON.SceneLoader.ImportMeshAsync('', babylonFile, '', scene);
 

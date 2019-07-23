@@ -25,11 +25,6 @@ class AudioSourceContext extends React.Component {
     if (!trackId) {
       throw Error("Can't make source without track ID");
     }
-    // if (this.state.source) {
-    //   const {id} = this.state.source;
-    //   AudioSourceContext.cache[id].dispose();
-    //   delete AudioSourceContext.cache[id];
-    // }
     if (!AudioSourceContext.cache[trackId]) {
       AudioSourceContext.cache[trackId] = new HLSAudioSource({id: trackId});
     }
@@ -54,9 +49,7 @@ class AudioSourceContext extends React.Component {
   render() {
     return (
       <AudioSourceContext.Provider value={this.state}>
-        <AudioMetaContext source={this.state.source}>
-          {this.props.children}
-        </AudioMetaContext>
+        <AudioMetaContext source={this.state.source}>{this.props.children}</AudioMetaContext>
       </AudioSourceContext.Provider>
     );
   }
