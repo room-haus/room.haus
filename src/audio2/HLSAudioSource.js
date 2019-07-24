@@ -110,7 +110,7 @@ export default class HLSAudioSource {
   }
 
   isPlaying() {
-    return !this.audio.paused;
+    return this.audio ? !this.audio.paused : false;
   }
 
   getFrequencyData(band) {
@@ -173,7 +173,7 @@ export default class HLSAudioSource {
   }
 
   currentTime() {
-    return this.audio.currentTime || 0;
+    return this.audio ? this.audio.currentTime : 0;
   }
 
   // update(band) {

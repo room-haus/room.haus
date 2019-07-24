@@ -15,7 +15,9 @@ class BabylonSceneManager {
       stencil: true,
     });
     this.onResize = () => this.engine.resize();
-    window.addEventListener('resize', this.onResize);
+    try {
+      window.addEventListener('resize', this.onResize);
+    } catch (e) {}
   }
 
   async createScene({id, caseTexture, build, sceneAssetsPath, cdLabelTexture, audio}) {

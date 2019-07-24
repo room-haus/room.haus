@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import HLSAudioSource from './HLSAudioSource';
 
 export const Context = React.createContext({
-  audio: undefined,
+  audio: new HLSAudioSource(),
 });
 
 export default ({children}) => {

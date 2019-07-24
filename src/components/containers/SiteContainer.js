@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import AudioSourceContext from '../contexts/audio/AudioSourceContext';
 import ErrorBoundary from '../ErrorBoundary';
 
 const SiteContainer = styled.div`
@@ -12,13 +11,11 @@ const SiteContainer = styled.div`
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
   overflow: hidden;
-  height: 100vh;
+  height: 100%;
 `;
 
 export default (props) => (
   <ErrorBoundary>
-    <AudioSourceContext>
-      <SiteContainer {...props} />
-    </AudioSourceContext>
+    <SiteContainer {...props} />
   </ErrorBoundary>
 );

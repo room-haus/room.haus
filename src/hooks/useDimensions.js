@@ -36,7 +36,7 @@ export default (ref) => {
     handleResize();
 
     if (typeof ResizeObserver === 'function') {
-      let resizeObserver = new ResizeObserver(() => handleResize());
+      let resizeObserver = new ResizeObserver(handleResize);
       resizeObserver.observe(element);
 
       return () => {
