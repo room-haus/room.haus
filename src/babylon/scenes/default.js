@@ -104,7 +104,7 @@ export const build = ({scene}) => {
   // const mesh = BABYLON.Mesh.CreateSphere('mesh', 32, 10, scene);
   mesh.position = new BABYLON.Vector3(0, 0, 0);
 
-  const refTexture = new BABYLON.Texture('http://i.imgur.com/HP1V7TJ.png', scene);
+  const refTexture = new BABYLON.Texture('https://i.imgur.com/HP1V7TJ.png', scene);
 
   shaderMaterial.setTexture('refSampler', refTexture);
   shaderMaterial.setFloat('time', 0);

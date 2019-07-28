@@ -5,7 +5,6 @@ export default (canvas) => {
   const {current: manager} = useRef(new BabylonSceneManager());
 
   useEffect(() => {
-    console.log('Initializing manager', canvas.current);
     if (canvas.current) {
       manager.init(canvas.current);
     }

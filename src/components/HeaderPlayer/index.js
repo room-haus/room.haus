@@ -20,10 +20,15 @@ const Container = styled.div`
   height: 100%;
   justify-self: center;
   padding: 5px 10px;
+
+  @media (max-width: 700px) {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
+  }
 `;
 
 const MediaTitle = styled.span`
-  overflow: hidden;
   white-space: nowrap;
 `;
 
@@ -33,11 +38,36 @@ const CatalougeNumber = styled.span`
 `;
 
 const MediaTime = styled.span`
-  font-size: 1.5em;
+  font-size: 3.7vw;
   text-align: center;
   display: inline-block;
   flex-basis: content;
-  width: 10vw;
+  width: 11vw;
+  line-height: 1em;
+
+  @media (max-width: 700px) {
+    grid-row-start: 1;
+    justify-self: end;
+  }
+`;
+
+const MediaMetaContainer = styled.div`
+  display: flex;
+  flex-basis: content;
+  align-items: center;
+  justify-items: center;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    grid-row-start: 1;
+    justify-self: start;
+    padding-right: 10%;
+
+    & span {
+      font-size: 0.7em;
+      font-weight: 900;
+    }
+  }
 `;
 
 const MediaMetaWrapper = styled.div`
@@ -51,17 +81,12 @@ const MediaMetaWrapper = styled.div`
   font-family: 'NeueHaasGrotDisp';
   height: 80%;
   justify-content: space-between;
-  margin: 0 0 0 10px;
-`;
-
-const MediaMetaContainer = styled.div`
-  display: flex;
-  flex-basis: content;
-  align-items: center;
-  justify-items: center;
+  margin: 0 0 0 1vw;
 
   @media (max-width: 700px) {
-    margin-left: 1em;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
   }
 `;
 
@@ -80,17 +105,6 @@ const MediaImage = styled.img`
   }
 `;
 
-const ProgressBar = styled.div`
-  position: absolute;
-  bottom: 0;
-  opacity: 0.7;
-  background-color: ${({color}) => color || '#53ef8d'};
-  width: ${(props) => Math.round(props.progress * 100)}%;
-  height: 0.3em;
-  border: none !important;
-  pointer-events: none;
-`;
-
 const PlayheadProgressBar = styled.div`
   position: absolute;
   bottom: 0;
@@ -107,12 +121,15 @@ const Controls = styled.div`
   cursor: ${({loading}) => (loading ? 'wait' : 'pointer')};
   border: 1px solid rgba(19, 18, 20, 0.7);
   display: grid;
-  grid-template-columns: 1fr 8fr;
-  grid-template-rows: 2em;
-  margin: 0 3vw;
+  grid-template-columns: minmax(45px, 1fr) 8fr;
+  grid-template-rows: minmax(3em, 5vh);
+  margin: 0 2vw 0 3vw;
 
   @media (max-width: 700px) {
-    flex: 2;
+    grid-row-start: 2;
+    grid-column-start: span 2;
+    margin: 0;
+    grid-template-rows: 5vh;
   }
 
   * + * {

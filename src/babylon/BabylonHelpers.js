@@ -227,9 +227,7 @@ export async function loadCDModel(scene, caseTexture, cdLabelTexture) {
 }
 
 export async function loadSceneAssets(scene, babylonFilePath) {
-  console.log(babylonFilePath);
   const parts = babylonFilePath.split('/');
-  console.log(parts);
   const file = parts.pop();
   const root = parts.join('/') + '/';
   return BABYLON.SceneLoader.AppendAsync(root, file, scene);

@@ -65,6 +65,7 @@ const HeaderFlyout = (props) => {
   const transformOffset = mainHeight + flyoutHeight;
   const hoverZoneRef = useRef();
   const isHovering = useHover(hoverZoneRef);
+  const hoverHeight = Math.round(Math.min(flyoutHeight, 100));
   const clickHandler = useCallback(() => {
     if (!isHovering) {
       setActive((a) => !a);
@@ -82,7 +83,7 @@ const HeaderFlyout = (props) => {
           <FlyoutComponent />
         </Flyout>
       )}
-      {!disableFlyout && <HoverZone height={`${Math.round(flyoutHeight)}px`} />}
+      {!disableFlyout && <HoverZone height={`${Math.round(hoverHeight)}px`} />}
     </FlyoutContainer>
   );
 };

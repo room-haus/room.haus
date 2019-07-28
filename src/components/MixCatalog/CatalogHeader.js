@@ -64,7 +64,7 @@ export default ({tactile}) => {
   return (
     <Header>
       <HeaderItem position="left">
-        <Link href="/mixes/">
+        <Link to="/mixes/">
           <RoomIcon src={RoomLogo} alt="Room logo" />
         </Link>
       </HeaderItem>

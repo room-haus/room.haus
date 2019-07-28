@@ -38,6 +38,7 @@ const CatalogListOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 100%;
   z-index: 3;
   opacity: ${({show}) => (show ? 1 : 0)};
@@ -47,14 +48,11 @@ const CatalogListOverlay = styled.div`
 
 const CatalogOverlay = ({show}) => {
   const [visible, setVisible] = useState(show);
-  console.log('CATALOG OVERLAY', show, visible);
   useEffect(() => {
-    console.log('SETTING THE FUCKING VISIBILITY', show);
     setVisible(show);
   }, []);
 
   useEffect(() => {
-    console.log('CATALOG OVERLAY useEffect', show, visible);
     if (visible) {
       setTimeout(() => {
         setVisible(show);
@@ -71,7 +69,6 @@ const CatalogOverlay = ({show}) => {
 };
 
 export default ({mixId, sceneId, showCatalogOverlay}) => {
-  console.log('Scene Viewer', showCatalogOverlay);
   const mainCanvasRef = useRef();
   const manager = useSceneManager(mainCanvasRef);
   const {setMixId, meta} = useMixMetaContext();
@@ -79,7 +76,6 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
   const Background = manager.background;
 
   useEffect(() => {
-    console.log('Running scene', sceneId, mixId);
     if (mixId && sceneId) {
       setMixId(mixId);
       manager.runScene(sceneId, {audio});

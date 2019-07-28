@@ -12,6 +12,7 @@ const PlayButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-image: url(${buttonUrl});
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 `;
