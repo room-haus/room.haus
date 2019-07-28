@@ -5,7 +5,9 @@ import {loadCDModel, initCamera, loadSceneAssets} from '../utils/BabylonHelpers'
 class BabylonSceneManager {
   constructor(canvas) {
     this.scenes = {};
-    this.init(canvas);
+    if (canvas) {
+      this.init(canvas);
+    }
   }
 
   init(canvas) {
@@ -14,10 +16,8 @@ class BabylonSceneManager {
       preserveDrawingBuffer: true,
       stencil: true,
     });
-    this.onResize = () => this.engine.resize();
-    try {
-      window.addEventListener('resize', this.onResize);
-    } catch (e) {}
+    this.resize = () => this.engine.resize();
+    window.addEventListener('resize', this.resize);
   }
 
   async createScene({id, caseTexture, build, sceneAssetsPath, cdLabelTexture, audio}) {
@@ -51,6 +51,7 @@ class BabylonSceneManager {
     }
     this.engine.stopRenderLoop();
     this.engine.runRenderLoop(() => scene.render());
+    this.resize();
   }
 
   cleanUp() {

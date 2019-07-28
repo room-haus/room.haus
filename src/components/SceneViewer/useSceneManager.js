@@ -6,7 +6,9 @@ export default (canvas) => {
 
   useEffect(() => {
     console.log('Initializing manager', canvas.current);
-    manager.init(canvas.current);
+    if (canvas.current) {
+      manager.init(canvas.current);
+    }
   }, [canvas]);
 
   return manager;

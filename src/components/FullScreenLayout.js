@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Header from './header';
-import SiteContainer from './containers/SiteContainer';
+import SiteContainer from './layout/SiteLayout';
 import './globalStyles';
 
 const Viewport = styled.div`
@@ -16,13 +16,10 @@ const SiteHeader = styled(Header)`
 `;
 
 const FullScreenLayout = ({children}) => (
-  <>
-    <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
-    <SiteContainer>
-      <SiteHeader tactile />
-      <Viewport>{children}</Viewport>
-    </SiteContainer>
-  </>
+  <SiteContainer>
+    <SiteHeader tactile />
+    <Viewport>{children}</Viewport>
+  </SiteContainer>
 );
 
 FullScreenLayout.propTypes = {

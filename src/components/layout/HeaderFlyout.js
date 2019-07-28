@@ -56,7 +56,7 @@ const FlyoutContainer = styled.header`
 `;
 
 const HeaderFlyout = (props) => {
-  const {MainComponent, FlyoutComponent, flyoutType, tactile, ...rest} = props;
+  const {MainComponent, FlyoutComponent, disableFlyout, ...rest} = props;
   const [active, setActive] = useState(false);
   const mainRef = useRef();
   const {height: mainHeight = 0} = useDimensions(mainRef);
@@ -75,12 +75,14 @@ const HeaderFlyout = (props) => {
     <FlyoutContainer {...rest} innerRef={hoverZoneRef}>
       {active && <ClickCatcher onClick={clickHandler} />}
       <Main innerRef={mainRef} onClick={clickHandler}>
-        <MainComponent tactile={tactile} />
+        <MainComponent tactile={!disableFlyout} />
       </Main>
-      <Flyout innerRef={flyoutRef} active={isHovering || active} transformOffset={transformOffset}>
-        <FlyoutComponent />
-      </Flyout>
-      <HoverZone height={`${Math.round(flyoutHeight)}px`} />
+      {!disableFlyout && (
+        <Flyout innerRef={flyoutRef} active={isHovering || active} transformOffset={transformOffset}>
+          <FlyoutComponent />
+        </Flyout>
+      )}
+      {!disableFlyout && <HoverZone height={`${Math.round(flyoutHeight)}px`} />}
     </FlyoutContainer>
   );
 };

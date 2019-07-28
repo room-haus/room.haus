@@ -1,9 +1,9 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
-import useMix from './useMix';
 import useSceneManager from './useSceneManager';
 import useHLSAudio from '../../audio2/useHLSAudio';
 import {useMixMetaContext} from './MixMetaContext';
+import CatalogList from '../MixCatalog/CatalogList';
 
 const CanvasContainer = styled.div`
   position: relative;
@@ -11,6 +11,7 @@ const CanvasContainer = styled.div`
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 `;
 
 const Canvas = styled.canvas`
@@ -32,7 +33,45 @@ const BackgroundContainer = styled.div`
   padding: 0;
 `;
 
-export default ({mixId, sceneId}) => {
+const CatalogListOverlay = styled.div`
+  background: #f5f6f6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  opacity: ${({show}) => (show ? 1 : 0)};
+  transition: opacity 0.35s ease-in;
+  visibility: ${({visible}) => (visible ? 'visible' : 'hidden')};
+`;
+
+const CatalogOverlay = ({show}) => {
+  const [visible, setVisible] = useState(show);
+  console.log('CATALOG OVERLAY', show, visible);
+  useEffect(() => {
+    console.log('SETTING THE FUCKING VISIBILITY', show);
+    setVisible(show);
+  }, []);
+
+  useEffect(() => {
+    console.log('CATALOG OVERLAY useEffect', show, visible);
+    if (visible) {
+      setTimeout(() => {
+        setVisible(show);
+      }, 350);
+    } else {
+      setVisible(show);
+    }
+  }, [show]);
+  return (
+    <CatalogListOverlay show={show} visible={visible}>
+      <CatalogList />
+    </CatalogListOverlay>
+  );
+};
+
+export default ({mixId, sceneId, showCatalogOverlay}) => {
+  console.log('Scene Viewer', showCatalogOverlay);
   const mainCanvasRef = useRef();
   const manager = useSceneManager(mainCanvasRef);
   const {setMixId, meta} = useMixMetaContext();
@@ -41,93 +80,23 @@ export default ({mixId, sceneId}) => {
 
   useEffect(() => {
     console.log('Running scene', sceneId, mixId);
-    setMixId(mixId);
-    manager.runScene(sceneId, {audio});
+    if (mixId && sceneId) {
+      setMixId(mixId);
+      manager.runScene(sceneId, {audio});
+    }
   }, [sceneId, mixId]);
 
   return (
-    <CanvasContainer>
-      {Background && (
-        <BackgroundContainer>
-          <Background source={audio} />
-        </BackgroundContainer>
-      )}
-      <Canvas innerRef={mainCanvasRef} />
-    </CanvasContainer>
+    <div id="test">
+      <CatalogOverlay show={showCatalogOverlay} />
+      <CanvasContainer>
+        {Background && (
+          <BackgroundContainer>
+            <Background source={audio} />
+          </BackgroundContainer>
+        )}
+        <Canvas innerRef={mainCanvasRef} />
+      </CanvasContainer>
+    </div>
   );
 };
-
-// class SceneViewer extends React.Component {
-//   canvas = React.createRef();
-//   backgroundCanvas = React.createRef();
-
-//   constructor(props) {
-//     super(props);
-//     this.sceneManager = new BabylonSceneManager();
-//     const mix = getMix(props.scene);
-//     if (mix && props.setter) {
-//       props.setter(mix.id);
-//     }
-//     this.sceneManager.onReady = () => {
-//       this.setState({ready: true});
-//       setTimeout(() => this.setState({loaded: true}), 1000);
-//     };
-//     // props.onInit && props.onInit();
-//     this.state = {Background: null, ready: false, loaded: false};
-//   }
-
-//   componentDidMount() {
-//     const {scene} = this.props;
-//     this.sceneManager.init(this.canvas.current);
-//     this.sceneManager.runScene(scene);
-//     this.setState({
-//       Background: this.sceneManager.background,
-//     });
-//   }
-
-//   componentDidUpdate(prevProps) {
-//     const {source, scene, setter} = this.props;
-//     this.sceneManager.audio = source;
-//     const newScene = prevProps.scene !== scene;
-//     if (!prevProps.scene || newScene) {
-//       if (newScene && source && source.isPlaying()) {
-//         const oldSource = prevProps.source;
-//         if (oldSource) {
-//           oldSource.pause();
-//         }
-//       }
-//       this.sceneManager.runScene(scene);
-//       this.setState({
-//         Background: this.sceneManager.background,
-//       });
-//       const mix = getMix(scene);
-//       if (mix) {
-//         setter(mix.id);
-//       }
-//     }
-//   }
-
-//   componentWillUnmount() {
-//     this.sceneManager.cleanUp();
-//   }
-
-//   render() {
-//     const {Background, ready, loaded} = this.state;
-//     const {source} = this.props;
-//     return (
-//       <>
-//         {(!ready || !loaded) && <SplashScreen hide={ready} />}
-//         <CanvasContainer>
-//           {Background && (
-//             <BackgroundContainer>
-//               <Background source={source} />
-//             </BackgroundContainer>
-//           )}
-//           <Canvas innerRef={this.canvas} />
-//         </CanvasContainer>
-//       </>
-//     );
-//   }
-// }
-
-// export default SceneViewer;

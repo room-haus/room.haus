@@ -12,7 +12,8 @@ injectGlobal`
 
 html {
   font-family: sans-serif;
-  line-height: 1.15;
+  height: 100%;
+  /* line-height: 1.15; */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -47,6 +48,7 @@ body {
   color: black;
   text-align: left;
   background-color: white;
+  height: 100%;
 }
 
 [tabindex="-1"]:focus {

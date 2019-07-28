@@ -12,7 +12,7 @@ const CarouselContainer = styled.div`
   background: #f5f6f6;
   top: 4.5em;
   left: 0;
-  width: 100vw;
+  width: 100%;
 `;
 
 const Main = (props) => <CatalogHeader {...props} />;
@@ -25,8 +25,8 @@ const Flyout = () => (
   </>
 );
 
-const Header = (props) => {
-  return <HeaderFlyout {...props} MainComponent={Main} FlyoutComponent={Flyout} />;
-};
+const Header = ({disableFlyout, ...props}) => (
+  <HeaderFlyout {...props} MainComponent={Main} FlyoutComponent={Flyout} disableFlyout={disableFlyout} />
+);
 
 export default Header;
