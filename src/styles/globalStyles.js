@@ -1,4 +1,4 @@
-import '../fonts/fonts.css';
+import './fonts/fonts.css';
 import './layout.css';
 import {injectGlobal} from 'styled-components';
 

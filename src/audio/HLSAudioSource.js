@@ -1,60 +1,47 @@
 import HLS from 'hls.js';
 import {FREQ_BIN_COUNT} from './constants';
 import AudioBand from './AudioBand';
-import {getMix} from '../content/mixes';
 import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 
 export default class HLSAudioSource {
-  constructor({id} = {}, callbacks = {}) {
-    this.ready = false;
-    this.meta = getMix(id) || {};
+  constructor(callbacks = {}) {
+    console.log('Creating audio source');
     this.callbacks = {
-      onInit: callbacks.onInit || function() {},
-      onPlay: callbacks.onPlay || function() {},
-      onPause: callbacks.onPause || function() {},
-      onToggle: callbacks.onToggle || function() {},
-      onEnd: callbacks.onEnd || function() {},
-      onLoaded: callbacks.onLoaded || function() {},
-      onProgress: callbacks.onProgress || function() {},
-      onTime: callbacks.onTime || function() {},
-      onReady: callbacks.onReady || function() {},
+      onInit: callbacks.onInit,
+      onPlay: callbacks.onPlay,
+      onPause: callbacks.onPause,
+      onToggle: callbacks.onToggle,
+      onEnd: callbacks.onEnd,
+      onLoaded: callbacks.onLoaded,
+      onProgress: callbacks.onProgress,
+      onTime: callbacks.onTime,
+      onReady: callbacks.onReady,
     };
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      this.ctx = new AudioContext();
-    } catch (e) {
-      this.ctx = null;
-    }
-    if (id) {
-      this.init(id);
-    }
 
-    this.timeInterval = null;
-    setInterval(() => {
-      this.update();
-    }, 10);
-    // document.addEventListener('keypress', (event) => {
-    //   if (event.keyCode === 32) {
-    //     this.ready && this.toggle();
-    //   }
-    // });
+    this.ready = false;
   }
 
-  async init(id) {
-    this.callbacks.onInit();
+  callback(name, ...params) {
+    const func = this.callbacks[name];
+    return func ? func(...params) : undefined;
+  }
 
-    this.bands = {};
+  async init(ctx) {
+    console.log('Initializing audio source');
+    this.callback('onInit');
 
-    try {
-      this.audio = new Audio();
-    } catch (e) {
-      return;
-    }
+    this.ctx = ctx;
+    this.hls = new HLS();
+    this.audio = new Audio();
+
     this.element = this.ctx.createMediaElementSource(this.audio);
     this.analyser = this.ctx.createAnalyser();
     this.analyser.fft = FREQ_BIN_COUNT * 2;
     this.frequencyBuffer = new Uint8Array(this.analyser.frequencyBinCount);
     this.timeDomainBuffer = new Uint8Array(this.analyser.frequencyBinCount);
+
+    this.bands = {};
+
     const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
     console.log(`CPU cores: ${cpuCores}`);
     if (this.ctx.audioWorklet && cpuCores > 1) {
@@ -66,91 +53,64 @@ export default class HLSAudioSource {
         console.error('Failed to load bpm analyzer processor!', error);
       }
     }
+
     this.element.connect(this.analyser);
     this.element.connect(this.ctx.destination);
 
     this.audio.addEventListener('play', () => {
-      this.playing = true;
-
-      this.timeInterval = window.setInterval(() => {
-        this.callbacks.onTime(this.element.currentTime);
-      }, 500);
-
-      this.callbacks.onPlay();
-      this.callbacks.onToggle();
+      this.callback('onPlay');
+      this.callback('onToggle');
     });
     this.audio.addEventListener('pause', () => {
-      this.playing = false;
-
-      window.clearInterval(this.timeInterval);
-      this.timeInterval = null;
-
-      this.callbacks.onPause();
-      this.callbacks.onToggle();
+      this.callback('onPause');
+      this.callback('onToggle');
     });
     this.audio.addEventListener('ended', () => {
-      this.playing = false;
-      this.callbacks.onEnd();
-      if (this.timeInterval) {
-        window.clearInterval(this.timeInterval);
-      }
+      this.callback('onEnd');
     });
+  }
 
-    const manifestUrl =
-      id === 'MX029'
-        ? `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/audio/${id}.m3u8`
-        : `https://roomhauscdnprd.blob.core.windows.net/mixes/${id}/${id}.m3u8`;
-
+  loadAudio() {
     if (HLS.isSupported()) {
-      this.hls && this.hls.destroy();
-      this.hls = new HLS();
-      this.hls.loadSource(manifestUrl);
+      this.hls.loadSource(this.manifestUrl);
       this.hls.attachMedia(this.audio);
     } else {
-      this.audio.src = manifestUrl;
+      this.audio.src = this.manifestUrl;
     }
     this.ready = true;
   }
 
-  setOnsetCallback(func) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onsetCallback = func;
-    }
+  setManifestUrl(manifestUrl) {
+    this.manifestUrl = manifestUrl;
+    this.loadAudio();
   }
 
-  setODFUpdateCallback(func) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onMessage = func;
-    }
-  }
+  // setOnsetCallback(func) {
+  //   if (this.bpmAnalyzerNode) {
+  //     this.bpmAnalyzerNode.onsetCallback = func;
+  //   }
+  // }
 
-  play() {
-    if (this.audio) {
-      this.ctx.resume && this.ctx.resume();
-      this.audio.play();
-    }
-  }
+  // setODFUpdateCallback(func) {
+  //   if (this.bpmAnalyzerNode) {
+  //     this.bpmAnalyzerNode.onMessage = func;
+  //   }
+  // }
 
-  pause() {
-    if (this.audio) {
-      this.audio.pause();
-    }
-  }
-
-  playheadLocation() {
+  percentCompletion() {
     return this.audio ? this.audio.currentTime / this.audio.duration : 0;
   }
 
   dispose() {
-    this.hls && this.hls.destroy();
+    this.hls.destroy();
   }
 
   toggle() {
-    this.isPlaying() ? this.pause() : this.play(); // eslint-disable-line no-unused-expressions
+    this.isPlaying() ? this.audio.pause() : this.audio.play(); // eslint-disable-line no-unused-expressions
   }
 
   isPlaying() {
-    return this.audio && !this.audio.paused;
+    return this.audio ? !this.audio.paused : false;
   }
 
   getFrequencyData(band) {
@@ -162,10 +122,6 @@ export default class HLSAudioSource {
     }
     this.analyser.getByteFrequencyData(this.frequencyBuffer);
     return this.frequencyBuffer ? this.frequencyBuffer : [];
-  }
-
-  ready() {
-    return true;
   }
 
   getTimeDomainData(band) {
@@ -204,10 +160,6 @@ export default class HLSAudioSource {
     }
   }
 
-  currentTime() {
-    return this.audio ? this.audio.currentTime : 0;
-  }
-
   getTotalEnergy(band) {
     if (band) {
       return this.bands[band].getTotalEnergy();
@@ -220,23 +172,27 @@ export default class HLSAudioSource {
     this.bands[name] = new AudioBand(this.ctx, this.element, options);
   }
 
-  update(band) {
-    if (!this.ready || !this.isPlaying()) {
-      return;
-    }
-    if (band) {
-      this.bands[band].process();
-    } else {
-      Object.values(this.bands).forEach((b) => b.process());
-    }
+  currentTime() {
+    return this.audio ? this.audio.currentTime : 0;
   }
 
+  // update(band) {
+  //   if (!this.ready || !this.isPlaying()) {
+  //     return;
+  //   }
+  //   if (band) {
+  //     this.bands[band].process();
+  //   } else {
+  //     Object.values(this.bands).forEach((b) => b.process());
+  //   }
+  // }
+
   getMeta() {
+    const {currentTime = 0, duration = 0.000001, paused = true} = this.audio;
     return {
-      time: this.currentTime(),
-      isPlaying: this.isPlaying(),
-      playheadLocation: this.playheadLocation(),
-      meta: this.meta,
+      time: currentTime,
+      isPlaying: !paused,
+      playheadLocation: currentTime / duration,
     };
   }
 }

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
+import AudioSourceContext from 'audio/AudioSourceContext';
+import MixMetaContext from './src/components/SceneViewer/MixMetaContext';
 import Header from '../header';
 
 const Screen = styled.div`
@@ -35,14 +38,20 @@ const SiteHeader = styled(Header)`
 `;
 
 const SiteLayout = ({children, mixSceneMode}) => {
-  console.log('SITE LAYOUT', mixSceneMode);
   return (
-    <Screen>
-      <SiteContainer fixToViewport={mixSceneMode}>
-        <SiteHeader disableFlyout={!mixSceneMode} />
-        <Viewport>{children}</Viewport>
-      </SiteContainer>
-    </Screen>
+    <>
+      <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
+      <AudioSourceContext>
+        <MixMetaContext>
+          <Screen>
+            <SiteContainer fixToViewport={mixSceneMode}>
+              <SiteHeader disableFlyout={!mixSceneMode} />
+              <Viewport>{children}</Viewport>
+            </SiteContainer>
+          </Screen>
+        </MixMetaContext>
+      </AudioSourceContext>
+    </>
   );
 };
 

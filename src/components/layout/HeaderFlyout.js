@@ -1,7 +1,7 @@
 import React, {useState, useRef, useCallback} from 'react';
 import styled from 'styled-components';
-import useDimensions from '../../hooks/useDimensions';
-import useHover from '../../hooks/useHover';
+import useDimensions from '../hooks/useDimensions';
+import useHover from '../hooks/useHover';
 
 const transformEasing = ({active, transformOffset}) => {
   if (active) {
