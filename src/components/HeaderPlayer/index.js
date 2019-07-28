@@ -1,8 +1,8 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {useAudioContext} from '../../audio2/AudioSourceContext';
+import {useAudioContext} from 'src/audio/AudioSourceContext';
+import Oscilliscope from 'src/audio/visualizations/Oscilliscope';
 import {useMixMetaContext} from '../SceneViewer/MixMetaContext';
-import Oscilliscope from '../../audio/visualizations/Oscilliscope';
 import PlayButton from './PlayButton';
 
 const OscilliscopeContainer = styled.div`

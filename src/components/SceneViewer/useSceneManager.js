@@ -1,5 +1,5 @@
 import {useEffect, useRef} from 'react';
-import BabylonSceneManager from '../../visual/BabylonSceneManager';
+import BabylonSceneManager from 'src/babylon/BabylonSceneManager';
 
 export default (canvas) => {
   const {current: manager} = useRef(new BabylonSceneManager());

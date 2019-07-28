@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {getMix} from '../../content/mixes';
+import {getMix} from 'src/mixes';
 
 export default (mixId) => {
   const [mix, setMix] = useState(getMix(mixId));

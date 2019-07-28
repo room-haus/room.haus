@@ -1,10 +1,13 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import {Link} from 'gatsby';
-import {mixes as mixList} from 'src/content/mixes';
+import {mixes as mixList} from 'src/mixes';
 
 const MixItem = styled.img`
   margin: 0;
+`;
+
+const Link = styled.a`
+  text-decoration: none;
 `;
 
 const fadeStyles = css`

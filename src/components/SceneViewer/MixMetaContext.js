@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {getMix} from '../../content/mixes';
+import {getMix} from 'src/mixes';
 
 export const Context = React.createContext({meta: {}});
 

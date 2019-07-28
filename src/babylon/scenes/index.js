@@ -1,4 +1,4 @@
-import {getMix} from 'src/content/mixes';
+import {getMix} from 'src/mixes';
 import * as MX009 from './MX009';
 import * as MX010 from './MX010';
 import * as MX011 from './MX011';

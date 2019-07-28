@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import AudioSourceContext from 'audio/AudioSourceContext';
-import MixMetaContext from './src/components/SceneViewer/MixMetaContext';
-import Header from '../header';
+// import Helmet from 'react-helmet';
+import AudioSourceContext from 'src/audio/AudioSourceContext';
+import MixMetaContext from 'src/components/SceneViewer/MixMetaContext';
+import Header from 'src/components/layout/Header';
 
 const Screen = styled.div`
   position: relative;
@@ -40,7 +40,7 @@ const SiteHeader = styled(Header)`
 const SiteLayout = ({children, mixSceneMode}) => {
   return (
     <>
-      <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} />
+      {/* <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} /> */}
       <AudioSourceContext>
         <MixMetaContext>
           <Screen>

@@ -1,4 +1,4 @@
-import {withPrefix} from 'gatsby';
+import workletProcessor from './worklets/OnsetWorkletProcessor.js'; // eslint-disable-line import/extensions
 
 const ENERGY = 'ENERGY';
 const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
@@ -24,7 +24,7 @@ export default class BPMDetectorWorkletNode {
   }
 
   async init() {
-    await this.context.audioWorklet.addModule(withPrefix('worklets/OnsetWorkletProcessor.js'));
+    await this.context.audioWorklet.addModule(workletProcessor);
     this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
       numberOfInputs: 4,
       processorOptions: {

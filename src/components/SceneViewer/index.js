@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
+import useHLSAudio from 'src/audio/useHLSAudio';
 import useSceneManager from './useSceneManager';
-import useHLSAudio from '../../audio2/useHLSAudio';
 import {useMixMetaContext} from './MixMetaContext';
 import CatalogList from '../MixCatalog/CatalogList';
 
