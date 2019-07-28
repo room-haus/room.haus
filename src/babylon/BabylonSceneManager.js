@@ -16,6 +16,7 @@ class BabylonSceneManager {
       preserveDrawingBuffer: true,
       stencil: true,
     });
+    BABYLON.SceneLoaderFlags.ShowLoadingScreen = false;
     this.resize = () => this.engine.resize();
     window.addEventListener('resize', this.resize);
   }
