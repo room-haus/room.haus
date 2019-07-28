@@ -10,7 +10,7 @@ module.exports = {
     publicPath: '/',
   },
   target: 'web',
-  mode: 'development',
+  mode: 'production',
   devServer: {
     contentBase: './dist',
     historyApiFallback: true,
@@ -24,8 +24,26 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /worklets/],
         loader: 'babel-loader',
+      },
+      {
+        test: /worklets\/OnsetWorkletProcessor\.js/,
+        exclude: /OnsetWorkletProcessor\.js$/,
+        loader: 'worklet-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '/',
+        },
+      },
+      {
+        test: /worklets\/.+\.js/,
+        exclude: /OnsetWorkletProcessor\.js$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '/',
+        },
       },
       {
         test: /\.css$/,
@@ -41,7 +59,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(babylon|png|jpeg|jpg|svg|dds)$/,
+        test: /\.(babylon|png|jpeg|jpg|svg|dds|wasm)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',

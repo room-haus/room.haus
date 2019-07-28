@@ -62,7 +62,9 @@ class VideoGrid extends React.Component {
     this.initGrid();
 
     const {source} = this.props;
-    source.setOnsetCallback(() => this.updateGrid());
+    if (source.setOnsetCallback) {
+      source.setOnsetCallback(() => this.updateGrid());
+    }
     this.animate();
   }
 

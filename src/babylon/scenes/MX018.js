@@ -1,9 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import CaseTexture from 'src/images/mix-art/mx018.jpg';
-import CDLabelTexture from '../../images/cd_template_MX018.png';
 import {scaleLinear, scaleLog} from 'd3';
+import ModelPath from 'src/babylon/models/MX018/jett.babylon';
+import CDLabelTexture from '../../images/cd_template_MX018.png';
 
-export const sceneAssetsPath = 'mixes/MX018/jett.babylon';
+export const sceneAssetsPath = ModelPath;
 export const cdLabelTexture = CDLabelTexture;
 export const caseTexture = CaseTexture;
 
@@ -47,21 +48,9 @@ export const build = ({scene, audio}) => {
 
     const kickAmp = audio.getAverageAmplitude('kick');
     const scale = bumpScale(kickAmp);
-    outerSphere.scaling = new BABYLON.Vector3(
-      0.1 * scale,
-      0.1 * scale,
-      0.1 * scale,
-    );
-    middleSphere.scaling = new BABYLON.Vector3(
-      0.09 * scale,
-      0.09 * scale,
-      0.09 * scale,
-    );
-    innerSphere.scaling = new BABYLON.Vector3(
-      0.3 * scale,
-      0.3 * scale,
-      0.3 * scale,
-    );
+    outerSphere.scaling = new BABYLON.Vector3(0.1 * scale, 0.1 * scale, 0.1 * scale);
+    middleSphere.scaling = new BABYLON.Vector3(0.09 * scale, 0.09 * scale, 0.09 * scale);
+    innerSphere.scaling = new BABYLON.Vector3(0.3 * scale, 0.3 * scale, 0.3 * scale);
   });
 
   return scene;

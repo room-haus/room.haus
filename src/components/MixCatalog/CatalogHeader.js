@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link as RouterLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Header, HeaderItem} from 'src/components/layout/Header';
 import RoomLogo from 'src/images/logo.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -23,7 +23,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin: 0;
 `;
 
-const Link = styled(RouterLink)`
+const SocialLink = styled.a`
   text-decoration: none;
   color: inherit;
 `;
@@ -78,15 +78,15 @@ export default ({tactile}) => {
         )}
       </HeaderItem>
       <SocialIcons position="right">
-        <Link href="mailto:info@room.haus">
+        <SocialLink href="mailto:info@room.haus">
           <StyledIcon icon={faEnvelope} />
-        </Link>
-        <Link href="https://soundcloud.com/room-haus" target="_blank" rel="noopener noreferrer">
+        </SocialLink>
+        <SocialLink href="https://soundcloud.com/room-haus" target="_blank" rel="noopener noreferrer">
           <StyledIcon icon={faSoundcloud} />
-        </Link>
-        <Link href="https://www.instagram.com/room.haus/" target="_blank" rel="noopener noreferrer">
+        </SocialLink>
+        <SocialLink href="https://www.instagram.com/room.haus/" target="_blank" rel="noopener noreferrer">
           <StyledIcon icon={faInstagram} />
-        </Link>
+        </SocialLink>
       </SocialIcons>
     </Header>
   );

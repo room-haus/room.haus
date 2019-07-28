@@ -3,6 +3,7 @@ import {scaleLinear} from 'd3';
 import {forceIterable} from 'src/utils/CollectionHelpers';
 import CDModel from './models/CD/CD.babylon';
 import EnvironmentDDS from './textures/EnvironmentSpecularHDR.dds';
+import 'src/babylon/textures/environment.dds';
 
 export class MeshGroup {
   constructor(name, scene, children = []) {
@@ -226,8 +227,9 @@ export async function loadCDModel(scene, caseTexture, cdLabelTexture) {
 }
 
 export async function loadSceneAssets(scene, babylonFilePath) {
-  const filePath = babylonFilePath;
-  const parts = filePath.split('/');
+  console.log(babylonFilePath);
+  const parts = babylonFilePath.split('/');
+  console.log(parts);
   const file = parts.pop();
   const root = parts.join('/') + '/';
   return BABYLON.SceneLoader.AppendAsync(root, file, scene);
