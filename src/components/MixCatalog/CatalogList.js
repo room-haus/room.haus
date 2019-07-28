@@ -1,12 +1,13 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 import {mixes as mixList} from 'src/mixes';
+import {Link as RouterLink} from 'react-router-dom';
 
 const MixItem = styled.img`
   margin: 0;
 `;
 
-const Link = styled.a`
+const Link = styled(RouterLink)`
   text-decoration: none;
 `;
 

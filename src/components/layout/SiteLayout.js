@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import Helmet from 'react-helmet';
 import AudioSourceContext from 'src/audio/AudioSourceContext';
 import MixMetaContext from 'src/components/SceneViewer/MixMetaContext';
-import Header from 'src/components/layout/Header';
+import MixHeader from 'src/components/MixCatalog/MixHeader';
 
 const Screen = styled.div`
   position: relative;
@@ -33,7 +33,7 @@ const Viewport = styled.div`
   position: relative;
 `;
 
-const SiteHeader = styled(Header)`
+const SiteHeader = styled(MixHeader)`
   grid-area: header;
 `;
 

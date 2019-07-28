@@ -87,7 +87,7 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
   }, [sceneId, mixId]);
 
   return (
-    <div id="test">
+    <>
       <CatalogOverlay show={showCatalogOverlay} />
       <CanvasContainer>
         {Background && (
@@ -97,6 +97,6 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
         )}
         <Canvas innerRef={mainCanvasRef} />
       </CanvasContainer>
-    </div>
+    </>
   );
 };

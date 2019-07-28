@@ -7,9 +7,14 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     libraryTarget: 'umd',
+    publicPath: '/',
   },
   target: 'web',
-  mode: 'production',
+  mode: 'development',
+  devServer: {
+    contentBase: './dist',
+    historyApiFallback: true,
+  },
   resolve: {
     alias: {
       src: path.resolve(__dirname, './src/'),
@@ -28,7 +33,15 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\/font\/.+\.(ttf|woff|woff2|eot|svg)$/,
+        test: /\/fonts\/.+\.(ttf|woff|woff2|eot|svg|otf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          publicPath: '/',
+        },
+      },
+      {
+        test: /\.(babylon|png|jpeg|jpg|svg|dds)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',
@@ -37,5 +50,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      favicon: path.resolve(__dirname, './src/favicon.png'),
+      template: path.resolve(__dirname, './src/index.html'),
+    }),
+  ],
 };

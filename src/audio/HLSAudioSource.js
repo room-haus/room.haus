@@ -1,7 +1,7 @@
 import HLS from 'hls.js';
 import {FREQ_BIN_COUNT} from './constants';
 import AudioBand from './AudioBand';
-import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
+// import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 
 export default class HLSAudioSource {
   constructor(callbacks = {}) {
@@ -44,15 +44,15 @@ export default class HLSAudioSource {
 
     const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
     console.log(`CPU cores: ${cpuCores}`);
-    if (this.ctx.audioWorklet && cpuCores > 1) {
-      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
-      try {
-        await this.bpmAnalyzerNode.init();
-        this.bpmAnalyzerNode.attach(this.element);
-      } catch (error) {
-        console.error('Failed to load bpm analyzer processor!', error);
-      }
-    }
+    // if (this.ctx.audioWorklet && cpuCores > 1) {
+    //   this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
+    //   try {
+    //     await this.bpmAnalyzerNode.init();
+    //     this.bpmAnalyzerNode.attach(this.element);
+    //   } catch (error) {
+    //     console.error('Failed to load bpm analyzer processor!', error);
+    //   }
+    // }
 
     this.element.connect(this.analyser);
     this.element.connect(this.ctx.destination);
