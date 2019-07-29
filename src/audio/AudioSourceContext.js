@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react';
 import HLSAudioSource from './HLSAudioSource';
 
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
 export const Context = React.createContext({
   audio: new HLSAudioSource(),
 });

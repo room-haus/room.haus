@@ -106,7 +106,7 @@ class VideoGrid extends React.Component {
     return (
       <Container>
         {this.videos.map(({ref, manifestUrl}) => (
-          <Video key={manifestUrl} innerRef={ref} autoPlay loop muted />
+          <Video key={manifestUrl} innerRef={ref} autoPlay loop muted playsinline />
         ))}
         <Canvas innerRef={this.canvasRef} autoPlay loop muted />
       </Container>

@@ -9,11 +9,7 @@ export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
 export const build = ({scene}) => {
-  const light = new BABYLON.HemisphericLight(
-    'light',
-    new BABYLON.Vector3(0, 1, 0),
-    scene,
-  );
+  const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
@@ -61,13 +57,7 @@ export class Background extends React.Component {
   render() {
     return (
       <Container>
-        <Video
-          key="video"
-          innerRef={this.videoRef}
-          autoPlay={true}
-          loop
-          muted
-        />
+        <Video key="video" innerRef={this.videoRef} autoPlay={true} loop muted playsinline />
       </Container>
     );
   }

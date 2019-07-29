@@ -114,6 +114,7 @@ export class Background extends React.Component {
         type="video/mp4"
         loop
         muted
+        playsinline
       />
     );
     const canvases = this.canvasRefs.map((ref, i) => <CanvasTile key={i} innerRef={this.canvasRefs[i]} />);

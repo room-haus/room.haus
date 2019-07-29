@@ -116,6 +116,7 @@ export class Background extends React.Component {
           // type="video/mp4"
           loop
           muted
+          playsinline
         />
       </Container>
     );
