@@ -73,6 +73,7 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
   const manager = useSceneManager(mainCanvasRef);
   const {setMixId, meta} = useMixMetaContext();
   const audio = useHLSAudio(meta.audioSourceURL);
+  console.log(audio.manifestUrl);
   const Background = manager.background;
 
   useEffect(() => {

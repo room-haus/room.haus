@@ -194,9 +194,10 @@ const AudioControls = ({audio}) => {
   const isAudioPlaying = audio.isPlaying();
   const oscRef = useRef();
   const percentage = useMousePerc(oscRef);
+  const callback = () => isAudioReady && audio.toggle();
   return (
     <Controls loading={!isAudioReady}>
-      <PlayButton handleClick={() => isAudioReady && audio.toggle()} playing={isAudioPlaying} />
+      <PlayButton handleClick={callback} playing={isAudioPlaying} />
       <OscilliscopeContainer innerRef={oscRef} onClick={() => audio.setPlayhead(percentage)}>
         <Oscilliscope source={audio} />
         <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />

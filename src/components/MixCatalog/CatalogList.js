@@ -37,6 +37,10 @@ const MixList = styled.div`
   }
 
   ${({fadeOnHover}) => (fadeOnHover ? fadeStyles : null)}
+
+  @media (min-width: 700px) {
+    grid-template-columns: repeat(20, 1fr);
+  }
 `;
 
 const getMixLink = ({className}, mix) => (
@@ -45,9 +49,9 @@ const getMixLink = ({className}, mix) => (
   </Link>
 );
 
-export default ({mixes = mixList, columns = 5, density = 5, ...props}) => {
+export default ({mixes = mixList, columns = 5, density = 5, fadeOnHover, ...props}) => {
   return (
-    <MixList columns={columns} density={density}>
+    <MixList columns={columns} density={density} fadeOnHover={fadeOnHover}>
       {mixes.map((mix) => getMixLink(props, mix))}
     </MixList>
   );

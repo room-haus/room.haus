@@ -106,6 +106,9 @@ export default class HLSAudioSource {
   }
 
   toggle() {
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
     this.isPlaying() ? this.audio.pause() : this.audio.play(); // eslint-disable-line no-unused-expressions
   }
 
