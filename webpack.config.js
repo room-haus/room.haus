@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
-  const isDev = env && env.development;
+  const isDev = Boolean(env && env.development);
   return {
     entry: ['./src/index.js'],
     output: {
