@@ -1,10 +1,10 @@
 import * as BABYLON from 'babylonjs';
 import {scaleLinear} from 'd3';
-// import Skybox from '../skyboxes/space/blue/';
+import 'src/babylon/skyboxes/space/blue/';
 import CaseTexture from 'src/images/mix-art/mx010.jpg';
 import CDLabelTexture from '../../images/cd_template_MX010.png';
 
-import {makeGridGroup} from '../BabylonHelpers';
+import {makeGridGroup, makeSkybox} from '../BabylonHelpers';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
@@ -20,7 +20,7 @@ export const build = ({scene, engine, audio}) => {
   }
   gl.blurKernelSize = 32;
 
-  // makeSkybox(scene, Skybox);
+  makeSkybox(scene, 'blue');
 
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
