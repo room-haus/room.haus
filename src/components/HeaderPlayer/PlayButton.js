@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styled from 'styled-components';
 import PlaySVG from 'src/images/play.svg';
 import PauseSVG from 'src/images/pause.svg';
@@ -17,16 +17,7 @@ const PlayButtonWrapper = styled.div`
   background-repeat: no-repeat;
 `;
 
-class PlayButton extends React.Component {
-  onClick = () => {
-    if (this.props.handleClick) {
-      this.props.handleClick();
-    }
-  };
-
-  render() {
-    return <PlayButtonWrapper playing={this.props.playing} onClick={this.onClick} loading={this.props.loading} />;
-  }
-}
-
-export default PlayButton;
+export default ({handleClick, playing, loading}) => {
+  const onClick = useCallback(handleClick, [handleClick]);
+  return <PlayButtonWrapper playing={playing} onClick={onClick} loading={loading} />;
+};

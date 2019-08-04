@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled, {css} from 'styled-components';
 import {mixes as mixList} from 'src/mixes';
 import {Link as RouterLink} from 'react-router-dom';
+import useDimensions from 'src/components/hooks/useDimensions';
 
 const MixItem = styled.img`
   margin: 0;
@@ -28,7 +29,10 @@ const MixList = styled.div`
   display: grid;
   grid-template-columns: repeat(${({columns}) => columns}, 1fr);
   grid-gap: ${({density}) => `${density}vmin`};
-  /* grid-gap: 5vmin; */
+
+  /* @media (max-width: 700px) {
+    grid-template-columns: repeat(20, 1fr);
+  } */
 
   ${MixItem} {
     transform: opacity grayscale;
@@ -37,10 +41,6 @@ const MixList = styled.div`
   }
 
   ${({fadeOnHover}) => (fadeOnHover ? fadeStyles : null)}
-
-  @media (min-width: 700px) {
-    grid-template-columns: repeat(20, 1fr);
-  }
 `;
 
 const getMixLink = ({className}, mix) => (
@@ -49,9 +49,12 @@ const getMixLink = ({className}, mix) => (
   </Link>
 );
 
-export default ({mixes = mixList, columns = 5, density = 5, fadeOnHover, ...props}) => {
+export default ({mixes = mixList, columns, density = 5, fadeOnHover, ...props}) => {
+  const ref = useRef();
+  const {width} = useDimensions(ref);
+  const autoColumns = width < 700 ? 7 : 20;
   return (
-    <MixList columns={columns} density={density} fadeOnHover={fadeOnHover}>
+    <MixList innerRef={ref} columns={columns || autoColumns} density={density} fadeOnHover={fadeOnHover}>
       {mixes.map((mix) => getMixLink(props, mix))}
     </MixList>
   );

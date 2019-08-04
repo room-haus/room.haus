@@ -2,6 +2,7 @@ import React, {useState, useRef, useCallback} from 'react';
 import styled from 'styled-components';
 import useDimensions from '../hooks/useDimensions';
 import useHover from '../hooks/useHover';
+import useInputDetection from '../hooks/useInputDetection';
 
 const transformEasing = ({active, transformOffset}) => {
   if (active) {
@@ -58,6 +59,8 @@ const FlyoutContainer = styled.header`
 const HeaderFlyout = (props) => {
   const {MainComponent, FlyoutComponent, disableFlyout, ...rest} = props;
   const [active, setActive] = useState(false);
+  const mode = useInputDetection();
+  const isUsingMouse = mode === 'mouse';
   const mainRef = useRef();
   const {height: mainHeight = 0} = useDimensions(mainRef);
   const flyoutRef = useRef();
@@ -66,24 +69,23 @@ const HeaderFlyout = (props) => {
   const hoverZoneRef = useRef();
   const isHovering = useHover(hoverZoneRef);
   const hoverHeight = Math.round(flyoutHeight);
-  const clickHandler = useCallback(() => {
-    if (!isHovering) {
-      setActive((a) => !a);
-    }
+  const touchHandler = useCallback(() => {
+    setActive((a) => !a);
   });
+  const containerProps = isUsingMouse ? {innerRef: hoverZoneRef} : {};
 
   return (
-    <FlyoutContainer {...rest} innerRef={hoverZoneRef}>
-      {active && <ClickCatcher onClick={clickHandler} />}
-      <Main innerRef={mainRef} onClick={clickHandler}>
+    <FlyoutContainer {...rest} {...containerProps}>
+      {active && <ClickCatcher onTouchStart={touchHandler} />}
+      <Main innerRef={mainRef} onTouchStart={touchHandler}>
         <MainComponent tactile={!disableFlyout} />
       </Main>
       {!disableFlyout && (
-        <Flyout innerRef={flyoutRef} active={isHovering || active} transformOffset={transformOffset}>
+        <Flyout innerRef={flyoutRef} active={(isUsingMouse && isHovering) || active} transformOffset={transformOffset}>
           <FlyoutComponent />
         </Flyout>
       )}
-      {!disableFlyout && <HoverZone height={`${Math.round(hoverHeight)}px`} />}
+      {!disableFlyout && isUsingMouse && <HoverZone height={`${Math.round(hoverHeight)}px`} />}
     </FlyoutContainer>
   );
 };

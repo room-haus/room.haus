@@ -63,7 +63,7 @@ const CatalogOverlay = ({show}) => {
   }, [show]);
   return (
     <CatalogListOverlay show={show} visible={visible}>
-      <CatalogList />
+      <CatalogList columns={5} />
     </CatalogListOverlay>
   );
 };

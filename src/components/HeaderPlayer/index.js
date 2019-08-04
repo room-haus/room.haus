@@ -150,7 +150,8 @@ const useMousePerc = (ref) => {
   const [percentage, setPercentage] = useState();
   const onMouseMove = useCallback((event) => {
     const rect = event.target.getBoundingClientRect();
-    const x = event.clientX - rect.left;
+    const {clientX} = event.touches ? event.touches[0] : event;
+    const x = clientX - rect.left;
     setPercentage(x / rect.width);
   });
   const onMouseLeave = useCallback(() => {
@@ -161,12 +162,12 @@ const useMousePerc = (ref) => {
     const element = ref.current;
     element.addEventListener('mousemove', onMouseMove);
     element.addEventListener('mouseleave', onMouseLeave);
-    element.addEventListener('touchstart', onMouseMove);
+    // element.addEventListener('touchstart', onMouseMove);
 
     return () => {
       element.removeEventListener('mousemove', onMouseMove);
       element.removeEventListener('mouseleave', onMouseLeave);
-      element.removeEventListener('touchstart', onMouseMove);
+      // element.removeEventListener('touchstart', onMouseMove);
     };
   }, [ref.current]);
 
@@ -195,10 +196,11 @@ const AudioControls = ({audio}) => {
   const oscRef = useRef();
   const percentage = useMousePerc(oscRef);
   const callback = () => isAudioReady && audio.toggle();
+  const setPercentage = useCallback(() => audio.setPlayhead(percentage));
   return (
     <Controls loading={!isAudioReady}>
       <PlayButton handleClick={callback} playing={isAudioPlaying} />
-      <OscilliscopeContainer innerRef={oscRef} onClick={() => audio.setPlayhead(percentage)}>
+      <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage}>
         <Oscilliscope source={audio} />
         <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />
       </OscilliscopeContainer>
@@ -229,73 +231,3 @@ export default () => {
     </Container>
   );
 };
-
-// class HeaderPlayer extends React.Component {
-//   state = {
-//     percentage: null,
-//   };
-//   handlePlay = memoize((source, onPlay) => () => source.toggle() && onPlay());
-
-//   handleTouch = (setPlayhead, event) => {
-//     this.handleMouseMove(event);
-//     const {percentage} = this.state;
-//     setPlayhead(percentage);
-//   };
-
-//   handleMouseLeave = () => {
-//     this.setState({percentage: null});
-//   };
-
-//   handleMouseMove = (event) => {
-//     const rect = event.target.getBoundingClientRect();
-//     const x = event.clientX - rect.left;
-//     this.setState({percentage: x / rect.width});
-//   };
-
-//   render() {
-//     return (
-//       <AudioSourceContext.Consumer>
-//         {({source}) =>
-//           source && (
-//             <AudioMetaContext.Consumer>
-//               {({isLoading, isPlaying, isReady, meta, loadProgress}) => (
-//                 <Container>
-//                   {meta && (
-//                     <MediaMetaContainer>
-//                       <MediaImage src={meta.art} />
-//                       <MediaMetaWrapper>
-//                         <MediaTitle>{meta.artist}</MediaTitle>
-//                         <MediaTitle>
-//                           <i>{meta.name}</i>
-//                         </MediaTitle>
-//                         <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
-//                       </MediaMetaWrapper>
-//                     </MediaMetaContainer>
-//                   )}
-//                   <Controls loading={isLoading && !isReady}>
-//                     <PlayButton
-//                       handleClick={((!isLoading && !isReady) || isReady) && this.handlePlay(source, this.props.onPlay)}
-//                       playing={isPlaying}
-//                     />
-//                     <OscilliscopeContainer
-//                       onMouseMove={this.handleMouseMove}
-//                       onMouseLeave={this.handleMouseLeave}
-//                       onTouchStart={this.handleTouch.bind(this, () => source.setPlayhead)}
-//                       onClick={() => source.setPlayhead(this.state.percentage)}>
-//                       <Oscilliscope source={source} />
-//                       {loadProgress < 1 && <ProgressBar progress={loadProgress} />}
-//                       {source.ready && <PlayheadProgressBar progress={source.playheadLocation()} color="#121212" />}
-//                     </OscilliscopeContainer>
-//                   </Controls>
-//                   <MediaTime>{formatTime(source.currentTime())}</MediaTime>
-//                 </Container>
-//               )}
-//             </AudioMetaContext.Consumer>
-//           )
-//         }
-//       </AudioSourceContext.Consumer>
-//     );
-//   }
-// }
-
-// export default HeaderPlayer;
