@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export {default as  */
 export {default as MX001} from './mx001.jpg';
 export {default as MX002} from './mx002.jpg';
 export {default as MX003} from './mx003.jpg';
@@ -37,3 +36,5 @@ export {default as MX035} from './mx035.jpg';
 export {default as MX036} from './mx036.jpg';
 export {default as MX037} from './mx037.jpg';
 export {default as MX038} from './mx038.jpg';
+export {default as MX039} from './mx039.jpg';
+export {default as MX040} from './mx040.jpg';

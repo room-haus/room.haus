@@ -5,7 +5,6 @@ import AudioBand from './AudioBand';
 
 export default class HLSAudioSource {
   constructor(callbacks = {}) {
-    console.log('Creating audio source');
     this.callbacks = {
       onInit: callbacks.onInit,
       onPlay: callbacks.onPlay,
@@ -27,7 +26,6 @@ export default class HLSAudioSource {
   }
 
   async init(ctx) {
-    console.log('Initializing audio source');
     this.callback('onInit');
 
     this.ctx = ctx;
@@ -72,6 +70,10 @@ export default class HLSAudioSource {
 
   loadAudio() {
     if (HLS.isSupported()) {
+      if (this.hls) {
+        this.hls.destroy();
+        this.hls = new HLS();
+      }
       this.hls.loadSource(this.manifestUrl);
       this.hls.attachMedia(this.audio);
     } else {

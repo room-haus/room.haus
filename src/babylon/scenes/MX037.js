@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
 import CaseTexture from '../../images/mix-art/mx037.jpg';
-import CDLabelTexture from '../../images/cd_template_MX040.png';
+// import CDLabelTexture from '../../images/cd_template_test2.png';
 
 export const caseTexture = CaseTexture;
-export const cdLabelTexture = CDLabelTexture;
+// export const cdLabelTexture = CDLabelTexture;
 
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
