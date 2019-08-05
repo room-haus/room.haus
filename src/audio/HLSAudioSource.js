@@ -29,7 +29,6 @@ export default class HLSAudioSource {
     this.callback('onInit');
 
     this.ctx = ctx;
-    this.hls = new HLS();
     this.audio = new Audio();
 
     this.element = this.ctx.createMediaElementSource(this.audio);
@@ -68,23 +67,25 @@ export default class HLSAudioSource {
     });
   }
 
-  loadAudio() {
+  loadHSLAudio(autoplay = false) {
     if (HLS.isSupported()) {
       if (this.hls) {
         this.hls.destroy();
-        this.hls = new HLS();
       }
+      this.hls = new HLS();
       this.hls.loadSource(this.manifestUrl);
       this.hls.attachMedia(this.audio);
     } else {
       this.audio.src = this.manifestUrl;
     }
-    this.ready = true;
+    if (autoplay) {
+      this.toggle();
+    }
   }
 
   setManifestUrl(manifestUrl) {
     this.manifestUrl = manifestUrl;
-    this.loadAudio();
+    this.loadHSLAudio(true);
   }
 
   // setOnsetCallback(func) {
@@ -107,11 +108,18 @@ export default class HLSAudioSource {
     this.hls.destroy();
   }
 
+  resume() {
+    this.ctx.resume();
+    this.ready = true;
+    this.callback('onResume');
+  }
+
   toggle() {
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
+    if (this.ready) {
+      this.isPlaying() ? this.audio.pause() : this.audio.play(); // eslint-disable-line no-unused-expressions
+    } else {
+      this.callbacks.onResume = this.toggle.bind(this);
     }
-    this.isPlaying() ? this.audio.pause() : this.audio.play(); // eslint-disable-line no-unused-expressions
   }
 
   isPlaying() {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CatalogList from 'src/components/MixCatalog/CatalogList';
 import {mixes} from 'src/mixes';
 import HeaderPlayer from 'src/components/HeaderPlayer';
+import {useAudioContext} from 'src/audio/AudioSourceContext';
 import HeaderFlyout from '../layout/HeaderFlyout';
 import CatalogHeader from './CatalogHeader';
 
@@ -25,6 +26,15 @@ const Flyout = () => (
   </>
 );
 
-export default ({disableFlyout, ...props}) => (
-  <HeaderFlyout {...props} MainComponent={Main} FlyoutComponent={Flyout} disableFlyout={disableFlyout} />
-);
+export default ({disableFlyout, ...props}) => {
+  const {ready} = useAudioContext();
+  return (
+    <HeaderFlyout
+      {...props}
+      MainComponent={Main}
+      FlyoutComponent={Flyout}
+      forceActive={!ready}
+      disableFlyout={disableFlyout}
+    />
+  );
+};

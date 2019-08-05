@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import PlaySVG from 'src/images/play.svg';
 import PauseSVG from 'src/images/pause.svg';
 
@@ -15,9 +15,24 @@ const PlayButtonWrapper = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+
+  ${({highlight}) =>
+    highlight &&
+    css`
+      @keyframes shadow-pulse {
+        0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+        }
+        100% {
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+      }
+
+      animation: shadow-pulse 1s infinite;
+    `};
 `;
 
-export default ({handleClick, playing, loading}) => {
+export default ({handleClick, playing, readyForPlayback}) => {
   const onClick = useCallback(handleClick, [handleClick]);
-  return <PlayButtonWrapper playing={playing} onClick={onClick} loading={loading} />;
+  return <PlayButtonWrapper highlight={!readyForPlayback} playing={playing} onClick={onClick} />;
 };

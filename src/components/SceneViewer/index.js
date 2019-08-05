@@ -82,6 +82,12 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
     }
   }, [sceneId, mixId]);
 
+  useEffect(() => {
+    if (showCatalogOverlay && audio.isPlaying()) {
+      audio.toggle();
+    }
+  }, [showCatalogOverlay]);
+
   return (
     <>
       <CatalogOverlay show={showCatalogOverlay} />

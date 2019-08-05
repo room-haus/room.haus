@@ -57,7 +57,7 @@ const FlyoutContainer = styled.header`
 `;
 
 const HeaderFlyout = (props) => {
-  const {MainComponent, FlyoutComponent, disableFlyout, ...rest} = props;
+  const {MainComponent, FlyoutComponent, disableFlyout, forceActive, ...rest} = props;
   const [active, setActive] = useState(false);
   const mode = useInputDetection();
   const isUsingMouse = mode === 'mouse';
@@ -81,7 +81,10 @@ const HeaderFlyout = (props) => {
         <MainComponent tactile={!disableFlyout} />
       </Main>
       {!disableFlyout && (
-        <Flyout innerRef={flyoutRef} active={(isUsingMouse && isHovering) || active} transformOffset={transformOffset}>
+        <Flyout
+          innerRef={flyoutRef}
+          active={(isUsingMouse && isHovering) || active || forceActive}
+          transformOffset={transformOffset}>
           <FlyoutComponent />
         </Flyout>
       )}

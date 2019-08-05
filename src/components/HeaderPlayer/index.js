@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {useAudioContext} from 'src/audio/AudioSourceContext';
+import useIntervalCallback from 'src/components/hooks/useIntervalCallback';
 import Oscilliscope from 'src/audio/visualizations/Oscilliscope';
 import {useMixMetaContext} from '../SceneViewer/MixMetaContext';
 import PlayButton from './PlayButton';
@@ -9,6 +10,8 @@ const OscilliscopeContainer = styled.div`
   position: relative;
   vertical-align: middle;
   height: 100%;
+  cursor: ${({disabled}) => (disabled ? 'wait' : 'pointer')};
+  pointer-events: ${({disabled}) => (disabled ? 'none' : 'auto')};
 `;
 
 const Container = styled.div`
@@ -118,7 +121,7 @@ const PlayheadProgressBar = styled.div`
 
 const Controls = styled.div`
   flex-grow: 2;
-  cursor: ${({loading}) => (loading ? 'wait' : 'pointer')};
+  cursor: pointer;
   border: 1px solid rgba(19, 18, 20, 0.7);
   display: grid;
   grid-template-columns: minmax(45px, 1fr) 8fr;
@@ -195,12 +198,12 @@ const AudioControls = ({audio}) => {
   const isAudioPlaying = audio.isPlaying();
   const oscRef = useRef();
   const percentage = useMousePerc(oscRef);
-  const callback = () => isAudioReady && audio.toggle();
+  const callback = useCallback(() => isAudioReady && audio.toggle(), [isAudioReady]);
   const setPercentage = useCallback(() => audio.setPlayhead(percentage));
   return (
-    <Controls loading={!isAudioReady}>
-      <PlayButton handleClick={callback} playing={isAudioPlaying} />
-      <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage}>
+    <Controls>
+      <PlayButton handleClick={callback} playing={isAudioPlaying} readyForPlayback={isAudioReady} />
+      <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage} disabled={!isAudioReady}>
         <Oscilliscope source={audio} />
         <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />
       </OscilliscopeContainer>
@@ -215,14 +218,8 @@ const MediaTimestamp = ({time}) => {
 export default () => {
   const {audio} = useAudioContext();
   const [time, setTime] = useState(audio.currentTime());
-  const updateFunc = useCallback(() => setTime(audio.currentTime()));
-  useEffect(() => {
-    setInterval(updateFunc, 250);
+  useIntervalCallback(() => setTime(audio.currentTime()), [audio], 250);
 
-    return () => {
-      clearInterval(updateFunc);
-    };
-  }, []);
   return (
     <Container>
       <MediaMeta />

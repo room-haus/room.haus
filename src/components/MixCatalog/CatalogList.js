@@ -6,6 +6,7 @@ import useDimensions from 'src/components/hooks/useDimensions';
 
 const MixItem = styled.img`
   margin: 0;
+  user-drag: none;
 `;
 
 const Link = styled(RouterLink)`
