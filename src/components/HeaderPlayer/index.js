@@ -198,7 +198,13 @@ const AudioControls = ({audio}) => {
   const isAudioPlaying = audio.isPlaying();
   const oscRef = useRef();
   const percentage = useMousePerc(oscRef);
-  const callback = useCallback(() => isAudioReady && audio.toggle(), [isAudioReady]);
+  const callback = useCallback(() => {
+    if (isAudioReady) {
+      audio.toggle();
+    } else {
+      audio.resume();
+    }
+  }, [isAudioReady]);
   const setPercentage = useCallback(() => audio.setPlayhead(percentage));
   return (
     <Controls>

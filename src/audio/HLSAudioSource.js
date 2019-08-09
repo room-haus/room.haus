@@ -110,7 +110,10 @@ export default class HLSAudioSource {
 
   resume() {
     this.ctx.resume();
-    this.ready = true;
+    if (!this.ready) {
+      this.ready = true;
+      this.callback('onReady');
+    }
     this.callback('onResume');
   }
 

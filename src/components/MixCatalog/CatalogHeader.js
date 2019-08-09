@@ -5,7 +5,7 @@ import {Header, HeaderItem} from 'src/components/layout/Header';
 import RoomLogo from 'src/images/logo.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSoundcloud, faInstagram} from '@fortawesome/free-brands-svg-icons';
-import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
+import EmailSVG from './envelope-light.svg';
 
 const RoomIcon = styled.img`
   object-fit: contain;
@@ -21,6 +21,19 @@ const NavItems = styled.div`
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 3vmin;
   margin: 0;
+  vertical-align: middle;
+`;
+
+const EmailIcon = styled.div`
+  background-image: url(${EmailSVG});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 3vmin;
+  width: 3vmin;
+  display: inline-block;
+  vertical-align: middle;
 `;
 
 const SocialLink = styled.a`
@@ -79,7 +92,7 @@ export default ({tactile}) => {
       </HeaderItem>
       <SocialIcons position="right">
         <SocialLink href="mailto:info@room.haus">
-          <StyledIcon icon={faEnvelope} />
+          <EmailIcon />
         </SocialLink>
         <SocialLink href="https://soundcloud.com/room-haus" target="_blank" rel="noopener noreferrer">
           <StyledIcon icon={faSoundcloud} />

@@ -86,7 +86,27 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
     if (showCatalogOverlay && audio.isPlaying()) {
       audio.toggle();
     }
+    if (!showCatalogOverlay && !audio.isPlaying()) {
+      audio.toggle();
+    }
   }, [showCatalogOverlay]);
+
+  useEffect(() => {
+    if (showCatalogOverlay) {
+      /*
+       * If the mix catalog overaly is showing on page load, the audio context
+       * has not been set and needs to be resumed on any page click to allow seamless
+       * audio playback on mix selection.
+       * */
+      document.addEventListener(
+        'click',
+        () => {
+          audio.resume();
+        },
+        {once: true},
+      );
+    }
+  }, []);
 
   return (
     <>

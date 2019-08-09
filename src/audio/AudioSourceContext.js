@@ -10,7 +10,14 @@ export const Context = React.createContext({
 export default ({children}) => {
   const [state, setState] = useState(() => {
     const context = new AudioContext();
-    const audio = new HLSAudioSource();
+    const audio = new HLSAudioSource({
+      onReady() {
+        setState((prev) => ({
+          ...prev,
+          ready: true,
+        }));
+      },
+    });
     audio.init(context);
     return {
       context,
@@ -19,20 +26,6 @@ export default ({children}) => {
     };
   });
 
-  useEffect(() => {
-    const {audio} = state;
-    document.addEventListener(
-      'click',
-      () => {
-        audio.resume();
-        setState((prev) => ({
-          ...prev,
-          ready: true,
-        }));
-      },
-      {once: true},
-    );
-  }, []);
   return <Context.Provider value={state}>{children}</Context.Provider>;
 };
 
