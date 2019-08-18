@@ -1,5 +1,3 @@
-import workletProcessor from './worklets/OnsetWorkletProcessor.js'; // eslint-disable-line import/extensions
-
 const ENERGY = 'ENERGY';
 const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
 
@@ -24,7 +22,7 @@ export default class BPMDetectorWorkletNode {
   }
 
   async init() {
-    await this.context.audioWorklet.addModule(workletProcessor);
+    await this.context.audioWorklet.addModule('/worklets/index.js');
     this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
       numberOfInputs: 4,
       processorOptions: {

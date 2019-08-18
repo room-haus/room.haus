@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env) => {
   const isDev = Boolean(env && env.development);
@@ -30,34 +31,28 @@ module.exports = (env) => {
           loader: 'babel-loader',
         },
         {
-          test: /worklets\/OnsetWorkletProcessor\.js/,
-          exclude: /OnsetWorkletProcessor\.js$/,
-          loader: 'worklet-loader',
-          options: {
-            name: '[name].[ext]',
-            publicPath: '/',
-          },
-        },
-        {
-          test: /worklets\/.+\.js/,
-          exclude: /OnsetWorkletProcessor\.js$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            publicPath: '/',
-          },
-        },
-        {
           test: /\.css$/,
           exclude: /node_modules/,
           use: ['style-loader', 'css-loader'],
         },
+        // {
+        //   test: /worklets\/OnsetWorkletProcessor\//,
+        //   use: ['worklet-loader'],
+        //   options: {
+        //     name: '[name].[ext]',
+        //     publicPath: '/worklets/',
+        //     outputPath(url) {
+        //       return `/worklets/${url}`;
+        //     },
+        //   },
+        // },
         {
           test: /\/fonts\/.+\.(ttf|woff|woff2|eot|svg|otf)$/,
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            publicPath: '/',
+            outputPath: '/fonts/',
+            publicPath: '/fonts/',
           },
         },
         {
@@ -73,7 +68,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.(babylon|dds|wasm)$/,
+          test: /\.(babylon|dds)$/,
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
@@ -96,6 +91,7 @@ module.exports = (env) => {
       ],
     },
     plugins: [
+      new CopyPlugin([{from: path.resolve(__dirname, './src/audio/worklets/**/*'), to: 'worklets/', flatten: true}]),
       new HtmlWebpackPlugin({
         favicon: path.resolve(__dirname, './src/favicon.png'),
         template: path.resolve(__dirname, './src/index.html'),
