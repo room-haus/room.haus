@@ -10,6 +10,7 @@ import * as MX020 from './MX020';
 import * as MX021 from './MX021';
 import * as MX022 from './MX022';
 import * as MX023 from './MX023';
+import * as MX025 from './MX025';
 import * as MX029 from './MX029';
 import * as MX030 from './MX030';
 import * as MX031 from './MX031';
@@ -22,6 +23,7 @@ import * as MX037 from './MX037';
 import * as MX038 from './MX038';
 import * as MX039 from './MX039';
 import * as MX040 from './MX040';
+import * as MX041 from './MX041';
 import * as MX042 from './MX042';
 import * as MX043 from './MX043';
 import * as RM001 from './RM001';
@@ -72,6 +74,10 @@ export const mixConfigs = {
     id: 'MX023',
     ...MX023,
   },
+  MX025: {
+    id: 'MX025',
+    ...MX025,
+  },
   MX029: {
     id: 'MX029',
     ...MX029,
@@ -119,6 +125,10 @@ export const mixConfigs = {
   MX040: {
     id: 'MX040',
     ...MX040,
+  },
+  MX041: {
+    id: 'MX041',
+    ...MX041,
   },
   MX042: {
     id: 'MX042',
