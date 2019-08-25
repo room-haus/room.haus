@@ -35,17 +35,6 @@ module.exports = (env) => {
           exclude: /node_modules/,
           use: ['style-loader', 'css-loader'],
         },
-        // {
-        //   test: /worklets\/OnsetWorkletProcessor\//,
-        //   use: ['worklet-loader'],
-        //   options: {
-        //     name: '[name].[ext]',
-        //     publicPath: '/worklets/',
-        //     outputPath(url) {
-        //       return `/worklets/${url}`;
-        //     },
-        //   },
-        // },
         {
           test: /\/fonts\/.+\.(ttf|woff|woff2|eot|svg|otf)$/,
           loader: 'file-loader',
@@ -68,7 +57,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.(babylon|dds)$/,
+          test: /\.(babylon|dds|manifest)$/,
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',

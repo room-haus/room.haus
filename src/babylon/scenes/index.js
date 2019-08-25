@@ -20,6 +20,10 @@ import * as MX035 from './MX035';
 import * as MX036 from './MX036';
 import * as MX037 from './MX037';
 import * as MX038 from './MX038';
+import * as MX039 from './MX039';
+import * as MX040 from './MX040';
+import * as MX042 from './MX042';
+import * as MX043 from './MX043';
 import * as RM001 from './RM001';
 import * as defaultConfig from './default';
 
@@ -108,6 +112,22 @@ export const mixConfigs = {
     id: 'MX038',
     ...MX038,
   },
+  MX039: {
+    id: 'MX039',
+    ...MX039,
+  },
+  MX040: {
+    id: 'MX040',
+    ...MX040,
+  },
+  MX042: {
+    id: 'MX042',
+    ...MX042,
+  },
+  MX043: {
+    id: 'MX043',
+    ...MX043,
+  },
   RM001: {
     id: 'RM001',
     ...RM001,
@@ -117,9 +137,11 @@ export const mixConfigs = {
 export const getMixConfig = (id) => {
   let config = mixConfigs[id];
   if (!config) {
+    const {art, label} = getMix(id);
     config = {
       ...defaultConfig,
-      caseTexture: getMix(id).art,
+      caseTexture: art,
+      cdLabelTexture: label,
     };
   }
   return config;

@@ -24,19 +24,33 @@ class BabylonSceneManager {
   async createScene({id, caseTexture, build, sceneAssetsPath, cdLabelTexture, audio}) {
     let scene = new BABYLON.Scene(this.engine);
     this.scenes[id] = scene;
-    if (sceneAssetsPath) {
-      scene = await loadSceneAssets(scene, sceneAssetsPath);
-    }
+
     if (caseTexture) {
       scene = await loadCDModel(scene, caseTexture, cdLabelTexture);
     }
     scene = initCamera(scene, this.canvas);
+    if (sceneAssetsPath) {
+      /* If there are any additional assets, we want to load the asset files separately
+       * from the standard core models. We do this in a promise instead of the async/await
+       * syntax so that the default assets of the scene can load and start running while the
+       * file is loaded. Once the assets are loaded, we want to rebuild the scene. */
+      loadSceneAssets(scene, sceneAssetsPath).then(() => {
+        build({
+          scene,
+          canvas: this.canvas,
+          engine: this.engine,
+          audio,
+          assetsLoaded: true,
+        });
+      });
+    }
     build({
       scene,
       canvas: this.canvas,
       engine: this.engine,
       audio,
     });
+
     if (this.onReady) {
       scene.executeWhenReady(this.onReady);
     }

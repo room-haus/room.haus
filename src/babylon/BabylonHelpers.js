@@ -2,6 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {scaleLinear} from 'd3';
 import {forceIterable} from 'src/utils/CollectionHelpers';
 import CDModel from './models/CD/CD.babylon';
+import './models/CD/CD.babylon.manifest';
 import EnvironmentDDS from './textures/EnvironmentSpecularHDR.dds';
 import 'src/babylon/textures/environment.dds';
 

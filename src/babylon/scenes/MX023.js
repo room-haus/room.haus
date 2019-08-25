@@ -2,7 +2,7 @@ import React from 'react';
 import * as BABYLON from 'babylonjs';
 import CaseTexture from 'src/images/mix-art/mx023.jpg';
 import VideoGrid from '../../components/VideoGrid';
-import CDLabelTexture from '../../images/cd_template_MX023.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX023.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;

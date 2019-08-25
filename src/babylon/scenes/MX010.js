@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import {scaleLinear} from 'd3';
 import 'src/babylon/skyboxes/space/blue/';
 import CaseTexture from 'src/images/mix-art/mx010.jpg';
-import CDLabelTexture from '../../images/cd_template_MX010.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX010.png';
 
 import {makeGridGroup, makeSkybox} from '../BabylonHelpers';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
 import CaseTexture from 'src/images/mix-art/mx013.jpg';
-import CDLabelTexture from '../../images/cd_template_MX013.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX013.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;

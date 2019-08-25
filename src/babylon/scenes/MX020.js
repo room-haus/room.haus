@@ -3,17 +3,13 @@ import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
 import styled from 'styled-components';
 import CaseTexture from 'src/images/mix-art/mx020.jpg';
-import CDLabelTexture from '../../images/cd_template_MX020.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX020.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
 export const build = ({scene}) => {
-  const light = new BABYLON.HemisphericLight(
-    'light',
-    new BABYLON.Vector3(0, 1, 0),
-    scene,
-  );
+  const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 

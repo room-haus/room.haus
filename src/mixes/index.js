@@ -1,4 +1,5 @@
 import * as art from 'src/images/mix-art/';
+import * as labels from 'src/images/mix-labels/';
 // import rm001 from '../images/rm001.jpg';
 
 const BASE_URL = 'https://roomhauscdnprd.blob.core.windows.net/mixes/';
@@ -7,6 +8,7 @@ export const mixes = [
   {
     id: 'MX001',
     art: art.MX001,
+    label: labels.MX001,
     artist: 'Eddy Bauer',
     catalogueNumber: 'MX001',
     soundcloud: 'https://soundcloud.com/room-haus/room-mx001-eddy-bauer',
@@ -15,6 +17,7 @@ export const mixes = [
   {
     id: 'MX002',
     art: art.MX002,
+    label: labels.MX002,
     artist: '35mm',
     catalogueNumber: 'MX002',
     soundcloud: 'https://soundcloud.com/room-haus/room-mx002-35mm',
@@ -23,6 +26,7 @@ export const mixes = [
   {
     id: 'MX003',
     art: art.MX003,
+    label: labels.MX003,
     artist: 'Blackfoot Millie',
     catalogueNumber: 'MX003',
     soundcloud: 'https://soundcloud.com/room-haus/mx003-blackfoot-millie-live',
@@ -31,6 +35,7 @@ export const mixes = [
   {
     id: 'MX004',
     art: art.MX004,
+    label: labels.MX004,
     artist: 'Iwan Thickett',
     name: 'MX004: Iwan Thickett',
     catalogueNumber: 'MX004',
@@ -40,6 +45,7 @@ export const mixes = [
   {
     id: 'MX005',
     art: art.MX005,
+    label: labels.MX005,
     artist: 'AV',
     catalogueNumber: 'MX005',
     soundcloud: 'https://soundcloud.com/room-haus/mx005-av',
@@ -48,6 +54,7 @@ export const mixes = [
   {
     id: 'MX006',
     art: art.MX006,
+    label: labels.MX006,
     catalogueNumber: 'MX006',
     artist: 'Articil',
     soundcloud: 'https://soundcloud.com/room-haus/room-mx006-articil',
@@ -56,6 +63,7 @@ export const mixes = [
   {
     id: 'MX007',
     art: art.MX007,
+    label: labels.MX007,
     artist: 'Wade Hammes',
     catalogueNumber: 'MX007',
     soundcloud: 'https://soundcloud.com/room-haus/mx007-wade-hammes',
@@ -64,6 +72,7 @@ export const mixes = [
   {
     id: 'MX008',
     art: art.MX008,
+    label: labels.MX008,
     artist: 'Big Chain',
     catalogueNumber: 'MX008',
     soundcloud: 'https://soundcloud.com/room-haus/mx008-big-chain',
@@ -72,6 +81,7 @@ export const mixes = [
   {
     id: 'MX009',
     art: art.MX009,
+    label: labels.MX009,
     name: 'Music for Rain',
     artist: 'Sami',
     catalogueNumber: 'MX009',
@@ -81,6 +91,7 @@ export const mixes = [
   {
     id: 'MX010',
     art: art.MX010,
+    label: labels.MX010,
     name: 'For Consumption',
     artist: 'Harry',
     catalogueNumber: 'MX010',
@@ -90,6 +101,7 @@ export const mixes = [
   {
     id: 'MX011',
     art: art.MX011,
+    label: labels.MX011,
     artist: 'KLM',
     catalogueNumber: 'MX011',
     soundcloud: 'https://soundcloud.com/room-haus/mx011-klm',
@@ -98,6 +110,7 @@ export const mixes = [
   {
     id: 'MX012',
     art: art.MX012,
+    label: labels.MX012,
     name: 'Jersey Edition',
     artist: 'Rawle Night Long',
     catalogueNumber: 'MX012',
@@ -107,6 +120,7 @@ export const mixes = [
   {
     id: 'MX013',
     art: art.MX013,
+    label: labels.MX013,
     name: 'Acid Club',
     artist: '35mm & Iwan Thickett',
     catalogueNumber: 'MX013',
@@ -116,6 +130,7 @@ export const mixes = [
   {
     id: 'MX014',
     art: art.MX014,
+    label: labels.MX014,
     name: 'A LOVE LETTER 2 SOUNDCLOUD',
     artist: 'Mr. Fade',
     catalogueNumber: 'MX014',
@@ -125,6 +140,7 @@ export const mixes = [
   {
     id: 'MX015',
     art: art.MX015,
+    label: labels.MX015,
     artist: 'Iwan Thickett',
     catalogueNumber: 'MX015',
     soundcloud: 'https://soundcloud.com/room-haus/mx015-iwan-thickett',
@@ -133,6 +149,7 @@ export const mixes = [
   {
     id: 'MX016',
     art: art.MX016,
+    label: labels.MX016,
     name: 'Mirage Mix',
     artist: 'Fady D',
     catalogueNumber: 'MX016',
@@ -142,6 +159,7 @@ export const mixes = [
   {
     id: 'MX017',
     art: art.MX017,
+    label: labels.MX017,
     name: 'Winter Headflex',
     artist: 'DJ Swingling',
     catalogueNumber: 'MX017',
@@ -151,6 +169,7 @@ export const mixes = [
   {
     id: 'MX018',
     art: art.MX018,
+    label: labels.MX018,
     name: 'Final Words',
     artist: 'Jett Chandon',
     catalogueNumber: 'MX018',
@@ -160,6 +179,7 @@ export const mixes = [
   {
     id: 'MX019',
     art: art.MX019,
+    label: labels.MX019,
     name: 'Angel Of The Extinct Heart',
     artist: 'Tony Cruise',
     catalogueNumber: 'MX019',
@@ -169,6 +189,7 @@ export const mixes = [
   {
     id: 'MX020',
     art: art.MX020,
+    label: labels.MX020,
     artist: 'Chadwick',
     catalogueNumber: 'MX020',
     soundcloud: 'https://soundcloud.com/room-haus/mx020-chadwick',
@@ -177,6 +198,7 @@ export const mixes = [
   {
     id: 'MX021',
     art: art.MX021,
+    label: labels.MX021,
     artist: 'Tooth Choir',
     name: 'Falter',
     catalogueNumber: 'MX021',
@@ -186,6 +208,7 @@ export const mixes = [
   {
     id: 'MX022',
     art: art.MX022,
+    label: labels.MX022,
     artist: 'Nick Garcia',
     name: 'Test Of Time',
     catalogueNumber: 'MX022',
@@ -195,6 +218,7 @@ export const mixes = [
   {
     id: 'MX023',
     art: art.MX023,
+    label: labels.MX023,
     artist: 'Ayesha',
     name: 'Does It Bring You Joy',
     catalogueNumber: 'MX023',
@@ -204,6 +228,7 @@ export const mixes = [
   {
     id: 'MX024',
     art: art.MX024,
+    label: labels.MX024,
     artist: 'Hipster Woods',
     name: 'Banned POC',
     catalogueNumber: 'MX024',
@@ -213,6 +238,7 @@ export const mixes = [
   {
     id: 'MX025',
     art: art.MX025,
+    label: labels.MX025,
     artist: 'Michael The Lion B2B Shawn Ryan',
     name: 'Funk Train DC',
     catalogueNumber: 'MX025',
@@ -222,6 +248,7 @@ export const mixes = [
   {
     id: 'MX026',
     art: art.MX026,
+    label: labels.MX026,
     artist: 'AC Rowland',
     catalogueNumber: 'MX026',
     soundcloud: 'https://soundcloud.com/room-haus/mx026-ac-rowland',
@@ -230,6 +257,7 @@ export const mixes = [
   {
     id: 'MX027',
     art: art.MX027,
+    label: labels.MX027,
     artist: 'DJ Nativesun',
     name: 'Swing That',
     catalogueNumber: 'MX027',
@@ -239,6 +267,7 @@ export const mixes = [
   {
     id: 'MX028',
     art: art.MX028,
+    label: labels.MX028,
     artist: 'Naygod',
     name: 'Deconstructed',
     catalogueNumber: 'MX028',
@@ -248,6 +277,7 @@ export const mixes = [
   {
     id: 'MX029',
     art: art.MX029,
+    label: labels.MX029,
     artist: 'Saad Ashraf',
     name: 'Settle Another Day',
     catalogueNumber: 'MX029',
@@ -257,6 +287,7 @@ export const mixes = [
   {
     id: 'MX030',
     art: art.MX030,
+    label: labels.MX030,
     artist: 'ART DLR',
     name: 'W4',
     catalogueNumber: 'MX030',
@@ -266,6 +297,7 @@ export const mixes = [
   {
     id: 'MX031',
     art: art.MX031,
+    label: labels.MX031,
     artist: 'PC Pete',
     name: 'Farther Along',
     catalogueNumber: 'MX031',
@@ -275,6 +307,7 @@ export const mixes = [
   {
     id: 'MX032',
     art: art.MX032,
+    label: labels.MX032,
     artist: 'GABBERBITCH69',
     name: 'No Te Acerques A Mí',
     catalogueNumber: 'MX032',
@@ -284,6 +317,7 @@ export const mixes = [
   {
     id: 'MX033',
     art: art.MX033,
+    label: labels.MX033,
     artist: 'Outputmessage',
     name: 'The Octopus Room',
     catalogueNumber: 'MX033',
@@ -293,6 +327,7 @@ export const mixes = [
   {
     id: 'MX034',
     art: art.MX034,
+    label: labels.MX034,
     artist: 'Kenny M',
     name: 'Post-Coital Funk',
     catalogueNumber: 'MX034',
@@ -302,6 +337,7 @@ export const mixes = [
   {
     id: 'MX035',
     art: art.MX035,
+    label: labels.MX035,
     artist: 'Tony G',
     name: 'Global Warning',
     catalogueNumber: 'MX035',
@@ -311,6 +347,7 @@ export const mixes = [
   {
     id: 'MX036',
     art: art.MX036,
+    label: labels.MX036,
     artist: 'DJ Land Reform',
     name: 'Make It Hot',
     catalogueNumber: 'MX036',
@@ -320,6 +357,7 @@ export const mixes = [
   {
     id: 'MX037',
     art: art.MX037,
+    label: labels.MX037,
     artist: '35mm',
     name: 'Unwanted Unneeded',
     catalogueNumber: 'MX037',
@@ -329,6 +367,7 @@ export const mixes = [
   {
     id: 'MX038',
     art: art.MX038,
+    label: labels.MX038,
     artist: 'Blindstares B2B Noce',
     name: 'Good & Plenty',
     catalogueNumber: 'MX038',
@@ -338,6 +377,7 @@ export const mixes = [
   {
     id: 'MX039',
     art: art.MX039,
+    label: labels.MX039,
     artist: 'Naíome',
     catalogueNumber: 'MX039',
     soundcloud: 'https://soundcloud.com/room-haus/mx039-naiome',
@@ -346,6 +386,7 @@ export const mixes = [
   {
     id: 'MX040',
     art: art.MX040,
+    label: labels.MX040,
     artist: 'Jamel Zuñiga',
     name: 'Violence Jack',
     catalogueNumber: 'MX040',
@@ -355,11 +396,31 @@ export const mixes = [
   {
     id: 'MX041',
     art: art.MX041,
+    label: labels.MX041,
     artist: 'Rose Corps',
     name: 'Late Night Summer Feels',
     catalogueNumber: 'MX041',
     soundcloud: 'https://soundcloud.com/room-haus/mx041-rose-corps',
     audioSourceURL: `${BASE_URL}MX041/MX041.m3u8`,
+  },
+  {
+    id: 'MX042',
+    art: art.MX042,
+    label: labels.MX042,
+    artist: 'Saintgolder',
+    catalogueNumber: 'MX042',
+    soundcloud: 'https://soundcloud.com/room-haus/mx042-saintgolder',
+    audioSourceURL: `${BASE_URL}MX042/MX042.m3u8`,
+  },
+  {
+    id: 'MX043',
+    art: art.MX043,
+    // label: labels.MX043,
+    artist: 'Kundalini',
+    name: 'T÷MPL÷12',
+    catalogueNumber: 'MX043',
+    soundcloud: 'https://soundcloud.com/room-haus/mx043-kundalini',
+    audioSourceURL: `${BASE_URL}MX043/MX043.m3u8`,
   },
   //   id: 'RM001',
   //   art: rm001,

@@ -3,7 +3,7 @@ import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
 import styled from 'styled-components';
 import CaseTexture from 'src/images/mix-art/mx021.jpg';
-import CDLabelTexture from '../../images/cd_template_MX021.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX021.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;

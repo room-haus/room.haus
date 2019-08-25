@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
 import HLS from 'hls.js';
 import CaseTexture from '../../images/mix-art/mx038.jpg';
-import CDLabelTexture from '../../images/cd_template_MX030.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX038.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
@@ -11,8 +11,6 @@ export const cdLabelTexture = CDLabelTexture;
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
   const CD = scene.getMeshByName('CDChassis');
-  const cdLabel = scene.getMeshByName('CDLabel');
-  cdLabel.position.addInPlace(new BABYLON.Vector3(-0.5, -0.3, 0));
   // Make sure the CD is rendered in front of everything else i.e. top layer
   CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line
   scene.clearColor = new BABYLON.Color4(0.1, 0.1, 0.1, 0);

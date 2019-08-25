@@ -2,7 +2,7 @@ import * as BABYLON from 'babylonjs';
 import * as Pts from 'pts';
 import PtsCanvas from '../../components/PtsCanvas';
 import CaseTexture from 'src/images/mix-art/mx011.jpg';
-import CDLabelTexture from '../../images/cd_template_MX011.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX011.png';
 import {scaleLinear} from 'd3';
 
 export const caseTexture = CaseTexture;
