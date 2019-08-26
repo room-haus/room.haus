@@ -1,6 +1,6 @@
 {
   "name": "ROOM",
-  "description": "Gatsby default starter",
+  "description": "Virtual Imprints",
   "private": true,
   "version": "1.0.0",
   "author": "Nicholas Licitra <nicholas.licitra@gmail.com>",
@@ -29,9 +29,6 @@
     "react-router-dom": "^5.0.1",
     "styled-components": "^3.4.10"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "webpack",
@@ -40,7 +37,7 @@
     "format": "prettier --write '**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "npx http-server-spa dist/",
-    "deploy": "npm run build && aws s3 sync ./dist/ s3://beta.room.haus"
+    "deploy": "npm run build && aws s3 sync ./dist/ s3://licitra.dev && aws cloudfront create-invalidation --distribution-id E2LS46XZY59AUV"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

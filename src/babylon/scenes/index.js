@@ -10,6 +10,7 @@ import * as MX020 from './MX020';
 import * as MX021 from './MX021';
 import * as MX022 from './MX022';
 import * as MX023 from './MX023';
+import * as MX024 from './MX024';
 import * as MX025 from './MX025';
 import * as MX029 from './MX029';
 import * as MX030 from './MX030';
@@ -26,6 +27,7 @@ import * as MX040 from './MX040';
 import * as MX041 from './MX041';
 import * as MX042 from './MX042';
 import * as MX043 from './MX043';
+import * as MX044 from './MX044';
 import * as RM001 from './RM001';
 import * as defaultConfig from './default';
 
@@ -73,6 +75,10 @@ export const mixConfigs = {
   MX023: {
     id: 'MX023',
     ...MX023,
+  },
+  MX024: {
+    id: 'MX024',
+    ...MX024,
   },
   MX025: {
     id: 'MX025',
@@ -137,6 +143,10 @@ export const mixConfigs = {
   MX043: {
     id: 'MX043',
     ...MX043,
+  },
+  MX044: {
+    id: 'MX044',
+    ...MX044,
   },
   RM001: {
     id: 'RM001',
