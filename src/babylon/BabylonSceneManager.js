@@ -58,12 +58,9 @@ class BabylonSceneManager {
   }
 
   async runScene(sceneId, params) {
-    let scene = this.scenes[sceneId];
     const config = getMixConfig(sceneId);
     this.background = config.Background;
-    if (!scene) {
-      scene = await this.createScene({...config, ...params});
-    }
+    const scene = await this.createScene({...config, ...params});
     this.engine.stopRenderLoop();
     this.engine.runRenderLoop(() => scene.render());
     this.resize();

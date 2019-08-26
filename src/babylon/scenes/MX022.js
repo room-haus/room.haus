@@ -7,10 +7,12 @@ import CDLabelTexture from '../../images/mix-labels/cd_template_MX022.png';
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-export const build = ({scene}) => {
+export const build = ({scene, audio}) => {
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+
+  audio.startWorklet();
 
   return scene;
 };

@@ -39,18 +39,6 @@ export default class HLSAudioSource {
 
     this.bands = {};
 
-    const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
-    console.log(`CPU cores: ${cpuCores}`);
-    if (this.ctx.audioWorklet && cpuCores > 1) {
-      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
-      try {
-        await this.bpmAnalyzerNode.init();
-        this.bpmAnalyzerNode.attach(this.element);
-      } catch (error) {
-        console.error('Failed to load bpm analyzer processor!', error);
-      }
-    }
-
     this.element.connect(this.analyser);
     this.element.connect(this.ctx.destination);
 
@@ -67,7 +55,33 @@ export default class HLSAudioSource {
     });
   }
 
+  async initWorklet() {
+    const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
+    console.log(`CPU cores: ${cpuCores}`);
+    if (this.ctx.audioWorklet && cpuCores > 1) {
+      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
+      try {
+        await this.bpmAnalyzerNode.init();
+        this.bpmAnalyzerNode.attach(this.element);
+      } catch (error) {
+        console.error('Failed to load bpm analyzer processor!', error);
+      }
+    }
+  }
+
+  async startWorklet() {
+    if (!this.bpmAnalyzerNode) {
+      await this.initWorklet();
+    } else {
+      this.bpmAnalyzerNode.resume();
+    }
+    this.bpmAnalyzerNode.onsetCallback = this.onsetCallback;
+  }
+
   loadHSLAudio(autoplay = false) {
+    if (this.bpmAnalyzerNode) {
+      this.bpmAnalyzerNode.bypass();
+    }
     if (HLS.isSupported()) {
       if (this.hls) {
         this.hls.destroy();
@@ -89,9 +103,7 @@ export default class HLSAudioSource {
   }
 
   setOnsetCallback(func) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onsetCallback = func;
-    }
+    this.onsetCallback = func;
   }
 
   // setODFUpdateCallback(func) {
