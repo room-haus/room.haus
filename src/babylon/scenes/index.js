@@ -12,6 +12,9 @@ import * as MX022 from './MX022';
 import * as MX023 from './MX023';
 import * as MX024 from './MX024';
 import * as MX025 from './MX025';
+import * as MX026 from './MX026';
+import * as MX027 from './MX027';
+import * as MX028 from './MX028';
 import * as MX029 from './MX029';
 import * as MX030 from './MX030';
 import * as MX031 from './MX031';
@@ -83,6 +86,18 @@ export const mixConfigs = {
   MX025: {
     id: 'MX025',
     ...MX025,
+  },
+  MX026: {
+    id: 'MX026',
+    ...MX026,
+  },
+  MX027: {
+    id: 'MX027',
+    ...MX027,
+  },
+  MX028: {
+    id: 'MX028',
+    ...MX028,
   },
   MX029: {
     id: 'MX029',
