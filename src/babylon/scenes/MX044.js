@@ -1,6 +1,6 @@
 import React from 'react';
 import {VideoBackgroundScene, build} from './templates/VideoBackground';
-import CaseTexture from '../../images/mix-art/mx043.jpg';
+import CaseTexture from '../../images/mix-art/mx044.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_MX044.png';
 
 export const caseTexture = CaseTexture;
