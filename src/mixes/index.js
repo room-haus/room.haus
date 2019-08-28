@@ -426,7 +426,7 @@ export const mixes = [
     id: 'MX044',
     art: art.MX044,
     label: labels.MX044,
-    artist: 'Sophia Lakis',
+    artist: 'Sofia Lakis',
     name: 'Slamdancer',
     catalogueNumber: 'MX044',
     soundcloud: 'https://soundcloud.com/room-haus/mx044-sofia-lakis',
