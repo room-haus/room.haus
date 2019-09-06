@@ -1,28 +1,37 @@
-import React from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import {memoize} from 'lodash';
-import AudioSourceContext from '../contexts/audio/AudioSourceContext';
-import AudioMetaContext from '../contexts/audio/AudioMetaContext';
-import Oscilliscope from '../../audio/visualizations/Oscilliscope';
+import {useAudioContext} from 'src/audio/AudioSourceContext';
+import useIntervalCallback from 'src/components/hooks/useIntervalCallback';
+import Oscilliscope from 'src/audio/visualizations/Oscilliscope';
+import {useMixMetaContext} from '../SceneViewer/MixMetaContext';
 import PlayButton from './PlayButton';
 
 const OscilliscopeContainer = styled.div`
   position: relative;
   vertical-align: middle;
   height: 100%;
+  cursor: ${({disabled}) => (disabled ? 'wait' : 'pointer')};
+  pointer-events: ${({disabled}) => (disabled ? 'none' : 'auto')};
 `;
 
 const Container = styled.div`
   box-sizing: border-box;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;
   justify-self: center;
+  padding: 5px 10px;
+
+  @media (max-width: 700px) {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
+  }
 `;
 
 const MediaTitle = styled.span`
-  overflow: hidden;
   white-space: nowrap;
 `;
 
@@ -32,10 +41,36 @@ const CatalougeNumber = styled.span`
 `;
 
 const MediaTime = styled.span`
-  flex: 1;
-  font-size: 1em;
+  font-size: 3.7vw;
   text-align: center;
-  max-width: 75px;
+  display: inline-block;
+  flex-basis: content;
+  width: 11vw;
+  line-height: 1em;
+
+  @media (max-width: 700px) {
+    grid-row-start: 1;
+    justify-self: end;
+  }
+`;
+
+const MediaMetaContainer = styled.div`
+  display: flex;
+  flex-basis: content;
+  align-items: center;
+  justify-items: center;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    grid-row-start: 1;
+    justify-self: start;
+    padding-right: 10%;
+
+    & span {
+      font-size: 0.7em;
+      font-weight: 900;
+    }
+  }
 `;
 
 const MediaMetaWrapper = styled.div`
@@ -49,18 +84,12 @@ const MediaMetaWrapper = styled.div`
   font-family: 'NeueHaasGrotDisp';
   height: 80%;
   justify-content: space-between;
-  flex: 2;
-`;
-
-const MediaMetaContainer = styled.div`
-  flex: 2;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  justify-content: space-between;
+  margin: 0 0 0 1vw;
 
   @media (max-width: 700px) {
-    margin-left: 1em;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
   }
 `;
 
@@ -68,9 +97,7 @@ const MediaImage = styled.img`
   object-fit: contain;
   max-height: 65px;
   max-width: 100px;
-  flex: 1;
   position: relative;
-  flex-shrink: 0;
   user-drag: none;
   vertical-align: middle;
   display: inline-block;
@@ -79,17 +106,6 @@ const MediaImage = styled.img`
   @media (max-width: 700px) {
     display: none;
   }
-`;
-
-const ProgressBar = styled.div`
-  position: absolute;
-  bottom: 0;
-  opacity: 0.7;
-  background-color: ${({color}) => color || '#53ef8d'};
-  width: ${(props) => Math.round(props.progress * 100)}%;
-  height: 0.3em;
-  border: none !important;
-  pointer-events: none;
 `;
 
 const PlayheadProgressBar = styled.div`
@@ -104,15 +120,19 @@ const PlayheadProgressBar = styled.div`
 `;
 
 const Controls = styled.div`
-  cursor: ${({loading}) => (loading ? 'wait' : 'pointer')};
+  flex-grow: 2;
+  cursor: pointer;
   border: 1px solid rgba(19, 18, 20, 0.7);
   display: grid;
-  grid-template-columns: 1fr 8fr;
-  grid-template-rows: 1.8em;
-  flex: 1;
+  grid-template-columns: minmax(45px, 1fr) 8fr;
+  grid-template-rows: minmax(3em, 5vh);
+  margin: 0 2vw 0 3vw;
 
   @media (max-width: 700px) {
-    flex: 2;
+    grid-row-start: 2;
+    grid-column-start: span 2;
+    margin: 0;
+    grid-template-rows: 5vh;
   }
 
   * + * {
@@ -129,72 +149,88 @@ const formatTime = (time) => {
   return `${minutes}:${seconds}`;
 };
 
-class HeaderPlayer extends React.Component {
-  state = {
-    percentage: null,
-  };
-  handlePlay = memoize((source, onPlay) => () => source.toggle() && onPlay());
-
-  handleTouch = (setPlayhead, event) => {
-    this.handleMouseMove(event);
-    const {percentage} = this.state;
-    setPlayhead(percentage);
-  };
-
-  handleMouseLeave = () => {
-    this.setState({percentage: null});
-  };
-
-  handleMouseMove = (event) => {
+const useMousePerc = (ref) => {
+  const [percentage, setPercentage] = useState();
+  const onMouseMove = useCallback((event) => {
     const rect = event.target.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    this.setState({percentage: x / rect.width});
-  };
+    const {clientX} = event.touches ? event.touches[0] : event;
+    const x = clientX - rect.left;
+    setPercentage(x / rect.width);
+  });
+  const onMouseLeave = useCallback(() => {
+    setPercentage(null);
+  });
 
-  render() {
-    return (
-      <AudioSourceContext.Consumer>
-        {({source}) =>
-          source && (
-            <AudioMetaContext.Consumer>
-              {({isLoading, isPlaying, isReady, meta, loadProgress}) => (
-                <Container>
-                  <Controls loading={isLoading && !isReady}>
-                    <PlayButton
-                      handleClick={((!isLoading && !isReady) || isReady) && this.handlePlay(source, this.props.onPlay)}
-                      playing={isPlaying}
-                    />
-                    <OscilliscopeContainer
-                      onMouseMove={this.handleMouseMove}
-                      onMouseLeave={this.handleMouseLeave}
-                      onTouchStart={this.handleTouch.bind(this, () => source.setPlayhead)}
-                      onClick={() => source.setPlayhead(this.state.percentage)}>
-                      <Oscilliscope source={source} />
-                      {loadProgress < 1 && <ProgressBar progress={loadProgress} />}
-                      {source.ready && <PlayheadProgressBar progress={source.playheadLocation()} color="#121212" />}
-                    </OscilliscopeContainer>
-                  </Controls>
-                  {meta && (
-                    <MediaMetaContainer>
-                      <MediaTime>{formatTime(source.currentTime())}</MediaTime>
-                      <MediaImage src={meta.art} />
-                      <MediaMetaWrapper>
-                        <MediaTitle>{meta.artist}</MediaTitle>
-                        <MediaTitle>
-                          <i>{meta.name}</i>
-                        </MediaTitle>
-                        <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
-                      </MediaMetaWrapper>
-                    </MediaMetaContainer>
-                  )}
-                </Container>
-              )}
-            </AudioMetaContext.Consumer>
-          )
-        }
-      </AudioSourceContext.Consumer>
-    );
-  }
-}
+  useEffect(() => {
+    const element = ref.current;
+    element.addEventListener('mousemove', onMouseMove);
+    element.addEventListener('mouseleave', onMouseLeave);
+    // element.addEventListener('touchstart', onMouseMove);
 
-export default HeaderPlayer;
+    return () => {
+      element.removeEventListener('mousemove', onMouseMove);
+      element.removeEventListener('mouseleave', onMouseLeave);
+      // element.removeEventListener('touchstart', onMouseMove);
+    };
+  }, [ref.current]);
+
+  return percentage;
+};
+
+const MediaMeta = () => {
+  const {meta} = useMixMetaContext();
+  return (
+    <MediaMetaContainer>
+      <MediaImage src={meta.art} />
+      <MediaMetaWrapper>
+        <MediaTitle>{meta.artist}</MediaTitle>
+        <MediaTitle>
+          <i>{meta.name}</i>
+        </MediaTitle>
+        <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
+      </MediaMetaWrapper>
+    </MediaMetaContainer>
+  );
+};
+
+const AudioControls = ({audio}) => {
+  const isAudioReady = audio.ready;
+  const isAudioPlaying = audio.isPlaying();
+  const oscRef = useRef();
+  const percentage = useMousePerc(oscRef);
+  const callback = useCallback(() => {
+    if (isAudioReady) {
+      audio.toggle();
+    } else {
+      audio.resume();
+    }
+  }, [isAudioReady]);
+  const setPercentage = useCallback(() => audio.setPlayhead(percentage));
+  return (
+    <Controls>
+      <PlayButton handleClick={callback} playing={isAudioPlaying} readyForPlayback={isAudioReady} />
+      <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage} disabled={!isAudioReady}>
+        <Oscilliscope source={audio} />
+        <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />
+      </OscilliscopeContainer>
+    </Controls>
+  );
+};
+
+const MediaTimestamp = ({time}) => {
+  return <MediaTime>{formatTime(time)}</MediaTime>;
+};
+
+export default () => {
+  const {audio} = useAudioContext();
+  const [time, setTime] = useState(audio.currentTime());
+  useIntervalCallback(() => setTime(audio.currentTime()), [audio], 250);
+
+  return (
+    <Container>
+      <MediaMeta />
+      <AudioControls audio={audio} />
+      <MediaTimestamp time={time} />
+    </Container>
+  );
+};

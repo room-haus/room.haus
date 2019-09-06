@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import PlaySVG from '../../images/play.svg';
-import PauseSVG from '../../images/pause.svg';
+import React, {useCallback} from 'react';
+import styled, {css} from 'styled-components';
+import PlaySVG from 'src/images/play.svg';
+import PauseSVG from 'src/images/pause.svg';
 
 const buttonUrl = ({playing}) => (playing ? PauseSVG : PlaySVG);
 
@@ -12,24 +12,27 @@ const PlayButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-image: url(${buttonUrl});
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+
+  ${({highlight}) =>
+    highlight &&
+    css`
+      @keyframes shadow-pulse {
+        0% {
+          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+        }
+        100% {
+          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+      }
+
+      animation: shadow-pulse 1s infinite;
+    `};
 `;
 
-class PlayButton extends React.Component {
-  onClick = () => {
-    this.props.handleClick && this.props.handleClick();
-  };
-
-  render() {
-    return (
-      <PlayButtonWrapper
-        playing={this.props.playing}
-        onClick={this.onClick}
-        loading={this.props.loading}
-      />
-    );
-  }
-}
-
-export default PlayButton;
+export default ({handleClick, playing, readyForPlayback}) => {
+  const onClick = useCallback(handleClick, [handleClick]);
+  return <PlayButtonWrapper highlight={!readyForPlayback} playing={playing} onClick={onClick} />;
+};

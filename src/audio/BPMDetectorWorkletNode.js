@@ -1,11 +1,10 @@
-import {withPrefix} from 'gatsby';
-
 const ENERGY = 'ENERGY';
 const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
 
 export default class BPMDetectorWorkletNode {
   constructor(context, onMessage, {cpuCores = 1} = {}) {
     this.context = context;
+    this.active = false;
     this.mode = cpuCores > 4 ? SPECTRAL_DIFFERENCE : ENERGY;
     this.onMessage = onMessage || function() {};
     this.filteredInputs = {
@@ -24,7 +23,7 @@ export default class BPMDetectorWorkletNode {
   }
 
   async init() {
-    await this.context.audioWorklet.addModule(withPrefix('worklets/OnsetWorkletProcessor.js'));
+    await this.context.audioWorklet.addModule('/worklets/index.js');
     this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
       numberOfInputs: 4,
       processorOptions: {
@@ -33,6 +32,7 @@ export default class BPMDetectorWorkletNode {
     });
     Object.values(this.filteredInputs).forEach((input, index) => input.connect(this.node, 0, index));
     this.node.connect(this.context.destination);
+    this.active = true;
     this.node.port.onmessage = (event) => {
       const {data} = event;
       if (data.debug) {
@@ -47,5 +47,17 @@ export default class BPMDetectorWorkletNode {
 
   attach(source) {
     Object.values(this.filteredInputs).forEach((input) => source.connect(input));
+  }
+
+  bypass() {
+    if (this.active) {
+      this.node.disconnect(this.context.destination);
+      this.active = false;
+    }
+  }
+
+  resume() {
+    this.node.connect(this.context.destination);
+    this.active = true;
   }
 }

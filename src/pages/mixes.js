@@ -1,31 +1,17 @@
 import React from 'react';
-import AudioSourceContext from '../components/contexts/audio/AudioSourceContext';
-import FullScreenLayout from '../components/FullScreenLayout';
-import SceneViewer from '../components/SceneViewer';
-import {getMix} from '../content/mixes';
+import SceneViewer from 'src/components/SceneViewer';
+import {getMix} from 'src/mixes/';
+import useURLParams from 'src/components/hooks/useURLParams';
+import SiteLayout from 'src/components/layout/SiteLayout';
 
-const getParams = (search) => {
-  const params = {};
-  search
-    .split('?')
-    .pop()
-    .split('&')
-    .forEach((kvpair) => {
-      const [key, value] = kvpair.split('=');
-      params[key] = value;
-    });
-  return params;
-};
-
-const MixPage = ({location}) => {
-  let {mx} = getParams(location.search);
-  mx = getMix(mx) ? mx : 'MX030';
+const MixPage = () => {
+  let mx = useURLParams(window.location.search).get('mx');
+  mx = getMix(mx);
+  const id = mx ? mx.id : null;
   return (
-    <FullScreenLayout>
-      <AudioSourceContext.Consumer>
-        {({source, set}) => <SceneViewer scene={mx} source={source} setter={set} />}
-      </AudioSourceContext.Consumer>
-    </FullScreenLayout>
+    <SiteLayout mixSceneMode={Boolean(mx)}>
+      <SceneViewer showCatalogOverlay={!mx} sceneId={id} mixId={id} />
+    </SiteLayout>
   );
 };
 
