@@ -37,7 +37,7 @@
     "format": "prettier --write '**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "npx http-server-spa dist/",
-    "deploy": "npm run build && aws s3 sync ./dist/ s3://licitra.dev && aws cloudfront create-invalidation --distribution-id E2LS46XZY59AUV --paths \"/*\""
+    "deploy": "npm run build && aws s3 sync ./dist/ s3://room.haus && aws cloudfront create-invalidation --distribution-id E240MGV7PK0AIJ --paths \"/*\""
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

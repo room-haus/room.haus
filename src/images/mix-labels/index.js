@@ -42,3 +42,4 @@ export {default as MX041} from './cd_template_MX041.png';
 export {default as MX042} from './cd_template_MX042.png';
 export {default as MX043} from './cd_template_MX043.png';
 export {default as MX044} from './cd_template_MX044.png';
+export {default as MX045} from './cd_template_MX045.png';
