@@ -1,34 +1,11 @@
-# gatsby-starter-default
-The default Gatsby starter.
+![Room Logo](https://i.imgur.com/WKfsXS9.png)
 
-For an overview of the project structure please refer to the [Gatsby documentation - Building with Components](https://www.gatsbyjs.org/docs/building-with-components/).
+ROOM is both a visual studio and a platform. Our primary public-facing output is a weekly genre-free mix series that is hosted on SoundCloud and our site. On the studio side, we handle web development, album/single art, posters, print design, 3D modeling, live visuals, production, mixing/mastering, among other disciplines.
 
-## Install
+## Local Development
+To start local development, run `npm start`.
 
-1. Make sure that you have the Gatsby CLI program installed:
-  ```sh
-  npm install --global gatsby-cli
-  ```
-2. Clone repoistory to local machine and run npm install:
-  ```sh
-  git clone https://github.com/nlicitra/room.haus.git
-
-  cd room.haus
-
-  npm install
-  ```
-
-3. Now you can run project from the root directory:
-  ```sh
-  gatsby develop
-  ```
-
-4. Visit localhost:8000 on your machine.
-
-
-
-**NOTE:**  it is recommended that you upgrade to node v10.0. Try using [nvm](https://github.com/creationix/nvm) to manage multiple versions of node on your machine.
-
-## Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
+## Deployment
+- Install the [AWS CLI](https://aws.amazon.com/cli/) via `pip install awscli` for Mac/Linux. If using windows, amazon provides an installer on their website.
+- Configure the CLI to use the correct keys by running `aws configure`.
+- Run `npm run deploy`. This will bundle and deploy the code you have on your machine, not on github, so make sure you have the latest version of the repo before running this command.
