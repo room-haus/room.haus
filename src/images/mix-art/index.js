@@ -43,3 +43,4 @@ export {default as MX042} from './mx042.jpg';
 export {default as MX043} from './mx043.jpg';
 export {default as MX044} from './mx044.jpg';
 export {default as MX045} from './mx045.jpg';
+export {default as MX046} from './mx046.jpg';
