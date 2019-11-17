@@ -212,7 +212,7 @@ export const mixConfigs = {
   },
   MX054: {
     id: 'MX054',
-    ...MX048,
+    ...MX054,
   },
   MX055: {
     id: 'MX055',
