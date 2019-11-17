@@ -33,7 +33,7 @@ export default ({disableFlyout, ...props}) => {
       {...props}
       MainComponent={Main}
       FlyoutComponent={Flyout}
-      forceActive={!ready}
+      // forceActive={!ready}
       disableFlyout={disableFlyout}
     />
   );

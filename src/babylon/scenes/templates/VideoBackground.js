@@ -5,9 +5,9 @@ import HLS from 'hls.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
-  const CD = scene.getMeshByName('CDChassis');
+  const CD = scene.getTransformNodeByName('CDChassis');
   // Make sure the CD is rendered in front of everything else i.e. top layer
-  CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line
+  CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line no-return-assign
   scene.clearColor = new BABYLON.Color4(0.1, 0.1, 0.1, 0);
 
   const color = new BABYLON.Color3(240 / 255, 230 / 255, 194 / 255);

@@ -8,9 +8,10 @@ export const cdLabelTexture = CDLabelTexture;
 
 export const build = ({scene, engine, audio}) => {
   const camera = scene.activeCamera;
-  const CD = scene.getMeshByName('CDChassis');
+  const CD = scene.getTransformNodeByName('CDChassis');
   // Make sure the CD is rendered in front of everything else i.e. top layer
-  CD.getChildren().forEach((child) => (child.renderingGroupId = 1));
+  CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line no-return-assign
+  // CD.renderingGroupId = 1;
 
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;

@@ -154,11 +154,10 @@ export const makeStreak = (scene, parent, updateCallback) => {
 };
 
 export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
-  const CDChassis = new BABYLON.Mesh.CreateBox('CDChassis', 1, scene);
+  const CDChassis = new BABYLON.TransformNode('CDChassis', scene);
   meshes.forEach((mesh) => {
     mesh.parent = CDChassis;
   });
-  CDChassis.isVisible = false;
   CDChassis.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
   CDChassis.position = new BABYLON.Vector3(0, 0, 0);
 
