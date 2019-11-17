@@ -35,6 +35,13 @@ import * as MX045 from './MX045';
 import * as MX046 from './MX046';
 import * as MX047 from './MX047';
 import * as MX048 from './MX048';
+import * as MX049 from './MX049';
+import * as MX050 from './MX050';
+import * as MX051 from './MX051';
+import * as MX052 from './MX052';
+import * as MX053 from './MX053';
+import * as MX054 from './MX054';
+import * as MX055 from './MX055';
 import * as RM001 from './RM001';
 import * as defaultConfig from './default';
 
@@ -182,6 +189,34 @@ export const mixConfigs = {
   MX048: {
     id: 'MX048',
     ...MX048,
+  },
+  MX049: {
+    id: 'MX049',
+    ...MX048,
+  },
+  MX050: {
+    id: 'MX050',
+    ...MX050,
+  },
+  MX051: {
+    id: 'MX051',
+    ...MX051,
+  },
+  MX052: {
+    id: 'MX052',
+    ...MX052,
+  },
+  MX053: {
+    id: 'MX053',
+    ...MX053,
+  },
+  MX054: {
+    id: 'MX054',
+    ...MX048,
+  },
+  MX055: {
+    id: 'MX055',
+    ...MX055,
   },
   RM001: {
     id: 'RM001',
