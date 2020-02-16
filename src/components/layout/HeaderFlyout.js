@@ -24,7 +24,8 @@ const Flyout = styled.div`
   transition: transform 0.3s ease-in-out, opacity 0.35s ease-in;
   position: absolute;
   z-index: 1;
-  background: #f5f6f6;
+  background: hsla(0, 0%, 94.1%, 0.5);
+  backdrop-filter: blur(30px);
   width: 100%;
 `;
 
