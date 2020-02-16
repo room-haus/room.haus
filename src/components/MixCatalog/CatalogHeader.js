@@ -19,7 +19,7 @@ const NavItems = styled.div`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 3vmin;
+  font-size: 3vw;
   margin: 0;
   vertical-align: middle;
 `;
@@ -30,8 +30,8 @@ const EmailIcon = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
-  height: 3vmin;
-  width: 3vmin;
+  height: 3vw;
+  width: 3vw;
   display: inline-block;
   vertical-align: middle;
 `;
@@ -65,7 +65,7 @@ const Tactile = styled.div`
   }
 `;
 
-const Tactiles = (
+const Tactiles = () => (
   <TactileContainer>
     <Tactile />
     <Tactile />
@@ -83,7 +83,7 @@ export default ({tactile}) => {
       </HeaderItem>
       <HeaderItem position="middle">
         {tactile ? (
-          Tactiles
+          <Tactiles />
         ) : (
           <NavItems>
             <span>MIXES</span>
