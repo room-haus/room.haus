@@ -6,5 +6,4 @@ export const forceIterable = (input) => {
   return typeof input[Symbol.iterator] === 'function' ? input : [input];
 };
 
-export const resolve = (thing) =>
-  typeof thing === 'function' ? thing() : thing;
+export const resolve = (thing) => (typeof thing === 'function' ? thing() : thing);

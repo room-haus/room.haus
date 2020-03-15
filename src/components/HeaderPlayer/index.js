@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useAudioContext} from 'src/audio/AudioSourceContext';
 import useIntervalCallback from 'src/components/hooks/useIntervalCallback';
 import Oscilliscope from 'src/audio/visualizations/Oscilliscope';
-import {useMixMetaContext} from '../SceneViewer/MixMetaContext';
+import {useContentMetaContext} from '../SceneViewer/ContentMetaContext';
 import PlayButton from './PlayButton';
 
 const OscilliscopeContainer = styled.div`
@@ -178,7 +178,7 @@ const useMousePerc = (ref) => {
 };
 
 const MediaMeta = () => {
-  const {meta} = useMixMetaContext();
+  const {meta} = useContentMetaContext();
   return (
     <MediaMetaContainer>
       <MediaImage src={meta.art} />

@@ -13,6 +13,7 @@ injectGlobal`
 html {
   font-family: sans-serif;
   height: 100%;
+  overflow-y: auto;
   /* line-height: 1.15; */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;

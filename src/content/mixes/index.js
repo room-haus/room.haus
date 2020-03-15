@@ -548,5 +548,3 @@ export const mixes = [
 ];
 
 export const getMix = (mx) => mixes.find((mix) => mx === mix.id);
-
-export const liveMixes = mixes.filter((mx) => !mx.hidden);

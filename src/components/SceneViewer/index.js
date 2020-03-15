@@ -1,8 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
+import {useRouteMatch} from 'react-router-dom';
 import useHLSAudio from 'src/audio/useHLSAudio';
+import {mixes as mixList} from 'src/content/mixes';
+import SceneViewLayout from 'src/components/layout/SceneViewLayout';
+import {releases as releaseList} from 'src/content/releases';
+import {getMix, getReleaseBySlug} from 'src/content';
 import useSceneManager from './useSceneManager';
-import {useMixMetaContext} from './MixMetaContext';
+import {useContentMetaContext} from './ContentMetaContext';
 import CatalogList from '../MixCatalog/CatalogList';
 
 const CanvasContainer = styled.div`
@@ -46,7 +51,7 @@ const CatalogListOverlay = styled.div`
   visibility: ${({visible}) => (visible ? 'visible' : 'hidden')};
 `;
 
-const CatalogOverlay = ({show}) => {
+const CatalogOverlay = ({show, contentType}) => {
   const [visible, setVisible] = useState(show);
   useEffect(() => {
     setVisible(show);
@@ -61,26 +66,63 @@ const CatalogOverlay = ({show}) => {
       setVisible(show);
     }
   }, [show]);
+  const content = contentType === 'mix' ? mixList : releaseList;
   return (
     <CatalogListOverlay show={show} visible={visible}>
-      <CatalogList columns={5} />
+      <CatalogList content={content} columns={5} density={2} />
     </CatalogListOverlay>
   );
 };
 
-export default ({mixId, sceneId, showCatalogOverlay}) => {
+const useURLAwareConfig = () => {
+  const mixMatch = useRouteMatch('/mixes/');
+  const releaseMatch = useRouteMatch('/releases/:slug?');
+  if (mixMatch) {
+    let mx = new URLSearchParams(window.location.search).get('mx');
+    mx = getMix(mx);
+    if (mx) {
+      const {id} = mx;
+      return {
+        contentId: id,
+        sceneId: id,
+        contentType: 'mix',
+      };
+    }
+    return {contentType: 'mix'};
+  }
+  if (releaseMatch) {
+    const {slug} = releaseMatch.params;
+    const release = getReleaseBySlug(slug);
+    if (release) {
+      const {id} = release;
+      return {
+        contentId: id,
+        sceneId: id,
+        contentType: 'release',
+      };
+    }
+    return {
+      contentType: 'release',
+    };
+  }
+  return {};
+};
+
+export default () => {
   const mainCanvasRef = useRef();
   const manager = useSceneManager(mainCanvasRef);
-  const {setMixId, meta} = useMixMetaContext();
-  const audio = useHLSAudio(meta.audioSourceURL);
+  const {setContentId, streamURL} = useContentMetaContext({trackIndex: 0});
+  const audio = useHLSAudio(streamURL);
   const Background = manager.background;
+  const {contentId, contentType, sceneId} = useURLAwareConfig();
+  const showCatalogOverlay = !contentId;
 
   useEffect(() => {
-    if (mixId && sceneId) {
-      setMixId(mixId);
+    if (contentId && sceneId) {
+      setContentId(contentId);
       manager.runScene(sceneId, {audio});
     }
-  }, [sceneId, mixId]);
+  }, [sceneId, contentId]);
 
   useEffect(() => {
     if (showCatalogOverlay && audio.isPlaying()) {
@@ -109,8 +151,8 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
   }, []);
 
   return (
-    <>
-      <CatalogOverlay show={showCatalogOverlay} />
+    <SceneViewLayout mixSceneMode={Boolean(contentId)} contentViewType={contentType}>
+      <CatalogOverlay show={showCatalogOverlay} contentType={contentType} />
       <CanvasContainer>
         {Background && (
           <BackgroundContainer>
@@ -119,6 +161,6 @@ export default ({mixId, sceneId, showCatalogOverlay}) => {
         )}
         <Canvas innerRef={mainCanvasRef} />
       </CanvasContainer>
-    </>
+    </SceneViewLayout>
   );
 };

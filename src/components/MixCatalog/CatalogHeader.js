@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {Header, HeaderItem} from 'src/components/layout/Header';
 import RoomLogo from 'src/images/logo.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -10,12 +10,23 @@ import EmailSVG from './envelope-light.svg';
 const RoomIcon = styled.img`
   object-fit: contain;
   margin: 0;
-  width: 50%;
+  width: 92%;
   max-width: 200px;
 `;
 
 const NavItems = styled.div`
   font-size: 5vmin;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  a.active {
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: inherit;
+  }
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -77,7 +88,7 @@ export default ({tactile}) => {
   return (
     <Header>
       <HeaderItem position="left">
-        <Link to="/mixes/">
+        <Link to={({pathname}) => `/${pathname.split('/').filter((x) => x !== '')[0]}/`}>
           <RoomIcon src={RoomLogo} alt="Room logo" />
         </Link>
       </HeaderItem>
@@ -86,7 +97,12 @@ export default ({tactile}) => {
           <Tactiles />
         ) : (
           <NavItems>
-            <span>MIXES</span>
+            <NavLink to="/mixes/">
+              <span>MIXES</span>
+            </NavLink>
+            <NavLink to="/releases/">
+              <span>RELEASES</span>
+            </NavLink>
           </NavItems>
         )}
       </HeaderItem>

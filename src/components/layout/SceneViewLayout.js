@@ -13,11 +13,10 @@ const Screen = styled.div`
   height: 100vh;
 `;
 
-const SiteContainer = styled.div`
+const LayoutGrid = styled.div`
   margin: 0;
   padding: 0;
   display: grid;
-  position: ${({fixToViewport}) => (fixToViewport ? 'fixed' : 'relative')};
   grid-template-areas:
     'header'
     'viewport';
@@ -37,27 +36,27 @@ const SiteHeader = styled(MixHeader)`
   grid-area: header;
 `;
 
-const SiteLayout = ({children, mixSceneMode}) => {
+const SceneViewLayout = ({children, mixSceneMode, contentViewType}) => {
   return (
     <>
       {/* <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} /> */}
       <Screen>
-        <SiteContainer fixToViewport={mixSceneMode}>
-          <SiteHeader disableFlyout={!mixSceneMode} />
+        <LayoutGrid>
+          <SiteHeader disableFlyout={!mixSceneMode} contentViewType={contentViewType} />
           <Viewport fixToViewport={mixSceneMode}>{children}</Viewport>
-        </SiteContainer>
+        </LayoutGrid>
       </Screen>
     </>
   );
 };
 
-SiteLayout.defaultProps = {
+SceneViewLayout.defaultProps = {
   mixSceneMode: false,
 };
 
-SiteLayout.propTypes = {
+SceneViewLayout.propTypes = {
   children: PropTypes.node.isRequired,
   mixSceneMode: PropTypes.bool,
 };
 
-export default SiteLayout;
+export default SceneViewLayout;
