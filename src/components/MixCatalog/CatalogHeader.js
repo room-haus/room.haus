@@ -36,6 +36,18 @@ const SocialIcons = styled(HeaderItem)`
   * + * {
     margin-left: 2vw;
   }
+
+  @media (max-width: 700px) {
+    * + * {
+      margin-left: 0;
+    }
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    display: flex;
+    flex-direction: column;
+    font-size: 2vw;
+  }
 `;
 
 const TactileContainer = styled.div`
