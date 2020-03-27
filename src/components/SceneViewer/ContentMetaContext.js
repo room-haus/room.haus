@@ -1,11 +1,15 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useCallback} from 'react';
 import {getContent} from 'src/content';
 
 export const Context = React.createContext({meta: {}});
 
 export default (props) => {
-  const [contentId, setContentId] = useState();
+  const [contentId, _setContentId] = useState();
   const [trackIndex, setTrackIndex] = useState(0);
+  const setContentId = useCallback((id) => {
+    _setContentId(id);
+    setTrackIndex(0);
+  }, []);
   const [state, setState] = useState({
     setContentId,
     setTrackIndex,

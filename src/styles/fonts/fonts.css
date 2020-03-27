@@ -12,3 +12,13 @@
     font-family: "NeueHaasGrotDisp-Medium";
     src: url('./NeueHaasGrotDisp-65Medium.otf');
 }
+
+@font-face {
+    font-family: "AcuminVariableConcept";
+    src: url('./AcuminVariableConcept.otf');
+}
+
+@font-face {
+    font-family: "GlyphWorld-Forest";
+    src: url('./GlyphWorld-Forest.otf');
+}

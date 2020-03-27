@@ -31,7 +31,19 @@ const Flyout = () => (
 );
 
 const TrackList = styled.ul`
-  margin: 0 1%;
+  margin: 0 3%;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  li {
+    font-size: 3vw;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    line-height: 1em;
+  }
 
   & > li.active {
     border: 1px solid;

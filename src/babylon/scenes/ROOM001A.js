@@ -1,6 +1,7 @@
 import * as BABYLON from 'babylonjs';
-import CaseTexture from '../../images/mix-art/mx055.jpg';
+import CaseTexture from '../../images/mix-art/rm001A.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_MX047.png';
+import EnvironmentDDS from '../textures/EnvironmentSpecularHDR.dds';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
@@ -22,7 +23,7 @@ const allWithin = (val, x, y, z) => {
 function createCubesBall(num, scene) {
   const cubes = [];
   for (let i = 0; i < num; i++) {
-    if (i === 0) cubes[i] = BABYLON.Mesh.CreateBox('b', 0.05, scene);
+    if (i === 0) cubes[i] = BABYLON.Mesh.CreateCylinder('b', 0.05, 0.05, 0.01, scene);
     else cubes[i] = cubes[0].createInstance(`b${i}`);
 
     let x = 0;
@@ -44,6 +45,7 @@ function createCubesBall(num, scene) {
 }
 
 export const build = async ({scene}) => {
+  scene.environmentTexture = BABYLON.CubeTexture.CreateFromPrefilteredData(EnvironmentDDS, scene);
   const CD = scene.getTransformNodeByName('CDChassis');
   // Make sure the CD is rendered in front of everything else i.e. top layer
   // CD.getChildren().forEach((child) => (child.renderingGroupId = 1)); // eslint-disable-line no-return-assign
@@ -69,7 +71,13 @@ export const build = async ({scene}) => {
   // const probe = new BABYLON.ReflectionProbe('probe', 512, scene);
   // probe.renderList.push(sphere);
 
-  const cubesMat = new BABYLON.StandardMaterial('m', scene);
+  const cubesMat = new BABYLON.PBRMaterial('box mat', scene);
+  cubesMat.sheen.isEnabled = true;
+  cubesMat.clearCoat.isEnabled = true;
+  cubesMat.clearCoat.isTintEnabled = true;
+  cubesMat.clearCoat.indexOfRefraction = 10;
+  cubesMat.metallic = 0.0;
+  cubesMat.roughness = 0.0;
 
   cubes[0].material = cubesMat;
 
@@ -86,10 +94,6 @@ export const build = async ({scene}) => {
   let cb = 0;
   let t = 0.0;
   let tc = 0.0;
-  let seed = 0;
-  let updating = false;
-  let sleeping = false;
-  let wiggle = 1;
 
   // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
   var sphere = BABYLON.Mesh.CreateSphere('sphere1', 32, 25, scene);

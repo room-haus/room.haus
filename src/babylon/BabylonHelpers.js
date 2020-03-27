@@ -195,6 +195,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   const cdCaseBack = scene.getMeshByName('BackPlastic');
 
   const plastic = new BABYLON.PBRMaterial('plastic', scene);
+  plastic.clearCoat.isEnabled = true;
   cdCaseFront.material = plastic;
   cdCaseBack.material = plastic;
 
