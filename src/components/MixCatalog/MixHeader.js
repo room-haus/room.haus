@@ -45,7 +45,11 @@ const TrackList = styled.ul`
     line-height: 1em;
   }
 
-  & > li.active {
+  li:hover {
+    cursor: pointer;
+  }
+
+  li.active {
     border: 1px solid;
   }
 `;

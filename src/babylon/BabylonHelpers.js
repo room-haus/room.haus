@@ -181,7 +181,9 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   const cdLabel = scene.getMeshByName('CDLabel');
   if (cdLabelTexture) {
-    cdLabel.material.opacityTexture = new BABYLON.Texture(cdLabelTexture, scene);
+    const cdTexture = new BABYLON.Texture(cdLabelTexture, scene);
+    cdLabel.material.opacityTexture = cdTexture;
+    cdLabel.material.emissiveTexture = cdTexture;
     cdLabel.rotate(BABYLON.Axis.Y, Math.PI);
     cdLabel.rotate(BABYLON.Axis.Z, Math.PI);
     cdLabel.material.backFaceCulling = false;

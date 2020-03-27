@@ -1,6 +1,6 @@
 import * as BABYLON from 'babylonjs';
 import CaseTexture from '../../images/mix-art/rm001A.jpg';
-import CDLabelTexture from '../../images/mix-labels/cd_template_MX047.png';
+import CDLabelTexture from '../../images/mix-labels/cd_template_RM001A.png';
 import EnvironmentDDS from '../textures/EnvironmentSpecularHDR.dds';
 
 export const caseTexture = CaseTexture;

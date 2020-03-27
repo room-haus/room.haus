@@ -161,7 +161,11 @@ const generateTubes = (scene, instance, points) => {
   }
   const lines = BABYLON.MeshBuilder.CreateTube('tube', params, scene);
   lines.material = new BABYLON.StandardMaterial(null, scene);
-  lines.material.emissiveColor = BABYLON.Color3.White();
+  const base = 255;
+  const color = new BABYLON.Color3(94 / base, 132 / base, 241 / base);
+  lines.material.diffuseColor = color;
+  lines.material.emissiveColor = color;
+  lines.material.ambientColor = color;
   return lines;
 };
 
