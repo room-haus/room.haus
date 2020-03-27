@@ -103,7 +103,8 @@ export const build = async ({scene}) => {
   var mat = new BABYLON.StandardMaterial('mat', scene);
   mat.backFaceCulling = false;
   mat.alpha = 0.7;
-  mat.diffuseColor = new BABYLON.Color3(0.4, 0.5, 0.7);
+  const c = [255, 210, 72].map((x) => x / 255);
+  mat.diffuseColor = new BABYLON.Color3(...c);
   mat.bumpTexture = new BABYLON.Texture('http://www.synergy-development.fr/equalonyzer/images/grained_uv.png', scene);
   mat.bumpTexture.uScale = 4;
   mat.bumpTexture.vScale = 4;
