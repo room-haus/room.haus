@@ -74,7 +74,7 @@ const MediaMetaContainer = styled.div`
 `;
 
 const MediaMetaWrapper = styled.div`
-  color: #262525;
+  /* color: #262525; */
   font-size: 1em;
   line-height: 1em;
   display: flex;
@@ -119,10 +119,12 @@ const PlayheadProgressBar = styled.div`
   pointer-events: none;
 `;
 
+const color = 'rgba(245, 245, 245, 0.7)';
 const Controls = styled.div`
   flex-grow: 2;
   cursor: pointer;
-  border: 1px solid rgba(19, 18, 20, 0.7);
+  /* border: 1px solid rgba(19, 18, 20, 0.7); */
+  border: 1px solid ${color};
   display: grid;
   grid-template-columns: minmax(45px, 1fr) 8fr;
   grid-template-rows: minmax(3em, 5vh);
@@ -136,7 +138,7 @@ const Controls = styled.div`
   }
 
   * + * {
-    border-left: 1px solid rgba(19, 18, 20, 0.7);
+    border-left: 1px solid ${color};
   }
 `;
 

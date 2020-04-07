@@ -11,7 +11,8 @@ const getJustifySelf = ({position = 'middle'}) => {
 
 export const Header = styled.div`
   background: #f5f6f6;
-  border-bottom: 1px solid gray;
+  /* background: rgba(16, 16, 16, 0.5); */
+  /* border-bottom: 1px solid gray; */
 
   display: grid;
   grid-template-areas: 'left middle right';

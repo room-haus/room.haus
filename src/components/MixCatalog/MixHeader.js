@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import CatalogList from 'src/components/MixCatalog/CatalogList';
 import {getContentList} from 'src/content';
 import HeaderPlayer from 'src/components/HeaderPlayer';
+import {useAudioContext} from 'src/audio/AudioSourceContext';
 import {useContentMetaContext} from 'src/components/SceneViewer/ContentMetaContext';
 import HeaderFlyout from '../layout/HeaderFlyout';
 import CatalogHeader from './CatalogHeader';
 
 const CarouselContainer = styled.div`
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
   top: 4.5em;
   left: 0;
   width: 100%;
@@ -75,5 +76,14 @@ const TrackSelect = () => {
 
 export default ({disableFlyout, contentViewType, ...props}) => {
   const flyout = contentViewType === 'release' ? TrackSelect : Flyout;
-  return <HeaderFlyout {...props} MainComponent={Main} FlyoutComponent={flyout} disableFlyout={disableFlyout} />;
+  const {ready} = useAudioContext();
+  return (
+    <HeaderFlyout
+      {...props}
+      MainComponent={Main}
+      FlyoutComponent={flyout}
+      disableFlyout={disableFlyout}
+      forceActive={!ready}
+    />
+  );
 };
