@@ -55,4 +55,8 @@ export {default as MX054} from './cd_template_MX054.png';
 export {default as MX055} from './cd_template_MX055.png';
 export {default as MX056} from './cd_template_MX056.png';
 export {default as MX057} from './cd_template_MX057.png';
+export {default as MX058} from './cd_template_MX058.png';
+export {default as MX059} from './cd_template_MX059.png';
+export {default as MX060} from './cd_template_MX060.png';
+export {default as MX061} from './cd_template_MX061.png';
 export {default as RM001A} from './cd_template_RM001A.png';

@@ -1,9 +1,9 @@
 import {createBuild} from './templates/SceneExperiment';
-import CaseTexture from '../../images/mix-art/mx055.jpg';
-import CDLabelTexture from '../../images/mix-labels/cd_template_MX055.png';
+import CaseTexture from '../../images/mix-art/mx061.jpg';
+import CDLabelTexture from '../../images/mix-labels/cd_template_MX061.png';
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-const colors = ['#1C1C1C', '#5E5E5E'];
+const colors = ['#A5A195', '#090A0C'];
 export const build = createBuild(colors);

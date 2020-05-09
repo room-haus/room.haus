@@ -112,7 +112,7 @@ const PlayheadProgressBar = styled.div`
   position: absolute;
   bottom: 0;
   top: 0;
-  opacity: 0.1;
+  opacity: 0.2;
   background-color: ${({color}) => color || '#53ef8d'};
   width: ${(props) => Math.round(props.progress * 100)}%;
   border: none !important;
@@ -213,7 +213,7 @@ const AudioControls = ({audio}) => {
       <PlayButton handleClick={callback} playing={isAudioPlaying} readyForPlayback={isAudioReady} />
       <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage} disabled={!isAudioReady}>
         <Oscilliscope source={audio} />
-        <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />
+        <PlayheadProgressBar progress={audio.percentCompletion()} color="#FFF" />
       </OscilliscopeContainer>
     </Controls>
   );

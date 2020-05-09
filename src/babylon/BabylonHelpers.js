@@ -4,7 +4,7 @@ import {forceIterable} from 'src/utils/CollectionHelpers';
 import CDModel from './models/CD/CD.babylon';
 import './models/CD/CD.babylon.manifest';
 import EnvironmentDDS from './textures/EnvironmentSpecularHDR.dds';
-import 'src/babylon/textures/environment.dds';
+// import 'src/babylon/textures/environment.dds';
 
 export class MeshGroup {
   constructor(name, scene, children = []) {

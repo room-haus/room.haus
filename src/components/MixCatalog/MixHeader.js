@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CatalogList from 'src/components/MixCatalog/CatalogList';
 import {getContentList} from 'src/content';
