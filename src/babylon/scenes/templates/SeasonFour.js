@@ -40,9 +40,10 @@ export const builder = ({backgroundColors = [], gridColor} = {}) => ({scene, aud
   const xLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('x-lines', {lines: xPlane, updatable: true}, scene);
   const yLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('y-lines', {lines: yPlane, updatable: true}, scene);
   const zLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('z-lines', {lines: zPlane, updatable: true}, scene);
-  xLineSystem.color = gridColor;
-  yLineSystem.color = gridColor;
-  zLineSystem.color = gridColor;
+  const gridColor3 = hexToColor3(gridColor);
+  xLineSystem.color = gridColor3;
+  yLineSystem.color = gridColor3;
+  zLineSystem.color = gridColor3;
 
   const colorGen = colorGenerator(colors);
   scene.clearColor = colorGen.next().value;
