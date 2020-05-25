@@ -48,6 +48,7 @@ import * as MX058 from './MX058';
 import * as MX059 from './MX059';
 import * as MX060 from './MX060';
 import * as MX061 from './MX061';
+import * as MX062 from './MX062';
 import * as RM001 from './RM001';
 import * as ROOM001A from './ROOM001A';
 import * as ROOM001 from './ROOM001';
@@ -249,6 +250,10 @@ export const mixConfigs = {
   MX061: {
     id: 'MX061',
     ...MX061,
+  },
+  MX062: {
+    id: 'MX062',
+    ...MX062,
   },
   RM001: {
     id: 'RM001',

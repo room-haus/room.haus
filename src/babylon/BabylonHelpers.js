@@ -244,5 +244,12 @@ export const initCamera = (scene, canvas) => {
   camera.setTarget(new BABYLON.Vector3(0, 0, 0));
   camera.attachControl(canvas);
   scene.activeCamera = camera;
+  const spotlight = new BABYLON.SpotLight('spotlight', camera.position, camera.cameraDirection, Math.PI / 3, 2, scene);
+  spotlight.intensity = 1;
+  spotlight.diffuse = BABYLON.Color3.White();
+  scene.registerBeforeRender(() => {
+    spotlight.position = camera.position;
+    spotlight.direction = camera.cameraDirection;
+  });
   return scene;
 };
