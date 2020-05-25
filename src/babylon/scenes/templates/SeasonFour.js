@@ -1,5 +1,5 @@
 import * as BABYLON from 'babylonjs';
-import {makeGridGroup} from '../../BabylonHelpers';
+import {hexToColor3} from '../../BabylonHelpers';
 // import {scaleLinear, interpolate} from 'd3';
 
 function* colorGenerator(colors = []) {
@@ -13,14 +13,13 @@ function* colorGenerator(colors = []) {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const build = ({scene, audio}) => {
+export const builder = ({backgroundColors = [], gridColor} = {}) => ({scene, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
 
-  // const grid = makeGridGroup(scene, BABYLON.Color3.White());
-  const colors = [BABYLON.Color3.White(), BABYLON.Color3.Red(), BABYLON.Color3.Green(), BABYLON.Color3.Blue()];
+  const colors = backgroundColors.map(hexToColor3);
   const generateLines = (size, density = 1) => {
     const xPlane = [];
     const yPlane = [];
@@ -41,14 +40,15 @@ export const build = ({scene, audio}) => {
   const xLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('x-lines', {lines: xPlane, updatable: true}, scene);
   const yLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('y-lines', {lines: yPlane, updatable: true}, scene);
   const zLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('z-lines', {lines: zPlane, updatable: true}, scene);
-  const colorGen = colorGenerator(colors);
+  xLineSystem.color = gridColor;
+  yLineSystem.color = gridColor;
+  zLineSystem.color = gridColor;
 
+  const colorGen = colorGenerator(colors);
+  scene.clearColor = colorGen.next().value;
   audio.startWorklet();
   audio.setOnsetCallback(() => {
-    const color = colorGen.next().value;
-    xLineSystem.color = color;
-    yLineSystem.color = color;
-    zLineSystem.color = color;
+    scene.clearColor = colorGen.next().value;
   });
 
   // const glowLayer = new BABYLON.GlowLayer('glow', scene, {
