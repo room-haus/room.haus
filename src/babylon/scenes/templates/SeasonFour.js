@@ -22,26 +22,33 @@ export const build = ({scene, audio}) => {
   // const grid = makeGridGroup(scene, BABYLON.Color3.White());
   const colors = [BABYLON.Color3.White(), BABYLON.Color3.Red(), BABYLON.Color3.Green(), BABYLON.Color3.Blue()];
   const generateLines = (size, density = 1) => {
-    const lines = [];
+    const xPlane = [];
+    const yPlane = [];
+    const zPlane = [];
     for (let y = -size / 2; y < size / 2; y += density) {
-      lines.push([new BABYLON.Vector3(-4, y, -size), new BABYLON.Vector3(-4, y, size)]);
-      lines.push([new BABYLON.Vector3(4, y, -size), new BABYLON.Vector3(4, y, size)]);
+      xPlane.push([new BABYLON.Vector3(-4, y, -size), new BABYLON.Vector3(-4, y, size)]);
+      xPlane.push([new BABYLON.Vector3(4, y, -size), new BABYLON.Vector3(4, y, size)]);
 
-      lines.push([new BABYLON.Vector3(y, -4, -size), new BABYLON.Vector3(y, -4, size)]);
-      lines.push([new BABYLON.Vector3(y, 4, -size), new BABYLON.Vector3(y, 4, size)]);
+      yPlane.push([new BABYLON.Vector3(y, -4, -size), new BABYLON.Vector3(y, -4, size)]);
+      yPlane.push([new BABYLON.Vector3(y, 4, -size), new BABYLON.Vector3(y, 4, size)]);
 
-      lines.push([new BABYLON.Vector3(-size, y, -4), new BABYLON.Vector3(size, y, -4)]);
-      lines.push([new BABYLON.Vector3(-size, y, 4), new BABYLON.Vector3(size, y, 4)]);
+      zPlane.push([new BABYLON.Vector3(-size, y, -4), new BABYLON.Vector3(size, y, -4)]);
+      zPlane.push([new BABYLON.Vector3(-size, y, 4), new BABYLON.Vector3(size, y, 4)]);
     }
-    return lines;
+    return {xPlane, yPlane, zPlane};
   };
-  const lines = generateLines(100, 1);
-  const lineSystem = new BABYLON.MeshBuilder.CreateLineSystem('lines', {lines, updatable: true}, scene);
+  const {xPlane, yPlane, zPlane} = generateLines(100, 1);
+  const xLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('x-lines', {lines: xPlane, updatable: true}, scene);
+  const yLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('y-lines', {lines: yPlane, updatable: true}, scene);
+  const zLineSystem = new BABYLON.MeshBuilder.CreateLineSystem('z-lines', {lines: zPlane, updatable: true}, scene);
   const colorGen = colorGenerator(colors);
 
   audio.startWorklet();
   audio.setOnsetCallback(() => {
-    lineSystem.color = colorGen.next().value;
+    const color = colorGen.next().value;
+    xLineSystem.color = color;
+    yLineSystem.color = color;
+    zLineSystem.color = color;
   });
 
   // const glowLayer = new BABYLON.GlowLayer('glow', scene, {
@@ -49,9 +56,9 @@ export const build = ({scene, audio}) => {
   //   blurKernelSize: 32,
   // });
   scene.registerBeforeRender(() => {
-    lineSystem.rotation.x += 0.0002;
-    lineSystem.rotation.y += 0.0003;
-    lineSystem.rotation.z += 0.0001;
+    xLineSystem.rotation.x += 0.002;
+    yLineSystem.rotation.y += 0.003;
+    zLineSystem.rotation.z += 0.001;
   });
   // const skybox = BABYLON.Mesh.CreateBox('skyBox', 100.0, scene);
   // const skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene);
@@ -64,13 +71,6 @@ export const build = ({scene, audio}) => {
   // skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
   // skyboxMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.2, 0.3);
   // skybox.material = skyboxMaterial;
-  // for (let i = 0; i < 50; i++) {
-  //   const cube = new BABYLON.Mesh.CreateBox('box' + i, Math.random() * 10, scene, true);
-  //   cube.position = new BABYLON.Vector3(Math.random() * 3, Math.random() * 3, Math.random() * 3);
-  //   cube.enableEdgesRendering();
-  //   cube.edgesWidth = 2.0;
-  //   cube.edgesColor = new BABYLON.Color3(1, 1, 1);
-  // }
 
   return scene;
 };
