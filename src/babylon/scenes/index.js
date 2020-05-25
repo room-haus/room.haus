@@ -49,6 +49,18 @@ import * as MX059 from './MX059';
 import * as MX060 from './MX060';
 import * as MX061 from './MX061';
 import * as MX062 from './MX062';
+import * as MX063 from './MX063';
+import * as MX064 from './MX064';
+import * as MX065 from './MX065';
+import * as MX066 from './MX066';
+import * as MX067 from './MX067';
+import * as MX068 from './MX068';
+import * as MX069 from './MX069';
+import * as MX070 from './MX070';
+import * as MX071 from './MX071';
+import * as MX072 from './MX072';
+import * as MX073 from './MX073';
+
 import * as RM001 from './RM001';
 import * as ROOM001A from './ROOM001A';
 import * as ROOM001 from './ROOM001';
@@ -254,6 +266,50 @@ export const mixConfigs = {
   MX062: {
     id: 'MX062',
     ...MX062,
+  },
+  MX063: {
+    id: 'MX063',
+    ...MX063,
+  },
+  MX064: {
+    id: 'MX064',
+    ...MX064,
+  },
+  MX065: {
+    id: 'MX065',
+    ...MX065,
+  },
+  MX066: {
+    id: 'MX066',
+    ...MX066,
+  },
+  MX067: {
+    id: 'MX067',
+    ...MX067,
+  },
+  MX068: {
+    id: 'MX068',
+    ...MX068,
+  },
+  MX069: {
+    id: 'MX069',
+    ...MX069,
+  },
+  MX070: {
+    id: 'MX070',
+    ...MX070,
+  },
+  MX071: {
+    id: 'MX071',
+    ...MX071,
+  },
+  MX072: {
+    id: 'MX072',
+    ...MX072,
+  },
+  MX073: {
+    id: 'MX073',
+    ...MX073,
   },
   RM001: {
     id: 'RM001',
