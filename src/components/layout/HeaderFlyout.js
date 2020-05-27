@@ -28,6 +28,8 @@ const Flyout = styled.div`
   backdrop-filter: blur(30px);
   width: 100%;
   color: #f5f6f6;
+  max-height: 50vh;
+  overflow-y: auto;
 `;
 
 const Main = styled.div`
