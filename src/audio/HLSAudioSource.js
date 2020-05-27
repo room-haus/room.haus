@@ -104,13 +104,10 @@ export default class HLSAudioSource {
 
   setOnsetCallback(func) {
     this.onsetCallback = func;
+    if (this.bpmAnalyzerNode) {
+      this.bpmAnalyzerNode.onsetCallback = func;
+    }
   }
-
-  // setODFUpdateCallback(func) {
-  //   if (this.bpmAnalyzerNode) {
-  //     this.bpmAnalyzerNode.onMessage = func;
-  //   }
-  // }
 
   percentCompletion() {
     return this.audio ? this.audio.currentTime / this.audio.duration : 0;
