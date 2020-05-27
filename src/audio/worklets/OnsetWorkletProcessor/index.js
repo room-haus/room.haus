@@ -107,6 +107,8 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
     this.threshold = 0;
     this.highestPeak = 0;
     this.perf = [];
+    this.framesSinceDetect = 0;
+    this.DETECT_THROTTLE = 10;
   }
 
   energyODF() {
@@ -144,7 +146,12 @@ class OnsetWorkletProcesser extends AudioWorkletProcessor {
       this.updateFrames();
       const odf = this.mode === 'SPECTRAL_DIFFERENCE' ? this.spectralDifferenceODF() : this.energyODF();
       const threshold = this.calculateThreshold();
-      const isPreviousPeak = this.isPreviousOnset();
+      const isPreviousPeak = this.isPreviousOnset() && this.framesSinceDetect >= this.DETECT_THROTTLE;
+      if (isPreviousPeak) {
+        this.framesSinceDetect = 0;
+      } else {
+        this.framesSinceDetect++;
+      }
       this.port.postMessage({odf, threshold, isPreviousPeak, debug: false});
     }
     return true;

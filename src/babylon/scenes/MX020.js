@@ -14,19 +14,6 @@ export const build = ({scene}) => {
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
   return scene;
-  // scene.clearColor = new BABYLON.Color3(0.5, 0.5, 0.5);
-
-  // console.log(scene.meshes.map((mesh) => mesh.name));
-
-  // const headMesh = scene.getMeshByName('default');
-  // headMesh.createNormals(true);
-  // // headMesh.applyDisplacementMap(DisplacementMap, 0, 0.5);
-  // headMesh.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
-  // headMesh.position = new BABYLON.Vector3(0, -0.5, 0);
-  // const CD = scene.getMeshByName('CDChassis');
-  // CD.getChildren().forEach((child) => (child.renderingGroupId = 1));
-
-  // return scene;
 };
 
 const Container = styled.div`

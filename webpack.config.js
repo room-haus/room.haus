@@ -57,7 +57,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.(babylon|dds|manifest)$/,
+          test: /\.(babylon|dds|manifest|env)$/,
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',

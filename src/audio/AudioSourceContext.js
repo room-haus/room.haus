@@ -7,7 +7,7 @@ export const Context = React.createContext({
   audio: new HLSAudioSource(),
 });
 
-export default ({children}) => {
+export default (props) => {
   const [state, setState] = useState(() => {
     const context = new AudioContext();
     const audio = new HLSAudioSource({
@@ -26,7 +26,7 @@ export default ({children}) => {
     };
   });
 
-  return <Context.Provider value={state}>{children}</Context.Provider>;
+  return <Context.Provider value={state} {...props} />;
 };
 
 export const useAudioContext = () => {

@@ -2,16 +2,15 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 // import Helmet from 'react-helmet';
-import AudioSourceContext from 'src/audio/AudioSourceContext';
-import MixMetaContext from 'src/components/SceneViewer/MixMetaContext';
 import MixHeader from 'src/components/MixCatalog/MixHeader';
 
 const Screen = styled.div`
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100vh;
 `;
 
 const SiteContainer = styled.div`
@@ -31,6 +30,7 @@ const SiteContainer = styled.div`
 const Viewport = styled.div`
   grid-area: viewport;
   position: relative;
+  overflow-y: ${({fixToViewport}) => (fixToViewport ? 'hide' : 'auto')};
 `;
 
 const SiteHeader = styled(MixHeader)`
@@ -41,22 +41,23 @@ const SiteLayout = ({children, mixSceneMode}) => {
   return (
     <>
       {/* <Helmet title="ROOM" meta={[{name: 'description', content: 'Virtual Imprints'}]} /> */}
-      <AudioSourceContext>
-        <MixMetaContext>
-          <Screen>
-            <SiteContainer fixToViewport={mixSceneMode}>
-              <SiteHeader disableFlyout={!mixSceneMode} />
-              <Viewport>{children}</Viewport>
-            </SiteContainer>
-          </Screen>
-        </MixMetaContext>
-      </AudioSourceContext>
+      <Screen>
+        <SiteContainer fixToViewport={mixSceneMode}>
+          <SiteHeader disableFlyout={!mixSceneMode} />
+          <Viewport fixToViewport={mixSceneMode}>{children}</Viewport>
+        </SiteContainer>
+      </Screen>
     </>
   );
 };
 
+SiteLayout.defaultProps = {
+  mixSceneMode: false,
+};
+
 SiteLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  mixSceneMode: PropTypes.bool,
 };
 
 export default SiteLayout;

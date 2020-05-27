@@ -8,6 +8,7 @@ export default (canvas) => {
     if (canvas.current) {
       manager.init(canvas.current);
     }
+    return () => manager.cleanUp();
   }, [canvas]);
 
   return manager;

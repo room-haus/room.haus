@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {useAudioContext} from 'src/audio/AudioSourceContext';
 import useIntervalCallback from 'src/components/hooks/useIntervalCallback';
 import Oscilliscope from 'src/audio/visualizations/Oscilliscope';
-import {useMixMetaContext} from '../SceneViewer/MixMetaContext';
+import {useContentMetaContext} from '../SceneViewer/ContentMetaContext';
 import PlayButton from './PlayButton';
 
 const OscilliscopeContainer = styled.div`
@@ -74,7 +74,7 @@ const MediaMetaContainer = styled.div`
 `;
 
 const MediaMetaWrapper = styled.div`
-  color: #262525;
+  /* color: #262525; */
   font-size: 1em;
   line-height: 1em;
   display: flex;
@@ -112,17 +112,19 @@ const PlayheadProgressBar = styled.div`
   position: absolute;
   bottom: 0;
   top: 0;
-  opacity: 0.1;
+  opacity: 0.2;
   background-color: ${({color}) => color || '#53ef8d'};
   width: ${(props) => Math.round(props.progress * 100)}%;
   border: none !important;
   pointer-events: none;
 `;
 
+const color = 'rgba(245, 245, 245, 0.7)';
 const Controls = styled.div`
   flex-grow: 2;
   cursor: pointer;
-  border: 1px solid rgba(19, 18, 20, 0.7);
+  /* border: 1px solid rgba(19, 18, 20, 0.7); */
+  border: 1px solid ${color};
   display: grid;
   grid-template-columns: minmax(45px, 1fr) 8fr;
   grid-template-rows: minmax(3em, 5vh);
@@ -136,7 +138,7 @@ const Controls = styled.div`
   }
 
   * + * {
-    border-left: 1px solid rgba(19, 18, 20, 0.7);
+    border-left: 1px solid ${color};
   }
 `;
 
@@ -178,7 +180,7 @@ const useMousePerc = (ref) => {
 };
 
 const MediaMeta = () => {
-  const {meta} = useMixMetaContext();
+  const {meta} = useContentMetaContext();
   return (
     <MediaMetaContainer>
       <MediaImage src={meta.art} />
@@ -211,7 +213,7 @@ const AudioControls = ({audio}) => {
       <PlayButton handleClick={callback} playing={isAudioPlaying} readyForPlayback={isAudioReady} />
       <OscilliscopeContainer innerRef={oscRef} onClick={setPercentage} disabled={!isAudioReady}>
         <Oscilliscope source={audio} />
-        <PlayheadProgressBar progress={audio.percentCompletion()} color="#121212" />
+        <PlayheadProgressBar progress={audio.percentCompletion()} color="#FFF" />
       </OscilliscopeContainer>
     </Controls>
   );

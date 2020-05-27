@@ -11,7 +11,8 @@ const OscilliscopeCanvas = styled.canvas`
 export default class Oscilloscope extends React.Component {
   constructor(props) {
     super(props);
-    this.color = '#131214';
+    // this.color = '#131214';
+    this.color = '#f5f5f5';
     this.lineWidth = 1;
 
     this.container = React.createRef();

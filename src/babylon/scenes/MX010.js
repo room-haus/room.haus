@@ -25,7 +25,7 @@ export const build = ({scene, engine, audio}) => {
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
 
-  const parent = scene.getMeshByName('CDChassis');
+  const parent = scene.getTransformNodeByName('CDChassis');
   gl.addExcludedMesh(parent);
 
   const color = new BABYLON.Color4(231 / 255, 12 / 255, 10 / 255, 1);

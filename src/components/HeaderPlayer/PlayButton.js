@@ -15,16 +15,20 @@ const PlayButtonWrapper = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  color: #f5f5f5;
 
   ${({highlight}) =>
     highlight &&
     css`
       @keyframes shadow-pulse {
         0% {
-          box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 0 0px rgba(245, 245, 245, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 0 4px rgba(245, 245, 245, 0.5);
         }
         100% {
-          box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+          box-shadow: 0 0 0 0px rgba(245, 245, 245, 0.2);
         }
       }
 

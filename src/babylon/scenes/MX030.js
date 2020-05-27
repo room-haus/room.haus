@@ -58,7 +58,7 @@ const makeParticles = (scene, mesh, particleCount) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
-  const CD = scene.getMeshByName('CDChassis');
+  const CD = scene.getTransformNodeByName('CDChassis');
   const cdLabel = scene.getMeshByName('CDLabel');
   cdLabel.position.addInPlace(new BABYLON.Vector3(-0.5, -0.3, 0));
   // Make sure the CD is rendered in front of everything else i.e. top layer

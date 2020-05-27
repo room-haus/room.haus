@@ -1,49 +1,52 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {Header, HeaderItem} from 'src/components/layout/Header';
 import RoomLogo from 'src/images/logo.png';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSoundcloud, faInstagram} from '@fortawesome/free-brands-svg-icons';
-import EmailSVG from './envelope-light.svg';
 
 const RoomIcon = styled.img`
   object-fit: contain;
   margin: 0;
-  width: 50%;
+  width: 92%;
   max-width: 200px;
 `;
 
 const NavItems = styled.div`
   font-size: 5vmin;
-`;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 
-const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 3vw;
-  margin: 0;
-  vertical-align: middle;
-`;
+  a.active {
+    text-decoration: underline;
+  }
 
-const EmailIcon = styled.div`
-  background-image: url(${EmailSVG});
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  height: 3vw;
-  width: 3vw;
-  display: inline-block;
-  vertical-align: middle;
+  a {
+    color: inherit;
+  }
 `;
 
 const SocialLink = styled.a`
   text-decoration: none;
   color: inherit;
+  font-size: 1em;
 `;
 
 const SocialIcons = styled(HeaderItem)`
   * + * {
     margin-left: 2vw;
+  }
+
+  @media (max-width: 700px) {
+    * + * {
+      margin-left: 0;
+    }
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    display: flex;
+    flex-direction: column;
+    font-size: 2vw;
   }
 `;
 
@@ -77,7 +80,7 @@ export default ({tactile}) => {
   return (
     <Header>
       <HeaderItem position="left">
-        <Link to="/mixes/">
+        <Link to={({pathname}) => `/${pathname.split('/').filter((x) => x !== '')[0]}/`}>
           <RoomIcon src={RoomLogo} alt="Room logo" />
         </Link>
       </HeaderItem>
@@ -86,19 +89,22 @@ export default ({tactile}) => {
           <Tactiles />
         ) : (
           <NavItems>
-            <span>MIXES</span>
+            <NavLink to="/mixes/">
+              <span>MIXES</span>
+            </NavLink>
+            <NavLink to="/releases/">
+              <span>RELEASES</span>
+            </NavLink>
           </NavItems>
         )}
       </HeaderItem>
       <SocialIcons position="right">
-        <SocialLink href="mailto:info@room.haus">
-          <EmailIcon />
-        </SocialLink>
+        <SocialLink href="mailto:info@room.haus">email</SocialLink>
         <SocialLink href="https://soundcloud.com/room-haus" target="_blank" rel="noopener noreferrer">
-          <StyledIcon icon={faSoundcloud} />
+          soundcloud
         </SocialLink>
         <SocialLink href="https://www.instagram.com/room.haus/" target="_blank" rel="noopener noreferrer">
-          <StyledIcon icon={faInstagram} />
+          instagram
         </SocialLink>
       </SocialIcons>
     </Header>

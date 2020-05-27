@@ -4,7 +4,7 @@ import {forceIterable} from 'src/utils/CollectionHelpers';
 import CDModel from './models/CD/CD.babylon';
 import './models/CD/CD.babylon.manifest';
 import EnvironmentDDS from './textures/EnvironmentSpecularHDR.dds';
-import 'src/babylon/textures/environment.dds';
+// import 'src/babylon/textures/environment.dds';
 
 export class MeshGroup {
   constructor(name, scene, children = []) {
@@ -154,11 +154,10 @@ export const makeStreak = (scene, parent, updateCallback) => {
 };
 
 export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
-  const CDChassis = new BABYLON.Mesh.CreateBox('CDChassis', 1, scene);
+  const CDChassis = new BABYLON.TransformNode('CDChassis', scene);
   meshes.forEach((mesh) => {
     mesh.parent = CDChassis;
   });
-  CDChassis.isVisible = false;
   CDChassis.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
   CDChassis.position = new BABYLON.Vector3(0, 0, 0);
 
@@ -182,7 +181,8 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   const cdLabel = scene.getMeshByName('CDLabel');
   if (cdLabelTexture) {
-    cdLabel.material.opacityTexture = new BABYLON.Texture(cdLabelTexture, scene);
+    const cdTexture = new BABYLON.Texture(cdLabelTexture, scene);
+    cdLabel.material.opacityTexture = cdTexture;
     cdLabel.rotate(BABYLON.Axis.Y, Math.PI);
     cdLabel.rotate(BABYLON.Axis.Z, Math.PI);
     cdLabel.material.backFaceCulling = false;
@@ -196,6 +196,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   const cdCaseBack = scene.getMeshByName('BackPlastic');
 
   const plastic = new BABYLON.PBRMaterial('plastic', scene);
+  plastic.clearCoat.isEnabled = true;
   cdCaseFront.material = plastic;
   cdCaseBack.material = plastic;
 
@@ -242,5 +243,25 @@ export const initCamera = (scene, canvas) => {
   camera.setTarget(new BABYLON.Vector3(0, 0, 0));
   camera.attachControl(canvas);
   scene.activeCamera = camera;
+  const spotlight = new BABYLON.SpotLight('spotlight', camera.position, camera.cameraDirection, Math.PI / 3, 2, scene);
+  spotlight.intensity = 1;
+  spotlight.diffuse = BABYLON.Color3.White();
+  scene.registerBeforeRender(() => {
+    spotlight.position = camera.position;
+    spotlight.direction = camera.cameraDirection;
+  });
   return scene;
+};
+
+export const hexToColor3 = (_hex) => {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const hex = _hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const {r, g, b} = {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16),
+  };
+  return new BABYLON.Color3(r / 255, g / 255, b / 255);
 };

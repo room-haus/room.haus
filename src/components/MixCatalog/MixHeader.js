@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import CatalogList from 'src/components/MixCatalog/CatalogList';
-import {mixes} from 'src/mixes';
+import {getContentList} from 'src/content';
 import HeaderPlayer from 'src/components/HeaderPlayer';
 import {useAudioContext} from 'src/audio/AudioSourceContext';
+import {useContentMetaContext} from 'src/components/SceneViewer/ContentMetaContext';
 import HeaderFlyout from '../layout/HeaderFlyout';
 import CatalogHeader from './CatalogHeader';
 
 const CarouselContainer = styled.div`
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
   top: 4.5em;
   left: 0;
   width: 100%;
@@ -25,20 +26,64 @@ const Flyout = () => (
     <HeaderPlayer />
     <CarouselContainer>
       <Divider />
-      <CatalogList mixes={mixes} density={2} fadeOnHover />
+      <CatalogList content={getContentList('mix')} density={2} fadeOnHover />
     </CarouselContainer>
   </>
 );
 
-export default ({disableFlyout, ...props}) => {
+const TrackList = styled.ul`
+  margin: 0 3%;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  li {
+    font-size: 3vw;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    line-height: 1em;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  li.active {
+    border: 1px solid;
+  }
+`;
+const TrackSelect = () => {
+  const {meta, setTrackIndex, trackIndex} = useContentMetaContext();
+  const tracks = meta.tracks || [];
+  return (
+    <>
+      <HeaderPlayer />
+      <CarouselContainer>
+        <Divider />
+        <TrackList>
+          {tracks.map((t, index) => (
+            <li key={t.name} className={trackIndex === index ? 'active' : ''} onClick={() => setTrackIndex(index)}>
+              {t.name}
+            </li>
+          ))}
+        </TrackList>
+      </CarouselContainer>
+    </>
+  );
+};
+
+export default ({disableFlyout, contentViewType, ...props}) => {
+  const flyout = contentViewType === 'release' ? TrackSelect : Flyout;
   const {ready} = useAudioContext();
   return (
     <HeaderFlyout
       {...props}
       MainComponent={Main}
-      FlyoutComponent={Flyout}
-      forceActive={!ready}
+      FlyoutComponent={flyout}
       disableFlyout={disableFlyout}
+      forceActive={!ready}
     />
   );
 };
