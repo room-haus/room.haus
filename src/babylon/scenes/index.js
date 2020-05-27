@@ -60,6 +60,7 @@ import * as MX070 from './MX070';
 import * as MX071 from './MX071';
 import * as MX072 from './MX072';
 import * as MX073 from './MX073';
+import * as MX074 from './MX074';
 
 import * as RM001 from './RM001';
 import * as ROOM001A from './ROOM001A';
@@ -310,6 +311,10 @@ export const mixConfigs = {
   MX073: {
     id: 'MX073',
     ...MX073,
+  },
+  MX074: {
+    id: 'MX074',
+    ...MX074,
   },
   RM001: {
     id: 'RM001',
