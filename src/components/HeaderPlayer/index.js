@@ -183,7 +183,13 @@ const MediaMeta = () => {
   const {meta} = useContentMetaContext();
   return (
     <MediaMetaContainer>
-      <MediaImage src={meta.art} />
+      {meta.purchaseLink ? (
+        <a target="_blank" rel="noopener noreferrer" href={meta.purchaseLink}>
+          <MediaImage src={meta.art} />
+        </a>
+      ) : (
+        <MediaImage src={meta.art} />
+      )}
       <MediaMetaWrapper>
         <MediaTitle>{meta.artist}</MediaTitle>
         <MediaTitle>

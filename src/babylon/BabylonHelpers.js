@@ -176,6 +176,7 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
   CDCover.material = cover;
 
   cover.roughness = 0.8;
+  // cover.emissiveTexture = new BABYLON.Texture(caseTexture, scene);
   cover.albedoTexture = new BABYLON.Texture(caseTexture, scene);
   cover.backFaceCulling = false;
 
@@ -265,3 +266,33 @@ export const hexToColor3 = (_hex) => {
   };
   return new BABYLON.Color3(r / 255, g / 255, b / 255);
 };
+
+export const rbgToColor3 = (str) => {
+  const [r, g, b] = str
+    .replace('rgb(', '')
+    .replace(')', '')
+    .split(',')
+    .map((x) => Number(x));
+  return new BABYLON.Color3(r, g, b);
+};
+
+export const stringToColor3 = (str) => {
+  if (str.startsWith('#')) {
+    return hexToColor3(str);
+  }
+  if (str.startsWith('rgb(')) {
+    return rbgToColor3(str);
+  }
+  throw Error(`Invalid color string format: ${str}`);
+};
+
+export function* colorGenerator(_colors = []) {
+  const colors = _colors.map(stringToColor3);
+  let index = 0;
+  while (true) {
+    if (index >= colors.length) {
+      index = 0;
+    }
+    yield colors[index++];
+  }
+}

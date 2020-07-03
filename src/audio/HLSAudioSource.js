@@ -92,6 +92,9 @@ export default class HLSAudioSource {
     } else {
       this.audio.src = this.manifestUrl;
     }
+    if (this.bpmAnalyzerNode) {
+      this.bpmAnalyzerNode.resume();
+    }
     if (autoplay) {
       this.toggle();
     }
