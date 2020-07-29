@@ -37,10 +37,23 @@ export const releases = [
   {
     id: 'ROOM002',
     art: art.RM002,
-    label: labels.MX001,
     artist: 'VistaVision',
     catalogueNumber: 'ROOM002',
     slug: 'ROOM002-VISTA-VISION-SUN',
+    purchaseLink: 'http://vistavision-room.bandcamp.com/album/s-u-n-room002',
+    tracks: [
+      {name: 'Commitment Issues', streamURL: `${BASE_URL}ROOM002/audio/commitment-issues.m3u8`},
+      {name: 'So', streamURL: `${BASE_URL}ROOM002/audio/so.m3u8`},
+      {name: 'S.U.N.', streamURL: `${BASE_URL}ROOM002/audio/sun.m3u8`},
+      {name: 'Working Title', streamURL: `${BASE_URL}ROOM002/audio/working-title.m3u8`},
+    ],
+  },
+  {
+    id: 'ROOM003',
+    art: art.RM002,
+    artist: 'VistaVision',
+    catalogueNumber: 'ROOM003',
+    slug: 'ROOM003-VISTA-VISION-SUN',
     purchaseLink: 'http://vistavision-room.bandcamp.com/album/s-u-n-room002',
     tracks: [
       {name: 'Commitment Issues', streamURL: `${BASE_URL}ROOM002/audio/commitment-issues.m3u8`},

@@ -177,6 +177,9 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 
   cover.roughness = 0.8;
   // cover.emissiveTexture = new BABYLON.Texture(caseTexture, scene);
+  if (cover.albedoTexture) {
+    cover.albedoTexture.dispose();
+  }
   cover.albedoTexture = new BABYLON.Texture(caseTexture, scene);
   cover.backFaceCulling = false;
 

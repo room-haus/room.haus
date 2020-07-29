@@ -73,4 +73,7 @@ export {default as MX072} from './cd_template_MX072.png';
 export {default as MX073} from './cd_template_MX073.png';
 export {default as MX074} from './cd_template_MX074.png';
 export {default as MX075} from './cd_template_MX075.png';
+export {default as MX076} from './cd_template_MX076.png';
+export {default as MX077} from './cd_template_MX077.png';
+export {default as MX078} from './cd_template_MX078.png';
 export {default as RM001A} from './cd_template_RM001A.png';
