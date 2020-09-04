@@ -3,11 +3,7 @@ const FRAME_WINDOW_SIZE = 100;
 const SLEEP_AMOUNT = 300;
 
 export default class AudioBand {
-  constructor(
-    ctx,
-    clip,
-    {lowPass, highPass, callback, threshold, sleepDuration},
-  ) {
+  constructor(ctx, clip, {lowPass, highPass, callback, threshold, sleepDuration}) {
     this.ctx = ctx;
 
     this.clip = clip;
@@ -62,27 +58,22 @@ export default class AudioBand {
     }
     const buffer = this.getFrequencyData();
     const filteredBuffer = buffer.filter((slice) => slice);
-    const frame =
-      filteredBuffer.reduce((total, slice) => total + slice, 0) /
-      (filteredBuffer.length || 1);
+    const frame = filteredBuffer.reduce((total, slice) => total + slice, 0) / (filteredBuffer.length || 1);
     if (this.threshold) {
       if (frame >= this.threshold) {
         this.trigger(frame);
       }
       return;
-    } else {
-      if (this.average < frame) {
-        this.trigger(frame);
-      }
-      if (this.frames.length >= FRAME_WINDOW_SIZE) {
-        this.frames.shift();
-      }
-      this.frames.push(frame);
-      this.average =
-        this.frames.reduce((total, _frame) => total + _frame, 0) /
-        this.frames.length;
-      // console.log(this.average, frame, this.frames.length);
     }
+    if (this.average < frame) {
+      this.trigger(frame);
+    }
+    if (this.frames.length >= FRAME_WINDOW_SIZE) {
+      this.frames.shift();
+    }
+    this.frames.push(frame);
+    this.average = this.frames.reduce((total, _frame) => total + _frame, 0) / this.frames.length;
+    // console.log(this.average, frame, this.frames.length);
   }
 
   getFrequencyData() {

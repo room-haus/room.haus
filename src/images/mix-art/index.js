@@ -79,3 +79,4 @@ export {default as MX078} from './mx078.jpg';
 export {default as RM001} from './rm001.jpg';
 export {default as RM001A} from './rm001A.jpg';
 export {default as RM002} from './rm002.jpg';
+export {default as RM003} from './rm003.jpg';

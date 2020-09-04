@@ -205,15 +205,6 @@ const generateWater = (scene, renderList = []) => {
   // light.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.7);
 };
 
-const rbgToColor3 = (str) => {
-  const [r, g, b] = str
-    .replace('rgb(', '')
-    .replace(')', '')
-    .split(',')
-    .map((x) => Number(x));
-  return new BABYLON.Color3(r, g, b);
-};
-
 // eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
   const CD = scene.getTransformNodeByName('CDChassis');

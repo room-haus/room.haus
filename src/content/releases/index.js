@@ -50,16 +50,18 @@ export const releases = [
   },
   {
     id: 'ROOM003',
-    art: art.RM002,
+    art: art.RM003,
     artist: 'VistaVision',
     catalogueNumber: 'ROOM003',
-    slug: 'ROOM003-VISTA-VISION-SUN',
-    purchaseLink: 'http://vistavision-room.bandcamp.com/album/s-u-n-room002',
+    slug: 'ROOM003-VISTA-VISION-SUN-REMIXES',
+    purchaseLink: 'https://vistavision-room.bandcamp.com/album/s-u-n-remixes-room003',
     tracks: [
-      {name: 'Commitment Issues', streamURL: `${BASE_URL}ROOM002/audio/commitment-issues.m3u8`},
-      {name: 'So', streamURL: `${BASE_URL}ROOM002/audio/so.m3u8`},
-      {name: 'S.U.N.', streamURL: `${BASE_URL}ROOM002/audio/sun.m3u8`},
-      {name: 'Working Title', streamURL: `${BASE_URL}ROOM002/audio/working-title.m3u8`},
+      {name: 'So (DJ Nativesun Remix)', streamURL: `${BASE_URL}ROOM003/audio/so-(nativesun-remix).m3u8`},
+      {name: 'Working Title (Mr.Fade Remix)', streamURL: `${BASE_URL}ROOM003/audio/working-title-(mr-fade-remix).m3u8`},
+      {
+        name: "Commitment Issues (l'enfant Remix)",
+        streamURL: `${BASE_URL}ROOM003/audio/commitment-Issues-(l'enfant-remix).m3u8`,
+      },
     ],
   },
 ];

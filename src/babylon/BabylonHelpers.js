@@ -270,12 +270,12 @@ export const hexToColor3 = (_hex) => {
   return new BABYLON.Color3(r / 255, g / 255, b / 255);
 };
 
-export const rbgToColor3 = (str) => {
+export const rgbToColor3 = (str) => {
   const [r, g, b] = str
     .replace('rgb(', '')
     .replace(')', '')
     .split(',')
-    .map((x) => Number(x));
+    .map((x) => Number(x) / 255);
   return new BABYLON.Color3(r, g, b);
 };
 
@@ -284,7 +284,7 @@ export const stringToColor3 = (str) => {
     return hexToColor3(str);
   }
   if (str.startsWith('rgb(')) {
-    return rbgToColor3(str);
+    return rgbToColor3(str);
   }
   throw Error(`Invalid color string format: ${str}`);
 };

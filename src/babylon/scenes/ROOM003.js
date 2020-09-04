@@ -1,7 +1,11 @@
 import * as BABYLON from 'babylonjs';
-import CaseTexture from '../../images/mix-art/rm002.jpg';
-import CDLabelTexture from '../../images/mix-labels/cd_template_RM002.png';
-import {colorGenerator} from '../BabylonHelpers';
+import throttle from 'lodash/throttle';
+import {interpolateRainbow} from 'd3';
+import CaseTexture from '../../images/mix-art/rm003.jpg';
+import CDLabelTexture from '../../images/mix-labels/cd_template_RM003.png';
+import {stringToColor3} from '../BabylonHelpers';
+
+const getColor = (x) => stringToColor3(interpolateRainbow(x));
 
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
@@ -10,114 +14,96 @@ export const cdLabelTexture = CDLabelTexture;
 export const build = ({scene, engine, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);
-  const lol = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 0, 1), scene);
-  lol.intensity = 1;
+  const lol = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
+  lol.intensity = 5;
+  const lol2 = new BABYLON.HemisphericLight('light2', new BABYLON.Vector3(0, -1, 0), scene);
+  lol2.intensity = 5;
 
-  // const CD = scene.getTransformNodeByName('CDChassis');
-  // CD.getChildren().forEach((child) => {
-  //   child.material.emmissiveColor = new BABYLON.Color3(1, 1, 1);
-  // });
+  const gl = new BABYLON.GlowLayer('glow', scene);
+  gl.intensity = 1.5;
 
-  const camera = scene.activeCamera;
-
-  const createStrobe = (position, rotate) => {
-    // Create the "God Rays" effect (volumetric light scattering)
-    // const mesh = new BABYLON.MeshBuilder.CreateBox('sphere', {updatable: true}, scene);
-    // const mesh = new BABYLON.MeshBuilder.CreateSphere('sphere', {updatable: true}, scene);
-    const mesh = new BABYLON.MeshBuilder.CreatePlane('sphere', {updatable: true}, scene);
-    mesh.material = new BABYLON.StandardMaterial('sphere_mat', scene);
-    // mesh.material.diffuseColor = new BABYLON.Color3(0, 0, 0);
-    // mesh.material.backFaceCulling = false;
-    if (rotate) {
-      mesh.rotation.y = Math.PI;
-    }
-    mesh.material.diffuseTexture = new BABYLON.Texture(
-      'https://playground.babylonjs.com/textures/sun.png',
-      scene,
-      true,
-      false,
-      BABYLON.Texture.BILINEAR_SAMPLINGMODE,
-    );
-    mesh.material.diffuseTexture.hasAlpha = true;
-    const size = 50;
-    mesh.scaling = new BABYLON.Vector3(size, size, size);
-    mesh.position = position;
-
-    const godrays = new BABYLON.VolumetricLightScatteringPostProcess(
-      'godrays',
-      2.0,
-      camera,
-      mesh,
-      100,
-      BABYLON.Texture.BILINEAR_SAMPLINGMODE,
-      engine,
-      false,
-      scene,
-    );
-    godrays.exposure = 0.2;
-    godrays.decay = 0.96815;
-    godrays.weight = 0.58767;
-    godrays.density = 0.926;
-
-    godrays.useDiffuseColor = true;
-
-    const light = new BABYLON.PointLight('Omni', position, scene);
-
-    godrays.light = light;
-    return godrays;
-  };
-
-  const light = new BABYLON.PointLight('Omni', new BABYLON.Vector3(0, 0, -100), scene);
-  const strobes = [
-    createStrobe(new BABYLON.Vector3(0, 0, 100)),
-    // createStrobe(new BABYLON.Vector3(0, 0, -100), true),
-    // createStrobe(new BABYLON.Vector3(100, 0, 0)),
-    // createStrobe(new BABYLON.Vector3(-100, 0, 0)),
-    // createStrobe(new BABYLON.Vector3(0, 100, 0)),
-    // createStrobe(new BABYLON.Vector3(0, -100, 0)),
+  const path = [
+    new BABYLON.Vector3(-1.0, 0.0, 0.0),
+    new BABYLON.Vector3(0.0, 1, 0.0),
+    new BABYLON.Vector3(1.0, 0, 0.0),
+    new BABYLON.Vector3(0.0, -1, 0.0),
+    new BABYLON.Vector3(-1.0, 0.0, 0.0),
   ];
-  // const strobe = createStrobe(new BABYLON.Vector3(0, 0, 100));
 
-  const colors = colorGenerator(['#F1E201', '#FF0286', '#37BE02', '#2775FD']);
-  audio.startWorklet();
-  audio.setOnsetCallback(() => {
-    const color = colors.next().value;
-    // strobe.mesh.material.diffuseColor = color;
-    // scene.clearColor = color;
-    strobes.forEach((strobe) => {
-      strobe.mesh.material.diffuseColor = color;
-    });
+  const colors = new Array(path.length).fill(0).map(() => new BABYLON.Color4(1, 1, 1, 1));
+
+  const step = 1.0;
+  const zDepth = 25;
+
+  const squares = [];
+  const addShape = (shapeCount = 10, scale = 1) => {
+    for (let i = 0; i < shapeCount; i += 1) {
+      const square = BABYLON.MeshBuilder.CreateLines('tube', {points: path, colors, updatable: true}, scene);
+      square.material.emissiveColor = new BABYLON.Color3(1, 0.5, 0);
+      square.material.disableLighting = true;
+      square.material.alpha = 1;
+
+      square.idx = i;
+      square.originalPosZ = -square.idx * step;
+
+      square.position.z = -zDepth;
+      square.scaling = new BABYLON.Vector3(scale, scale, scale);
+
+      squares.push(square);
+    }
+  };
+  const addLow = throttle(() => addShape(1, 5), 100);
+  const addMid = throttle(() => addShape(1, 2), 300);
+
+  // addShapes(50);
+  // audio.startWorklet();
+  // audio.setOnsetCallback(() => {
+  //   console.log('YEET');
+  //   // addShapes(2);
+  // });
+  audio.makeBand('low', {
+    lowPass: 300,
+  });
+  audio.makeBand('clap', {
+    highPass: 5000,
+    lowPass: 10000,
   });
 
-  // let color = colorGenerator.next().value;
+  let time = 0;
+  const rate = 0.01;
+  scene.registerBeforeRender(() => {
+    // gl.intensity = audio.isPlaying() ? 1.5 : 0.5;
+    const energy = audio.getAverageAmplitude('low');
+    // console.log(energy);
+    if (energy > 140) {
+      addLow();
+    }
+    const clap = audio.getAverageFrequency('clap');
+    if (clap > 100) {
+      addMid();
+    }
+    for (let i = squares.length - 1; i >= 0; i--) {
+      const square = squares[i];
+      square.position.z += 0.1;
+      square.rotation.z = (Math.cos(time + square.idx * 0.1) * Math.PI) / 2;
+      if (square.position.z > zDepth) {
+        squares.splice(i, 1);
+        square.dispose();
+        // square.idx += squaresCount;
+        // square.originalPosZ = -square.idx * step;
+        // toRemove.push(square);
+      } else {
+        const percent = (square.position.z + zDepth) / (2 * zDepth);
+        const color = getColor(percent);
+        square.material.emissiveColor = color;
+        // BABYLON.Color3.HSVtoRGBToRef(magic, 1, 1, square.material.emissiveColor);
+        // square.material.emissiveColor.scaleToRef(1 - Math.sqrt(Math.abs(magic)), square.material.emissiveColor);
+      }
+    }
 
-  // audio.makeBand('low', {
-  //   lowPass: 90,
-  //   highPass: 30,
-  // });
-
-  // let t = 0;
-  // scene.registerBeforeRender(() => {
-  //   const lowAmp = audio.getAverageAmplitude('low');
-  //   const amount = (lowAmp - 120) / 20;
-  //   lol.intensity = amount * 3 || 1;
-
-  //   strobes.forEach((strobe) => {
-  //     strobe.exposure = amount * 0.3;
-  //     strobe.density = amount;
-  //     strobe.light.position = strobe.mesh.position;
-  //   });
-
-  //   // const size = ((lowAmp - 120) / 20) * 5;
-  //   // godrays.mesh.scaling = new BABYLON.Vector3(size, size, size);
-  //   // console.log(lowAmp, light.intensity);
-  //   // godrays.mesh.position.x = Math.sin(t) * 100;
-  //   // godrays.mesh.position.z = Math.cos(t) * 100;
-  //   // godrays.mesh.rotation.z += t / 100;
-  //   // godrays.mesh.rotation.y += t / 150;
-  //   // godrays.mesh.rotation.x += t / 250;
-  //   t += 0.002;
-  // });
+    // camera.fov = (Math.sin(time * 3) * 0.25 + 0.75) * 0.25 + 0.525;
+    time += scene.getAnimationRatio() * rate;
+  });
 
   return scene;
 };
