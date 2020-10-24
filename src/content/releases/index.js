@@ -64,6 +64,15 @@ export const releases = [
       },
     ],
   },
+  {
+    id: 'ROOM004',
+    art: art.RM004,
+    artist: 'SIR E.U & TOOTH CHOIR',
+    catalogueNumber: 'ROOM004',
+    slug: 'ROOM004-SIR-EU-TOOTH-CHOIR-ilikeit',
+    purchaseLink: 'https://roomdc.bandcamp.com/track/ilikeit-room004',
+    tracks: [{name: 'ilikeit', streamURL: `${BASE_URL}ROOM004/audio/ilikeit.m3u8`}],
+  },
 ];
 
 export const getRelease = (id) => releases.find((r) => id === r.id);

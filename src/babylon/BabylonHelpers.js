@@ -47,7 +47,7 @@ export class MeshGroup {
 //   return parent;
 // };
 
-export const createGrid = (scene, color, xpos) => {
+export const createGrid = (scene, color, xpos, thickness = 0.05) => {
   const density = 100;
   const size = 1000;
   var positionScale = scaleLinear()
@@ -62,7 +62,7 @@ export const createGrid = (scene, color, xpos) => {
     const gridLine = BABYLON.MeshBuilder.CreatePlane(
       `VerticalLine${index}`,
       {
-        width: 0.05,
+        width: thickness,
         height: size,
         updatable: true,
         sideOrientation: BABYLON.Mesh.DOUBLESIDE,
@@ -79,7 +79,7 @@ export const createGrid = (scene, color, xpos) => {
       `HorizontalLine${index}`,
       {
         width: size,
-        height: 0.05,
+        height: thickness,
         updatable: true,
         sideOrientation: BABYLON.Mesh.DOUBLESIDE,
       },

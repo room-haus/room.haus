@@ -9,6 +9,9 @@ const RoomIcon = styled.img`
   margin: 0;
   width: 92%;
   max-width: 200px;
+  @media (min-width: 1200px) {
+    padding-right: 5vw;
+  }
 `;
 
 const NavItems = styled.div`

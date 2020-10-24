@@ -180,7 +180,8 @@ const useMousePerc = (ref) => {
 };
 
 const MediaMeta = () => {
-  const {meta} = useContentMetaContext();
+  const {meta, trackIndex} = useContentMetaContext();
+  const name = meta.tracks ? meta.tracks[trackIndex].name : meta.name;
   return (
     <MediaMetaContainer>
       {meta.purchaseLink ? (
@@ -193,7 +194,7 @@ const MediaMeta = () => {
       <MediaMetaWrapper>
         <MediaTitle>{meta.artist}</MediaTitle>
         <MediaTitle>
-          <i>{meta.name}</i>
+          <i>{name}</i>
         </MediaTitle>
         <CatalougeNumber>{meta.catalogueNumber}</CatalougeNumber>
       </MediaMetaWrapper>

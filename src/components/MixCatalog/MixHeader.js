@@ -60,16 +60,18 @@ const TrackSelect = () => {
   return (
     <>
       <HeaderPlayer />
-      <CarouselContainer>
-        <Divider />
-        <TrackList>
-          {tracks.map((t, index) => (
-            <li key={t.name} className={trackIndex === index ? 'active' : ''} onClick={() => setTrackIndex(index)}>
-              {t.name}
-            </li>
-          ))}
-        </TrackList>
-      </CarouselContainer>
+      {tracks.length > 1 && (
+        <CarouselContainer>
+          <Divider />
+          <TrackList>
+            {tracks.map((t, index) => (
+              <li key={t.name} className={trackIndex === index ? 'active' : ''} onClick={() => setTrackIndex(index)}>
+                {t.name}
+              </li>
+            ))}
+          </TrackList>
+        </CarouselContainer>
+      )}
     </>
   );
 };
