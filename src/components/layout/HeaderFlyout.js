@@ -84,7 +84,7 @@ const HeaderFlyout = (props) => {
       <Main innerRef={mainRef} onTouchStart={touchHandler}>
         <MainComponent tactile={!disableFlyout} />
       </Main>
-      {/* {!disableFlyout && (
+      {!disableFlyout && (
         <Flyout
           innerRef={flyoutRef}
           active={(isUsingMouse && isHovering) || active || forceActive}
@@ -92,7 +92,7 @@ const HeaderFlyout = (props) => {
           <FlyoutComponent />
         </Flyout>
       )}
-      {!disableFlyout && isUsingMouse && <HoverZone height={`${Math.round(hoverHeight)}px`} />} */}
+      {!disableFlyout && isUsingMouse && <HoverZone height={`${Math.round(hoverHeight)}px`} />}
     </FlyoutContainer>
   );
 };

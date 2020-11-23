@@ -46,30 +46,29 @@ export const builder = ({scene}) => {
   material.diffuseColor = new BABYLON.Color3(1, 1, 1);
   background.parent = camera;
   background.material = material;
-
   background.receiveShadows = true;
   light.excludedMeshes.push(background);
 
-  // const water = BABYLON.MeshBuilder.CreatePlane('water', {width: 10, height: 10, updatable: true});
-  // water.position = new BABYLON.Vector3(0, -2, 6);
-  // water.parent = camera;
-  // const waterMaterial = new WaterMaterial('waterMaterial', scene, new BABYLON.Vector2(512, 512));
-  // waterMaterial.bumpTexture = new BABYLON.Texture('//www.babylonjs.com/assets/waterbump.png', scene);
-  // // waterMaterial.windForce = -10;
-  // // waterMaterial.waveHeight = 0.1;
-  // // waterMaterial.bumpHeight = 0.2;
-  // // waterMaterial.waveLength = 0.1;
-  // // waterMaterial.waveSpeed = 50.0;
-  // waterMaterial.colorBlendFactor = 0;
-  // waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
-  // waterMaterial.colorBlendFactor = 0;
-  // water.material = waterMaterial;
+  const water = BABYLON.MeshBuilder.CreatePlane('water', {width: 10, height: 10, updatable: true});
+  water.position = new BABYLON.Vector3(0, -2, 6);
+  water.parent = camera;
+  const waterMaterial = new WaterMaterial('waterMaterial', scene, new BABYLON.Vector2(512, 512));
+  waterMaterial.bumpTexture = new BABYLON.Texture('//www.babylonjs.com/assets/waterbump.png', scene);
+  // waterMaterial.windForce = -10;
+  // waterMaterial.waveHeight = 0.1;
+  // waterMaterial.bumpHeight = 0.2;
+  // waterMaterial.waveLength = 0.1;
+  // waterMaterial.waveSpeed = 50.0;
+  waterMaterial.colorBlendFactor = 0;
+  waterMaterial.windDirection = new BABYLON.Vector2(1, 1);
+  waterMaterial.colorBlendFactor = 0;
+  water.material = waterMaterial;
 
-  // waterMaterial.addToRenderList(background);
-  // scene
-  //   .getTransformNodeByName('CDChassis')
-  //   .getChildren()
-  //   .forEach((c) => waterMaterial.addToRenderList(c));
+  waterMaterial.addToRenderList(background);
+  scene
+    .getTransformNodeByName('CDChassis')
+    .getChildren()
+    .forEach((c) => waterMaterial.addToRenderList(c));
 
   let t = 0;
   scene.registerBeforeRender(() => {
