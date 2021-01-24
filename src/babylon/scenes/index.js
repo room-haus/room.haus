@@ -65,6 +65,7 @@ import * as MX075 from './MX075';
 import * as MX076 from './MX076';
 import * as MX077 from './MX077';
 import * as MX078 from './MX078';
+import * as MX079 from './MX079';
 
 import * as RM001 from './RM001';
 import * as ROOM001A from './ROOM001A';
@@ -72,6 +73,7 @@ import * as ROOM001 from './ROOM001';
 import * as ROOM002 from './ROOM002';
 import * as ROOM003 from './ROOM003';
 import * as ROOM004 from './ROOM004';
+import * as ROOM005 from './ROOM005';
 import * as defaultConfig from './default';
 
 export const mixConfigs = {
@@ -339,6 +341,10 @@ export const mixConfigs = {
     id: 'MX078',
     ...MX078,
   },
+  MX079: {
+    id: 'MX079',
+    ...MX079,
+  },
   RM001: {
     id: 'RM001',
     ...RM001,
@@ -362,6 +368,10 @@ export const mixConfigs = {
   ROOM004: {
     id: 'ROOM004',
     ...ROOM004,
+  },
+  ROOM005: {
+    id: 'ROOM005',
+    ...ROOM005,
   },
 };
 

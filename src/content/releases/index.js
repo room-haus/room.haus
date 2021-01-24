@@ -73,6 +73,15 @@ export const releases = [
     purchaseLink: 'https://roomdc.bandcamp.com/track/ilikeit-room004',
     tracks: [{name: 'ilikeit', streamURL: `${BASE_URL}ROOM004/audio/ilikeit.m3u8`}],
   },
+  {
+    id: 'ROOM005',
+    art: art.RM004,
+    artist: 'Furtive',
+    catalogueNumber: 'ROOM005',
+    slug: 'ROOM005-FURTIVE',
+    purchaseLink: 'https://roomdc.bandcamp.com/track/ilikeit-room004',
+    tracks: [{name: 'ilikeit', streamURL: `${BASE_URL}ROOM004/audio/ilikeit.m3u8`}],
+  },
 ];
 
 export const getRelease = (id) => releases.find((r) => id === r.id);
