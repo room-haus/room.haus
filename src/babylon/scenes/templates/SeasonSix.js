@@ -1,11 +1,11 @@
 import * as BABYLON from 'babylonjs';
 import {CustomMaterial} from 'babylonjs-materials';
-import {scaleLinear} from 'd3';
+// import {scaleLinear} from 'd3';
 
 const {MeshBuilder, Mesh, Matrix} = BABYLON;
 
 // eslint-disable-next-line import/prefer-default-export
-export const builder = () => ({scene, audio}) => {
+export const builder = () => ({scene}) => {
   const length = 10;
   const segments = 500;
   const radius = 0.05;
@@ -24,7 +24,14 @@ export const builder = () => ({scene, audio}) => {
 
   scene.clearColor = BABYLON.Color4.FromColor3(blackColor);
 
-  const camera = new BABYLON.ArcRotateCamera('camera', -Math.PI / 2, Math.PI / 2, -0.0, new BABYLON.Vector3(0, 0, 0), scene);
+  const camera = new BABYLON.ArcRotateCamera(
+    'camera',
+    -Math.PI / 2,
+    Math.PI / 2,
+    -0.0,
+    new BABYLON.Vector3(0, 0, 0),
+    scene,
+  );
   // camera.attachControl(canvas, true);
   camera.minZ = 0.1;
   camera.fov = 1.15;
@@ -52,31 +59,31 @@ export const builder = () => ({scene, audio}) => {
 
   const path = [];
   for (let i = 0; i < length; i += length / segments) {
-      path.push(new BABYLON.Vector3(0, 0, i - 1));
+    path.push(new BABYLON.Vector3(0, 0, i - 1));
   }
   const meshParams = {
-      path,
-      tessellation: 32,
-      radius,
-      cap: BABYLON.Mesh.DOUBLESIDE,
-      scene,
-      updatable: false,
+    path,
+    tessellation: 32,
+    radius,
+    cap: BABYLON.Mesh.DOUBLESIDE,
+    scene,
+    updatable: false,
   };
 
-  const contourMesh = BABYLON.MeshBuilder.CreateTube('tube', { ...meshParams, sideOrientation: BABYLON.Mesh.BACKSIDE });
+  const contourMesh = BABYLON.MeshBuilder.CreateTube('tube', {...meshParams, sideOrientation: BABYLON.Mesh.BACKSIDE});
   contourMesh.material = contourMaterial;
 
-  const fillerMesh = MeshBuilder.CreateTube('tube', { ...meshParams, sideOrientation: Mesh.FRONTSIDE });
+  const fillerMesh = MeshBuilder.CreateTube('tube', {...meshParams, sideOrientation: Mesh.FRONTSIDE});
   fillerMesh.material = fillerMaterial;
 
   const bufferMatrices = new Float32Array(16 * totalItems);
   let idx = 0;
   for (let y = -rowItems / 2; y <= rowItems / 2; y += 1) {
-      for (let x = -rowItems / 2; x <= rowItems / 2; x += 1) {
-          const matrix = Matrix.Translation(x * spaceBetween, y * spaceBetween, 0);
-          matrix.copyToArray(bufferMatrices, 16 * idx);
-          idx += 1;
-      }
+    for (let x = -rowItems / 2; x <= rowItems / 2; x += 1) {
+      const matrix = Matrix.Translation(x * spaceBetween, y * spaceBetween, 0);
+      matrix.copyToArray(bufferMatrices, 16 * idx);
+      idx += 1;
+    }
   }
   contourMesh.thinInstanceSetBuffer('matrix', bufferMatrices, 16);
   fillerMesh.thinInstanceSetBuffer('matrix', bufferMatrices, 16);
@@ -102,29 +109,29 @@ export const builder = () => ({scene, audio}) => {
   `);
 
   [fillerMaterial, contourMaterial].forEach((material) => {
-      material.AddUniform('iTime', 'float');
-      material.AddUniform('factor', 'float');
-      material.AddUniform('speed', 'float');
-      material.AddUniform('radius', 'float');
-      material.AddUniform('swingSize', 'float');
+    material.AddUniform('iTime', 'float');
+    material.AddUniform('factor', 'float');
+    material.AddUniform('speed', 'float');
+    material.AddUniform('radius', 'float');
+    material.AddUniform('swingSize', 'float');
 
-      material.onBind = () => {
-          const time = (+new Date() - initTime) * 0.001;
-          material.getEffect().setFloat('iTime', time);
-          material.getEffect().setFloat('factor', 1.0);
-          material.getEffect().setFloat('speed', 5);
-          material.getEffect().setFloat('radius', radius);
-          material.getEffect().setFloat('swingSize', 0.15);
-      };
+    material.onBind = () => {
+      const time = (+new Date() - initTime) * 0.001;
+      material.getEffect().setFloat('iTime', time);
+      material.getEffect().setFloat('factor', 1.0);
+      material.getEffect().setFloat('speed', 5);
+      material.getEffect().setFloat('radius', radius);
+      material.getEffect().setFloat('swingSize', 0.15);
+    };
   });
 
   // FOV control
 
   window.addEventListener('mousewheel', (e) => {
-      const sign = Math.sign(e.wheelDelta) * -1;
+    const sign = Math.sign(e.wheelDelta) * -1;
 
-      camera.fov += sign * 0.05;
-      camera.fov = Math.max(Math.min(camera.fov, 1.2), 0.25);
+    camera.fov += sign * 0.05;
+    camera.fov = Math.max(Math.min(camera.fov, 1.2), 0.25);
   });
 
   return scene;
