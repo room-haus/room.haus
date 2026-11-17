@@ -76,7 +76,6 @@ export default function Player({entry, visible, autoplay, activeAudio, onClose, 
 
 function ListeningRoom({record, section, player, position, selectTrack, startOver}) {
   const {trackIndex} = position;
-  const [reducedMotion, setReducedMotion] = useState(() => matchMedia(motionQuery).matches);
   const [scene, setScene] = useState(() => !matchMedia(motionQuery).matches);
   const [sceneFailed, setSceneFailed] = useState(false);
   const stage = useRef(null);
@@ -89,7 +88,6 @@ function ListeningRoom({record, section, player, position, selectTrack, startOve
     stage.current?.focus({preventScroll: true});
     const media = matchMedia(motionQuery);
     const change = (event) => {
-      setReducedMotion(event.matches);
       if (event.matches) setScene(false);
     };
     media.addEventListener('change', change);
@@ -145,7 +143,6 @@ function ListeningRoom({record, section, player, position, selectTrack, startOve
         shared={position.shared}
         startOver={startOver}
         getLink={() => listeningLink(record, trackIndex, player.audio.position())}
-        reducedMotion={reducedMotion}
         scene={scene}
         selectMode={(enabled) => {
           setSceneFailed(false);

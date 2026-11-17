@@ -50,3 +50,31 @@ test('the main waveform reacts to the music and seeks with Options closed', asyn
   await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(target + 1);
   await expect.poll(() => trace(scope)).toBeGreaterThan(0);
 });
+
+test('the compact waveform reacts to the recording and holds still when paused', async ({page}) => {
+  await page.goto('http://127.0.0.1:4173/mixes/MX029/?t=30');
+  const play = page.getByRole('button', {name: 'Play', exact: true});
+  await expect(play).toBeVisible();
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  await play.click();
+  const pause = page.getByRole('button', {name: 'Pause', exact: true});
+  await expect(pause).toBeVisible();
+  await page.getByRole('link', {name: 'Back to mixes'}).click();
+  const compact = page.getByRole('region', {name: 'Listening player'});
+  const scope = compact.locator('.wave-seek canvas');
+  await expect(scope).toBeInViewport({ratio: 1});
+  await expect.poll(() => trace(scope)).toBeGreaterThan(0);
+  const initial = await trace(scope);
+  await expect.poll(async () => {
+    const value = await trace(scope);
+    return value !== 0 && value !== initial;
+  }).toBe(true);
+  await compact.getByRole('button', {name: 'Pause', exact: true}).click();
+  await expect(compact.getByRole('button', {name: 'Play', exact: true})).toBeVisible();
+  const paused = await trace(scope);
+  // Give the render loop several opportunities to draw another frame.
+  await page.evaluate(() => new Promise(resolve => {
+    requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  }));
+  expect(await trace(scope)).toBe(paused);
+});

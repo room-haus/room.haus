@@ -11,3 +11,5 @@ Keep ROOM typography, restrained dark controls, and existing focus/motion conven
 Approaches considered: retaining the entire scene hidden would waste GPU/media resources; duplicating an audio player for the mini bar risks overlapping streams. The selected implementation direction is a single retained audio owner with separate full and compact presentations. This is an implementation choice based on the user's requested behavior.
 
 Scope: implement and validate in a separate branch/local preview. The earlier authorization to merge and deploy portraits remains a separate task.
+
+The user additionally requested a scrubber in the persistent bar using the existing experience waveform structure. Reuse the current live PlaybackScope waveform and accessible range semantics with the retained audio owner. Provide pointer, touch, and keyboard seeking, with elapsed/total time, disabled unknown-duration seeking, and reduced-motion behavior. Preserve room controls and compact responsive layout; reserve the expanded bar footprint.

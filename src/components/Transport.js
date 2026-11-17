@@ -1,11 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import LoadingLabel from './LoadingLabel';
-import PlaybackScope from './PlaybackScope';
-
-function timestamp(seconds) {
-  const value = Math.max(0, Math.floor(Number.isFinite(seconds) ? seconds : 0));
-  return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, '0')}`;
-}
+import WaveformSeek, {PlaybackClock, timestamp} from './WaveformSeek';
 
 export function PlayIcon({playing}) {
   return (
@@ -20,7 +15,6 @@ export default function Transport({
   player,
   trackIndex,
   selectTrack,
-  reducedMotion,
   shared,
   startOver,
   getLink,
@@ -50,8 +44,7 @@ export default function Transport({
   const shareButton = useRef(null);
   const linkField = useRef(null);
   const playButton = useRef(null);
-  const {audio, time, duration, playing, status, error, seek} = player;
-  const readyToSeek = duration > 0 && Number.isFinite(duration);
+  const {time, duration, playing, status, error} = player;
   const failed = status === 'error' || status === 'unavailable';
   useEffect(() => {
     if (failed) setSoundBarVisible(true);
@@ -133,23 +126,7 @@ export default function Transport({
             onClick={failed ? player.retry : canPause ? player.pause : player.play}>
             <PlayIcon playing={canPause} />
           </button>
-          <div className="time-control">
-            <div className="wave-seek" style={{'--played': `${readyToSeek ? 100 * Math.min(time / duration, 1) : 0}%`}}>
-              <PlaybackScope audio={audio} active={soundBarVisible && playing && !reducedMotion} />
-              <input
-                type="range"
-                className="seek"
-                aria-label="Seek playback"
-                disabled={!readyToSeek}
-                min="0"
-                max={readyToSeek ? duration : 0}
-                value={readyToSeek ? Math.min(time, duration) : 0}
-                step="1"
-                aria-valuetext={`${timestamp(time)} of ${readyToSeek ? timestamp(duration) : 'unknown duration'}`}
-                onChange={(event) => seek(Number(event.target.value))}
-              />
-            </div>
-          </div>
+          <WaveformSeek player={player} visible={soundBarVisible} />
         </div>
       </div>
       <div className="player-dock">
@@ -215,10 +192,7 @@ export default function Transport({
                 {(selected || record.name) && <p>{selected?.name || record.name}</p>}
               </div>
             </div>
-            <div className="clock">
-              <span>{timestamp(time)}</span>
-              <span>{readyToSeek ? timestamp(duration) : '–:––'}</span>
-            </div>
+            <PlaybackClock time={time} duration={duration} />
             <div className="visual-modes" role="group" aria-label="Visual mode">
               {[true, false].map((enabled) => (
                 <button

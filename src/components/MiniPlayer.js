@@ -2,6 +2,7 @@ import React from 'react';
 import {createPortal} from 'react-dom';
 import {recordPath} from '../pages/navigation';
 import {PlayIcon} from './Transport';
+import WaveformSeek from './WaveformSeek';
 
 export default function MiniPlayer({record, trackIndex, player, onClose, onOpen}) {
   const {status, playing, error} = player;
@@ -12,6 +13,7 @@ export default function MiniPlayer({record, trackIndex, player, onClose, onOpen}
   const track = record.tracks?.[trackIndex]?.name || record.name;
   return createPortal(
     <section className="mini-player" aria-label="Listening player">
+      <WaveformSeek player={player} showTime />
       <div className="mini-player-record">
         <a
           href={recordPath(record)}

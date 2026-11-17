@@ -48,3 +48,13 @@
 - [ ] Run focused browser tests across Chromium, Android and WebKit, all unit tests, lint, dependency policy, production build and route checks. Use dedicated test/preview ports so other worktrees are not tested accidentally. Run the full browser suite once with an isolated configuration (hard-coded 4173 URLs require careful isolation).
 - [ ] Inspect rendered desktop/mobile compact player, keyboard focus, reduced motion and loading/error controls; save screenshots outside tracked source.
 - [ ] Self-review and commit the feature, then report exact checks and limitations. Do not push, open PR, merge or deploy this feature; root will review first.
+
+### Task 2: Existing waveform in the persistent bar
+
+Reuse the experience waveform structure in the always-on player, as explicitly requested by the user. Extract the existing PlaybackScope + range markup into a shared component if needed, preserving its styling and behavior inside Transport. Use the same player.audio/time/duration/seek in MiniPlayer; no second audio source or scene. Include elapsed/total time and disable seeking when duration is unknown. Keep reduced-motion and document-hidden behavior; do not animate when paused. Add the 44px-high waveform as a compact full-width row above the existing metadata/actions, or equivalent responsive placement with all controls readable. Update reserved bottom space including loading/error, 320px width, 150% text, and safe-area insets.
+
+Own relevant src/components (MiniPlayer, Transport, shared waveform component), src/styles/layout.css, and e2e/persistent-listening.spec.cjs/e2e/waveform.spec.cjs as needed. Avoid audio lifecycle changes unless a concrete reuse issue requires them.
+
+Acceptance: waveform uses existing rendering; real media position updates by pointer/touch and keyboard from mini player, paused seek remains paused, returning retains media instance and selected position; waveform reacts while playing, reduced motion disables animation without disabling seek; controls and page actions do not overlap at desktop and narrow mobile sizes. Existing experience waveform remains functional.
+
+Run focused real browser checks covering waveform, persistent playback and narrow/keyboard behavior on Chromium, Android and WebKit; lint, build, route checks. No full-suite repeat unless new evidence warrants it. Capture desktop/mobile screenshots outside source and inspect. Commit only this task; no push/PR/deploy. Append report to the implementation report with exact commands/results. Global constraints from the main plan remain binding. Load /Users/pmarko.alt/.codex/skills/app-design-principles/SKILL.md.

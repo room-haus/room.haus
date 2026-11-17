@@ -208,6 +208,12 @@ test('closing a pending stream prevents a delayed start', async ({page}) => {
   await play(page).click();
   await leave(page);
   await expect(mini(page).getByRole('status')).toContainText('Loading audio');
+  await page.setViewportSize({width: 320, height: 568});
+  await page.evaluate(() => { document.documentElement.style.fontSize = '150%'; });
+  const slider = seek(mini(page));
+  await expect(slider).toBeDisabled();
+  const range = await slider.boundingBox();
+  expect(range.y + range.height).toBeLessThanOrEqual((await mini(page).getByRole('link').boundingBox()).y);
   await close(mini(page)).click();
   await expect(mini(page)).toHaveCount(0);
   await page.evaluate(() => window.roomPlayAttempts.forEach(complete => complete()));
@@ -328,13 +334,60 @@ test('a refused handoff exposes Retry and can still play the new recording', asy
   const player = mini(page);
   const status = player.getByRole('status');
   await expect(status).toContainText('Press play again');
+  await expect(seek(player)).toBeDisabled();
   await page.setViewportSize({width: 320, height: 568});
   await page.evaluate(() => { document.documentElement.style.fontSize = '150%'; });
   const track = await player.getByText('Settle Another Day').boundingBox();
+  const range = await seek(player).boundingBox();
+  expect(range.y + range.height).toBeLessThanOrEqual(track.y);
   expect(track.y + track.height).toBeLessThanOrEqual((await status.boundingBox()).y);
   await player.getByRole('button', {name: 'Retry', exact: true}).click();
   await confirmPlaying(page, 2);
   expect((await mediaState(page))[1]).toMatchObject({paused: true, attached: false});
+});
+
+test('the compact waveform seeks with pointer or touch and keyboard while paused', async ({page, isMobile, browserName}) => {
+  await page.goto(mix);
+  await play(page).click();
+  await confirmPlaying(page);
+  await leave(page);
+  await visitStatic(page, 'Collective');
+  const player = mini(page);
+  const slider = seek(player);
+  await expect(slider).toBeEnabled();
+  await expect(player.getByText('0:30', {exact: true})).toBeVisible();
+
+  // Reduced motion keeps the seek range available as the media clock advances.
+  const clock = (await mediaState(page))[0].time;
+  await expect.poll(async () => (await mediaState(page))[0].time).toBeGreaterThan(clock + 0.25);
+  const canvas = player.locator('.wave-seek canvas');
+  expect(await canvas.evaluate(element => {
+    const pixels = element.getContext('2d').getImageData(0, 0, element.width, element.height).data;
+    return pixels.some(value => value !== 0);
+  })).toBe(false);
+
+  await pause(player).click();
+  const box = await slider.boundingBox();
+  expect(box.height).toBeGreaterThanOrEqual(44);
+  const position = {x: Math.round(box.width * 2 / 3), y: Math.round(box.height / 2)};
+  if (isMobile) await slider.tap({position});
+  else await slider.click({position});
+  await expect.poll(async () => (await mediaState(page))[0].time).toBeGreaterThan(18);
+  expect((await mediaState(page))[0]).toMatchObject({paused: true});
+  expect((await mediaState(page))[0].time).toBeLessThan(22);
+
+  await page.getByRole('heading', {name: 'Collective'}).focus();
+  await tabTo(page, slider, browserName);
+  const target = Number(await slider.inputValue()) + 1;
+  await page.keyboard.press('ArrowRight');
+  await expect(slider).toHaveValue(String(target));
+  await expect.poll(async () => (await mediaState(page))[0].time).toBe(target);
+  await expect(slider).toHaveAttribute('aria-valuetext', `0:${target} of 0:30`);
+  await expect(player.getByText(`0:${target}`, {exact: true})).toBeVisible();
+
+  await player.getByRole('link', {name: /MX001/}).click();
+  await expect(seek(page)).toHaveValue(String(target));
+  expect(await mediaState(page)).toEqual([expect.objectContaining({time: target, paused: true})]);
 });
 
 test('the compact controls fit a narrow viewport and leave the splash links clear', async ({page}) => {
@@ -344,15 +397,17 @@ test('the compact controls fit a narrow viewport and leave the splash links clea
   await confirmPlaying(page);
   await leave(page);
   await page.getByRole('link', {name: 'ROOM home'}).click();
+  await page.evaluate(() => { document.documentElement.style.fontSize = '150%'; });
   const player = mini(page);
   await expect(player).toBeInViewport();
-  for (const control of [player.getByRole('link'), pause(player), close(player)]) {
+  for (const control of [seek(player), player.getByRole('link'), pause(player), close(player)]) {
     const box = await control.boundingBox();
     expect(box.width).toBeGreaterThanOrEqual(44);
     expect(box.height).toBeGreaterThanOrEqual(44);
     expect(box.x).toBeGreaterThanOrEqual(0);
     expect(box.x + box.width).toBeLessThanOrEqual(320);
   }
+  await page.getByRole('button', {name: 'Rotate loop'}).click({trial: true});
   const collective = page.getByRole('link', {name: 'Collective', exact: true});
   await collective.scrollIntoViewIfNeeded();
   expect((await collective.boundingBox()).y + (await collective.boundingBox()).height)
