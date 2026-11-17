@@ -6,7 +6,6 @@ import {colorGenerator} from '../BabylonHelpers';
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, engine, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);
@@ -31,14 +30,17 @@ export const build = ({scene, engine, audio}) => {
     if (rotate) {
       mesh.rotation.y = Math.PI;
     }
-    mesh.material.diffuseTexture = new BABYLON.Texture(
-      'https://playground.babylonjs.com/textures/sun.png',
-      scene,
-      true,
-      false,
-      BABYLON.Texture.BILINEAR_SAMPLINGMODE,
-    );
-    mesh.material.diffuseTexture.hasAlpha = true;
+    const sun = new BABYLON.DynamicTexture('sun', 128, scene, false);
+    const brush = sun.getContext();
+    const glow = brush.createRadialGradient(64, 64, 0, 64, 64, 64);
+    glow.addColorStop(0, 'white');
+    glow.addColorStop(0.4, 'rgba(255, 255, 255, 0.95)');
+    glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    brush.fillStyle = glow;
+    brush.fillRect(0, 0, 128, 128);
+    sun.hasAlpha = true;
+    sun.update();
+    mesh.material.diffuseTexture = sun;
     const size = 50;
     mesh.scaling = new BABYLON.Vector3(size, size, size);
     mesh.position = position;

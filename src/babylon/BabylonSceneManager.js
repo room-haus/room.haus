@@ -1,75 +1,64 @@
 import * as BABYLON from 'babylonjs';
-import {getMixConfig} from 'src/babylon/scenes';
-import {loadCDModel, initCamera, loadSceneAssets} from './BabylonHelpers';
+import {initCamera, loadCDModel, loadSceneAssets} from './BabylonHelpers';
+import {getMixConfig} from './scenes';
 
-class BabylonSceneManager {
+export default class BabylonSceneManager {
   constructor(canvas) {
-    this.scenes = {};
-    if (canvas) {
-      this.init(canvas);
-    }
-  }
-
-  init(canvas) {
     this.canvas = canvas;
-    this.engine = new BABYLON.Engine(canvas, true, {
-      preserveDrawingBuffer: true,
-      stencil: true,
-    });
-    BABYLON.SceneLoaderFlags.ShowLoadingScreen = false;
+    this.engine = new BABYLON.Engine(canvas, true, {stencil: true, audioEngine: false});
+    this.engine.enableOfflineSupport = false;
+    BABYLON.SceneLoader.ShowLoadingScreen = false;
     this.resize = () => this.engine.resize();
-    window.addEventListener('resize', this.resize);
+    if (typeof ResizeObserver !== 'undefined') {
+      this.observer = new ResizeObserver(this.resize);
+      this.observer.observe(canvas);
+    } else {
+      window.addEventListener('resize', this.resize);
+    }
   }
 
-  async createScene({id, caseTexture, build, sceneAssetsPath, cdLabelTexture, audio}) {
-    let scene = new BABYLON.Scene(this.engine);
-    this.scenes[id] = scene;
-
-    if (caseTexture) {
-      scene = await loadCDModel(scene, caseTexture, cdLabelTexture);
+  async run(record, audio, onReady, onError) {
+    const config = await getMixConfig(record);
+    if (this.closed) return;
+    const scene = new BABYLON.Scene(this.engine);
+    this.scene = scene;
+    scene.skipPointerMovePicking = true;
+    await loadCDModel(scene, config.caseTexture, config.cdLabelTexture);
+    if (this.closed) return;
+    initCamera(scene, this.canvas);
+    if (config.sceneAssetsPath) {
+      await loadSceneAssets(scene, config.sceneAssetsPath);
+      if (this.closed) return;
     }
-    scene = initCamera(scene, this.canvas);
-    if (sceneAssetsPath) {
-      /* If there are any additional assets, we want to load the asset files separately
-       * from the standard core models. We do this in a promise instead of the async/await
-       * syntax so that the default assets of the scene can load and start running while the
-       * file is loaded. Once the assets are loaded, we want to rebuild the scene. */
-      loadSceneAssets(scene, sceneAssetsPath).then(() => {
-        build({
-          scene,
-          canvas: this.canvas,
-          engine: this.engine,
-          audio,
-          assetsLoaded: true,
-        });
-      });
-    }
-    build({
-      scene,
-      canvas: this.canvas,
-      engine: this.engine,
-      audio,
-    });
-
-    if (this.onReady) {
-      scene.executeWhenReady(this.onReady);
-    }
-    return scene;
-  }
-
-  async runScene(sceneId, params) {
-    const config = getMixConfig(sceneId);
-    this.background = config.Background;
-    const scene = await this.createScene({...config, ...params});
-    this.engine.stopRenderLoop();
-    this.engine.runRenderLoop(() => scene.render());
+    config.build({scene, canvas: this.canvas, engine: this.engine, audio, assetsLoaded: Boolean(config.sceneAssetsPath)});
     this.resize();
+    let ready = false;
+    this.engine.runRenderLoop(() => {
+      if (this.closed) return;
+      try {
+        audio.processBands();
+        scene.render();
+        if (!ready && scene.isReady()) {
+          ready = true;
+          onReady(config.Background);
+        }
+      } catch (error) {
+        onError(error);
+      }
+    });
   }
 
   cleanUp() {
-    window.removeEventListener('resize', this.onResize);
+    if (this.closed) return;
+    this.closed = true;
+    this.observer?.disconnect();
+    window.removeEventListener('resize', this.resize);
+    this.engine.stopRenderLoop();
+    // Browsers cap simultaneously allocated WebGL contexts, including detached
+    // canvases waiting for collection. Relinquish this canvas after navigation.
+    const gl = this.canvas.getContext('webgl2') || this.canvas.getContext('webgl');
+    const lose = gl?.getExtension('WEBGL_lose_context');
     this.engine.dispose();
+    if (!this.canvas.isConnected) lose?.loseContext();
   }
 }
-
-export default BabylonSceneManager;

@@ -1,3 +1,5 @@
+import sphereMap from '../assets/sphereMap.jpg';
+import surfaceNormal from '../assets/waterbump.png';
 import * as BABYLON from 'babylonjs';
 import {scaleLinear, interpolate} from 'd3';
 // import environment from '../../textures/environment.dds';
@@ -44,11 +46,11 @@ export const createBuild = ([primaryColor, secondaryColor]) => ({scene, audio} =
   mat.backFaceCulling = false;
   mat.alpha = 0.7;
   // const c = [0, 255, 0].map((x) => x / 255);
-  mat.bumpTexture = new BABYLON.Texture('http://www.synergy-development.fr/equalonyzer/images/grained_uv.png', scene);
+  mat.bumpTexture = new BABYLON.Texture(surfaceNormal, scene);
   mat.bumpTexture.uScale = 1;
   mat.bumpTexture.vScale = 1;
   mat.reflectionTexture = new BABYLON.Texture(
-    'http://www.synergy-development.fr/equalonyzer/images/spheremap.jpg',
+    sphereMap,
     scene,
   );
   mat.reflectionTexture.level = 1;

@@ -12,7 +12,6 @@ function* colorGenerator(colors = []) {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const builder = ({backgroundColors = [], gridColor} = {}) => ({scene, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);

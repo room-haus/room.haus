@@ -1,0 +1,126 @@
+[
+  {
+    "id": "ROOM001A",
+    "art": "RM001A",
+    "label": "RM001A",
+    "artist": "Amal",
+    "catalogueNumber": "ROOM001A",
+    "slug": "ROOM001A-AMAL-574S",
+    "purchaseLink": "https://roomdc.bandcamp.com/album/574s-room001a",
+    "tracks": [
+      {
+        "name": "574S",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001A/audio/574s.m3u8"
+      },
+      {
+        "name": "574S (35mm remix)",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001A/audio/574s-35mm-remix.m3u8"
+      }
+    ],
+    "name": "574S"
+  },
+  {
+    "id": "ROOM001",
+    "art": "RM001",
+    "label": "RM001",
+    "artist": "Amal",
+    "catalogueNumber": "ROOM001",
+    "slug": "ROOM001-AMAL-DANCECONCEPT",
+    "purchaseLink": "https://roomdc.bandcamp.com/album/dance-concept-room001",
+    "tracks": [
+      {
+        "name": "990S",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/990s.m3u8"
+      },
+      {
+        "name": "GEORGIA AVE",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/georgia-ave.m3u8"
+      },
+      {
+        "name": "574S",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/574s.m3u8"
+      },
+      {
+        "name": "DTS",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/dts.m3u8"
+      },
+      {
+        "name": "FREE JUDO",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/free-judo.m3u8"
+      },
+      {
+        "name": "FREE JUDO (UNCUT)",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/free-judo-uncut.m3u8"
+      }
+    ],
+    "name": "Dance Concept"
+  },
+  {
+    "id": "ROOM002",
+    "art": "RM002",
+    "artist": "VistaVision",
+    "catalogueNumber": "ROOM002",
+    "slug": "ROOM002-VISTA-VISION-SUN",
+    "purchaseLink": "https://vistavision-room.bandcamp.com/album/s-u-n-room002",
+    "tracks": [
+      {
+        "name": "Commitment Issues",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/commitment-issues.m3u8"
+      },
+      {
+        "name": "So",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/so.m3u8"
+      },
+      {
+        "name": "S.U.N.",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/sun.m3u8"
+      },
+      {
+        "name": "Working Title",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/working-title.m3u8"
+      }
+    ],
+    "name": "S.U.N.",
+    "label": "RM002"
+  },
+  {
+    "id": "ROOM003",
+    "art": "RM003",
+    "artist": "VistaVision",
+    "catalogueNumber": "ROOM003",
+    "slug": "ROOM003-VISTA-VISION-SUN-REMIXES",
+    "purchaseLink": "https://vistavision-room.bandcamp.com/album/s-u-n-remixes-room003",
+    "tracks": [
+      {
+        "name": "So (DJ Nativesun Remix)",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/so-(nativesun-remix).m3u8"
+      },
+      {
+        "name": "Working Title (Mr.Fade Remix)",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/working-title-(mr-fade-remix).m3u8"
+      },
+      {
+        "name": "Commitment Issues (l'enfant Remix)",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/commitment-Issues-(l'enfant-remix).m3u8"
+      }
+    ],
+    "name": "S.U.N. Remixes",
+    "label": "RM003"
+  },
+  {
+    "id": "ROOM004",
+    "art": "RM004",
+    "artist": "SIR E.U & TOOTH CHOIR",
+    "catalogueNumber": "ROOM004",
+    "slug": "ROOM004-SIR-EU-TOOTH-CHOIR-ilikeit",
+    "purchaseLink": "https://roomdc.bandcamp.com/track/ilikeit-room004",
+    "tracks": [
+      {
+        "name": "ilikeit",
+        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM004/audio/ilikeit.m3u8"
+      }
+    ],
+    "name": "ilikeit",
+    "label": "RM004"
+  }
+]

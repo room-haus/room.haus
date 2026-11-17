@@ -205,7 +205,6 @@ const generateWater = (scene, renderList = []) => {
   // light.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.7);
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
   const CD = scene.getTransformNodeByName('CDChassis');
   // Make sure the CD is rendered in front of everything else i.e. top layer

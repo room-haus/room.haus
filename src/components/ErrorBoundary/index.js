@@ -1,34 +1,17 @@
 import React from 'react';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      info: null,
-    };
-  }
-  static getDerivedStateFromError(error) {
-    return {error};
+export default class ErrorBoundary extends React.Component {
+  state = {failed: false};
+
+  static getDerivedStateFromError() {
+    return {failed: true};
   }
 
-  componentDidCatch(error, info) {
-    this.setState({error, info});
+  componentDidCatch(error) {
+    this.props.onError(error);
   }
 
   render() {
-    const {error, info} = this.state;
-    if (error) {
-      return (
-        <>
-          <h1>{error.toString()}</h1>
-          <span>{info && info.componentStack}</span>
-        </>
-      );
-    }
-
-    return this.props.children;
+    return this.state.failed ? null : this.props.children;
   }
 }
-
-export default ErrorBoundary;

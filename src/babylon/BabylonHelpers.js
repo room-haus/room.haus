@@ -225,7 +225,9 @@ export const initCDModel = (scene, meshes, caseTexture, cdLabelTexture) => {
 };
 
 export async function loadCDModel(scene, caseTexture, cdLabelTexture) {
-  const {meshes} = await BABYLON.SceneLoader.ImportMeshAsync('', CDModel, '', scene);
+  const split = CDModel.lastIndexOf('/') + 1;
+  const {meshes} = await BABYLON.SceneLoader.ImportMeshAsync('', CDModel.slice(0, split), CDModel.slice(split), scene);
+  if (scene.isDisposed) return scene;
 
   initCDModel(scene, meshes, caseTexture, cdLabelTexture);
 

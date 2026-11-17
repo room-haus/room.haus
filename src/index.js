@@ -1,6 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/globalStyles';
+import {createRoot} from 'react-dom/client';
+import './styles/layout.css';
 import App from './pages';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+createRoot(document.getElementById('root')).render(<App />);
