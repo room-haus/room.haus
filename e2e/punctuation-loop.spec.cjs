@@ -1,5 +1,65 @@
 const {test, expect} = require('@playwright/test');
 
+test('the home scene warms while browsing mixes and stays paused until shown', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  await page.addInitScript(() => {
+    window.studyContexts = new Set();
+    window.studyDraws = 0;
+    const getContext = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (type, ...args) {
+      const context = getContext.call(this, type, ...args);
+      if (context && type.includes('webgl') && this.classList.contains('study-model')) {
+        window.studyContexts.add(context);
+      }
+      return context;
+    };
+    for (const Context of [window.WebGLRenderingContext, window.WebGL2RenderingContext]) {
+      if (!Context) continue;
+      const draw = Context.prototype.drawElements;
+      Context.prototype.drawElements = function (...args) {
+        if (this.canvas.classList.contains('study-model')) window.studyDraws++;
+        return draw.apply(this, args);
+      };
+    }
+  });
+  await page.goto('/mixes/');
+  const stage = page.locator('.type-study');
+  await expect(stage).toHaveClass(/has-model/, {timeout: 10000});
+  await expect(page.locator('[data-room-panel=splash]')).toHaveAttribute('inert', '');
+  const frames = () => page.evaluate(() => new Promise(resolve => {
+    let remaining = 6;
+    const tick = () => --remaining ? requestAnimationFrame(tick) : resolve(window.studyDraws);
+    requestAnimationFrame(tick);
+  }));
+  const prepared = await frames();
+  expect(await frames()).toBe(prepared);
+  expect(await page.evaluate(() => window.studyContexts.size)).toBe(1);
+  await page.getByRole('link', {name: 'ROOM home'}).click();
+  await expect(page.getByRole('button', {name: 'Pause rotation'})).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.studyDraws)).toBeGreaterThan(prepared);
+  expect(await page.evaluate(() => window.studyContexts.size)).toBe(1);
+  await page.getByRole('link', {name: 'S/S 2017-2019'}).click();
+  await expect(stage).not.toBeInViewport();
+  const paused = await frames();
+  expect(await frames()).toBe(paused);
+});
+
+test('a failed background download retries when home is opened', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  let attempts = 0;
+  await page.route(/\/assets\/punctuation-loop\..*\.js/, route => {
+    attempts++;
+    return attempts === 1 ? route.abort() : route.continue();
+  });
+  const failed = page.waitForEvent('requestfailed', request => /punctuation-loop/.test(request.url()));
+  await page.goto('/mixes/');
+  await failed;
+  await page.getByRole('link', {name: 'ROOM home'}).click();
+  await expect(page.locator('.type-study')).toHaveClass(/has-model/);
+  await expect(page.getByRole('button', {name: 'Pause rotation'})).toBeVisible();
+  expect(attempts).toBe(2);
+});
+
 test('the loaded model crossfades from the print without moving the artwork frame', async ({page}) => {
   await page.emulateMedia({reducedMotion: 'no-preference'});
   let release;

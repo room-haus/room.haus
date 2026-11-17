@@ -27,16 +27,16 @@ export default function App({Player = LazyPlayer}) {
   const [{route, archive, session}, setScreen] = useState(() =>
     screenState(readRoute(), {archive: {page: 'archive', section: 'mixes', query: ''}}, false),
   );
-  const splash = route.page === 'splash';
-  const studyStarted = useRef(false);
+  const study = useRef(null);
   const activeAudio = useRef(null);
   useRoomPanels(route);
   useEffect(() => {
-    if (splash && !studyStarted.current) {
-      studyStarted.current = true;
-      initStudy(document.querySelector('.type-study'));
-    }
-  }, [splash]);
+    study.current = initStudy(document.querySelector('.type-study'));
+    return () => study.current.dispose();
+  }, []);
+  useEffect(() => {
+    if (route.page === 'archive') return study.current.preload();
+  }, [route.page]);
 
   useLayoutEffect(() => {
     const shell = document.querySelector('.room-shell');

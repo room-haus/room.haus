@@ -2,7 +2,7 @@ import React from 'react';
 import {createPortal} from 'react-dom';
 import {recordPath} from '../pages/navigation';
 import {PlayIcon} from './Transport';
-import WaveformSeek from './WaveformSeek';
+import WaveformSeek, {PlaybackClock} from './WaveformSeek';
 
 export default function MiniPlayer({record, trackIndex, player, onClose, onOpen}) {
   const {status, playing, error} = player;
@@ -13,11 +13,11 @@ export default function MiniPlayer({record, trackIndex, player, onClose, onOpen}
   const track = record.tracks?.[trackIndex]?.name || record.name;
   return createPortal(
     <section className="mini-player" aria-label="Listening player">
-      <WaveformSeek player={player} showTime />
       <div className="mini-player-record">
         <a
           href={recordPath(record)}
           onClick={onOpen}
+          title={`${record.id} · ${record.artist}${track ? ' · ' + track : ''}`}
           aria-label={`Return to ${record.id}, ${record.artist}${track ? ', ' + track : ''}`}>
           <img src={record.art} alt="" width="44" height="44" />
           <span className="mini-player-meta">
@@ -25,6 +25,13 @@ export default function MiniPlayer({record, trackIndex, player, onClose, onOpen}
             {track && <span className="mini-player-track">{track}</span>}
           </span>
         </a>
+      </div>
+      <div className="mini-player-playback">
+        <WaveformSeek player={player} />
+        <div className="mini-player-playback-info">
+          <span className="mini-player-compact-title" title={track || record.artist}>{track || record.artist}</span>
+          <PlaybackClock time={player.time} duration={player.duration} />
+        </div>
         <span className="mini-player-status" role="status">
           {failed ? error : loading ? (playing ? 'Buffering audio…' : 'Loading audio…') : ''}
         </span>

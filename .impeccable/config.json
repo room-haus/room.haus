@@ -29,6 +29,15 @@
         ],
         "createdAt": "2026-11-17T17:15:09.877Z",
         "reason": "Agent review: Instrument Serif is the pre-existing ROOM display typeface; the mobile drag fix preserves the incumbent visual identity under app-design-principles."
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "src/styles/layout.css"
+        ],
+        "createdAt": "2026-11-17T23:02:02.420Z",
+        "reason": "Codex review: existing absolute-positioned shared ROOM logo intentionally morphs between header sizes and positions. Unchanged from HEAD; final home-navigation profile at 4x CPU showed no long tasks. Preserve this established transition in the scoped player/preload work."
       }
     ]
   }

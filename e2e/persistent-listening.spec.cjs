@@ -213,7 +213,9 @@ test('closing a pending stream prevents a delayed start', async ({page}) => {
   const slider = seek(mini(page));
   await expect(slider).toBeDisabled();
   const range = await slider.boundingBox();
-  expect(range.y + range.height).toBeLessThanOrEqual((await mini(page).getByRole('link').boundingBox()).y);
+  const cover = await mini(page).getByRole('link').boundingBox();
+  expect(cover.x + cover.width).toBeLessThanOrEqual(range.x);
+  expect(Math.abs(cover.y + cover.height / 2 - range.y - range.height / 2)).toBeLessThan(20);
   await close(mini(page)).click();
   await expect(mini(page)).toHaveCount(0);
   await page.evaluate(() => window.roomPlayAttempts.forEach(complete => complete()));
@@ -337,10 +339,9 @@ test('a refused handoff exposes Retry and can still play the new recording', asy
   await expect(seek(player)).toBeDisabled();
   await page.setViewportSize({width: 320, height: 568});
   await page.evaluate(() => { document.documentElement.style.fontSize = '150%'; });
-  const track = await player.getByText('Settle Another Day').boundingBox();
   const range = await seek(player).boundingBox();
-  expect(range.y + range.height).toBeLessThanOrEqual(track.y);
-  expect(track.y + track.height).toBeLessThanOrEqual((await status.boundingBox()).y);
+  expect(range.y + range.height).toBeLessThanOrEqual((await status.boundingBox()).y);
+  expect((await status.boundingBox()).x).toBeGreaterThanOrEqual(range.x);
   await player.getByRole('button', {name: 'Retry', exact: true}).click();
   await confirmPlaying(page, 2);
   expect((await mediaState(page))[1]).toMatchObject({paused: true, attached: false});
@@ -356,6 +357,7 @@ test('the compact waveform seeks with pointer or touch and keyboard while paused
   const slider = seek(player);
   await expect(slider).toBeEnabled();
   await expect(player.getByText('0:30', {exact: true})).toBeVisible();
+  if (isMobile) await expect(player.locator('.mini-player-compact-title')).toContainText('Eddy Bauer');
 
   // Reduced motion keeps the seek range available as the media clock advances.
   const clock = (await mediaState(page))[0].time;
