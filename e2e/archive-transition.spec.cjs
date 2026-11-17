@@ -107,7 +107,7 @@ test('every section shares one document and retains its interactions through his
   await page.getByRole('link', {name: 'ROOM home', exact: true}).click();
   await page.getByRole('link', {name: 'Collective', exact: true}).click();
   await expect(collective).not.toHaveAttribute('inert');
-  await expect(page.getByRole('button', {name: /Pixelate portrait/})).toHaveCount(4);
+  await expect(page.getByRole('button', {name: /Reveal haunted portrait/})).toHaveCount(4);
   await page.goBack();
   await expect(page.getByRole('heading', {name: 'ROOM', exact: true})).toBeVisible();
   await page.goBack();

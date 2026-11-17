@@ -42,8 +42,8 @@ for (const portrait of document.querySelectorAll('.portrait')) {
   const coarse = document.createElement('canvas');
   coarse.className = 'pixel-print pixel-core';
   coarse.setAttribute('aria-hidden', 'true');
-  coarse.width = 32;
-  coarse.height = 40;
+  coarse.width = 64;
+  coarse.height = 80;
   const brush = coarse.getContext('2d');
   // The original print remains the fallback while the canvas source loads.
   pixels.after(coarse);
@@ -82,7 +82,7 @@ for (const portrait of document.querySelectorAll('.portrait')) {
     });
     portrait.style.setProperty('--patch-radius', Math.min(32, 20 + speed * .45) + '%');
     if (sourceReady) {
-      const resolution = Math.round(Math.max(12, 32 - speed));
+      const resolution = Math.round(Math.max(32, 64 - speed));
       if (coarse.width !== resolution) {
         coarse.width = resolution;
         coarse.height = Math.round(resolution * 1.25);
