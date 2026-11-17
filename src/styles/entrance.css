@@ -416,8 +416,14 @@
 .member figcaption { display: grid; gap: .45rem; padding: .75rem .65rem 1rem; }
 .member figcaption span { font: 400 clamp(1.65rem, 3.3vw, 4rem)/.98 var(--display); letter-spacing: -.035em; }
 .member figcaption small { font: .78rem/1.25 var(--utility); text-transform: uppercase; }
-@media (max-width: 760px) {
+@media (max-width: 1100px) {
   .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .member figcaption span { font-size: clamp(1.65rem, 4.8vw, 3.4rem); }
+  .member figcaption { padding: .85rem .75rem 1rem; }
+}
+@media (max-width: 360px) {
+  .member-grid { grid-template-columns: minmax(0, 1fr); }
+  .member figcaption span { font-size: 2.25rem; }
 }
 
 /* A finer cobalt echo follows the moving, coarser patch. */
