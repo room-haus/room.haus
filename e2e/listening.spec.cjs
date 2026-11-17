@@ -90,7 +90,25 @@ test('ROOM001 plays and switches to the selected release track', async ({page, i
 });
 
 test('failed mix can retry without leaving its cover or transport', async ({page, browserName}) => {
-  test.skip(browserName !== 'chromium', 'Native WebKit HLS can bypass browser request interception.');
+  // Native WebKit can fetch HLS outside Playwright's network interception.
+  // Give its first audio element a real missing playlist, then restore the setter for Retry.
+  if (browserName === 'webkit') {
+    await page.addInitScript(() => {
+      const prototype = HTMLMediaElement.prototype;
+      const src = Object.getOwnPropertyDescriptor(prototype, 'src');
+      Object.defineProperty(prototype, 'src', {
+        ...src,
+        set(value) {
+          if (this.tagName === 'AUDIO' && /\.m3u8(?:$|[?#])/.test(value)) {
+            Object.defineProperty(prototype, 'src', src);
+            src.set.call(this, new URL('/missing-playlist.m3u8', location.origin).href);
+          } else {
+            src.set.call(this, value);
+          }
+        },
+      });
+    });
+  }
   const manifest = process.env.ROOM_MX029_AUDIO_URL || '**/MX029/MX029.m3u8';
   await page.route(manifest, (route) => route.fulfill({status: 404, body: 'Missing'}));
   await page.goto(base + '/mixes/?mx=MX029');
