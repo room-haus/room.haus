@@ -5,7 +5,7 @@ export default function PlaybackScope({audio, active}) {
   useEffect(() => {
     const canvas = ref.current;
     const context = canvas.getContext('2d');
-    if (!context || !active) return;
+    if (!context || !active || !audio?.analyser) return;
     let frame;
     let last = 0;
     const draw = (now) => {

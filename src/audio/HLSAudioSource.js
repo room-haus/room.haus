@@ -1,4 +1,4 @@
-import {attachStream} from './attachStream';
+import {attachStream, usesNativeHLS} from './attachStream';
 import AudioBand from './AudioBand';
 import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 import {FREQ_BIN_COUNT} from './constants';
@@ -26,7 +26,7 @@ export default class HLSAudioSource {
 
   fail(message) {
     this.releaseMedia();
-    this.update({status: 'error', error: message, playing: false});
+    this.update({status: 'error', error: message, playing: false, time: 0, duration: 0});
   }
 
   createMedia() {
@@ -57,7 +57,11 @@ export default class HLSAudioSource {
 
     // The browser media element can play by itself when Web Audio is unavailable.
     const Context = window.AudioContext || window.webkitAudioContext;
-    if (Context) {
+    // WebKit's native HLS decoder can advance the playhead without supplying
+    // Web Audio samples. Preserve its native output. Chromium supplies samples
+    // on both native HLS and MediaSource, so it keeps the reactive scenes.
+    const nativeWebKit = navigator.vendor === 'Apple Computer, Inc.' && usesNativeHLS(media, this.url);
+    if (Context && !nativeWebKit) {
       try {
         this.context = new Context();
         this.analyser = this.context.createAnalyser();

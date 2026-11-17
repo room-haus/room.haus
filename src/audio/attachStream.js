@@ -1,9 +1,15 @@
+const isHls = (url) => /\.m3u8(?:$|[?#])/i.test(url);
+
+export function usesNativeHLS(media, url) {
+  return isHls(url) && Boolean(media.canPlayType('application/vnd.apple.mpegurl'));
+}
+
 // Native HLS must attach synchronously so Safari can honor the original play gesture.
 export function attachStream(media, url, onReady, onError) {
   let closed = false;
   let hls;
   const fail = (reason) => { if (!closed) onError(reason); };
-  if (!/\.m3u8(?:$|[?#])/i.test(url) || media.canPlayType('application/vnd.apple.mpegurl')) {
+  if (!isHls(url) || usesNativeHLS(media, url)) {
     media.src = url;
     onReady();
   } else {
