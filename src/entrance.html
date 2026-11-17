@@ -27,6 +27,16 @@
       <% if (home) { %>
       <section class="type-study" aria-label="Virtual Imprints punctuation study">
         <div class="study-rules" aria-hidden="true"></div>
+        <div class="study-overprint" aria-hidden="true">
+          <div class="split-imprint"><span>IMPRINTS</span><span>IMPRINTS</span></div>
+          <div class="season-screen">S/S</div>
+          <div class="bracket-fan">
+            <% for (let row = 0; row < 13; row++) { %>
+            <span style="--row: <%= row %>"><%= '[('.repeat(3 + row) %><%= ')]'.repeat(3 + row) %></span>
+            <% } %>
+          </div>
+          <div class="proof-slug">/// (( VIRTUAL IMPRINTS )) /// ROOM.HAUS /// (( VIRTUAL IMPRINTS )) ///</div>
+        </div>
         <div class="study-bleed" aria-hidden="true">
           <div class="study-ticker"><div class="ticker-track"><% for (let copy = 0; copy < 2; copy++) { %><span><%= '(( VIRTUAL IMPRINTS )) ((ROOM.HAUS)) '.repeat(8) %></span><% } %></div></div>
           <div><%= '(( )) [[ ]] {{ }} //// '.repeat(15) %></div>
