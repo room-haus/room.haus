@@ -156,13 +156,9 @@ const adjustPoints = (points, t) => {
   }
 };
 
-const generateTubes = (scene, instance, points) => {
-  const params = {path: points, radius: 0.01, updatable: true};
-  if (instance) {
-    params.instance = instance;
-    return BABYLON.MeshBuilder.CreateTube(null, params);
-  }
-  const lines = BABYLON.MeshBuilder.CreateTube('tube', params, scene);
+const generateTube = (scene, points) => {
+  // The wire is 0.02 scene units across. Its path is fixed and rotates as one mesh.
+  const lines = BABYLON.MeshBuilder.CreateTube('tube', {path: points, radius: 0.01, tessellation: 12}, scene);
   lines.material = new BABYLON.StandardMaterial(null, scene);
   const base = 255;
   const color = new BABYLON.Color3(94 / base, 132 / base, 241 / base);
@@ -234,7 +230,7 @@ export const build = ({scene, audio}) => {
   for (let i = 0; i < numPoints; i++) {
     points.push(allPoints[i * offset]);
   }
-  let lines = generateTubes(scene, null, points);
+  const lines = generateTube(scene, points);
   generateWater(scene, [lines, ...CD.getChildren()]);
 
   const gl = new BABYLON.GlowLayer('glow', scene, {mainTextureSamples: 8});

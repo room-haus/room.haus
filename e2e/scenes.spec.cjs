@@ -21,7 +21,12 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
       await play.focus();
       await page.keyboard.press('Space');
     }
-    await expect.poll(async () => Number(await page.getByRole('slider', {name: 'Seek playback'}).inputValue())).toBeGreaterThan(1);
+    const seek = page.getByRole('slider', {name: 'Seek playback'});
+    try {
+      await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(1);
+    } catch (error) {
+      throw new Error('Playback stopped at ' + await seek.inputValue() + 's. ' + await page.locator('.transport').innerText(), {cause: error});
+    }
     if (id === 'MX029') {
       const background = page.locator('.listening-scene video');
       await expect.poll(() => background.evaluate(video => video.videoWidth > 0 && video.currentTime > 0), {timeout: 30000}).toBe(true);
