@@ -4,7 +4,8 @@ module.exports = defineConfig({
   testDir: 'e2e',
   timeout: 70000,
   expect: {timeout: 18000},
-  workers: 2,
+  // Hosted browsers share the runner's software GPU and audio device.
+  workers: process.env.CI ? 1 : 2,
   reporter: 'list',
   use: {reducedMotion: 'reduce'},
   projects: [
