@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-360 -260 720 520">
+  <title>Punctuation study</title>
+  <defs>
+    <path id="contour" d="M -248 32 C -264 -39 -209 -107 -123 -126 C -43 -149 -5 -108 45 -118 C 122 -133 193 -132 222 -68 C 271 27 180 123 68 135 C -63 151 -220 143 -248 32 Z"/>
+    <text id="impression" font-family="monospace" font-size="14" font-weight="bold">
+      <textPath xlink:href="#contour" textLength="1216" lengthAdjust="spacingAndGlyphs">((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}((()))[]{}</textPath>
+    </text>
+  </defs>
+  <g fill="#173baa">
+    <use xlink:href="#impression" transform="translate(-45.0 30.0) rotate(-47.0) scale(0.940 0.660)"/>
+    <use xlink:href="#impression" transform="translate(-41.7 27.4) rotate(-44.2) scale(0.945 0.671)"/>
+    <use xlink:href="#impression" transform="translate(-38.4 24.8) rotate(-41.5) scale(0.950 0.683)"/>
+    <use xlink:href="#impression" transform="translate(-35.2 22.2) rotate(-38.7) scale(0.954 0.694)"/>
+    <use xlink:href="#impression" transform="translate(-31.9 19.7) rotate(-36.0) scale(0.959 0.706)"/>
+    <use xlink:href="#impression" transform="translate(-28.6 17.1) rotate(-33.2) scale(0.964 0.717)"/>
+    <use xlink:href="#impression" transform="translate(-25.3 14.5) rotate(-30.4) scale(0.969 0.728)"/>
+    <use xlink:href="#impression" transform="translate(-22.1 11.9) rotate(-27.7) scale(0.974 0.740)"/>
+    <use xlink:href="#impression" transform="translate(-18.8 9.3) rotate(-24.9) scale(0.979 0.751)"/>
+    <use xlink:href="#impression" transform="translate(-15.5 6.7) rotate(-22.2) scale(0.983 0.762)"/>
+    <use xlink:href="#impression" transform="translate(-12.2 4.1) rotate(-19.4) scale(0.988 0.774)"/>
+    <use xlink:href="#impression" transform="translate(-9.0 1.6) rotate(-16.7) scale(0.993 0.785)"/>
+    <use xlink:href="#impression" transform="translate(-5.7 -1.0) rotate(-13.9) scale(0.998 0.797)"/>
+    <use xlink:href="#impression" transform="translate(-2.4 -3.6) rotate(-11.1) scale(1.003 0.808)"/>
+    <use xlink:href="#impression" transform="translate(0.9 -6.2) rotate(-8.4) scale(1.008 0.819)"/>
+    <use xlink:href="#impression" transform="translate(4.1 -8.8) rotate(-5.6) scale(1.012 0.831)"/>
+    <use xlink:href="#impression" transform="translate(7.4 -11.4) rotate(-2.9) scale(1.017 0.842)"/>
+    <use xlink:href="#impression" transform="translate(10.7 -14.0) rotate(-0.1) scale(1.022 0.853)"/>
+    <use xlink:href="#impression" transform="translate(14.0 -16.6) rotate(2.7) scale(1.027 0.865)"/>
+    <use xlink:href="#impression" transform="translate(17.2 -19.1) rotate(5.4) scale(1.032 0.876)"/>
+    <use xlink:href="#impression" transform="translate(20.5 -21.7) rotate(8.2) scale(1.037 0.888)"/>
+    <use xlink:href="#impression" transform="translate(23.8 -24.3) rotate(10.9) scale(1.041 0.899)"/>
+    <use xlink:href="#impression" transform="translate(27.1 -26.9) rotate(13.7) scale(1.046 0.910)"/>
+    <use xlink:href="#impression" transform="translate(30.3 -29.5) rotate(16.4) scale(1.051 0.922)"/>
+    <use xlink:href="#impression" transform="translate(33.6 -32.1) rotate(19.2) scale(1.056 0.933)"/>
+    <use xlink:href="#impression" transform="translate(36.9 -34.7) rotate(22.0) scale(1.061 0.944)"/>
+    <use xlink:href="#impression" transform="translate(40.2 -37.2) rotate(24.7) scale(1.066 0.956)"/>
+    <use xlink:href="#impression" transform="translate(43.4 -39.8) rotate(27.5) scale(1.070 0.967)"/>
+    <use xlink:href="#impression" transform="translate(46.7 -42.4) rotate(30.2) scale(1.075 0.979)"/>
+    <use xlink:href="#impression" transform="translate(50.0 -45.0) rotate(33.0) scale(1.080 0.990)"/>
+  </g>
+</svg>

@@ -46,41 +46,6 @@
   text-transform: uppercase;
 }
 
-.imprint-poster {
-  min-width: 0;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  margin: 0;
-  background: #070707;
-  color: var(--stock);
-}
-.imprint-art { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
-.imprint-poster figcaption { width: 100%; }
-.imprint-title {
-  width: fit-content;
-  max-width: 100%;
-  padding: .12em .16em .07em;
-  background: var(--stock);
-  color: var(--black);
-  font: 400 clamp(2.4rem, 5.3vw, 7rem)/.92 var(--display);
-  letter-spacing: -.045em;
-  text-transform: uppercase;
-}
-
-.imprint-credit {
-  display: flex;
-  justify-content: space-between;
-  gap: .5em;
-  padding: .75rem var(--inset);
-  border-top: 1px solid #686964;
-  background: var(--black);
-  font: .75rem/1.2 var(--utility);
-  text-transform: uppercase;
-}
-
 .entrance-nav {
   container-type: inline-size;
   display: grid;
@@ -132,10 +97,6 @@
 @media (max-width: 680px) {
   .entrance { grid-template: auto minmax(12rem, 1fr) auto / minmax(0, 1fr); }
   .entrance-home img { width: 42vw; }
-  .imprint-poster { min-height: clamp(13rem, 33svh, 25rem); }
-  .imprint-art { object-position: 50% 38%; }
-  .imprint-title { font-size: clamp(2.1rem, 9.6vw, 4.5rem); }
-  .imprint-credit { font-size: .67rem; }
   .entrance-nav a { padding: .7rem var(--inset); }
   .section-label { display: flex; align-items: baseline; gap: .6rem; }
   .section-name { font-size: clamp(2.2rem, 10.7vw, 4.3rem); }
@@ -148,4 +109,135 @@
   .section-label { display: grid; gap: .2rem; }
   .section-name { font-size: clamp(1.4rem, 12cqi, 2.35rem); }
   .entrance-arrow { font-size: .75rem; }
+}
+
+/* Keep the overprint inside the artwork. The navigation sits on its own paper strip. */
+.entrance--study {
+  container: splash / inline-size;
+  grid-template: auto minmax(23rem, 1fr) auto / minmax(0, 1fr);
+  gap: 0;
+}
+.entrance--study .entrance-header { align-items: center; }
+.entrance--study .entrance-home img { width: clamp(10rem, 25vw, 28rem); }
+
+.type-study {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  border-block: 1px solid var(--black);
+  background: #e6e5db;
+  container-type: inline-size;
+}
+.study-rules, .study-bleed { position: absolute; inset: 0; pointer-events: none; }
+.study-rules {
+  background:
+    linear-gradient(to right, #16191555 1px, transparent 1px) 0 0 / 16.6667% 100%,
+    linear-gradient(to bottom, #16191555 1px, transparent 1px) 0 0 / 100% 25%;
+}
+.study-rules::after {
+  content: '';
+  position: absolute;
+  top: 7%;
+  left: 8.333%;
+  width: 33.333%;
+  height: 55%;
+  border-top: 1px solid #16191577;
+  border-right: 1px solid #16191577;
+}
+.study-columns {
+  position: absolute;
+  right: 0;
+  bottom: 11%;
+  width: 33.333%;
+  height: 12%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  overflow: hidden;
+  color: #393932;
+  font: 400 clamp(.61rem, .72cqi, .85rem)/.94 var(--utility);
+  letter-spacing: -.045em;
+}
+.study-columns span { padding: .25em .55em; border-top: 1px solid; }
+.study-bleed {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: nowrap;
+  color: var(--black);
+  font: 400 clamp(.7rem, 1cqi, 1.35rem)/.83 var(--utility);
+  letter-spacing: -.065em;
+}
+.study-bleed > :first-child {
+  transform: translateX(-3.7em);
+  padding-block: .45em;
+  border-bottom: 1px solid var(--black);
+}
+.study-bleed > :last-child {
+  margin-left: -.75em;
+  font: 400 8.2cqi/.61 var(--display);
+  letter-spacing: -.12em;
+  color: #73736b;
+}
+.study-title {
+  position: absolute;
+  top: 22%;
+  left: -.037em;
+  margin: 0;
+  font: 400 15.7cqi/.755 var(--display);
+  letter-spacing: -.065em;
+}
+.study-form {
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  width: 79%;
+  height: auto;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  pointer-events: none;
+}
+.study-proof {
+  position: absolute;
+  left: 1.2%;
+  bottom: 8%;
+  display: grid;
+  font: 400 clamp(.65rem, 1.28cqi, 1.3rem)/.83 var(--utility);
+  letter-spacing: -.09em;
+}
+
+.entrance--study .entrance-nav {
+  grid-template: auto / minmax(0, 1.18fr) repeat(2, minmax(0, 1fr));
+  border-bottom: 2px solid var(--black);
+  background: var(--stock);
+  color: var(--black);
+}
+.entrance--study .entrance-nav a {
+  padding: clamp(1rem, 2.3vw, 2.75rem) clamp(.8rem, 1.6vw, 2rem);
+  gap: .3rem;
+  flex-wrap: wrap;
+}
+.entrance--study .entrance-nav a + a { border-top: 0; border-left: 1px solid var(--black); }
+.entrance--study .entrance-nav a[href='/ss-2026/'] { background: var(--blue); color: white; }
+.entrance--study .section-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: .5em; }
+.entrance--study .section-name { font-size: clamp(2.1rem, 4.15vw, 5.5rem); }
+.entrance--study .entrance-arrow { align-self: center; }
+.entrance--study .entrance-nav a:hover,
+.entrance--study .entrance-nav a:focus-visible { background: var(--black); color: white; }
+
+@media (max-width: 680px) {
+  .entrance--study { grid-template-rows: auto minmax(17rem, 1fr) auto; }
+  .entrance--study .entrance-home img { width: clamp(8.5rem, 42vw, 15rem); }
+  .study-columns { bottom: 8%; width: 33.333%; height: 9%; grid-template-columns: 1fr; }
+  .study-columns span + span { display: none; }
+  .study-title { top: 11%; font-size: 26cqi; }
+  .study-form { top: 59%; left: 61%; width: min(135%, 72svh); }
+  .study-bleed > :last-child { font-size: 17cqi; }
+  .study-proof { bottom: 8%; }
+}
+
+@container splash (max-width: 40em) {
+  .entrance--study .entrance-nav { grid-template-columns: minmax(0, 1fr); }
+  .entrance--study .entrance-nav a { padding: .65rem .85rem; }
+  .entrance--study .entrance-nav a + a { border-left: 0; border-top: 1px solid var(--black); }
+  .entrance--study .section-name { font-size: clamp(1.8rem, 8.8vw, 3rem); }
 }

@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://room.haus<%= page.path %>" />
   </head>
   <body>
-    <main class="entrance">
+    <main class="entrance<%= home ? ' entrance--study' : '' %>">
       <header class="entrance-header">
         <% if (home) { %><h1><% } %>
         <a class="entrance-home" href="/" aria-label="<%= home ? 'ROOM' : 'ROOM home' %>">
@@ -25,13 +25,23 @@
       </header>
 
       <% if (home) { %>
-      <figure class="imprint-poster">
-        <img class="imprint-art" src="<%= require('./images/mix-art/rm004.jpg') %>" alt="Black-and-white sleeve for ilikeit" width="500" height="500" />
-        <figcaption>
-          <p class="imprint-title">Virtual Imprints</p>
-          <div class="imprint-credit"><span>ROOM004</span><span>Sir E.U &amp; Tooth Choir</span></div>
-        </figcaption>
-      </figure>
+      <section class="type-study" aria-label="Virtual Imprints punctuation study">
+        <div class="study-rules" aria-hidden="true"></div>
+        <div class="study-bleed" aria-hidden="true">
+          <div><%= '((( ROOM.HAUS ))) (( VIRTUAL IMPRINTS )) '.repeat(10) %></div>
+          <div><%= '(( )) [[ ]] {{ }} //// '.repeat(15) %></div>
+        </div>
+        <div class="study-columns" aria-hidden="true">
+          <% for (const line of ['ROOM.HAUS / VIRTUAL IMPRINTS ', '(( { [ / ] } )) ']) { %>
+          <span><%= line.repeat(18) %></span>
+          <% } %>
+        </div>
+        <p class="study-title">Virtual<br />Imprints</p>
+        <img class="study-form" src="<%= require('./images/punctuation-study.svg') %>" alt="A cobalt loop built from tightly layered rows of brackets and parentheses" width="720" height="520" />
+        <div class="study-proof" aria-hidden="true">
+          <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>
+        </div>
+      </section>
       <% } else { %>
       <section class="section-poster">
         <h1><%- page.title %></h1><p><%- page.note %></p>
