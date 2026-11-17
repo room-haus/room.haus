@@ -4,9 +4,10 @@ import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 import {FREQ_BIN_COUNT} from './constants';
 
 export default class HLSAudioSource {
-  constructor(url) {
+  constructor(url, startTime = 0) {
     this.url = url;
-    this.snapshot = {playing: false, status: url ? 'idle' : 'unavailable', time: 0, duration: 0, error: null};
+    this.pendingTime = startTime;
+    this.snapshot = {playing: false, status: url ? 'idle' : 'unavailable', time: startTime, duration: 0, error: null};
     this.bandOptions = new Map();
     this.bands = new Map();
     this.onsets = new Set();
@@ -25,8 +26,14 @@ export default class HLSAudioSource {
   }
 
   fail(message) {
+    this.pendingTime = this.position();
     this.releaseMedia();
-    this.update({status: 'error', error: message, playing: false, time: 0, duration: 0});
+    this.update({status: 'error', error: message, playing: false, time: this.pendingTime, duration: 0});
+  }
+
+  position() {
+    if (this.pendingTime > 0) return this.pendingTime;
+    return Number.isFinite(this.media?.currentTime) ? this.media.currentTime : this.snapshot.time;
   }
 
   createMedia() {
@@ -34,12 +41,22 @@ export default class HLSAudioSource {
     this.media = media;
     media.preload = 'none';
     media.crossOrigin = 'anonymous';
-    const syncTime = () => this.update({
-      time: Number.isFinite(media.currentTime) ? media.currentTime : 0,
-      duration: Number.isFinite(media.duration) ? media.duration : 0,
-    });
+    const syncTime = () => {
+      const duration = Number.isFinite(media.duration) ? media.duration : 0;
+      if (this.pendingTime > 0 && media.readyState >= 1 && duration > 0) {
+        // A stale or out-of-range link starts at the beginning of the available recording.
+        const target = this.pendingTime < duration ? this.pendingTime : 0;
+        try {
+          media.currentTime = target;
+          if (Math.abs(media.currentTime - target) < 1) this.pendingTime = 0;
+        } catch {
+          // Some native HLS streams expose their seek range after loadedmetadata.
+        }
+      }
+      this.update({time: this.position(), duration});
+    };
     const events = {
-      timeupdate: syncTime, durationchange: syncTime, loadedmetadata: syncTime,
+      timeupdate: syncTime, durationchange: syncTime, loadedmetadata: syncTime, canplay: syncTime,
       playing: () => {
         clearTimeout(this.timeout);
         this.update({playing: true, status: 'playing', error: null});

@@ -121,7 +121,6 @@ const generateRoom = (scene) => {
   const room = new BABYLON.MeshBuilder.CreateBox('room', roomMeshOptions, scene);
   room.position = new BABYLON.Vector3(0, 0, 0);
   // room.updateFacetData();
-  // const url = 'https://roomhauscdnprd.blob.core.windows.net/assets/MX046/video/background.m3u8';
 
   // const vid = document.createElement('video');
   // const hls = new HLS();

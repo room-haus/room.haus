@@ -3,6 +3,7 @@ import usePlayer from '../audio/usePlayer';
 import SiteHeader from '../components/SiteHeader';
 import Transport from '../components/Transport';
 import ErrorBoundary from '../components/ErrorBoundary';
+import {listeningLink, openingPosition, savePosition} from './listeningPosition';
 
 const ListeningScene = lazy(() => import(/* webpackChunkName: "listening-scene" */ '../components/ListeningScene'));
 const motionQuery = '(prefers-reduced-motion: reduce)';
@@ -21,13 +22,24 @@ function StillArt({record}) {
 }
 
 export default function Player({record, section}) {
-  const [trackIndex, setTrackIndex] = useState(0);
+  const [position, setPosition] = useState(() => openingPosition(record));
+  const {trackIndex} = position;
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia(motionQuery).matches);
   const [scene, setScene] = useState(() => !matchMedia(motionQuery).matches);
   const [sceneFailed, setSceneFailed] = useState(false);
   const stage = useRef(null);
   const stream = record.tracks ? record.tracks[trackIndex].streamURL : record.audioSourceURL;
-  const player = usePlayer(stream);
+  const remember = useCallback((seconds) => savePosition(record, trackIndex, seconds), [record, trackIndex]);
+  const player = usePlayer(stream, position.seconds, remember);
+  const selectTrack = (index) => {
+    if (index === trackIndex) return;
+    savePosition(record, index, 0);
+    setPosition({trackIndex: index, seconds: 0, shared: false});
+  };
+  const startOver = () => {
+    savePosition(record, trackIndex, 0);
+    setPosition({trackIndex, seconds: 0, shared: false});
+  };
   const sceneError = useCallback(() => {
     setSceneFailed(true);
     setScene(false);
@@ -87,7 +99,10 @@ export default function Player({record, section}) {
         record={record}
         player={player}
         trackIndex={trackIndex}
-        selectTrack={setTrackIndex}
+        selectTrack={selectTrack}
+        shared={position.shared}
+        startOver={startOver}
+        getLink={() => listeningLink(record, trackIndex, player.audio.position())}
         reducedMotion={reducedMotion}
       />
     </div>

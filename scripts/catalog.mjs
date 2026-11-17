@@ -1,7 +1,9 @@
 import fs from 'node:fs';
-import mixes from '../src/content/mixes/records.json' with {type: 'json'};
-import releases from '../src/content/releases/records.json' with {type: 'json'};
-export {mixes, releases};
+import mixData from '../src/content/mixes/records.json' with {type: 'json'};
+import releaseData from '../src/content/releases/records.json' with {type: 'json'};
+import {withMedia} from '../src/content/media.mjs';
+export const mixes = mixData.map(withMedia);
+export const releases = releaseData.map(withMedia);
 
 export const records = [...mixes, ...releases];
 export const routeOf = (record) => (record.slug ? '/releases/' + record.slug + '/' : '/mixes/' + record.id + '/');
@@ -42,7 +44,7 @@ export function validateCatalog() {
     }
   }
   for (const {url} of streams) {
-    if (!url || new URL(url).protocol !== 'https:' || !new URL(url).pathname.endsWith('.m3u8')) {
+    if (!url || !new URL(url).pathname.endsWith('.m3u8')) {
       throw Error('Invalid stream: ' + url);
     }
   }

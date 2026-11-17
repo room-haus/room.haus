@@ -2,14 +2,15 @@ import {mkdir, readdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {records, mixes, routeOf, coverName, validateCatalog} from './catalog.mjs';
 import {cloudFrontSource} from './routing.mjs';
+import {archiveBody, assetLookup, escape, recordBody} from './static-pages.mjs';
 
 const site = 'https://room.haus';
 const dist = path.resolve('dist');
 validateCatalog();
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
-const files = await readdir(path.join(dist, 'assets'));
-const escape = (value) =>
-  String(value).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c]);
+const asset = assetLookup(await readdir(path.join(dist, 'assets')));
+const root = /(<div id=(?:"root"|'root'|root)>)(?:<!--catalog-->[\s\S]*?<!--\/catalog-->)?<\/div>/i;
+if (!root.test(template)) throw Error('Missing archive mount in the HTML template');
 const pages = [
   ['/', 'ROOM', 'Independent mixes and releases from ROOM.'],
   ['/mixes/', 'Mixes | ROOM', 'Browse the ROOM mix archive.'],
@@ -31,10 +32,7 @@ for (const [route, title, description, record] of pages) {
     'og:url': site + route,
   };
   if (record) {
-    const name = coverName(record);
-    const cover = files.find((file) => file.startsWith(name + '.') && file.endsWith('.jpg'));
-    if (!cover) throw Error('Missing emitted cover: ' + name);
-    tags['og:image'] = site + '/assets/' + cover;
+    tags['og:image'] = site + asset(coverName(record) + '.jpg');
     tags['og:image:alt'] = record.artist + ' — ' + record.id;
   }
   const head = [
@@ -45,16 +43,25 @@ for (const [route, title, description, record] of pages) {
   ].join('\n');
   const dir = path.join(dist, route);
   await mkdir(dir, {recursive: true});
+  const body = record ? recordBody(record, asset) : archiveBody(route === '/releases/' ? 'releases' : 'mixes', asset);
   const html = template
+    .replace(/<!--catalog-head-->[\s\S]*?<!--\/catalog-head-->/, '')
     .replace(/<title[^>]*>[\s\S]*?<\/title>/i, '')
     .replace(/<meta\b[^>]*name=["']description["'][^>]*>/gi, '')
-    .replace('</head>', head + '\n</head>');
+    .replace('</head>', () => '<!--catalog-head-->' + head + '<!--/catalog-head-->\n</head>')
+    .replace(root, (_, opening) => opening + '<!--catalog-->' + body + '<!--/catalog--></div>');
   await writeFile(path.join(dir, 'index.html'), html);
 }
+await writeFile(
+  path.join(dist, 'sitemap.xml'),
+  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    pages.map(([route]) => '  <url><loc>' + escape(site + route) + '</loc></url>').join('\n') +
+    '\n</urlset>\n',
+);
 await writeFile(
   path.join(dist, '_redirects'),
   mixes.map((record) => '/mixes/ mx=' + record.id + ' ' + routeOf(record) + ' 301!').join('\n') + '\n',
 );
 await mkdir('release', {recursive: true});
 await writeFile('release/room-routes.js', cloudFrontSource());
-console.log('Built ' + pages.length + ' public pages and the CDN route table.');
+console.log('Built ' + pages.length + ' public pages, the sitemap and the CDN route table.');

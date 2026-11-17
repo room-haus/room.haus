@@ -1,3 +1,4 @@
+import {mediaUrl} from '../../content/media.mjs';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import VideoGrid from '../../components/VideoGrid';
@@ -23,8 +24,8 @@ export const Background = (props) => (
     columns={2}
     rows={2}
     videos={[
-      'https://roomhauscdnprd.blob.core.windows.net/assets/MX022/videos/starry/MX022BGV-starry.m3u8',
-      'https://roomhauscdnprd.blob.core.windows.net/assets/MX022/videos/static/MX022BGV-static.m3u8',
+      mediaUrl('assets/MX022/videos/starry/MX022BGV-starry.m3u8'),
+      mediaUrl('assets/MX022/videos/static/MX022BGV-static.m3u8'),
     ]}
   />
 );

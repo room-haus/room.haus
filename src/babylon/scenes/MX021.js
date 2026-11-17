@@ -1,3 +1,4 @@
+import {mediaUrl} from '../../content/media.mjs';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import {VideoBackgroundScene} from './templates/VideoBackground';
@@ -15,4 +16,4 @@ export const build = ({scene}) => {
   return scene;
 };
 
-export const Background = () => <VideoBackgroundScene manifestUrl="https://roomhauscdnprd.blob.core.windows.net/assets/MX021BGV/MX021BGV.m3u8" />;
+export const Background = () => <VideoBackgroundScene manifestUrl={mediaUrl('assets/MX021BGV/MX021BGV.m3u8')} />;

@@ -4,9 +4,10 @@ import NotFoundPage from './404';
 import {readRoute} from './navigation';
 import SiteHeader from '../components/SiteHeader';
 
-const Player = lazy(() => import(/* webpackChunkName: "player" */ './Player'));
+export const loadPlayer = () => import(/* webpackChunkName: "player" */ './Player');
+const LazyPlayer = lazy(loadPlayer);
 
-export default function App() {
+export default function App({Player = LazyPlayer}) {
   const [route, setRoute] = useState(readRoute);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function App() {
         </>
       }
     >
-      <Player key={route.record.id} record={route.record} section={route.section} />
+      <Player key={route.record.id + ':' + (route.revision || 0)} record={route.record} section={route.section} />
     </Suspense>
   );
 }

@@ -71,13 +71,19 @@ def main():
     target = args.directory / record["id"]
     if target.exists():
         parser.error("Backup destination already exists: " + str(target))
-    tracks = record.get("tracks") or [{"name": record.get("name",record["artist"]), "streamURL": record["audioSourceURL"]}]
+    defaults = json.loads((ROOT / "src/content/media-defaults.json").read_text())
+    origin = (os.environ.get("ROOM_MEDIA_ORIGIN") or defaults["origin"]).rstrip("/") + "/"
+    tracks = record.get("tracks") or [{"name": record.get("name", record["artist"]), "streamPath": record["audioPath"]}]
     with tempfile.TemporaryDirectory(prefix="." + record["id"] + "-", dir=args.directory) as staging:
         output = Path(staging) / record["id"]
         output.mkdir()
         manifests = []
         for i, track in enumerate(tracks, 1):
-            manifests.append({**backup_playlist(track["streamURL"], output / f"track-{i:02}"), "name": track["name"]})
+            path = track["streamPath"]
+            url = urljoin(origin, path)
+            if path == defaults["mx029Audio"]:
+                url = os.environ.get("ROOM_MX029_AUDIO_URL") or url
+            manifests.append({**backup_playlist(url, output / f"track-{i:02}"), "name": track["name"]})
         (output / "backup.json").write_text(json.dumps({"record":record["id"], "artist":record["artist"], "tracks":manifests},indent=2) + "\n")
         os.rename(output,target)
     print(f"{target}: {len(manifests)} playlist(s), {sum(len(m['files']) for m in manifests)} segments")

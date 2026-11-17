@@ -12,9 +12,20 @@ Use `npm test` for catalog and routing checks, `npm run lint` for source checks,
 
 Edit the records in `src/content/mixes/records.json` and `src/content/releases/records.json`. Each record refers to the keys exported by the cover and CD label indexes in `src/images`. Retain each published ID and release slug so shared links keep working. The build checks the catalog, creates a static page with cover and artist metadata for each recording, and emits a CDN route function. It accepts both historic mix query links and canonical record paths.
 
-Run `npm run check:media` to check all playlists, their first and last segments, and cross-origin access. A scheduled workflow also runs this check weekly. Audio lives on the ROOM Azure Blob host. Preserve the catalog paths, playlist files and referenced segments together when migrating. Serve playlists as `application/vnd.apple.mpegurl`, MPEG transport streams as `video/mp2t`, support range requests, and allow the intended player origin through CORS. Confirm artist/label permissions and font embedding rights with the archive owner before moving distribution to another host.
+Run `npm run check:media` to check all playlists, their first and last segments, and cross-origin access. A scheduled workflow also runs this check weekly. Audio and scene videos default to the ROOM Azure Blob host. Set `ROOM_MEDIA_ORIGIN` at build time to use a mirror of the catalog paths. The origin can include a directory prefix. The check and release workflows read these settings from GitHub repository variables. Set `ROOM_MX029_AUDIO_URL` to override only the MX029 audio playlist. Preserve the catalog paths, playlist files and referenced segments together when migrating. Serve playlists as `application/vnd.apple.mpegurl`, MPEG transport streams as `video/mp2t`, support range requests, and allow the intended player origin through CORS. Confirm artist/label permissions and font embedding rights with the archive owner before moving distribution to another host.
 
-To make a portable copy of one record, run `python3 scripts/backup-recording.py MX029 /path/to/backup`. It copies each complete HLS playlist and its segments with their original bytes and relative names and writes a checksum inventory. Multi-track releases get one folder per track. Open a track's `index.m3u8` in a local HLS player. To rehost, upload those folders together, point the corresponding audio URLs at the new playlists, and re-run the media and browser checks. These are distribution encodes. Ask the archive owner for source masters, original video and artwork, artist agreements, and registrar/DNS access as part of the handoff.
+To make a portable copy of one record, run `python3 scripts/backup-recording.py MX029 /path/to/backup`. It copies each complete HLS playlist and its segments with their original bytes and relative names and writes a checksum inventory. Multi-track releases get one folder per track. Open a track's `index.m3u8` in a local HLS player. To rehost, upload those folders together, set the media origin (or the MX029 playlist override) to the new location, and re-run the media and browser checks. These are distribution encodes. Ask the archive owner for source masters, original video and artwork, artist agreements, and registrar/DNS access as part of the handoff.
+
+To verify just the portable MX029 sample, point the preview server at the backup’s track directory and build with the local playlist URL. The browser tests start the preview server automatically. Run these commands in the same shell.
+
+```sh
+export ROOM_MX029_SAMPLE_DIR="/path/to/backup/MX029/track-01"
+export ROOM_MX029_AUDIO_URL="http://127.0.0.1:4173/sample/mx029/index.m3u8"
+npm run build
+npm run test:browser -- -g 'portable MX029'
+unset ROOM_MX029_SAMPLE_DIR ROOM_MX029_AUDIO_URL
+npm run build
+```
 
 ## Publish or restore
 

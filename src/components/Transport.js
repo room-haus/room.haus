@@ -14,9 +14,22 @@ function PlayIcon({playing}) {
   );
 }
 
-export default function Transport({record, player, trackIndex, selectTrack, reducedMotion}) {
+export default function Transport({
+  record,
+  player,
+  trackIndex,
+  selectTrack,
+  reducedMotion,
+  shared,
+  startOver,
+  getLink,
+}) {
   const [showTracks, setShowTracks] = useState(false);
+  const [share, setShare] = useState(null);
   const listButton = useRef(null);
+  const shareButton = useRef(null);
+  const linkField = useRef(null);
+  const playButton = useRef(null);
   const {audio, time, duration, playing, status, error, seek} = player;
   const readyToSeek = duration > 0 && Number.isFinite(duration);
   const failed = status === 'error' || status === 'unavailable';
@@ -27,6 +40,29 @@ export default function Transport({record, player, trackIndex, selectTrack, redu
   const tracks = record.tracks || [];
   const fallbackURL = record.soundcloud || record.purchaseLink;
   const selected = tracks[trackIndex];
+  const copyLink = async () => {
+    const url = getLink();
+    const seconds = Number(new URL(url).searchParams.get('t'));
+    try {
+      await navigator.clipboard.writeText(url);
+      setShare({copied: true, seconds});
+    } catch {
+      setShare({url});
+    }
+  };
+  const closeLink = () => {
+    setShare(null);
+    shareButton.current?.focus();
+  };
+  useEffect(() => {
+    if (share?.url) {
+      linkField.current?.focus();
+      linkField.current?.select();
+    }
+    if (!share?.copied) return;
+    const timeout = setTimeout(() => setShare(null), 3500);
+    return () => clearTimeout(timeout);
+  }, [share]);
   const closeTracks = () => {
     setShowTracks(false);
     listButton.current?.focus();
@@ -57,6 +93,7 @@ export default function Transport({record, player, trackIndex, selectTrack, redu
                 <button
                   aria-pressed={trackIndex === index}
                   onClick={() => {
+                    setShare(null);
                     selectTrack(index);
                     closeTracks();
                   }}>
@@ -84,7 +121,40 @@ export default function Transport({record, player, trackIndex, selectTrack, redu
           </>
         )}
         {loading && <span>Loading audio…</span>}
+        {share?.copied && <span>Link copied at {timestamp(share.seconds)}.</span>}
       </div>
+      {share?.url && (
+        <div
+          className="share-fallback"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') closeLink();
+          }}>
+          <label htmlFor="listening-link">Copy this link</label>
+          <input
+            ref={linkField}
+            id="listening-link"
+            aria-label="Listening link"
+            readOnly
+            value={share.url}
+            onFocus={(event) => event.target.select()}
+          />
+          <button onClick={closeLink}>Done</button>
+        </div>
+      )}
+      {status === 'idle' && time > 0 && (
+        <div className="opening-position">
+          <span>
+            {shared ? 'Shared' : 'Resume'} at {timestamp(time)}
+          </span>
+          <button
+            onClick={() => {
+              startOver();
+              playButton.current?.focus();
+            }}>
+            Start over
+          </button>
+        </div>
+      )}
       <div className="transport-row">
         <div className="track-meta">
           <img src={record.art} alt="" width="58" height="58" />
@@ -95,6 +165,7 @@ export default function Transport({record, player, trackIndex, selectTrack, redu
           </div>
         </div>
         <button
+          ref={playButton}
           className="play-action"
           disabled={unavailable}
           aria-label={action}
@@ -123,22 +194,32 @@ export default function Transport({record, player, trackIndex, selectTrack, redu
             <span>{readyToSeek ? timestamp(duration) : '–:––'}</span>
           </div>
         </div>
-        {tracks.length > 0 ? (
+        <div className="transport-links">
+          {tracks.length > 0 ? (
+            <button
+              ref={listButton}
+              className="tracks-action"
+              aria-expanded={showTracks}
+              aria-controls="release-tracks"
+              onClick={() => setShowTracks(!showTracks)}>
+              Tracklist <span>{String(tracks.length).padStart(2, '0')}</span>
+            </button>
+          ) : (
+            fallbackURL && (
+              <a className="external-listen" href={fallbackURL}>
+                SoundCloud <span aria-hidden="true">↗</span>
+              </a>
+            )
+          )}
           <button
-            ref={listButton}
-            className="tracks-action"
-            aria-expanded={showTracks}
-            aria-controls="release-tracks"
-            onClick={() => setShowTracks(!showTracks)}>
-            Tracklist <span>{String(tracks.length).padStart(2, '0')}</span>
+            className="share-action"
+            ref={shareButton}
+            onClick={copyLink}
+            aria-label="Share listening link"
+            title="Copy a link at the current time">
+            Share
           </button>
-        ) : (
-          fallbackURL && (
-            <a className="external-listen" href={fallbackURL}>
-              SoundCloud <span aria-hidden="true">↗</span>
-            </a>
-          )
-        )}
+        </div>
       </div>
     </section>
   );

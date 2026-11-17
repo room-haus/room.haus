@@ -1,3 +1,4 @@
+import {mediaUrl} from '../../content/media.mjs';
 import React from 'react';
 import {VideoBackgroundScene, build} from './templates/VideoBackground';
 import CaseTexture from '../../images/mix-art/mx039.jpg';
@@ -12,7 +13,7 @@ export const Background = (props) => {
   return (
     <VideoBackgroundScene
       {...props}
-      manifestUrl="https://roomhauscdnprd.blob.core.windows.net/assets/MX039/video/background.m3u8"
+      manifestUrl={mediaUrl('assets/MX039/video/background.m3u8')}
     />
   );
 };

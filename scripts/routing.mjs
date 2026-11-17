@@ -30,7 +30,7 @@ function handler(event) {
     return {statusCode: 404, statusDescription: 'Not Found', headers: {'content-type': {value:'text/html; charset=utf-8'}},
       body:'<!doctype html><html lang="en"><title>Record unavailable | ROOM</title><h1>Record unavailable</h1><a href="/mixes/">Browse the ROOM archive</a></html>'};
   }
-  if (path.indexOf('/worklets/') === 0 || path.indexOf('/models/') === 0 || path === '/favicon.png') request.uri = prefix + request.uri;
+  if (path.indexOf('/worklets/') === 0 || path.indexOf('/models/') === 0 || path === '/favicon.png' || path === '/sitemap.xml') request.uri = prefix + request.uri;
   return request;
 }
 `;
