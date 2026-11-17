@@ -1,6 +1,5 @@
 import * as BABYLON from 'babylonjs';
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene}) => {
   scene.clearColor = new BABYLON.Color4(0.7, 0.3, 0.4, 0);
   const light = new BABYLON.HemisphericLight('hemilight', new BABYLON.Vector3(0, 1, 0), scene);
@@ -104,7 +103,15 @@ export const build = ({scene}) => {
   // const mesh = BABYLON.Mesh.CreateSphere('mesh', 32, 10, scene);
   mesh.position = new BABYLON.Vector3(0, 0, 0);
 
-  const refTexture = new BABYLON.Texture('https://i.imgur.com/HP1V7TJ.png', scene);
+  // The shader samples a repeating 256² noise tile. Keep it local and deterministic.
+  const noise = new Uint8Array(256 * 256);
+  let seed = 1;
+  for (let i = 0; i < noise.length; i++) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    noise[i] = seed >>> 24;
+  }
+  const refTexture = BABYLON.RawTexture.CreateLuminanceTexture(noise, 256, 256, scene, false, false);
+  refTexture.wrapU = refTexture.wrapV = BABYLON.Texture.WRAP_ADDRESSMODE;
 
   shaderMaterial.setTexture('refSampler', refTexture);
   shaderMaterial.setFloat('time', 0);

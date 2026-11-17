@@ -1,3 +1,4 @@
+import surfaceNormal from '../assets/waterbump.png';
 import * as BABYLON from 'babylonjs';
 import {scaleLinear} from 'd3';
 // import {hexToColor3} from '../../BabylonHelpers';
@@ -12,7 +13,6 @@ import {scaleLinear} from 'd3';
 //   }
 // }
 
-// eslint-disable-next-line import/prefer-default-export
 export const builder = (sphereMap) => ({scene, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   // scene.ambientColor = new BABYLON.Color3(1, 1, 1);
@@ -55,13 +55,12 @@ export const builder = (sphereMap) => ({scene, audio}) => {
   mat.backFaceCulling = false;
   mat.alpha = 1;
   // const c = [0, 255, 0].map((x) => x / 255);
-  mat.bumpTexture = new BABYLON.Texture('http://www.synergy-development.fr/equalonyzer/images/grained_uv.png', scene);
+  mat.bumpTexture = new BABYLON.Texture(surfaceNormal, scene);
   const scale = 0.15;
   mat.bumpTexture.uScale = scale;
   mat.bumpTexture.vScale = scale;
   mat.reflectionTexture = new BABYLON.Texture(
     sphereMap,
-    // 'http://www.synergy-development.fr/equalonyzer/images/spheremap.jpg',
     scene,
   );
   mat.reflectionTexture.level = 2;

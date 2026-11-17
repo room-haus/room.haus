@@ -10,7 +10,6 @@ const getColor = (x) => stringToColor3(interpolateRainbow(x));
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, engine, audio}) => {
   scene.clearColor = new BABYLON.Color3(0, 0, 0);
   scene.ambientColor = new BABYLON.Color3(1, 1, 1);

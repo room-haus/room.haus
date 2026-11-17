@@ -1,6 +1,5 @@
 import React from 'react';
 import * as BABYLON from 'babylonjs';
-import useWindowSize from '@rehooks/window-size';
 import VideoGrid from '../../components/VideoGrid';
 
 export const build = ({scene}) => {
@@ -16,15 +15,9 @@ export const build = ({scene}) => {
 };
 
 export const Background = (props) => {
-  const {innerWidth, innerHeight} = useWindowSize();
-  const isLandscape = innerWidth > innerHeight;
-  const columns = isLandscape ? 4 : 2;
-  const rows = isLandscape ? 2 : 4;
   return (
     <VideoGrid
       {...props}
-      columns={columns}
-      rows={rows}
       videos={[
         'https://roomhauscdnprd.blob.core.windows.net/assets/RM001/RM001BGV1/RM001BGV1.m3u8',
         'https://roomhauscdnprd.blob.core.windows.net/assets/RM001/RM001BGV2/RM001BGV2.m3u8',

@@ -1,3 +1,4 @@
+import heightMap from './assets/waterbump.png';
 import * as BABYLON from 'babylonjs';
 import CaseTexture from '../../images/mix-art/rm004.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_RM004.png';
@@ -6,7 +7,6 @@ import {createGrid} from '../BabylonHelpers';
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene}) => {
   const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
   light.intensity = 10;
@@ -27,7 +27,7 @@ export const build = ({scene}) => {
 
     const g = new BABYLON.Mesh.CreateGroundFromHeightMap(
       'ground',
-      'http://i1198.photobucket.com/albums/aa455/BelindaSaxondale/album/HeightMap.jpg',
+      heightMap,
       800,
       800,
       50,

@@ -9,3 +9,8 @@ yarn-error.log
 
 .vscode/
 .netlify/
+
+/release/
+
+/test-results/
+/playwright-report/

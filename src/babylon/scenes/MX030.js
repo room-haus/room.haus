@@ -1,7 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
-import HLS from 'hls.js';
+import {VideoBackgroundScene} from './templates/VideoBackground';
 import CaseTexture from 'src/images/mix-art/mx030.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_MX030.png';
 
@@ -56,7 +55,6 @@ const makeParticles = (scene, mesh, particleCount) => {
   });
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const build = ({scene, audio}) => {
   const CD = scene.getTransformNodeByName('CDChassis');
   const cdLabel = scene.getMeshByName('CDLabel');
@@ -113,12 +111,9 @@ export const build = ({scene, audio}) => {
       if (horizontalBlur.kernel < kernelMax) {
         horizontalBlur.kernel += kernelDelta;
       }
-    } else if (horizontalBlur.kernel > 0) {
-      horizontalBlur.kernel -= kernelDelta;
-    } else {
-      horizontalBlur.kernel = 0;
+    } else if (horizontalBlur.kernel > 1) {
+      horizontalBlur.kernel = Math.max(1, horizontalBlur.kernel - kernelDelta);
     }
-    horizontalBlur.updateEffect();
     const amp = audio.getAverageAmplitude('low');
     blurOn = amp > 128;
     // scene.clearColor = new BABYLON.Color4(energy, energy, energy, 1);
@@ -127,56 +122,4 @@ export const build = ({scene, audio}) => {
   return scene;
 };
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const Video = styled.video`
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-export class Background extends React.Component {
-  constructor(props) {
-    super(props);
-    this.videoRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.video = this.videoRef.current;
-    const manifestUrl = 'https://roomhauscdnprd.blob.core.windows.net/assets/MX030/video/office.m3u8';
-
-    if (HLS.isSupported()) {
-      this.hls && this.hls.destroy();
-      this.hls = new HLS();
-      this.hls.loadSource(manifestUrl);
-      this.hls.attachMedia(this.video);
-    } else {
-      this.video.src = manifestUrl;
-    }
-  }
-
-  render() {
-    return (
-      <Container>
-        <Video
-          key="video"
-          innerRef={this.videoRef}
-          autoPlay
-          // type="video/mp4"
-          loop
-          muted
-          playsinline
-        />
-      </Container>
-    );
-  }
-}
+export const Background = () => <VideoBackgroundScene manifestUrl="https://roomhauscdnprd.blob.core.windows.net/assets/MX030/video/office.m3u8" />;

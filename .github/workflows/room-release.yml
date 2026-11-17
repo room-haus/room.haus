@@ -1,0 +1,66 @@
+name: Publish ROOM
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Full commit SHA from master to publish or restore'
+        required: true
+        type: string
+concurrency:
+  group: room-production
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Select release
+        env:
+          RELEASE_SHA: ${{ inputs.commit }}
+        run: |
+          [[ "$GITHUB_REF" == refs/heads/master && "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git merge-base --is-ancestor "$RELEASE_SHA" origin/master
+          git checkout --detach "$RELEASE_SHA"
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci && npm test && npm run build && npm audit --audit-level=high
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser -- --project=chromium
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: room-dist
+          path: dist
+          if-no-files-found: error
+  publish:
+    needs: build
+    environment: production
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.commit }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: room-dist
+          path: dist
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.ROOM_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-1
+      - name: Switch release and check public routes
+        env:
+          RELEASE_SHA: ${{ inputs.commit }}
+        run: |
+          node scripts/deploy.mjs "$RELEASE_SHA"

@@ -1,115 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import {randomInt, tileVideoCanvas, loadVideo, setVideoMatrix} from './helpers';
-import HLSAudioSource from '../../audio/HLSAudioSource';
+import React, {useRef, useEffect} from 'react';
+import {loadVideo, tileVideoCanvas} from './helpers';
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const Video = styled.video`
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-`;
-
-const Canvas = styled.canvas`
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-class VideoGrid extends React.Component {
-  static propTypes = {
-    source: PropTypes.instanceOf(HLSAudioSource),
-    videos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    columns: PropTypes.number,
-    rows: PropTypes.number,
-  };
-  static defaultProps = {
-    source: {},
-    columns: 4,
-    rows: 2,
-  };
-  constructor(props) {
-    super(props);
-    this.columns = props.columns;
-    this.rows = props.rows;
-    this.videos = props.videos.map((manifestUrl) => ({
-      manifestUrl,
-      ref: React.createRef(),
-    }));
-    this.canvasRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.canvas = this.canvasRef.current;
-    const {width, height} = this.canvas.getBoundingClientRect();
-    this.canvas.width = width;
-    this.canvas.height = height;
-    this.ctx = this.canvas.getContext('2d');
-    this.loadVideos();
-    this.initGrid();
-
-    const {source} = this.props;
-    source.setOnsetCallback(() => this.updateGrid());
-    this.animate();
-  }
-
-  getRandomVideo() {
-    return this.videos[Math.floor(Math.random() * 2)];
-  }
-
-  initGrid() {
-    // this.columns = randomInt(5, 20);
-    this.videoMatrix = setVideoMatrix(this.videos, this.columns, this.rows);
-  }
-
-  updateGrid() {
-    // if (Math.random() > 0.95) {
-    //   this.initGrid();
-    // } else {
-    // const tiles = randomInt(2, 8);
-    const tiles = 1;
-    for (let i = 0; i < tiles; i++) {
-      const x = randomInt(this.columns);
-      const y = randomInt(this.rows);
-      this.videoMatrix[y][x] = randomInt(this.videos.length);
+export default function VideoGrid({source, videos, columns, rows}) {
+  const canvasRef = useRef(null);
+  const urls = videos.join('\n');
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    if (!context) return undefined;
+    const media = urls.split('\n').map(() => document.createElement('video'));
+    const detach = urls.split('\n').map((url, i) => loadVideo(media[i], url));
+    let matrix;
+    function resize() {
+      canvas.width = Math.max(1, Math.floor(canvas.clientWidth));
+      canvas.height = Math.max(1, Math.floor(canvas.clientHeight));
+      const wide = canvas.width >= canvas.height;
+      matrix = Array.from({length: rows || (wide ? 2 : 4)}, () => Array(columns || (wide ? 4 : 2)).fill(0));
     }
-    // }
-  }
-
-  animate() {
-    tileVideoCanvas(this.ctx, this.videos, this.canvas, this.videoMatrix);
-    if (this.canvas && this.videos && this.videos.every((v) => Boolean(v.ref.current))) {
-      requestAnimationFrame(this.animate.bind(this));
+    resize();
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(resize) : null;
+    observer?.observe(canvas);
+    if (media.length > 1) source.startWorklet();
+    const unsubscribe = source.setOnsetCallback(() => {
+      const row = matrix[Math.floor(Math.random() * matrix.length)];
+      row[Math.floor(Math.random() * row.length)] = Math.floor(Math.random() * media.length);
+    });
+    let frame;
+    function animate() {
+      tileVideoCanvas(context, media, canvas, matrix);
+      frame = requestAnimationFrame(animate);
     }
-  }
-
-  loadVideos() {
-    this.videos.forEach((video) => loadVideo(video));
-  }
-
-  render() {
-    return (
-      <Container>
-        {this.videos.map(({ref, manifestUrl}) => (
-          <Video key={manifestUrl} innerRef={ref} autoPlay loop muted playsinline />
-        ))}
-        <Canvas innerRef={this.canvasRef} autoPlay loop muted />
-      </Container>
-    );
-  }
+    animate();
+    return () => {
+      cancelAnimationFrame(frame);
+      unsubscribe();
+      observer?.disconnect();
+      detach.forEach((stop) => stop());
+    };
+  }, [source, urls, columns, rows]);
+  return <canvas ref={canvasRef} style={{display: 'block', width: '100%', height: '100%'}} />;
 }
-
-export default VideoGrid;

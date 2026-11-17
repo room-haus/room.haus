@@ -1,7 +1,7 @@
 import React from 'react';
 
 // For ES5 builds, import from 'pts/dist/es5'. For ES6 or custom builds, import from 'pts'.
-import {CanvasSpace} from 'pts';
+import {Bound, CanvasSpace} from 'pts';
 
 export default class PtsCanvas extends React.Component {
   constructor(props) {
@@ -17,8 +17,14 @@ export default class PtsCanvas extends React.Component {
     this._loop();
   }
 
-  componentDidUpdate() {
-    this._loop();
+  componentDidUpdate(previous) {
+    if (this.props.loop !== previous.loop) this._loop();
+  }
+
+  componentWillUnmount() {
+    this.observer?.disconnect();
+    this.space.stop();
+    this.space.removeAll();
   }
 
   _loop() {
@@ -47,9 +53,15 @@ export default class PtsCanvas extends React.Component {
   init() {
     this.space = new CanvasSpace(this.canvRef).setup({
       bgcolor: this.props.background,
-      resize: this.props.resize,
+      resize: false,
       retina: this.props.retina,
     });
+    if (this.props.resize && typeof ResizeObserver !== 'undefined') {
+      this.observer = new ResizeObserver(() => {
+        this.space.resize(Bound.fromBoundingRect(this.canvRef.parentElement.getBoundingClientRect()));
+      });
+      this.observer.observe(this.canvRef.parentElement);
+    }
     this.form = this.space.getForm();
 
     this.space.add(this);

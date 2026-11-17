@@ -1,11 +1,14 @@
 import * as BABYLON from 'babylonjs';
-import CaseTexture from 'src/images/mix-art/mx009.jpg';
+import CaseTexture from 'src/images/mix-art/mx004.jpg';
+import EnvironmentDDS from '../textures/EnvironmentSpecularHDR.dds';
+import '../skyboxes/ocean/tropical/';
 
 export const cdModelPath = 'models/CD/CD.babylon';
 export const caseTexture = CaseTexture;
 export const mixId = 515678430;
 
 export const build = ({scene, audio}) => {
+  const camera = scene.activeCamera;
   const pipeline = new BABYLON.DefaultRenderingPipeline(
     'default', // The name of the pipeline
     true, // Do you want HDR textures ?
@@ -22,7 +25,7 @@ export const build = ({scene, audio}) => {
   var skyboxMaterial = new BABYLON.StandardMaterial('skyBox', scene);
   skyboxMaterial.backFaceCulling = false;
   skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(
-    '//www.babylonjs.com/assets/skybox/TropicalSunnyDay',
+    '/models/skyboxes/tropical/tropical',
     scene,
   );
   skyboxMaterial.reflectionTexture.coordinatesMode =
@@ -65,9 +68,7 @@ export const build = ({scene, audio}) => {
     camera.beta = 1.5 * (Math.PI / 20 + Math.sin(t / 50));
     camera.radius = 10 + (-2 + 2 * Math.sin(t / 30));
 
-    const source = this.props.source();
-    const avgFreq =
-      source && source.isPlaying() ? source.getAverageFrequency() : 0;
+    const avgFreq = audio.isPlaying() ? audio.getAverageFrequency() : 0;
     const scale = 0.2 * Math.sin(s) + 1.5;
     sphere.scaling = new BABYLON.Vector3(scale, scale, scale);
     const shift = Math.abs(Math.cos(colorShift));

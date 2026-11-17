@@ -1,0 +1,757 @@
+[
+  {
+    "id": "MX001",
+    "art": "MX001",
+    "label": "MX001",
+    "artist": "Eddy Bauer",
+    "catalogueNumber": "MX001",
+    "soundcloud": "https://soundcloud.com/room-haus/room-mx001-eddy-bauer",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX001/MX001.m3u8"
+  },
+  {
+    "id": "MX002",
+    "art": "MX002",
+    "label": "MX002",
+    "artist": "35mm",
+    "catalogueNumber": "MX002",
+    "soundcloud": "https://soundcloud.com/room-haus/room-mx002-35mm",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX002/MX002.m3u8"
+  },
+  {
+    "id": "MX003",
+    "art": "MX003",
+    "label": "MX003",
+    "artist": "Blackfoot Millie",
+    "catalogueNumber": "MX003",
+    "soundcloud": "https://soundcloud.com/room-haus/mx003-blackfoot-millie-live",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX003/MX003.m3u8"
+  },
+  {
+    "id": "MX004",
+    "art": "MX004",
+    "label": "MX004",
+    "artist": "Iwan Thickett",
+    "name": "MX004: Iwan Thickett",
+    "catalogueNumber": "MX004",
+    "soundcloud": "https://soundcloud.com/room-haus/room-mx004-iwan-thickett",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX004/MX004.m3u8"
+  },
+  {
+    "id": "MX005",
+    "art": "MX005",
+    "label": "MX005",
+    "artist": "AV",
+    "catalogueNumber": "MX005",
+    "soundcloud": "https://soundcloud.com/room-haus/mx005-av",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX005/MX005.m3u8"
+  },
+  {
+    "id": "MX006",
+    "art": "MX006",
+    "label": "MX006",
+    "catalogueNumber": "MX006",
+    "artist": "Articil",
+    "soundcloud": "https://soundcloud.com/room-haus/room-mx006-articil",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX006/MX006.m3u8"
+  },
+  {
+    "id": "MX007",
+    "art": "MX007",
+    "label": "MX007",
+    "artist": "Wade Hammes",
+    "catalogueNumber": "MX007",
+    "soundcloud": "https://soundcloud.com/room-haus/mx007-wade-hammes",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX007/MX007.m3u8"
+  },
+  {
+    "id": "MX008",
+    "art": "MX008",
+    "label": "MX008",
+    "artist": "Big Chain",
+    "catalogueNumber": "MX008",
+    "soundcloud": "https://soundcloud.com/room-haus/mx008-big-chain",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX008/MX008.m3u8"
+  },
+  {
+    "id": "MX009",
+    "art": "MX009",
+    "label": "MX009",
+    "name": "Music for Rain",
+    "artist": "Sami",
+    "catalogueNumber": "MX009",
+    "soundcloud": "https://soundcloud.com/room-haus/mx009-sami",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX009/MX009.m3u8"
+  },
+  {
+    "id": "MX010",
+    "art": "MX010",
+    "label": "MX010",
+    "name": "For Consumption",
+    "artist": "Harry",
+    "catalogueNumber": "MX010",
+    "soundcloud": "https://soundcloud.com/room-haus/mx010-harry",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX010/MX010.m3u8"
+  },
+  {
+    "id": "MX011",
+    "art": "MX011",
+    "label": "MX011",
+    "artist": "KLM",
+    "catalogueNumber": "MX011",
+    "soundcloud": "https://soundcloud.com/room-haus/mx011-klm",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX011/MX011.m3u8"
+  },
+  {
+    "id": "MX012",
+    "art": "MX012",
+    "label": "MX012",
+    "name": "Jersey Edition",
+    "artist": "Rawle Night Long",
+    "catalogueNumber": "MX012",
+    "soundcloud": "https://soundcloud.com/room-haus/mx012-rawle-night-long",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX012/MX012.m3u8"
+  },
+  {
+    "id": "MX013",
+    "art": "MX013",
+    "label": "MX013",
+    "name": "Acid Club",
+    "artist": "35mm & Iwan Thickett",
+    "catalogueNumber": "MX013",
+    "soundcloud": "https://soundcloud.com/room-haus/mx013-acid-club",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX013/MX013.m3u8"
+  },
+  {
+    "id": "MX014",
+    "art": "MX014",
+    "label": "MX014",
+    "name": "A LOVE LETTER 2 SOUNDCLOUD",
+    "artist": "Mr. Fade",
+    "catalogueNumber": "MX014",
+    "soundcloud": "https://soundcloud.com/room-haus/mx014-mr-fade",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX014/MX014.m3u8"
+  },
+  {
+    "id": "MX015",
+    "art": "MX015",
+    "label": "MX015",
+    "artist": "Iwan Thickett",
+    "catalogueNumber": "MX015",
+    "soundcloud": "https://soundcloud.com/room-haus/mx015-iwan-thickett",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX015/MX015.m3u8"
+  },
+  {
+    "id": "MX016",
+    "art": "MX016",
+    "label": "MX016",
+    "name": "Mirage Mix",
+    "artist": "Fady D",
+    "catalogueNumber": "MX016",
+    "soundcloud": "https://soundcloud.com/room-haus/mx016-fady-d",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX016/MX016.m3u8"
+  },
+  {
+    "id": "MX017",
+    "art": "MX017",
+    "label": "MX017",
+    "name": "Winter Headflex",
+    "artist": "DJ Swingling",
+    "catalogueNumber": "MX017",
+    "soundcloud": "https://soundcloud.com/room-haus/mx017-dj-swingline",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX017/MX017.m3u8"
+  },
+  {
+    "id": "MX018",
+    "art": "MX018",
+    "label": "MX018",
+    "name": "Final Words",
+    "artist": "Jett Chandon",
+    "catalogueNumber": "MX018",
+    "soundcloud": "https://soundcloud.com/room-haus/mx018-jett-chandon",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX018/MX018.m3u8"
+  },
+  {
+    "id": "MX019",
+    "art": "MX019",
+    "label": "MX019",
+    "name": "Angel Of The Extinct Heart",
+    "artist": "Tony Cruise",
+    "catalogueNumber": "MX019",
+    "soundcloud": "https://soundcloud.com/room-haus/mx019-tony-cruise",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX019/MX019.m3u8"
+  },
+  {
+    "id": "MX020",
+    "art": "MX020",
+    "label": "MX020",
+    "artist": "Chadwick",
+    "catalogueNumber": "MX020",
+    "soundcloud": "https://soundcloud.com/room-haus/mx020-chadwick",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX020/MX020.m3u8"
+  },
+  {
+    "id": "MX021",
+    "art": "MX021",
+    "label": "MX021",
+    "artist": "Tooth Choir",
+    "name": "Falter",
+    "catalogueNumber": "MX021",
+    "soundcloud": "https://soundcloud.com/room-haus/mx021-tooth-choir",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX021/MX021.m3u8"
+  },
+  {
+    "id": "MX022",
+    "art": "MX022",
+    "label": "MX022",
+    "artist": "Nick Garcia",
+    "name": "Test Of Time",
+    "catalogueNumber": "MX022",
+    "soundcloud": "https://soundcloud.com/room-haus/mx022-nick-garcia",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX022/MX022.m3u8"
+  },
+  {
+    "id": "MX023",
+    "art": "MX023",
+    "label": "MX023",
+    "artist": "Ayesha",
+    "name": "Does It Bring You Joy",
+    "catalogueNumber": "MX023",
+    "soundcloud": "https://soundcloud.com/room-haus/mx023-ayesha",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX023/MX023.m3u8"
+  },
+  {
+    "id": "MX024",
+    "art": "MX024",
+    "label": "MX024",
+    "artist": "Hipster Woods",
+    "name": "Banned POC",
+    "catalogueNumber": "MX024",
+    "soundcloud": "https://soundcloud.com/room-haus/mx024-hipster-woods",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX024/MX024.m3u8"
+  },
+  {
+    "id": "MX025",
+    "art": "MX025",
+    "label": "MX025",
+    "artist": "Michael The Lion B2B Shawn Ryan",
+    "name": "Funk Train DC",
+    "catalogueNumber": "MX025",
+    "soundcloud": "https://soundcloud.com/room-haus/mx025-michael-the-lion-b2b-shawn-ryan",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX025/MX025.m3u8"
+  },
+  {
+    "id": "MX026",
+    "art": "MX026",
+    "label": "MX026",
+    "artist": "AC Rowland",
+    "catalogueNumber": "MX026",
+    "soundcloud": "https://soundcloud.com/room-haus/mx026-ac-rowland",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX026/MX026.m3u8"
+  },
+  {
+    "id": "MX027",
+    "art": "MX027",
+    "label": "MX027",
+    "artist": "DJ Nativesun",
+    "name": "Swing That",
+    "catalogueNumber": "MX027",
+    "soundcloud": "https://soundcloud.com/room-haus/mx027-dj-nativesun",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX027/MX027.m3u8"
+  },
+  {
+    "id": "MX028",
+    "art": "MX028",
+    "label": "MX028",
+    "artist": "Naygod",
+    "name": "Deconstructed",
+    "catalogueNumber": "MX028",
+    "soundcloud": "https://soundcloud.com/room-haus/mx028-naygod",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX028/MX028.m3u8"
+  },
+  {
+    "id": "MX029",
+    "art": "MX029",
+    "label": "MX029",
+    "artist": "Saad Ashraf",
+    "name": "Settle Another Day",
+    "catalogueNumber": "MX029",
+    "soundcloud": "https://soundcloud.com/room-haus/mx029-saad-ashraf",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8"
+  },
+  {
+    "id": "MX030",
+    "art": "MX030",
+    "label": "MX030",
+    "artist": "ART DLR",
+    "name": "W4",
+    "catalogueNumber": "MX030",
+    "soundcloud": "https://soundcloud.com/room-haus/mx030-art-dlr",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX030/MX030.m3u8"
+  },
+  {
+    "id": "MX031",
+    "art": "MX031",
+    "label": "MX031",
+    "artist": "PC Pete",
+    "name": "Farther Along",
+    "catalogueNumber": "MX031",
+    "soundcloud": "https://soundcloud.com/room-haus/mx031-pcpete",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX031/MX031.m3u8"
+  },
+  {
+    "id": "MX032",
+    "art": "MX032",
+    "label": "MX032",
+    "artist": "GABBERBITCH69",
+    "name": "No Te Acerques A Mí",
+    "catalogueNumber": "MX032",
+    "soundcloud": "https://soundcloud.com/room-haus/mx032-gabberbitch69",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX032/MX032.m3u8"
+  },
+  {
+    "id": "MX033",
+    "art": "MX033",
+    "label": "MX033",
+    "artist": "Outputmessage",
+    "name": "The Octopus Room",
+    "catalogueNumber": "MX033",
+    "soundcloud": "https://soundcloud.com/room-haus/mx033-outputmessage",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX033/MX033.m3u8"
+  },
+  {
+    "id": "MX034",
+    "art": "MX034",
+    "label": "MX034",
+    "artist": "Kenny M",
+    "name": "Post-Coital Funk",
+    "catalogueNumber": "MX034",
+    "soundcloud": "https://soundcloud.com/room-haus/mx034-kenny-m",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX034/MX034.m3u8"
+  },
+  {
+    "id": "MX035",
+    "art": "MX035",
+    "label": "MX035",
+    "artist": "Tony G",
+    "name": "Global Warning",
+    "catalogueNumber": "MX035",
+    "soundcloud": "https://soundcloud.com/room-haus/mx035-tony-g",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX035/MX035.m3u8"
+  },
+  {
+    "id": "MX036",
+    "art": "MX036",
+    "label": "MX036",
+    "artist": "DJ Land Reform",
+    "name": "Make It Hot",
+    "catalogueNumber": "MX036",
+    "soundcloud": "https://soundcloud.com/room-haus/mx036-dj-land-reform",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX036/MX036.m3u8"
+  },
+  {
+    "id": "MX037",
+    "art": "MX037",
+    "label": "MX037",
+    "artist": "35mm",
+    "name": "Unwanted Unneeded",
+    "catalogueNumber": "MX037",
+    "soundcloud": "https://soundcloud.com/room-haus/mx037-35mm",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX037/MX037.m3u8"
+  },
+  {
+    "id": "MX038",
+    "art": "MX038",
+    "label": "MX038",
+    "artist": "Blindstares B2B Noce",
+    "name": "Good & Plenty",
+    "catalogueNumber": "MX038",
+    "soundcloud": "https://soundcloud.com/room-haus/mx038-blindstares-b2b-noce",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX038/MX038.m3u8"
+  },
+  {
+    "id": "MX039",
+    "art": "MX039",
+    "label": "MX039",
+    "artist": "Naíome",
+    "catalogueNumber": "MX039",
+    "soundcloud": "https://soundcloud.com/room-haus/mx039-naiome",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX039/MX039.m3u8"
+  },
+  {
+    "id": "MX040",
+    "art": "MX040",
+    "label": "MX040",
+    "artist": "Jamel Zuñiga",
+    "name": "Violence Jack",
+    "catalogueNumber": "MX040",
+    "soundcloud": "https://soundcloud.com/room-haus/mx040-jamel-zuniga",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX040/MX040.m3u8"
+  },
+  {
+    "id": "MX041",
+    "art": "MX041",
+    "label": "MX041",
+    "artist": "Rose Corps",
+    "name": "Late Night Summer Feels",
+    "catalogueNumber": "MX041",
+    "soundcloud": "https://soundcloud.com/room-haus/mx041-rose-corps",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX041/MX041.m3u8"
+  },
+  {
+    "id": "MX042",
+    "art": "MX042",
+    "label": "MX042",
+    "artist": "Saintgolder",
+    "catalogueNumber": "MX042",
+    "soundcloud": "https://soundcloud.com/room-haus/mx042-saintgolder",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX042/MX042.m3u8"
+  },
+  {
+    "id": "MX043",
+    "art": "MX043",
+    "label": "MX043",
+    "artist": "Kundalini",
+    "name": "T÷MPL÷12",
+    "catalogueNumber": "MX043",
+    "soundcloud": "https://soundcloud.com/room-haus/mx043-kundalini",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX043/MX043.m3u8"
+  },
+  {
+    "id": "MX044",
+    "art": "MX044",
+    "label": "MX044",
+    "artist": "Sofia Lakis",
+    "name": "Slamdancer",
+    "catalogueNumber": "MX044",
+    "soundcloud": "https://soundcloud.com/room-haus/mx044-sofia-lakis",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX044/MX044.m3u8"
+  },
+  {
+    "id": "MX045",
+    "art": "MX045",
+    "label": "MX045",
+    "artist": "Rush Midnight",
+    "catalogueNumber": "MX045",
+    "soundcloud": "https://soundcloud.com/room-haus/mx045-rush-midnight",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX045/MX045.m3u8"
+  },
+  {
+    "id": "MX046",
+    "art": "MX046",
+    "label": "MX046",
+    "artist": "L'ENFANT",
+    "catalogueNumber": "MX046",
+    "soundcloud": "https://soundcloud.com/room-haus/mx046-lenfant",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX046/MX046.m3u8"
+  },
+  {
+    "id": "MX047",
+    "art": "MX047",
+    "label": "MX047",
+    "artist": "Baronhawk Poitier",
+    "name": "Smedium Sweat Smix 99'19",
+    "catalogueNumber": "MX047",
+    "soundcloud": "https://soundcloud.com/room-haus/mx047-baronhawk-poitier",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX047/MX047.m3u8"
+  },
+  {
+    "id": "MX048",
+    "art": "MX048",
+    "label": "MX048",
+    "artist": "Furtive",
+    "name": "Furtive's Woozy Twilight Retreating Star Haze",
+    "catalogueNumber": "MX048",
+    "soundcloud": "https://soundcloud.com/room-haus/mx048-furtive",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX048/MX048.m3u8"
+  },
+  {
+    "id": "MX049",
+    "art": "MX049",
+    "label": "MX049",
+    "artist": "Metal Femme",
+    "name": "Fling Flames From Her 6 Million Arms",
+    "catalogueNumber": "MX049",
+    "soundcloud": "https://soundcloud.com/room-haus/mx049-metal-femme",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX049/MX049.m3u8"
+  },
+  {
+    "id": "MX050",
+    "art": "MX050",
+    "label": "MX050",
+    "artist": "Sifu Sun",
+    "name": "Oops",
+    "catalogueNumber": "MX050",
+    "soundcloud": "https://soundcloud.com/room-haus/mx050-sifu-sun",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX050/MX050.m3u8"
+  },
+  {
+    "id": "MX051",
+    "art": "MX051",
+    "label": "MX051",
+    "artist": "Amal",
+    "name": "The Stigg (Free Jugg)",
+    "catalogueNumber": "MX051",
+    "soundcloud": "https://soundcloud.com/room-haus/mx051-amal",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX051/MX051.m3u8"
+  },
+  {
+    "id": "MX052",
+    "art": "MX052",
+    "label": "MX052",
+    "artist": "Obsidian",
+    "name": "Geode",
+    "catalogueNumber": "MX052",
+    "soundcloud": "https://soundcloud.com/room-haus/mx052-obsid1an",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX052/MX052.m3u8"
+  },
+  {
+    "id": "MX053",
+    "art": "MX053",
+    "label": "MX053",
+    "artist": "Panch",
+    "catalogueNumber": "MX053",
+    "soundcloud": "https://soundcloud.com/room-haus/mx053-panch",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX053/MX053.m3u8"
+  },
+  {
+    "id": "MX054",
+    "art": "MX054",
+    "label": "MX054",
+    "artist": "Jamie",
+    "catalogueNumber": "MX054",
+    "soundcloud": "https://soundcloud.com/room-haus/mx054-jamie",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX054/MX054.m3u8"
+  },
+  {
+    "id": "MX055",
+    "art": "MX055",
+    "label": "MX055",
+    "artist": "Nocturnal Wax",
+    "name": "Welcome To the Jungle",
+    "catalogueNumber": "MX055",
+    "soundcloud": "https://soundcloud.com/room-haus/mx055-nocturnal-wax",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX055/MX055.m3u8"
+  },
+  {
+    "id": "MX056",
+    "art": "MX056",
+    "label": "MX056",
+    "artist": "DJ STIIF",
+    "catalogueNumber": "MX056",
+    "soundcloud": "https://soundcloud.com/room-haus/mx056-djstiif",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX056/MX056.m3u8"
+  },
+  {
+    "id": "MX057",
+    "art": "MX057",
+    "label": "MX057",
+    "artist": "Soso Tharpa",
+    "name": "SOHA",
+    "catalogueNumber": "MX057",
+    "soundcloud": "https://soundcloud.com/room-haus/mx057-soso-tharpa",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX057/MX057.m3u8"
+  },
+  {
+    "id": "MX058",
+    "art": "MX058",
+    "label": "MX058",
+    "artist": "FLOR2K",
+    "name": "RAVETÓN",
+    "catalogueNumber": "MX058",
+    "soundcloud": "https://soundcloud.com/room-haus/mx058-flor2k",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX058/MX058.m3u8"
+  },
+  {
+    "id": "MX059",
+    "art": "MX059",
+    "label": "MX059",
+    "artist": "Twin Jude",
+    "name": "Twin Timecapsule",
+    "catalogueNumber": "MX059",
+    "soundcloud": "https://soundcloud.com/room-haus/mx059-twin-jude",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX059/MX059.m3u8"
+  },
+  {
+    "id": "MX060",
+    "art": "MX060",
+    "label": "MX060",
+    "artist": "THABLACKGOD",
+    "catalogueNumber": "MX060",
+    "soundcloud": "https://soundcloud.com/room-haus/mx060-thablackgod",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX060/MX060.m3u8"
+  },
+  {
+    "id": "MX061",
+    "art": "MX061",
+    "label": "MX061",
+    "artist": "MOUNTAIN",
+    "name": "PIQUE 630 MIX",
+    "catalogueNumber": "MX061",
+    "soundcloud": "https://soundcloud.com/room-haus/mx061-mountain",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX061/MX061.m3u8"
+  },
+  {
+    "id": "MX062",
+    "art": "MX062",
+    "label": "MX062",
+    "artist": "Benbo B2B Ovid",
+    "catalogueNumber": "MX062",
+    "soundcloud": "https://soundcloud.com/room-haus/mx062-benbo-b2b-ovid",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX062/MX062.m3u8"
+  },
+  {
+    "id": "MX063",
+    "art": "MX063",
+    "label": "MX063",
+    "artist": "Jerome",
+    "catalogueNumber": "MX063",
+    "soundcloud": "https://soundcloud.com/room-haus/mx063-jerome",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX063/MX063.m3u8"
+  },
+  {
+    "id": "MX064",
+    "art": "MX064",
+    "label": "MX064",
+    "artist": "DJ Ask Nicely",
+    "name": "À DEUX MÈTRES DU MONDE",
+    "catalogueNumber": "MX064",
+    "soundcloud": "https://soundcloud.com/room-haus/mx064-dj-ask-nicely",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX064/MX064.m3u8"
+  },
+  {
+    "id": "MX065",
+    "art": "MX065",
+    "label": "MX065",
+    "artist": "Kouhai",
+    "name": "Self Preservation",
+    "catalogueNumber": "MX065",
+    "soundcloud": "https://soundcloud.com/room-haus/mx065-kouhai",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX065/MX065.m3u8"
+  },
+  {
+    "id": "MX066",
+    "art": "MX066",
+    "label": "MX066",
+    "artist": "DJ Drink Water",
+    "name": "Before 11' Clock",
+    "catalogueNumber": "MX066",
+    "soundcloud": "https://soundcloud.com/room-haus/mx066-dj-drink-water",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX066/MX066.m3u8"
+  },
+  {
+    "id": "MX067",
+    "art": "MX067",
+    "label": "MX067",
+    "artist": "DJ Dubu",
+    "name": "Shelter Each Other",
+    "catalogueNumber": "MX067",
+    "soundcloud": "https://soundcloud.com/room-haus/mx067-dj-dubu",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX067/MX067.m3u8"
+  },
+  {
+    "id": "MX068",
+    "art": "MX068",
+    "label": "MX068",
+    "artist": "Associate",
+    "name": "From My Solitary",
+    "catalogueNumber": "MX068",
+    "soundcloud": "https://soundcloud.com/room-haus/mx068-associate",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX068/MX068.m3u8"
+  },
+  {
+    "id": "MX069",
+    "art": "MX069",
+    "label": "MX069",
+    "artist": "GIGAVIOLENCE",
+    "name": "Dematerializing",
+    "catalogueNumber": "MX069",
+    "soundcloud": "https://soundcloud.com/room-haus/mx069-gigaviolence",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX069/MX069.m3u8"
+  },
+  {
+    "id": "MX070",
+    "art": "MX070",
+    "label": "MX070",
+    "artist": "Karina S",
+    "name": "A Step Towards The Unstruck Sound",
+    "catalogueNumber": "MX070",
+    "soundcloud": "https://soundcloud.com/room-haus/mx070-karina-s",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX070/MX070.m3u8"
+  },
+  {
+    "id": "MX071",
+    "art": "MX071",
+    "label": "MX071",
+    "artist": "Luke Bartelme",
+    "name": "Adam's Ale",
+    "catalogueNumber": "MX071",
+    "soundcloud": "https://soundcloud.com/room-haus/mx071-luke-bartelme",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX071/MX071.m3u8"
+  },
+  {
+    "id": "MX072",
+    "art": "MX072",
+    "label": "MX072",
+    "artist": "XTIAN",
+    "catalogueNumber": "MX072",
+    "soundcloud": "https://soundcloud.com/room-haus/mx072-xtian",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX072/MX072.m3u8"
+  },
+  {
+    "id": "MX073",
+    "art": "MX073",
+    "label": "MX073",
+    "artist": "DJ Eddy Bauer",
+    "catalogueNumber": "MX073",
+    "soundcloud": "https://soundcloud.com/room-haus/mx073-dj-eddy-bauer",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX073/MX073.m3u8"
+  },
+  {
+    "id": "MX074",
+    "art": "MX074",
+    "label": "MX074",
+    "artist": "Chaotic Reality",
+    "name": "Mimmotape",
+    "catalogueNumber": "MX074",
+    "soundcloud": "https://soundcloud.com/room-haus/mx074-chaotic-reality",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX074/MX074.m3u8"
+  },
+  {
+    "id": "MX075",
+    "art": "MX075",
+    "label": "MX075",
+    "artist": "Chucha",
+    "name": "Trust Yourself",
+    "catalogueNumber": "MX075",
+    "soundcloud": "https://soundcloud.com/room-haus/mx075-chucha",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX075/MX075.m3u8"
+  },
+  {
+    "id": "MX076",
+    "art": "MX076",
+    "label": "MX076",
+    "artist": "TKS",
+    "name": "b2b with your own thoughts",
+    "catalogueNumber": "MX076",
+    "soundcloud": "https://soundcloud.com/room-haus/mx076-tks",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX076/MX076.m3u8"
+  },
+  {
+    "id": "MX077",
+    "art": "MX077",
+    "label": "MX077",
+    "artist": "TREV-SKI",
+    "catalogueNumber": "MX077",
+    "soundcloud": "https://soundcloud.com/room-haus/mx077-trev-ski",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX077/MX077.m3u8"
+  },
+  {
+    "id": "MX078",
+    "art": "MX078",
+    "label": "MX078",
+    "artist": "Softie",
+    "catalogueNumber": "MX078",
+    "soundcloud": "https://soundcloud.com/room-haus/mx078-softie",
+    "audioSourceURL": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX078/MX078.m3u8"
+  }
+]

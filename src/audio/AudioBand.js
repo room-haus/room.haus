@@ -9,7 +9,7 @@ export default class AudioBand {
     this.clip = clip;
 
     this.analyser = this.ctx.createAnalyser();
-    this.analyser.fft = FREQ_BIN_COUNT * 2;
+    this.analyser.fftSize = FREQ_BIN_COUNT * 2;
     this.frequencyBuffer = new Uint8Array(this.analyser.frequencyBinCount);
     this.timeDomainBuffer = new Uint8Array(this.analyser.frequencyBinCount);
 
@@ -32,6 +32,8 @@ export default class AudioBand {
     }, this.clip);
 
     filteredElement.connect(this.analyser);
+    this.filters = filters;
+    this.hasCallback = Boolean(callback);
     this.callback = callback || function() {}; // eslint-disable-line func-names
     this.frames = []; //new Array(FRAME_WINDOW_SIZE).fill(0);
     this.average = 0;
@@ -47,9 +49,16 @@ export default class AudioBand {
     }
     this.callback(frame);
     this.sleeping = true;
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.sleeping = false;
     }, this.sleepDuration);
+  }
+
+  dispose() {
+    clearTimeout(this.timer);
+    this.clip.disconnect(this.filters[0] || this.analyser);
+    this.filters.forEach((filter) => filter.disconnect());
+    this.analyser.disconnect();
   }
 
   process() {

@@ -1,63 +1,33 @@
-const ENERGY = 'ENERGY';
-const SPECTRAL_DIFFERENCE = 'SPECTRAL_DIFFERENCE';
-
 export default class BPMDetectorWorkletNode {
-  constructor(context, onMessage, {cpuCores = 1} = {}) {
+  constructor(context, onOnset) {
     this.context = context;
-    this.active = false;
-    this.mode = cpuCores > 4 ? SPECTRAL_DIFFERENCE : ENERGY;
-    this.onMessage = onMessage || function() {};
-    this.filteredInputs = {
-      analyser: context.createAnalyser(),
-      low: context.createBiquadFilter(),
-      mid: context.createBiquadFilter(),
-      high: context.createBiquadFilter(),
-    };
-    this.filteredInputs.low.type = 'lowpass';
-    this.filteredInputs.low.frequency.value = 100;
-    this.filteredInputs.mid.type = 'bandpass';
-    this.filteredInputs.mid.Q.value = 1;
-    this.filteredInputs.mid.frequency.value = 1000;
-    this.filteredInputs.high.type = 'highpass';
-    this.filteredInputs.high.frequency.value = 10000;
+    this.onOnset = onOnset;
   }
 
-  async init() {
+  async attach(source) {
     await this.context.audioWorklet.addModule('/worklets/index.js');
-    this.node = new AudioWorkletNode(this.context, 'onset-detector-processor', {
-      numberOfInputs: 4,
-      processorOptions: {
-        mode: this.mode,
-      },
-    });
-    Object.values(this.filteredInputs).forEach((input, index) => input.connect(this.node, 0, index));
+    if (this.closed) return;
+    this.node = new AudioWorkletNode(this.context, 'onset-detector-processor');
+    this.filter = this.context.createBiquadFilter();
+    this.filter.type = 'lowpass';
+    this.filter.frequency.value = 100;
+    this.source = source;
+    source.connect(this.filter);
+    this.filter.connect(this.node);
+    // The processor leaves its output silent. Media has its own audible output.
     this.node.connect(this.context.destination);
-    this.active = true;
-    this.node.port.onmessage = (event) => {
-      const {data} = event;
-      if (data.debug) {
-        console.log(event.data);
-      }
-      if (data.isPreviousPeak && this.onsetCallback) {
-        this.onsetCallback(data);
-      }
-      this.onMessage(data);
-    };
+    this.node.port.onmessage = () => this.onOnset();
   }
 
-  attach(source) {
-    Object.values(this.filteredInputs).forEach((input) => source.connect(input));
-  }
-
-  bypass() {
-    if (this.active) {
-      this.node.disconnect(this.context.destination);
-      this.active = false;
+  dispose() {
+    if (this.closed) return;
+    this.closed = true;
+    if (this.node) {
+      this.node.port.postMessage('stop');
+      this.node.port.close();
+      this.node.disconnect();
     }
-  }
-
-  resume() {
-    this.node.connect(this.context.destination);
-    this.active = true;
+    this.filter?.disconnect();
+    if (this.source) this.source.disconnect(this.filter);
   }
 }

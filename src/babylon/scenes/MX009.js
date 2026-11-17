@@ -29,9 +29,26 @@ export const build = ({scene, audio}) => {
     light.intensity = Math.min(avgFreq * 5 + 10, 20);
   });
 
-  BABYLON.ParticleHelper.CreateAsync('rain', scene, true).then((set) => {
-    set.start();
-  });
+  const rain = new BABYLON.ParticleSystem('rain', 600, scene);
+  const drop = new BABYLON.DynamicTexture('raindrop', {width: 8, height: 32}, scene, false);
+  const brush = drop.getContext();
+  brush.fillStyle = 'rgba(220,235,255,0.65)';
+  brush.fillRect(3, 2, 2, 27);
+  drop.hasAlpha = true;
+  drop.update();
+  rain.particleTexture = drop;
+  rain.emitter = new BABYLON.Vector3(0, 5, 0);
+  rain.minEmitBox = new BABYLON.Vector3(-5, 0, -5);
+  rain.maxEmitBox = new BABYLON.Vector3(5, 0, 5);
+  rain.direction1 = rain.direction2 = new BABYLON.Vector3(0, -1, 0);
+  rain.minEmitPower = 5;
+  rain.maxEmitPower = 8;
+  rain.minSize = 0.1;
+  rain.maxSize = 0.25;
+  rain.minLifeTime = 1;
+  rain.maxLifeTime = 1.5;
+  rain.emitRate = 220;
+  rain.start();
 
   return scene;
 };

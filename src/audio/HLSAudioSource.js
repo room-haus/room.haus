@@ -1,226 +1,213 @@
-import HLS from 'hls.js';
-import {FREQ_BIN_COUNT} from './constants';
+import {attachStream} from './attachStream';
 import AudioBand from './AudioBand';
 import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
+import {FREQ_BIN_COUNT} from './constants';
 
 export default class HLSAudioSource {
-  constructor(callbacks = {}) {
-    this.callbacks = {
-      onInit: callbacks.onInit,
-      onPlay: callbacks.onPlay,
-      onPause: callbacks.onPause,
-      onToggle: callbacks.onToggle,
-      onEnd: callbacks.onEnd,
-      onLoaded: callbacks.onLoaded,
-      onProgress: callbacks.onProgress,
-      onTime: callbacks.onTime,
-      onReady: callbacks.onReady,
+  constructor(url) {
+    this.url = url;
+    this.snapshot = {playing: false, status: url ? 'idle' : 'unavailable', time: 0, duration: 0, error: null};
+    this.bandOptions = new Map();
+    this.bands = new Map();
+    this.onsets = new Set();
+    this.attempt = 0;
+  }
+
+  update(values) {
+    this.snapshot = {...this.snapshot, ...values};
+    this.notify?.(this.snapshot);
+  }
+
+  loading() {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.fail('The stream took too long to respond.'), 20000);
+    this.update({status: 'loading', error: null});
+  }
+
+  fail(message) {
+    this.releaseMedia();
+    this.update({status: 'error', error: message, playing: false});
+  }
+
+  createMedia() {
+    const media = new Audio();
+    this.media = media;
+    media.preload = 'none';
+    media.crossOrigin = 'anonymous';
+    const syncTime = () => this.update({
+      time: Number.isFinite(media.currentTime) ? media.currentTime : 0,
+      duration: Number.isFinite(media.duration) ? media.duration : 0,
+    });
+    const events = {
+      timeupdate: syncTime, durationchange: syncTime, loadedmetadata: syncTime,
+      playing: () => {
+        clearTimeout(this.timeout);
+        this.update({playing: true, status: 'playing', error: null});
+      },
+      pause: () => {
+        clearTimeout(this.timeout);
+        this.update({playing: false, status: 'paused'});
+      },
+      waiting: () => { if (!media.paused) this.loading(); },
+      ended: () => this.update({playing: false, status: 'ended'}),
+      error: () => this.fail('The stream could not be played.'),
     };
+    Object.entries(events).forEach(([event, fn]) => media.addEventListener(event, fn));
+    this.removeListeners = () => Object.entries(events).forEach(([event, fn]) => media.removeEventListener(event, fn));
 
-    this.ready = false;
-  }
-
-  callback(name, ...params) {
-    const func = this.callbacks[name];
-    return func ? func(...params) : undefined;
-  }
-
-  async init(ctx) {
-    this.callback('onInit');
-
-    this.ctx = ctx;
-    this.audio = new Audio();
-
-    this.element = this.ctx.createMediaElementSource(this.audio);
-    this.analyser = this.ctx.createAnalyser();
-    this.analyser.fft = FREQ_BIN_COUNT * 2;
-    this.frequencyBuffer = new Uint8Array(this.analyser.frequencyBinCount);
-    this.timeDomainBuffer = new Uint8Array(this.analyser.frequencyBinCount);
-
-    this.bands = {};
-
-    this.element.connect(this.analyser);
-    this.element.connect(this.ctx.destination);
-
-    this.audio.addEventListener('play', () => {
-      this.callback('onPlay');
-      this.callback('onToggle');
-    });
-    this.audio.addEventListener('pause', () => {
-      this.callback('onPause');
-      this.callback('onToggle');
-    });
-    this.audio.addEventListener('ended', () => {
-      this.callback('onEnd');
-    });
-  }
-
-  async initWorklet() {
-    const cpuCores = navigator && navigator.hardwareConcurrency ? navigator.hardwareConcurrency : 1;
-    console.log(`CPU cores: ${cpuCores}`);
-    if (this.ctx.audioWorklet && cpuCores > 1) {
-      this.bpmAnalyzerNode = new BPMDetectorWorkletNode(this.ctx, this.callbacks.onODFUpdate, {cpuCores});
+    // The browser media element can play by itself when Web Audio is unavailable.
+    const Context = window.AudioContext || window.webkitAudioContext;
+    if (Context) {
       try {
-        await this.bpmAnalyzerNode.init();
-        this.bpmAnalyzerNode.attach(this.element);
-      } catch (error) {
-        console.error('Failed to load bpm analyzer processor!', error);
+        this.context = new Context();
+        this.analyser = this.context.createAnalyser();
+        this.analyser.fftSize = FREQ_BIN_COUNT * 2;
+        this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
+        this.waveform = new Uint8Array(this.analyser.fftSize);
+        this.input = this.context.createMediaElementSource(media);
+        this.input.connect(this.context.destination);
+        this.input.connect(this.analyser);
+        this.bandOptions.forEach((options, name) => this.makeBand(name, options));
+        if (this.workletRequested) this.startWorklet();
+      } catch {
+        // Hardware and browser support for analysis varies independently of media playback.
       }
     }
   }
 
-  async startWorklet() {
-    if (!this.bpmAnalyzerNode) {
-      await this.initWorklet();
-    } else {
-      this.bpmAnalyzerNode.resume();
-    }
-    this.bpmAnalyzerNode.onsetCallback = this.onsetCallback;
-  }
-
-  loadHSLAudio(autoplay = false) {
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.bypass();
-    }
-    if (HLS.isSupported()) {
-      if (this.hls) {
-        this.hls.destroy();
+  play() {
+    if (!this.url) return;
+    this.wantsPlay = true;
+    const attempt = ++this.attempt;
+    try {
+      if (!this.media) this.createMedia();
+      const media = this.media;
+      this.context?.resume().catch(() => {});
+      this.loading();
+      const start = () => {
+        if (this.media !== media || !this.wantsPlay) return;
+        const activeAttempt = this.attempt;
+        media.play()?.catch((error) => {
+          if (this.media !== media || activeAttempt !== this.attempt || !this.wantsPlay) return;
+          this.fail(error.name === 'NotAllowedError' ? 'Press play again to start the stream.' : 'The stream could not be played.');
+        });
+      };
+      if (!this.detach) {
+        this.detach = attachStream(media, this.url, () => {
+          this.attached = true;
+          start();
+        }, (message) => { if (this.media === media) this.fail(message); });
+      } else if (this.attached) {
+        start();
       }
-      this.hls = new HLS();
-      this.hls.loadSource(this.manifestUrl);
-      this.hls.attachMedia(this.audio);
-    } else {
-      this.audio.src = this.manifestUrl;
-    }
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.resume();
-    }
-    if (autoplay) {
-      this.toggle();
+    } catch {
+      if (attempt === this.attempt) this.fail('The stream could not be played.');
     }
   }
 
-  setManifestUrl(manifestUrl) {
-    this.manifestUrl = manifestUrl;
-    this.loadHSLAudio(true);
+  pause() {
+    this.wantsPlay = false;
+    this.attempt++;
+    clearTimeout(this.timeout);
+    this.media?.pause();
+    if (this.url) this.update({playing: false, status: 'paused'});
   }
 
-  setOnsetCallback(func) {
-    this.onsetCallback = func;
-    if (this.bpmAnalyzerNode) {
-      this.bpmAnalyzerNode.onsetCallback = func;
+  seek(seconds) {
+    if (this.media && Number.isFinite(seconds) && this.snapshot.duration > 0) {
+      this.media.currentTime = Math.max(0, Math.min(seconds, this.snapshot.duration));
+      this.update({time: this.media.currentTime});
     }
   }
 
-  percentCompletion() {
-    return this.audio ? this.audio.currentTime / this.audio.duration : 0;
-  }
+  isPlaying() { return this.snapshot.playing; }
 
-  dispose() {
-    this.hls.destroy();
-  }
-
-  resume() {
-    this.ctx.resume();
-    if (!this.ready) {
-      this.ready = true;
-      this.callback('onReady');
-    }
-    this.callback('onResume');
-  }
-
-  toggle() {
-    if (this.ready) {
-      this.isPlaying() ? this.audio.pause() : this.audio.play(); // eslint-disable-line no-unused-expressions
-    } else {
-      this.callbacks.onResume = this.toggle.bind(this);
-    }
-  }
-
-  isPlaying() {
-    return this.audio ? !this.audio.paused : false;
+  makeBand(name, options) {
+    this.bandOptions.set(name, options);
+    if (!this.input) return;
+    this.bands.get(name)?.dispose();
+    this.bands.set(name, new AudioBand(this.context, this.input, options));
   }
 
   getFrequencyData(band) {
-    if (!this.ready) {
-      return [];
-    }
-    if (band) {
-      return this.bands[band].getFrequencyData();
-    }
-    this.analyser.getByteFrequencyData(this.frequencyBuffer);
-    return this.frequencyBuffer ? this.frequencyBuffer : [];
+    if (band) return this.bands.get(band)?.getFrequencyData() || [];
+    if (!this.analyser) return [];
+    this.analyser.getByteFrequencyData(this.frequency);
+    return this.frequency;
   }
 
   getTimeDomainData(band) {
-    if (!this.ready) {
-      return [];
-    }
-    if (band) {
-      return this.bands[band].getTimeDomainData();
-    }
-    this.analyser.getByteTimeDomainData(this.timeDomainBuffer);
-    return this.timeDomainBuffer ? this.timeDomainBuffer : [];
+    if (band) return this.bands.get(band)?.getTimeDomainData();
+    if (!this.analyser) return null;
+    this.analyser.getByteTimeDomainData(this.waveform);
+    return this.waveform;
   }
 
   getAverageFrequency(band) {
-    if (band) {
-      return this.bands[band].getAverageFrequency();
-    }
-    const freqData = this.getFrequencyData();
-    if (!freqData.length) {
-      return 0;
-    }
-    return freqData.reduce((total, freq) => total + freq, 0) / freqData.length;
+    const data = this.getFrequencyData(band);
+    return this.getMean(data, 0);
   }
 
-  getAverageAmplitude(band) {
-    const data = this.getTimeDomainData(band);
-    if (!data.length) {
-      return 0;
-    }
-    return data.reduce((total, amp) => total + amp, 0) / data.length;
+  getAverageAmplitude(band) { return this.getMean(this.getTimeDomainData(band), 128); }
+
+  getMean(data, empty) {
+    return data?.length ? data.reduce((sum, value) => sum + value, 0) / data.length : empty;
   }
 
-  setPlayhead(percent) {
-    if (percent != null) {
-      this.audio.currentTime = this.audio.duration * percent;
-    }
+  getTotalEnergy(band) { return this.getFrequencyData(band).reduce((sum, value) => sum + value, 0); }
+
+  processBands() {
+    if (this.isPlaying()) this.bands.forEach((band) => { if (band.hasCallback) band.process(); });
   }
 
-  getTotalEnergy(band) {
-    if (band) {
-      return this.bands[band].getTotalEnergy();
-    }
-    const data = this.getFrequencyData();
-    return data.reduce((total, frame) => total + frame, 0);
+  setOnsetCallback(fn) {
+    this.onsets.add(fn);
+    return () => this.onsets.delete(fn);
   }
 
-  makeBand(name, options) {
-    this.bands[name] = new AudioBand(this.ctx, this.element, options);
+  startWorklet() {
+    this.workletRequested = true;
+    if (!this.context?.audioWorklet || !this.input || this.worklet) return;
+    const detector = new BPMDetectorWorkletNode(this.context, () => this.onsets.forEach((fn) => fn()));
+    this.worklet = detector;
+    detector.attach(this.input).catch(() => detector.dispose());
   }
 
-  currentTime() {
-    return this.audio ? this.audio.currentTime : 0;
+  stopAnalysis() {
+    this.worklet?.dispose();
+    this.worklet = null;
+    this.bands.forEach((band) => band.dispose());
+    this.bands.clear();
   }
 
-  // update(band) {
-  //   if (!this.ready || !this.isPlaying()) {
-  //     return;
-  //   }
-  //   if (band) {
-  //     this.bands[band].process();
-  //   } else {
-  //     Object.values(this.bands).forEach((b) => b.process());
-  //   }
-  // }
+  clearSceneAnalysis() {
+    this.stopAnalysis();
+    this.bandOptions.clear();
+    this.workletRequested = false;
+    this.onsets.clear();
+  }
 
-  getMeta() {
-    const {currentTime = 0, duration = 0.000001, paused = true} = this.audio;
-    return {
-      time: currentTime,
-      isPlaying: !paused,
-      playheadLocation: currentTime / duration,
-    };
+  releaseMedia() {
+    clearTimeout(this.timeout);
+    this.attempt++;
+    this.wantsPlay = false;
+    this.removeListeners?.();
+    this.removeListeners = null;
+    this.detach?.();
+    this.detach = null;
+    this.attached = false;
+    this.media = null;
+    this.stopAnalysis();
+    this.input?.disconnect();
+    this.analyser?.disconnect();
+    this.input = this.analyser = null;
+    if (this.context && this.context.state !== 'closed') this.context.close().catch(() => {});
+    this.context = null;
+  }
+
+  dispose() {
+    this.notify = null;
+    this.releaseMedia();
+    this.clearSceneAnalysis();
   }
 }

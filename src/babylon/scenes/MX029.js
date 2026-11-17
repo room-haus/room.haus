@@ -1,7 +1,7 @@
+import {loadVideo} from '../../components/VideoGrid/helpers';
 import React from 'react';
-import styled from 'styled-components';
 import * as BABYLON from 'babylonjs';
-import HLS from 'hls.js';
+import {VideoBackgroundScene} from './templates/VideoBackground';
 import CaseTexture from 'src/images/mix-art/mx029.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_MX029.png';
 // import {withPrefix} from 'gatsby';
@@ -19,14 +19,18 @@ export const build = ({scene, audio}) => {
   const url = 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/warp.m3u8';
 
   const vid = document.createElement('video');
-  const hls = new HLS();
-  hls.loadSource(url);
-  hls.attachMedia(vid);
   const mat = new BABYLON.StandardMaterial('mat', scene);
-  const videoTexture = new BABYLON.VideoTexture('video', vid, scene, true, true);
-  mat.diffuseTexture = videoTexture;
-  audio.callbacks.onPlay = () => videoTexture.video.play();
-  audio.callbacks.onPause = () => videoTexture.video.pause();
+  mat.diffuseColor = new BABYLON.Color3(0.45, 0.45, 0.55);
+  // A missing video must not keep the rest of this scene from becoming ready.
+  const applyVideo = () => {
+    if (!scene.isDisposed) mat.diffuseTexture = new BABYLON.VideoTexture('video', vid, scene, false, true);
+  };
+  vid.addEventListener('loadeddata', applyVideo, {once: true});
+  const detach = loadVideo(vid, url);
+  scene.onDisposeObservable.addOnce(() => {
+    vid.removeEventListener('loadeddata', applyVideo);
+    detach();
+  });
 
   const pl = new BABYLON.PointLight('pl', new BABYLON.Vector3(0, 0, 0), scene);
   pl.diffuse = new BABYLON.Color3(1, 1, 1);
@@ -97,56 +101,4 @@ export const build = ({scene, audio}) => {
   return scene;
 };
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-`;
-
-const Video = styled.video`
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-export class Background extends React.Component {
-  constructor(props) {
-    super(props);
-    this.videoRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.video = this.videoRef.current;
-    const manifestUrl = 'https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/bubbles.m3u8';
-
-    if (HLS.isSupported()) {
-      this.hls && this.hls.destroy();
-      this.hls = new HLS();
-      this.hls.loadSource(manifestUrl);
-      this.hls.attachMedia(this.video);
-    } else {
-      this.video.src = manifestUrl;
-    }
-  }
-
-  render() {
-    return (
-      <Container>
-        <Video
-          key="video"
-          innerRef={this.videoRef}
-          autoPlay
-          // type="video/mp4"
-          loop
-          muted
-          playsinline
-        />
-      </Container>
-    );
-  }
-}
+export const Background = () => <VideoBackgroundScene manifestUrl="https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/video/bubbles.m3u8" />;

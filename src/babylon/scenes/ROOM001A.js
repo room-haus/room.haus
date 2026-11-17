@@ -1,3 +1,5 @@
+import sphereMap from './assets/sphereMap.jpg';
+import surfaceNormal from './assets/waterbump.png';
 import * as BABYLON from 'babylonjs';
 import CaseTexture from '../../images/mix-art/rm001A.jpg';
 import CDLabelTexture from '../../images/mix-labels/cd_template_RM001A.png';
@@ -105,11 +107,11 @@ export const build = async ({scene}) => {
   mat.alpha = 0.7;
   const c = [255, 210, 72].map((x) => x / 255);
   mat.diffuseColor = new BABYLON.Color3(...c);
-  mat.bumpTexture = new BABYLON.Texture('http://www.synergy-development.fr/equalonyzer/images/grained_uv.png', scene);
+  mat.bumpTexture = new BABYLON.Texture(surfaceNormal, scene);
   mat.bumpTexture.uScale = 4;
   mat.bumpTexture.vScale = 4;
   mat.reflectionTexture = new BABYLON.Texture(
-    'http://www.synergy-development.fr/equalonyzer/images/spheremap.jpg',
+    sphereMap,
     scene,
   );
   mat.reflectionTexture.level = 0.6;

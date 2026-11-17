@@ -6,7 +6,6 @@ import CDLabelTexture from '../../images/mix-labels/cd_template_MX039.png';
 export const caseTexture = CaseTexture;
 export const cdLabelTexture = CDLabelTexture;
 
-// eslint-disable-next-line import/prefer-default-export
 export {build};
 
 export const Background = (props) => {
