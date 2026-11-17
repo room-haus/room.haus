@@ -1,3 +1,4 @@
+const {EnvironmentPlugin} = require('webpack');
 const path = require('node:path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -30,6 +31,11 @@ module.exports = (_env, argv) => ({
       {test: /\.js$/, include: src, exclude: /worklets/, loader: 'babel-loader', options: {envName: argv.mode}},
       {test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader']},
       {
+        include: path.join(modelRoot, 'MX018/jett.babylon'),
+        test: /\.babylon$/,
+        use: path.join(__dirname, 'scripts/index-mx018-model.cjs'),
+      },
+      {
         test: /\.(babylon|manifest|dds|env|3dl|png|jpe?g|svg|ttf|otf|woff2?|mp3)$/i,
         type: 'asset/resource',
         oneOf: [
@@ -52,6 +58,7 @@ module.exports = (_env, argv) => ({
     ],
   },
   plugins: [
+    new EnvironmentPlugin({ROOM_MEDIA_ORIGIN: '', ROOM_MX029_AUDIO_URL: ''}),
     new MiniCssExtractPlugin({filename: 'assets/[name].[contenthash:12].css'}),
     new CopyPlugin({patterns: [
       {from: path.join(src, 'audio/worklets/OnsetWorkletProcessor'), to: 'worklets', info: {minimized: true}},

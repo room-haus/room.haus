@@ -3,7 +3,7 @@ import {records, releases, routeOf} from './catalog.mjs';
 // Deploy the same lookup used by the local static server as a CloudFront viewer-request function.
 // Rewriting to distinct object keys makes the cached HTML independent of the query-string policy.
 export function cloudFrontSource(prefix = '') {
-  if (prefix && !/^\/_releases\/[a-f0-9]{40}$/.test(prefix)) throw Error('Expected a release commit SHA');
+  if (prefix && !/^\/_releases\/[a-f0-9]{40}(?:\/[a-f0-9]{64})?$/.test(prefix)) throw Error('Invalid release prefix');
   const pages = ['/mixes/', '/releases/', ...records.map(routeOf)].map((path) => path.slice(0, -1));
   return `var prefix = ${JSON.stringify(prefix)};
 var aliases = ${JSON.stringify(Object.fromEntries(releases.map((record) => [record.id, routeOf(record).slice(0, -1)])))};
@@ -30,7 +30,7 @@ function handler(event) {
     return {statusCode: 404, statusDescription: 'Not Found', headers: {'content-type': {value:'text/html; charset=utf-8'}},
       body:'<!doctype html><html lang="en"><title>Record unavailable | ROOM</title><h1>Record unavailable</h1><a href="/mixes/">Browse the ROOM archive</a></html>'};
   }
-  if (path.indexOf('/worklets/') === 0 || path.indexOf('/models/') === 0 || path === '/favicon.png') request.uri = prefix + request.uri;
+  if (path.indexOf('/worklets/') === 0 || path.indexOf('/models/') === 0 || path === '/favicon.png' || path === '/sitemap.xml') request.uri = prefix + request.uri;
   return request;
 }
 `;

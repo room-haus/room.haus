@@ -30,6 +30,7 @@ test('CloudFront selects isolated release objects and retains shared fingerprint
   const resolve = (uri) => handler({request: {uri, querystring: {}}}).uri;
   assert.equal(resolve('/'), prefix + '/index.html');
   assert.equal(resolve('/releases/ROOM001'), prefix + '/releases/ROOM001-AMAL-DANCECONCEPT/index.html');
+  assert.equal(resolve('/sitemap.xml'), prefix + '/sitemap.xml');
   assert.equal(resolve('/worklets/index.js'), prefix + '/worklets/index.js');
   assert.equal(resolve('/models/CD/CD.babylon'), prefix + '/models/CD/CD.babylon');
   assert.equal(resolve('/assets/main.123.js'), '/assets/main.123.js');

@@ -1,5 +1,5 @@
 const {test, expect} = require('@playwright/test');
-const base = 'http://127.0.0.1:4173';
+const base = process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
 
 async function tabTo(page, target) {
   for (let i = 0; i < 32; i++) {
@@ -90,8 +90,26 @@ test('ROOM001 plays and switches to the selected release track', async ({page, i
 });
 
 test('failed mix can retry without leaving its cover or transport', async ({page, browserName}) => {
-  test.skip(browserName !== 'chromium', 'Native WebKit HLS can bypass browser request interception.');
-  const manifest = '**/MX029/MX029.m3u8';
+  // Native WebKit can fetch HLS outside Playwright's network interception.
+  // Give its first audio element a real missing playlist, then restore the setter for Retry.
+  if (browserName === 'webkit') {
+    await page.addInitScript(() => {
+      const prototype = HTMLMediaElement.prototype;
+      const src = Object.getOwnPropertyDescriptor(prototype, 'src');
+      Object.defineProperty(prototype, 'src', {
+        ...src,
+        set(value) {
+          if (this.tagName === 'AUDIO' && /\.m3u8(?:$|[?#])/.test(value)) {
+            Object.defineProperty(prototype, 'src', src);
+            src.set.call(this, new URL('/missing-playlist.m3u8', location.origin).href);
+          } else {
+            src.set.call(this, value);
+          }
+        },
+      });
+    });
+  }
+  const manifest = process.env.ROOM_MX029_AUDIO_URL || '**/MX029/MX029.m3u8';
   await page.route(manifest, (route) => route.fulfill({status: 404, body: 'Missing'}));
   await page.goto(base + '/mixes/?mx=MX029');
   await page.getByRole('button', {name: 'Play', exact: true}).click();
@@ -102,3 +120,22 @@ test('failed mix can retry without leaving its cover or transport', async ({page
   await retry.click();
   await checkClock(page);
 });
+
+if (process.env.ROOM_MX029_AUDIO_URL) {
+  test('portable MX029 plays through a seek into its final segment', async ({page}) => {
+    await page.goto(base + '/mixes/MX029/');
+    await Promise.all([
+      page.waitForRequest(request => request.url() === process.env.ROOM_MX029_AUDIO_URL),
+      page.getByRole('button', {name: 'Play', exact: true}).click(),
+    ]);
+    const seek = await checkClock(page);
+    const duration = Number(await seek.getAttribute('max'));
+    expect(duration).toBeGreaterThan(3600);
+    await seek.focus();
+    await page.keyboard.press('End');
+    for (let i = 0; i < 8; i++) await page.keyboard.press('ArrowLeft');
+    const position = Number(await seek.inputValue());
+    expect(position).toBeGreaterThan(duration - 12);
+    await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(position + 1);
+  });
+}

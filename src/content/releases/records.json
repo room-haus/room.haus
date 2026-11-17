@@ -10,11 +10,11 @@
     "tracks": [
       {
         "name": "574S",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001A/audio/574s.m3u8"
+        "streamPath": "releases/ROOM001A/audio/574s.m3u8"
       },
       {
         "name": "574S (35mm remix)",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001A/audio/574s-35mm-remix.m3u8"
+        "streamPath": "releases/ROOM001A/audio/574s-35mm-remix.m3u8"
       }
     ],
     "name": "574S"
@@ -30,27 +30,27 @@
     "tracks": [
       {
         "name": "990S",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/990s.m3u8"
+        "streamPath": "releases/ROOM001/audio/990s.m3u8"
       },
       {
         "name": "GEORGIA AVE",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/georgia-ave.m3u8"
+        "streamPath": "releases/ROOM001/audio/georgia-ave.m3u8"
       },
       {
         "name": "574S",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/574s.m3u8"
+        "streamPath": "releases/ROOM001/audio/574s.m3u8"
       },
       {
         "name": "DTS",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/dts.m3u8"
+        "streamPath": "releases/ROOM001/audio/dts.m3u8"
       },
       {
         "name": "FREE JUDO",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/free-judo.m3u8"
+        "streamPath": "releases/ROOM001/audio/free-judo.m3u8"
       },
       {
         "name": "FREE JUDO (UNCUT)",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM001/audio/free-judo-uncut.m3u8"
+        "streamPath": "releases/ROOM001/audio/free-judo-uncut.m3u8"
       }
     ],
     "name": "Dance Concept"
@@ -65,19 +65,19 @@
     "tracks": [
       {
         "name": "Commitment Issues",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/commitment-issues.m3u8"
+        "streamPath": "releases/ROOM002/audio/commitment-issues.m3u8"
       },
       {
         "name": "So",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/so.m3u8"
+        "streamPath": "releases/ROOM002/audio/so.m3u8"
       },
       {
         "name": "S.U.N.",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/sun.m3u8"
+        "streamPath": "releases/ROOM002/audio/sun.m3u8"
       },
       {
         "name": "Working Title",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM002/audio/working-title.m3u8"
+        "streamPath": "releases/ROOM002/audio/working-title.m3u8"
       }
     ],
     "name": "S.U.N.",
@@ -93,15 +93,15 @@
     "tracks": [
       {
         "name": "So (DJ Nativesun Remix)",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/so-(nativesun-remix).m3u8"
+        "streamPath": "releases/ROOM003/audio/so-(nativesun-remix).m3u8"
       },
       {
         "name": "Working Title (Mr.Fade Remix)",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/working-title-(mr-fade-remix).m3u8"
+        "streamPath": "releases/ROOM003/audio/working-title-(mr-fade-remix).m3u8"
       },
       {
         "name": "Commitment Issues (l'enfant Remix)",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM003/audio/commitment-Issues-(l'enfant-remix).m3u8"
+        "streamPath": "releases/ROOM003/audio/commitment-Issues-(l'enfant-remix).m3u8"
       }
     ],
     "name": "S.U.N. Remixes",
@@ -117,7 +117,7 @@
     "tracks": [
       {
         "name": "ilikeit",
-        "streamURL": "https://roomhauscdnprd.blob.core.windows.net/releases/ROOM004/audio/ilikeit.m3u8"
+        "streamPath": "releases/ROOM004/audio/ilikeit.m3u8"
       }
     ],
     "name": "ilikeit",

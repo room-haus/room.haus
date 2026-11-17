@@ -20,6 +20,8 @@ const types = {
   '.woff2': 'font/woff2',
   '.otf': 'font/otf',
   '.xml': 'application/xml',
+  '.m3u8': 'application/vnd.apple.mpegurl',
+  '.ts': 'video/mp2t',
 };
 const server = createServer(async (req, res) => {
   try {
@@ -38,8 +40,11 @@ const server = createServer(async (req, res) => {
       res.writeHead(result.statusCode, {'Content-Type': 'text/html'}).end(result.body);
       return;
     }
-    const file = resolve(root, '.' + decodeURIComponent(result.uri));
-    if (!file.startsWith(root + sep) || !(await stat(file)).isFile()) throw Error('Not found');
+    // Mount only the portable MX029 playlist and its segments when explicitly requested.
+    const sample = process.env.ROOM_MX029_SAMPLE_DIR && /^\/sample\/mx029\/(index\.m3u8|MX029-\d+\.ts)$/.exec(url.pathname);
+    const directory = sample ? resolve(process.env.ROOM_MX029_SAMPLE_DIR) : root;
+    const file = resolve(directory, sample ? sample[1] : '.' + decodeURIComponent(result.uri));
+    if (!file.startsWith(directory + sep) || !(await stat(file)).isFile()) throw Error('Not found');
     res.writeHead(200, {'Content-Type': types[extname(file)] || 'application/octet-stream'});
     if (req.method === 'HEAD') res.end();
     else

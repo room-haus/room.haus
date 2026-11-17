@@ -1,0 +1,33 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {mixes, releases, records, routeOf, coverName} from '../scripts/catalog.mjs';
+import {archiveBody, escape, recordBody} from '../scripts/static-pages.mjs';
+
+const asset = (name) => '/assets/' + name;
+
+test('the cover walls link to every record in catalogue order', () => {
+  for (const [section, catalogue] of Object.entries({mixes, releases})) {
+    const body = archiveBody(section, asset);
+    assert.deepEqual(
+      [...body.matchAll(/<a class="sleeve" href="([^"]+)"/g)].map((match) => match[1]),
+      catalogue.map(routeOf),
+    );
+  }
+});
+
+test('every document has its recording details, artwork, destinations and ordered tracks before JavaScript', () => {
+  for (const record of records) {
+    const body = recordBody(record, asset);
+    assert.ok(body.includes('<h1>' + escape(record.artist) + '</h1>'), record.id);
+    assert.ok(body.includes('src="' + asset(coverName(record) + '.jpg') + '"'), record.id);
+    for (const value of [record.id, record.name].filter(Boolean))
+      assert.ok(body.includes('>' + escape(value) + '<'), record.id);
+    for (const url of [record.soundcloud, record.purchaseLink].filter(Boolean)) {
+      assert.ok(body.includes('href="' + escape(url) + '"'), record.id);
+    }
+    assert.deepEqual(
+      [...body.matchAll(/<li>(.*?)<\/li>/g)].map((match) => match[1]),
+      (record.tracks || []).map((track) => escape(track.name)),
+    );
+  }
+});
