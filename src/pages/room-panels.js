@@ -35,7 +35,7 @@ export function useRoomPanels(route) {
     }
     if (index !== 2) season.querySelector('audio').pause();
 
-    const logo = active.querySelector('.entrance-home img, .archive-page .wordmark img');
+    const logo = active.querySelector('.entrance-home img, .wordmark img');
     const mark = shell.querySelector('.room-mark');
     mark.hidden = !logo;
     if (!logo) return;

@@ -10,7 +10,7 @@ test.describe('archive without JavaScript', () => {
       await page.getByRole('link', {name: label, exact: true}).click();
       await page.reload();
       await expect(page.getByRole('heading', {name: label})).toBeVisible();
-      await expect(page.getByRole('link', {name: label})).toHaveAttribute('aria-current', 'page');
+      await expect(page.getByRole('navigation', {name: 'ROOM sections'})).toHaveCount(0);
       await page.getByRole('link', {name: 'ROOM home'}).click();
       await expect(page.getByRole('heading', {name: 'ROOM'})).toBeVisible();
     }

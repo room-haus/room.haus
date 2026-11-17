@@ -19,6 +19,7 @@
     <div class="room-shell">
     <% for (const panel of ['splash', 'season', 'collective']) { const homePanel = panel === 'splash'; const seasonPanel = panel === 'season'; const active = !archive && panel === initialPanel; %>
     <main data-room-panel="<%= panel %>" <%- active ? '' : 'inert aria-hidden="true"' %> class="entrance entrance--study<%= homePanel ? '' : ' entrance--section' %>">
+      <% if (homePanel) { %>
       <header class="entrance-header">
         <% if (homePanel) { %><h1><% } %>
         <a class="entrance-home" href="/" aria-label="<%= homePanel ? 'ROOM' : 'ROOM home' %>">
@@ -27,6 +28,18 @@
         <% if (homePanel) { %></h1><% } %>
         <p class="entrance-descriptor">Visual studio &amp;<br />music platform</p>
       </header>
+      <% } else { %>
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label="ROOM home">
+          <img src="<%= require('./images/logo.png') %>" alt="ROOM" width="1307" height="240" />
+        </a>
+        <nav class="out-links" aria-label="Contact and social links">
+          <a href="https://soundcloud.com/room-haus">SoundCloud<span aria-hidden="true">↗</span></a>
+          <a href="https://www.instagram.com/room.haus/">Instagram<span aria-hidden="true">↗</span></a>
+          <a href="mailto:info@room.haus">Email<span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+      <% } %>
 
       <% if (homePanel) { %>
       <section class="type-study" aria-label="Virtual Imprints punctuation study">
@@ -88,6 +101,7 @@
       </section>
       <% } %>
 
+      <% if (homePanel) { %>
       <nav class="entrance-nav" aria-label="ROOM sections">
         <% for (const section of sections) { const season = /^(S\/S|F\/W) /.test(section.title); %>
         <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === (seasonPanel ? '/fw-2026/' : panel === 'collective' ? '/collective/' : '/')) { %>aria-current="page"<% } %>>
@@ -96,6 +110,7 @@
         </a>
         <% } %>
       </nav>
+      <% } %>
     </main>
     <% } %>
       <div id="root"<%- archive ? '' : ' inert aria-hidden="true"' %>></div>

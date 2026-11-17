@@ -77,9 +77,12 @@ test('every section shares one document and retains its interactions through his
   await expect(page).toHaveURL(new RegExp('fw-2026/releases/$'));
   await expect(page.getByRole('link', {name: 'Releases', exact: true})).toHaveAttribute('aria-current', 'page');
   await expect(page.getByRole('button', {name: 'Play bruh sound effect'})).toBeVisible();
+  await page.getByRole('link', {name: 'ROOM home', exact: true}).click();
   await page.getByRole('link', {name: 'Collective', exact: true}).click();
   await expect(collective).not.toHaveAttribute('inert');
   await expect(page.getByRole('button', {name: /Pixelate portrait/})).toHaveCount(4);
+  await page.goBack();
+  await expect(page.getByRole('heading', {name: 'ROOM', exact: true})).toBeVisible();
   await page.goBack();
   await expect(season).not.toHaveAttribute('inert');
   await expect(page.getByRole('link', {name: 'Releases', exact: true})).toHaveAttribute('aria-current', 'page');

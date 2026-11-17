@@ -50,7 +50,7 @@ a { color: inherit; }
 }
 .wordmark { display: inline-flex; align-items: center; min-height: 44px; }
 .wordmark img { width: clamp(6.75rem, 13vw, 13.5rem); height: auto; }
-.archive-page .wordmark::before {
+:is(.archive-page, .entrance--section) .wordmark::before {
   content: '(←)';
   margin-right: .5em;
   font: .78rem/1 var(--mono);
@@ -278,7 +278,7 @@ a { color: inherit; }
   .collection-nav sup { font-size: .65rem; }
 }
 @media (max-width: 22rem) {
-  .archive-page .wordmark::before { content: '←'; margin-right: .25em; }
+  :is(.archive-page, .entrance--section) .wordmark::before { content: '←'; margin-right: .25em; }
   .out-links a span { display: none; }
   .wordmark img { width: 5.6rem; }
 }
@@ -366,7 +366,7 @@ a { color: inherit; }
   height: auto;
   pointer-events: none;
 }
-.room-shell:has(.room-mark:not([hidden])) :is(.entrance-home, .archive-page .wordmark) img { opacity: 0; }
+.room-shell:has(.room-mark:not([hidden])) :is(.entrance-home, .wordmark) img { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .room-shell[data-ready] {
     --room-slide: 480ms cubic-bezier(.42, 0, .18, 1);

@@ -344,7 +344,15 @@
   .entrance--study .section-name { font-size: clamp(1.8rem, 8.8vw, 3rem); }
 }
 
-.entrance--section { grid-template-rows: auto 1fr auto; }
+.entrance.entrance--section {
+  --stock: var(--paper);
+  padding: 0;
+  grid-template-rows: auto 1fr;
+}
+.entrance--section > .season-page,
+.entrance--section > .collective-page { margin-inline: var(--gutter); }
+.entrance--section .section-heading { border-top: 0; }
+.entrance--section .site-header { align-items: center; }
 .section-heading {
   display: flex;
   flex-wrap: wrap;
