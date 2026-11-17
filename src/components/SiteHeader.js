@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../images/logo.png';
-import {returnToArchive} from '../pages/navigation';
+import {navigate, returnToArchive} from '../pages/navigation';
 
 export default function SiteHeader({section = 'mixes', listening = false}) {
   const path = (listening && history.state?.fromArchive?.url) || `/${section}/`;
@@ -10,7 +10,7 @@ export default function SiteHeader({section = 'mixes', listening = false}) {
       <a
         className="wordmark"
         href={listening ? path : '/'}
-        onClick={listening ? back : undefined}
+        onClick={listening ? back : event => navigate(event, '/')}
         aria-label={listening ? 'ROOM archive' : 'ROOM home'}>
         <img src={logo} alt="ROOM" width="1307" height="240" />
       </a>

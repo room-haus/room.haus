@@ -10,7 +10,7 @@ const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
 module.exports = (_env, argv) => ({
-  entry: {main: './src/index.js', entrance: './src/entrance.js'},
+  entry: {main: './src/index.js', entrance: ['./src/styles/layout.css', './src/styles/entrance.css']},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -80,12 +80,14 @@ module.exports = (_env, argv) => ({
     new HtmlWebpackPlugin({
       filename: 'mixes/index.html',
       chunks: ['main'],
-      template: './src/index.html',
+      template: './src/entrance.html',
+      page: null,
+      sections,
       favicon: './src/favicon.png',
     }),
     ...entrancePages.map((page) => new HtmlWebpackPlugin({
       filename: page.path.slice(1) + 'index.html',
-      chunks: ['entrance'],
+      chunks: [page.path === '/' ? 'main' : 'entrance'],
       template: './src/entrance.html',
       favicon: './src/favicon.png',
       page,

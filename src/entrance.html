@@ -4,18 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#eeede5" />
-    <% const {page, sections} = htmlWebpackPlugin.options; const home = page.path === '/'; %>
-    <% if (home) { %><style media="(prefers-reduced-motion: no-preference)">@view-transition { navigation: auto; }</style><% } %>
+    <% const {page, sections} = htmlWebpackPlugin.options; const archive = !page; const home = archive || page.path === '/'; %>
     <title><%= home ? 'ROOM' : page.title + ' | ROOM' %></title>
+    <% if (!archive) { %>
     <meta name="description" content="<%- page.description %>" />
     <link rel="canonical" href="https://room.haus<%= page.path %>" />
     <meta property="og:title" content="<%- home ? 'ROOM' : page.title + ' | ROOM' %>" />
     <meta property="og:description" content="<%- page.description %>" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://room.haus<%= page.path %>" />
+    <% } %>
   </head>
   <body>
-    <main class="entrance<%= home ? ' entrance--study' : '' %>">
+    <% if (home) { %><div class="room-shell"><% } %>
+    <main <%= archive ? 'inert' : '' %> class="entrance<%= home ? ' entrance--study' : '' %>">
       <header class="entrance-header">
         <% if (home) { %><h1><% } %>
         <a class="entrance-home" href="/" aria-label="<%= home ? 'ROOM' : 'ROOM home' %>">
@@ -59,12 +61,17 @@
 
       <nav class="entrance-nav" aria-label="ROOM sections">
         <% for (const section of sections) { const season = section.title.startsWith('S/S '); %>
-        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === page.path) { %>aria-current="page"<% } %>>
+        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === page?.path) { %>aria-current="page"<% } %>>
           <span class="section-label"><% if (season) { %><small>S/S</small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
           <span class="entrance-arrow" aria-hidden="true"><%= home && section.path === '/mixes/' ? '→' : '↗' %></span>
         </a>
         <% } %>
       </nav>
     </main>
+    <% if (home) { %>
+      <div id="root"<%= archive ? '' : ' inert' %>></div>
+      <img class="room-mark" src="<%= require('./images/logo.png') %>" alt="" aria-hidden="true" hidden />
+    </div>
+    <% } %>
   </body>
 </html>

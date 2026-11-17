@@ -1,5 +1,5 @@
 import {hasCoverTitle} from '../content/catalogDisplay.mjs';
-import React, {useRef, useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import SiteHeader from '../components/SiteHeader';
 import {mixes} from '../content/mixes';
 import {releases} from '../content/releases';
@@ -57,6 +57,16 @@ function Search({query, onChange, section}) {
 export default function Archive({route}) {
   const {section} = route;
   const [query, setQuery] = useState(route.query);
+  useLayoutEffect(() => setQuery(route.query), [route]);
+  useLayoutEffect(() => {
+    // The offscreen archive is one viewport to the right. Warm the covers that will slide into view.
+    const panel = document.getElementById('root');
+    if (!panel.inert) return;
+    for (const cover of panel.querySelectorAll('.sleeve img')) {
+      if (cover.getBoundingClientRect().top >= window.innerHeight) break;
+      cover.loading = 'eager';
+    }
+  }, []);
   const catalogue = section === 'mixes' ? mixes : releases;
   const terms = normalize(query).trim().split(/\s+/).filter(Boolean);
   const visible = catalogue.filter((record) => {

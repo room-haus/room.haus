@@ -347,32 +347,33 @@ a { color: inherit; }
   .still-object { width: min(47vw, 38vh); }
 }
 
-/* The two pages travel edge to edge while the shared ROOM mark settles into its header. */
-@media (prefers-reduced-motion: no-preference) {
-  .entrance--study .entrance-home img,
-  .archive-page .wordmark img { view-transition-name: room-wordmark; }
-
-  :root {
-    --slide-in: 100%;
-    --slide-out: -100%;
-    --slide-duration: 480ms;
-    --slide-easing: cubic-bezier(.42, 0, .18, 1);
-  }
-  :root:has(.entrance--study) { --slide-in: -100%; --slide-out: 100%; }
-  ::view-transition-group(root),
-  ::view-transition-group(room-wordmark) {
-    animation-duration: var(--slide-duration);
-    animation-timing-function: var(--slide-easing);
-  }
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: var(--slide-duration) var(--slide-easing) both;
-    mix-blend-mode: normal;
-  }
-  ::view-transition-old(root) { animation-name: room-slide-out; }
-  ::view-transition-new(root) { animation-name: room-slide-in; }
-  ::view-transition-old(room-wordmark) { animation: none; opacity: 0; }
-  ::view-transition-new(room-wordmark) { animation: none; mix-blend-mode: normal; }
+/* Both live panels follow the same easing. CSS reverses from the current position. */
+.room-shell { position: relative; overflow-x: clip; }
+.room-shell > .entrance, .room-shell > #root { transform: none; }
+.room-shell > [inert] {
+  position: absolute;
+  inset: 0 0 auto;
+  max-height: 100dvh;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
 }
-@keyframes room-slide-out { to { transform: translateX(var(--slide-out)); } }
-@keyframes room-slide-in { from { transform: translateX(var(--slide-in)); } }
+.room-shell > .entrance[inert] { transform: translateX(-100%); }
+.room-shell > #root[inert] { transform: translateX(100%); }
+.room-mark {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+  pointer-events: none;
+}
+.room-shell:has(.room-mark:not([hidden])) :is(.entrance-home, .archive-page .wordmark) img { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .room-shell[data-ready] {
+    --room-slide: 480ms cubic-bezier(.42, 0, .18, 1);
+  }
+  .room-shell[data-ready] > :is(.entrance, #root) { transition: transform var(--room-slide); }
+  .room-shell[data-ready] > :is(.entrance, #root)[inert] { transition: transform var(--room-slide), visibility 0s 480ms; }
+  .room-shell[data-ready] > .room-mark {
+    transition: left var(--room-slide), top var(--room-slide), width var(--room-slide);
+  }
+}

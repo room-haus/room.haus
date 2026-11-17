@@ -9,7 +9,7 @@ export function readRoute() {
   const url = new URL(window.location.href);
   const path = url.pathname.replace(/\/$/, '');
   const query = url.searchParams.get('q') || '';
-  if (path === '' || path === '/index.html') return {page: 'archive', section: 'mixes', query};
+  if (path === '' || path === '/index.html') return {page: 'splash'};
   const match = /^\/(mixes|releases)(?:\/([^/]+))?$/.exec(path);
   if (!match) return {page: 'missing', section: 'mixes'};
   const [, section, id] = match;

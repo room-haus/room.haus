@@ -1,14 +1,7 @@
-import './styles/layout.css';
 import './styles/entrance.css';
 import contourUrl from './images/punctuation-study.svg';
 
-// Bookmarked searches from the former homepage still open the filtered archive.
-if (['/', '/index.html'].includes(location.pathname) && new URLSearchParams(location.search).has('q')) {
-  location.replace('/mixes/' + location.search + location.hash);
-}
-
-const stage = document.querySelector('.type-study');
-if (stage) {
+export function initStudy(stage) {
   const canvas = stage.querySelector('canvas');
   const toggle = stage.querySelector('.rotation-toggle');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');

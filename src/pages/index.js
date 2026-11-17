@@ -1,52 +1,80 @@
-import React, {lazy, Suspense, useEffect, useLayoutEffect, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {flushSync} from 'react-dom';
 import Archive from './Archive';
 import NotFoundPage from './404';
 import StillArt from '../components/StillArt';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {readRoute, returnToArchive} from './navigation';
+import {navigate, readRoute, returnToArchive} from './navigation';
 import SiteHeader from '../components/SiteHeader';
+import {initStudy} from '../entrance';
+import {useRoomPanels} from './room-panels';
 
 export const loadPlayer = () => import(/* webpackChunkName: "player" */ './Player');
 const LazyPlayer = lazy(loadPlayer);
 
-export default function App({Player = LazyPlayer}) {
-  const [route, setRoute] = useState(readRoute);
+function screenState(route, previousArchive) {
+  // Keep the first covers ready and retain the archive DOM throughout both directions of the slide.
+  const archive = route.page === 'archive' ? route : previousArchive;
+  return {route, archive};
+}
 
+export default function App({Player = LazyPlayer}) {
+  const [{route, archive}, setScreen] = useState(() =>
+    screenState(readRoute(), {page: 'archive', section: 'mixes', query: ''}),
+  );
+  const splash = route.page === 'splash';
+  const studyStarted = useRef(false);
+  useRoomPanels(route);
   useEffect(() => {
+    if (splash && !studyStarted.current) {
+      studyStarted.current = true;
+      initStudy(document.querySelector('.type-study'));
+    }
+  }, [splash]);
+
+  useLayoutEffect(() => {
+    const seasonLink = document.querySelector('.entrance-nav a[href="/mixes/"]');
+    const enterSeason = event => navigate(event, '/mixes/');
     let revision = 0;
     let transition;
+    let currentRoute = readRoute();
     const update = () => {
       const next = {...readRoute(), revision: ++revision};
+      const crossesSplash = currentRoute.page === 'splash' || next.page === 'splash';
+      currentRoute = next;
+      const commit = () => setScreen(previous => screenState(next, previous.archive));
       transition?.skipTransition();
-      if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        setRoute(next);
+      if (crossesSplash || !document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        commit();
         return;
       }
-
-      // Only the selected sleeve needs its own snapshot. The rest of the viewport dissolves together.
+      // Keep master's sleeve transition within the archive/player panel.
       const sleeve = next.record && document.getElementById('record-' + next.record.id)?.querySelector('img');
       if (sleeve) sleeve.style.viewTransitionName = 'selected-sleeve';
       transition = document.startViewTransition(() => {
         if (sleeve) sleeve.style.removeProperty('view-transition-name');
-        // A skipped transition can still run its callback after a second navigation.
-        if (revision === next.revision) flushSync(() => setRoute(next));
+        if (revision === next.revision) flushSync(commit);
       });
     };
     const previous = history.scrollRestoration;
     history.scrollRestoration = 'manual';
     window.addEventListener('popstate', update);
+    seasonLink.addEventListener('click', enterSeason);
     return () => {
       revision++;
       transition?.skipTransition();
       window.removeEventListener('popstate', update);
+      seasonLink.removeEventListener('click', enterSeason);
       history.scrollRestoration = previous;
     };
   }, []);
 
   useLayoutEffect(() => {
-    // Client-side archive navigation can change which screen this same document represents.
-    document.getElementById('archive-slide').media = route.page === 'archive' && route.section === 'mixes' ? 'all' : 'not all';
+    if (route.page === 'splash') {
+      document.title = 'ROOM';
+      if (route.revision) document.querySelector('.entrance-nav a[href="/mixes/"]').focus({preventScroll: true});
+      return;
+    }
     const archive = route.page === 'archive' && history.state?.archive;
     if (archive) {
       document.getElementById(`record-${archive.focus}`)?.focus({preventScroll: true});
@@ -66,7 +94,7 @@ export default function App({Player = LazyPlayer}) {
     document.title = `${title} — ROOM`;
   }, [route]);
 
-  if (route.page === 'archive') return <Archive key={route.revision || 0} route={route} />;
+  if (splash || route.page === 'archive') return <Archive key={archive.section} route={archive} />;
   if (route.page === 'missing') return <NotFoundPage section={route.section} />;
   return (
     <ErrorBoundary
