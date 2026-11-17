@@ -284,6 +284,11 @@
 }
 .study-proof { pointer-events: none; }
 .has-model .study-poster { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  /* The first model frame is ready before has-model is added. Keep both layers
+     in place while their different printed and dimensional contours dissolve. */
+  .has-model .study-form { transition: opacity 600ms ease; }
+}
 .rotation-toggle {
   position: absolute;
   top: 1.6rem;
