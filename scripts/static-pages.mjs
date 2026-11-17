@@ -75,7 +75,7 @@ export function recordBody(record, asset) {
       <div class="compact-disc" aria-hidden="true"><img src="${asset('cd_template_' + record.label + '.png')}" alt=""></div>
       <img class="still-cover" src="${cover}" alt="${escape(record.artist)} — ${escape(record.id)} cover" width="500" height="500">
     </div><p class="stage-notice" role="status" hidden><span class="loading-label">Opening ${escape(record.id)}…</span></p></div></main>
-    <details class="static-options"><summary>Options</summary><section class="options-panel" aria-label="Recording details">
+    <details class="static-options"><summary aria-label="Options" title="Options"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h8m4 0h6M3 12h2m4 0h12M3 18h12m4 0h2"/><circle cx="13" cy="6" r="2"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg></summary><section class="options-panel" aria-label="Recording details">
       <div class="track-meta"><img src="${cover}" alt="" width="58" height="58"><div>
         <span class="catalogue-code">${escape(record.id)}</span><h1>${escape(record.artist)}</h1>
         ${record.name ? `<p>${escape(record.name)}</p>` : ''}

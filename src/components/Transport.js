@@ -191,7 +191,21 @@ export default function Transport({
             else if (showTracks) closeTracks();
             else closeOptions();
           }}>
-          <summary ref={toggle}>Options</summary>
+          <summary ref={toggle} aria-label="Options" title="Options">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden="true">
+              <path d="M3 6h8m4 0h6M3 12h2m4 0h12M3 18h12m4 0h2" />
+              <circle cx="13" cy="6" r="2" />
+              <circle cx="7" cy="12" r="2" />
+              <circle cx="17" cy="18" r="2" />
+            </svg>
+          </summary>
           <div className="options-panel">
             <div className="track-meta">
               <img src={record.art} alt="" width="58" height="58" />

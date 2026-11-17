@@ -180,7 +180,10 @@ a { color: inherit; }
   display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px;
   border: 0; color: var(--paper); background: transparent; cursor: pointer;
 }
+.sound-bar-toggle svg, .player-dock summary svg, .static-options summary svg { opacity: .6; }
+.sound-bar-toggle:is(:hover, :focus-visible) svg, .player-dock summary:is(:hover, :focus-visible) svg, .static-options summary:is(:hover, :focus-visible) svg { opacity: 1; }
 .sound-bar-toggle[aria-expanded=true] { color: var(--acid); }
+.player-dock summary { min-width: 44px; padding-inline: .5rem; }
 .scene-back {
   --focus: var(--acid); position: absolute; z-index: 2;
   top: max(.5rem, env(safe-area-inset-top)); left: max(.5rem, env(safe-area-inset-left)); background: #171916eb;
