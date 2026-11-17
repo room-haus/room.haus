@@ -40,6 +40,7 @@ export function openingPosition(record) {
 
 export function savePosition(record, trackIndex, seconds) {
   const url = new URL(location.href);
+  let stored = true;
   try {
     if (trackIndex === 0 && seconds === 0) localStorage.removeItem(keyFor(record));
     else {
@@ -47,11 +48,15 @@ export function savePosition(record, trackIndex, seconds) {
       localStorage.setItem(keyFor(record), JSON.stringify({track, seconds}));
     }
   } catch {
-    return;
+    stored = false;
   }
+  // A reset must survive refresh even when local checkpoints are unavailable.
+  // Keep the selected release track in the URL if storage cannot remember it.
+  if (!stored && seconds !== 0) return;
   // Once listening begins, a refresh resumes progress beyond the original link.
-  if (url.searchParams.has('track') || url.searchParams.has('t')) {
-    url.searchParams.delete('track');
+  if (url.searchParams.has('track') || url.searchParams.has('t') || (!stored && trackIndex > 0)) {
+    if (!stored && record.tracks && trackIndex > 0) url.searchParams.set('track', trackToken(record.tracks[trackIndex]));
+    else url.searchParams.delete('track');
     url.searchParams.delete('t');
     history.replaceState(history.state, '', url);
   }

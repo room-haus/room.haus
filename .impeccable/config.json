@@ -11,6 +11,24 @@
         ],
         "createdAt": "2026-11-17T09:22:11.980Z",
         "reason": "Codex review: SiteHeader uses this span for the decorative external-link arrow; ROOM text uses Neue Haas."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/styles/entrance.css"
+        ],
+        "createdAt": "2026-11-17T17:13:10.367Z",
+        "reason": "Agent review: existing asterisk-screen uses striped ink as part of the incumbent printed artwork; this interaction-only refinement preserves that intentional artwork."
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "files": [
+          "src/styles/entrance.css"
+        ],
+        "createdAt": "2026-11-17T17:15:09.877Z",
+        "reason": "Agent review: Instrument Serif is the pre-existing ROOM display typeface; the mobile drag fix preserves the incumbent visual identity under app-design-principles."
       }
     ]
   }

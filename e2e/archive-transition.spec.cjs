@@ -1,5 +1,32 @@
 const {test, expect} = require('@playwright/test');
 
+async function loadArchiveImages(page) {
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await Promise.all([...document.querySelectorAll('#root img')].map(image => {
+      // The screenshot includes the whole filtered wall, including offscreen lazy images.
+      image.loading = 'eager';
+      return image.decode();
+    }));
+  });
+}
+
+test('returning from a recording preserves the archive appearance and filter', async ({page}) => {
+  await page.goto('/mixes/?q=MX00');
+  await loadArchiveImages(page);
+  const archive = page.locator('.archive-main');
+  await page.mouse.move(0, 0);
+  const before = await archive.screenshot({animations: 'disabled'});
+  await page.locator('#record-MX003').click();
+  await page.getByRole('link', {name: 'Back to mixes'}).click();
+  await expect(page.getByRole('searchbox')).toHaveValue('MX00');
+  await expect(page.locator('#record-MX003')).toBeFocused();
+  await loadArchiveImages(page);
+  await page.locator('#record-MX003').evaluate(node => node.blur());
+  await page.mouse.move(0, 0);
+  await expect.poll(async () => (await archive.screenshot({animations: 'disabled'})).equals(before)).toBe(true);
+});
+
 test('history can reverse a live slide without dropping either screen or resetting the loop', async ({page}) => {
   await page.emulateMedia({reducedMotion: 'no-preference'});
   await page.goto('/');

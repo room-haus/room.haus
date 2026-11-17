@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import {VideoBackgroundScene} from './templates/VideoBackground';
@@ -16,4 +16,4 @@ export const build = ({scene}) => {
   return scene;
 };
 
-export const Background = () => <VideoBackgroundScene manifestUrl={mediaUrl('assets/MX020BGV/MX020BGV.m3u8')} />;
+export const Background = () => <VideoBackgroundScene manifestUrl={sceneMediaUrl('MX020', 'MX020BGV')} />;

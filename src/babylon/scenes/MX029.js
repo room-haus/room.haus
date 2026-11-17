@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import {loadVideo} from '../../components/VideoGrid/helpers';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
@@ -17,7 +17,7 @@ export const build = ({scene, audio}) => {
   scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
   // makeSkybox(scene, withPrefix('skyboxes/space/blue/blue'));
 
-  const url = mediaUrl('mixes/MX029/video/warp.m3u8');
+  const url = sceneMediaUrl('MX029', 'warp');
 
   const vid = document.createElement('video');
   const mat = new BABYLON.StandardMaterial('mat', scene);
@@ -102,4 +102,4 @@ export const build = ({scene, audio}) => {
   return scene;
 };
 
-export const Background = () => <VideoBackgroundScene manifestUrl={mediaUrl('mixes/MX029/video/bubbles.m3u8')} />;
+export const Background = () => <VideoBackgroundScene manifestUrl={sceneMediaUrl('MX029', 'bubbles')} />;

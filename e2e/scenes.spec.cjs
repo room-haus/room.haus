@@ -6,6 +6,15 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
   test(id + ' renders its animated CD, plays, and returns to its cover', async ({page, isMobile}) => {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
+    if (id === 'MX029') await page.addInitScript(() => {
+      const createElement = document.createElement.bind(document);
+      window.roomSceneVideos = [];
+      document.createElement = function (...args) {
+        const element = createElement(...args);
+        if (element.tagName === 'VIDEO') window.roomSceneVideos.push(element);
+        return element;
+      };
+    });
     await page.goto('http://127.0.0.1:4173/' + collection + '/');
     const sleeve = page.locator('#record-' + id);
     if (isMobile) await sleeve.tap();
@@ -77,6 +86,9 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
     if (id === 'MX029') {
       const background = page.locator('.listening-scene video');
       await expect.poll(() => background.evaluate(video => video.videoWidth > 0 && video.currentTime > 0), {timeout: 30000}).toBe(true);
+      // The detached video texture is distinct from the visible background video.
+      await expect.poll(() => page.evaluate(() => window.roomSceneVideos.length >= 2 &&
+        window.roomSceneVideos.every(video => video.videoWidth > 0 && video.currentTime > 0)), {timeout: 30000}).toBe(true);
     }
     await expect(page.locator('.listening-scene')).toHaveAttribute('data-scene-state', 'ready');
     await page.getByRole('link', {name: 'Back to ' + collection}).click();

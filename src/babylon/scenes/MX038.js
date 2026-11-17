@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import {VideoBackgroundScene, build} from './templates/VideoBackground';
 import CaseTexture from '../../images/mix-art/mx038.jpg';
@@ -9,4 +9,4 @@ export const cdLabelTexture = CDLabelTexture;
 
 export {build};
 
-export const Background = () => <VideoBackgroundScene manifestUrl={mediaUrl('assets/MX038/video/background.m3u8')} />;
+export const Background = () => <VideoBackgroundScene manifestUrl={sceneMediaUrl('MX038', 'background')} />;
