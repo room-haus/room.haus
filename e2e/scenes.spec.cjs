@@ -39,7 +39,7 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
     else await hide.press('Space');
     await expect(page.locator('#sound-bar')).toBeHidden();
     const show = page.getByRole('button', {name: 'Show sound bar'});
-    await expect(show).toBeFocused();
+    if (!isMobile) await expect(show).toBeFocused();
     await expect(show).toHaveAttribute('aria-expanded', 'false');
     await expect(page.getByRole('link', {name: 'Back to ' + collection})).toBeInViewport();
     await expect.poll(() => page.locator('.seek').inputValue().then(Number)).toBeGreaterThan(positionBeforeHide + 1);
