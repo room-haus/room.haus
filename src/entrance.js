@@ -6,10 +6,12 @@ export function initStudy(stage) {
   const toggle = stage.querySelector('.rotation-toggle');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let rotating = !reduce.matches;
-  let inView = true;
+  let inView = !stage.closest('[inert]');
   let pending = false;
   let failed = false;
   let model;
+  const events = new AbortController();
+  const options = {signal: events.signal};
 
   function fallback() {
     failed = true;
@@ -20,11 +22,11 @@ export function initStudy(stage) {
     toggle.hidden = true;
   }
 
-  async function update() {
+  function update() {
     if (failed) return;
     toggle.textContent = rotating ? 'Pause rotation' : 'Rotate loop';
     if (!rotating || model) toggle.hidden = false;
-    if (!(rotating && inView && !document.hidden)) {
+    if (!(rotating && inView && !stage.closest('[inert]') && !document.hidden)) {
       model?.pause();
       return;
     }
@@ -32,7 +34,11 @@ export function initStudy(stage) {
       model.play();
       return;
     }
-    if (pending) return;
+    prepare();
+  }
+
+  async function prepare(background = false) {
+    if (failed || model || pending) return;
     pending = true;
     try {
       const {createPunctuationLoop} = await import(
@@ -49,25 +55,50 @@ export function initStudy(stage) {
       stage.classList.add('has-model');
       update();
     } catch {
-      fallback();
+      // A speculative download can fail transiently; actual entry gets its own attempt.
+      if (!background) fallback();
     } finally {
       pending = false;
+      if (background && !model && !failed && !stage.closest('[inert]')) update();
     }
   }
 
   toggle.addEventListener('click', () => {
     rotating = !rotating;
     update();
-  });
+  }, options);
   reduce.addEventListener('change', () => {
     rotating = !reduce.matches;
     update();
-  });
-  document.addEventListener('visibilitychange', update);
-  canvas.addEventListener('webglcontextlost', fallback);
-  new IntersectionObserver(([entry]) => {
+  }, options);
+  document.addEventListener('visibilitychange', update, options);
+  canvas.addEventListener('webglcontextlost', fallback, options);
+  const observer = new IntersectionObserver(([entry]) => {
     inView = entry.isIntersecting;
     update();
-  }).observe(stage);
+  });
+  observer.observe(stage);
   update();
+  return {
+    preload() {
+      if (failed || model || pending || reduce.matches || navigator.connection?.saveData) return;
+      // Warm a single paused scene after the archive has had time to paint.
+      // Downloading alone leaves engine evaluation and shader setup on the home transition.
+      const warm = () => {
+        if (!reduce.matches && !navigator.connection?.saveData && !document.hidden) prepare(true);
+      };
+      if (window.requestIdleCallback) {
+        const idle = window.requestIdleCallback(warm, {timeout: 2000});
+        return () => window.cancelIdleCallback(idle);
+      }
+      const timeout = window.setTimeout(warm, 300);
+      return () => window.clearTimeout(timeout);
+    },
+    dispose() {
+      failed = true;
+      events.abort();
+      observer.disconnect();
+      model?.dispose();
+    },
+  };
 }

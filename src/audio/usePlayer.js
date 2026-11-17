@@ -1,29 +1,32 @@
-import {useEffect, useMemo, useReducer} from 'react';
+import {useLayoutEffect, useMemo, useReducer} from 'react';
 import HLSAudioSource from './HLSAudioSource';
 
-export default function usePlayer(streamURL, startTime, onPosition) {
+export default function usePlayer(streamURL, startTime, onPosition, autoplay) {
   const audio = useMemo(() => new HLSAudioSource(streamURL, startTime), [streamURL, startTime]);
   const [, refresh] = useReducer((n) => n + 1, 0);
-  useEffect(() => {
+  useLayoutEffect(() => {
     let lastSecond;
-    const save = () => {
+    const save = (updateURL = true) => {
       const {status, duration} = audio.snapshot;
       if (!audio.media || !duration || !['playing', 'paused', 'ended'].includes(status)) return;
       const seconds = status === 'ended' || audio.media.ended ? 0 : Math.floor(audio.position());
       if (seconds === lastSecond) return;
       lastSecond = seconds;
-      onPosition(seconds);
+      onPosition(seconds, updateURL);
     };
     audio.notify = () => {
       save();
       refresh();
     };
-    window.addEventListener('pagehide', save);
+    const saveOnPageHide = () => save();
+    window.addEventListener('pagehide', saveOnPageHide);
+    if (autoplay) audio.play();
     return () => {
-      window.removeEventListener('pagehide', save);
+      window.removeEventListener('pagehide', saveOnPageHide);
+      save(false);
       audio.dispose();
     };
-  }, [audio, onPosition]);
+  }, [audio, onPosition, autoplay]);
   const controls = useMemo(() => ({
     play: () => audio.play(),
     pause: () => audio.pause(),

@@ -23,7 +23,7 @@ export function readRoute() {
       section === 'mixes'
         ? mixes.find((item) => item.id === key)
         : releases.find((item) => item.id === key || item.slug === key);
-    return {page: record ? 'player' : 'missing', section, record};
+    return {page: record ? 'player' : 'missing', section, record, search: url.search};
   }
   return {page: 'archive', section, query};
 }
