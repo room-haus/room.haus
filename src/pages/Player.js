@@ -33,10 +33,10 @@ export default function Player({entry, visible, autoplay, activeAudio, onClose, 
     if (lastEntry.current === entry) return;
     lastEntry.current = entry;
     const linked = linkedPosition(record, entry.search);
-    if (!linked?.shared) return;
+    if (!linked) return;
     if (linked.trackIndex === trackIndex) {
       player.audio.seekLinkedPosition(linked.seconds);
-      setPosition(previous => ({...previous, shared: true}));
+      setPosition(previous => ({...previous, shared: linked.shared}));
     } else {
       const playing = ['playing', 'loading'].includes(player.audio.snapshot.status);
       setPosition({...linked, autoplay: playing});

@@ -273,6 +273,30 @@ test('a same-release history link applies its selected track and timestamp', asy
   expect(current).toMatchObject({url: expect.stringContaining('georgia-ave.m3u8'), paused: false});
 });
 
+test('an invalid release history link restores the first track and opening time', async ({page}) => {
+  await page.goto(release + '?track=999&t=-1');
+  await openOptions(page);
+  await expect(page.locator('.track-meta')).toContainText('990S');
+  await leave(page, 'releases');
+  await page.locator('#record-ROOM001').click();
+  await openOptions(page);
+  await page.getByRole('button', {name: /^Tracklist/}).click();
+  await page.getByRole('button', {name: /GEORGIA AVE/}).click();
+  await play(page).click();
+  await confirmPlaying(page);
+
+  await page.goBack();
+  await expect(page.getByRole('searchbox')).toBeVisible();
+  await page.goBack();
+  await openOptions(page);
+  await expect(page.locator('.track-meta')).toContainText('990S');
+  await confirmPlaying(page, 1);
+  const [previous, current] = await mediaState(page);
+  expect(previous).toMatchObject({paused: true, attached: false});
+  expect(current).toMatchObject({url: expect.stringContaining('990s.m3u8'), paused: false});
+  expect(current.time).toBeLessThan(5);
+});
+
 test('the scene leaves the DOM and reconnects to the same media on return', async ({page}) => {
   await page.emulateMedia({reducedMotion: 'no-preference'});
   await page.goto(mix);
