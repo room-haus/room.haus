@@ -233,7 +233,8 @@ export const build = ({scene, audio}) => {
   const lines = generateTube(scene, points);
   generateWater(scene, [lines, ...CD.getChildren()]);
 
-  const gl = new BABYLON.GlowLayer('glow', scene, {mainTextureSamples: 8});
+  // The wire itself is antialiased by the scene. Its blurred halo needs one sample.
+  const gl = new BABYLON.GlowLayer('glow', scene);
   gl.blurKernelSize = 64;
   gl.addIncludedOnlyMesh(lines);
   gl.intensity = 0.4;

@@ -8,7 +8,14 @@ export default class BabylonSceneManager {
     this.engine = new BABYLON.Engine(canvas, true, {stencil: true, audioEngine: false});
     this.engine.enableOfflineSupport = false;
     BABYLON.SceneLoader.ShowLoadingScreen = false;
-    this.resize = () => this.engine.resize();
+    this.resize = () => {
+      this.engine.resize();
+      const camera = this.scene?.activeCamera;
+      if (!camera || !this.sceneFov || !canvas.clientWidth) return;
+      // Preserve the jewel case's horizontal framing on tall phone screens.
+      const scale = Math.max(1, 0.68 * canvas.clientHeight / canvas.clientWidth);
+      camera.fov = 2 * Math.atan(Math.tan(this.sceneFov / 2) * scale);
+    };
     if (typeof ResizeObserver !== 'undefined') {
       this.observer = new ResizeObserver(this.resize);
       this.observer.observe(canvas);
@@ -31,8 +38,10 @@ export default class BabylonSceneManager {
       if (this.closed) return;
     }
     config.build({scene, canvas: this.canvas, engine: this.engine, audio, assetsLoaded: Boolean(config.sceneAssetsPath)});
+    this.sceneFov = scene.activeCamera.fov;
     this.resize();
     let ready = false;
+    let slowFrames = 0;
     this.engine.runRenderLoop(() => {
       if (this.closed) return;
       try {
@@ -41,6 +50,15 @@ export default class BabylonSceneManager {
         if (!ready && scene.isReady()) {
           ready = true;
           onReady(config.Background);
+        } else if (ready && this.engine.getHardwareScalingLevel() < 2) {
+          // Full-screen rendering can saturate a phone or software GPU. Only
+          // reduce the drawing buffer after sustained slow visible frames.
+          const elapsed = this.engine.getDeltaTime();
+          slowFrames = !document.hidden && elapsed > 50 && elapsed < 1000 ? slowFrames + 1 : 0;
+          if (slowFrames >= 12) {
+            this.engine.setHardwareScalingLevel(this.engine.getHardwareScalingLevel() + 0.5);
+            slowFrames = 0;
+          }
         }
       } catch (error) {
         onError(error);

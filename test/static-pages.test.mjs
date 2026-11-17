@@ -31,3 +31,16 @@ test('every document has its recording details, artwork, destinations and ordere
     );
   }
 });
+
+test('the published wall shows distinct mix titles, and Next mix follows the complete catalog exactly once', () => {
+  const wall = archiveBody('mixes', asset);
+  assert.match(wall, />Music for Rain</);
+  assert.doesNotMatch(wall, />MX004: Iwan Thickett</);
+  for (const [index, mix] of mixes.entries()) {
+    const body = recordBody(mix, asset);
+    const next = body.match(/<a class="next-mix" href="([^"]+)"/);
+    assert.equal(next?.[1], mixes[index + 1] && routeOf(mixes[index + 1]));
+    assert.ok(body.includes('>View sleeve</a>') && body.includes('>View disc</a>'));
+  }
+  for (const release of releases) assert.doesNotMatch(recordBody(release, asset), /rel="next"/);
+});

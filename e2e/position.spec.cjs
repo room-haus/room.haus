@@ -1,3 +1,4 @@
+const {openOptions} = require('./options.cjs');
 const {test, expect} = require('@playwright/test');
 
 const base = process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
@@ -75,6 +76,7 @@ test('a mix resumes after refresh and can start over before playing', async ({pa
   await page.reload();
   await page.getByRole('button', {name: 'Start over'}).press('Enter');
   await expect(play(page)).toBeFocused();
+  await openOptions(page);
   await expect(page.locator('.clock span').first()).toHaveText('0:00');
   await page.reload();
   await playAt(page, 0);
@@ -91,15 +93,17 @@ test('a copied link selects the exact release track and overrides local progress
     });
   });
   await page.goto(base + release);
+  await play(page).waitFor();
+  await openOptions(page);
   await page.getByRole('button', {name: /^Tracklist/}).click();
   await page.getByRole('button', {name: /GEORGIA AVE/}).click();
   await playAt(page, 0);
   await seekTo(page, 17);
+  await openOptions(page);
   const share = page.getByRole('button', {name: /Share/});
   if (isMobile) await share.tap();
   else {
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
+    for (let i = 0; i < 16 && !(await share.evaluate(el => el === document.activeElement)); i++) await page.keyboard.press('Tab');
     await expect(share).toBeFocused();
     await share.press('Enter');
   }
@@ -133,6 +137,7 @@ test('invalid links, blocked storage and clipboard still allow playback and manu
   await expect(page.locator('.track-meta')).toContainText('990S');
   await playAt(page, 0);
   await seekTo(page, 5);
+  await openOptions(page);
   await page.getByRole('button', {name: /Share/}).click();
   const field = page.getByRole('textbox', {name: 'Listening link'});
   await expect(field).toBeFocused();

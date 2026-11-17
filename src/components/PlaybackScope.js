@@ -3,16 +3,26 @@ import React, {useEffect, useRef} from 'react';
 export default function PlaybackScope({audio, active}) {
   const ref = useRef(null);
   useEffect(() => {
+    if (!active) return;
     const canvas = ref.current;
     const context = canvas.getContext('2d');
-    if (!context || !active || !audio?.analyser) return;
+    if (!context) return;
+
+    const controller = new AbortController();
+    let read = () => audio.getTimeDomainData();
+    if (!audio.analyser && /\.m3u8(?:$|[?#])/i.test(audio.url) && window.OfflineAudioContext) {
+      import(/* webpackChunkName: "native-waveform" */ '../audio/nativeWaveform')
+        .then(({nativeWaveform}) => nativeWaveform(audio.url, controller.signal))
+        .then(sample => { if (sample) read = () => sample(audio.media?.currentTime ?? 0); })
+        .catch(() => {});
+    }
+
     let frame;
     let last = 0;
     const draw = (now) => {
       frame = requestAnimationFrame(draw);
-      if (now - last < 32 || document.hidden) return;
+      if (document.hidden || now - last < 32) return;
       last = now;
-      const values = audio?.getTimeDomainData?.();
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
       if (!width || !height) return;
@@ -21,24 +31,30 @@ export default function PlaybackScope({audio, active}) {
         canvas.width = Math.round(width * ratio);
         canvas.height = Math.round(height * ratio);
       }
+      const values = read();
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       context.clearRect(0, 0, width, height);
       if (!values?.length) return;
       context.beginPath();
-      for (let x = 0; x < width; x++) {
-        const y = height * (values[Math.floor((x * values.length) / width)] / 255);
-        if (x === 0) context.moveTo(x, y);
-        else context.lineTo(x, y);
+      const xScale = width / (values.length - 1);
+      // Give quiet recordings some headroom on a phone-sized display. Silence
+      // stays flat, and the loudest excursions still fit inside the control.
+      let peak = 0;
+      for (const sample of values) peak = Math.max(peak, Math.abs(sample - 128));
+      const yScale = (height / 2 - 5) / Math.max(32, peak);
+      context.moveTo(0, height / 2 + (values[0] - 128) * yScale);
+      for (let i = 1; i < values.length; i++) {
+        context.lineTo(i * xScale, height / 2 + (values[i] - 128) * yScale);
       }
-      context.lineWidth = 1.5;
-      context.strokeStyle = '#daffaf';
+      context.lineWidth = 1;
+      context.strokeStyle = '#f5f5f5';
       context.stroke();
     };
     frame = requestAnimationFrame(draw);
     return () => {
       cancelAnimationFrame(frame);
-      context.clearRect(0, 0, canvas.width, canvas.height);
+      controller.abort();
     };
   }, [active, audio]);
-  return <canvas ref={ref} className="playback-scope" aria-hidden="true" />;
+  return <canvas key={audio.url} ref={ref} className="playback-scope" aria-hidden="true" />;
 }

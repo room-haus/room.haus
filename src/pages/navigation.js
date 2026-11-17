@@ -39,6 +39,11 @@ export function openRecord(event, record) {
   navigate(event, recordPath(record), {fromArchive: archive});
 }
 
+export function openNextMix(event, record) {
+  const {fromArchive, mixSteps = 0} = history.state || {};
+  navigate(event, recordPath(record), fromArchive ? {fromArchive, mixSteps: mixSteps + 1} : {});
+}
+
 export function returnToArchive(event, section) {
   const archive = window.history.state?.fromArchive;
   if (!archive) {
@@ -47,5 +52,5 @@ export function returnToArchive(event, section) {
   }
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
-  window.history.back();
+  window.history.go(-1 - (history.state.mixSteps || 0));
 }

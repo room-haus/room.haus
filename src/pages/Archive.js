@@ -1,3 +1,4 @@
+import {hasCoverTitle} from '../content/catalogDisplay.mjs';
 import React, {useRef, useState} from 'react';
 import SiteHeader from '../components/SiteHeader';
 import {mixes} from '../content/mixes';
@@ -72,7 +73,7 @@ export default function Archive({route}) {
     history.replaceState({...history.state, archive: null}, '', url);
   };
   return (
-    <div className="archive-page">
+    <div className="archive-page" data-arriving={route.revision ? '' : undefined}>
       <a className="skip-link" href="#archive-grid">
         Skip to recordings
       </a>
@@ -114,12 +115,15 @@ export default function Archive({route}) {
                     height="500"
                     decoding="async"
                     loading={index < 6 ? 'eager' : 'lazy'}
+                    data-pending=""
+                    onLoad={(event) => event.currentTarget.removeAttribute('data-pending')}
+                    onError={(event) => event.currentTarget.removeAttribute('data-pending')}
                   />
                   <div className="caption">
                     <span className="catalogue-code">{record.id}</span>
                     <span className="artist">{record.artist}</span>
                   </div>
-                  {section === 'releases' && record.name && <span className="release-name">{record.name}</span>}
+                  {hasCoverTitle(record) && <span className="release-name">{record.name}</span>}
                 </a>
               </li>
             ))}
