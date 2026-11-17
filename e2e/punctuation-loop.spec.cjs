@@ -1,5 +1,79 @@
 const {test, expect} = require('@playwright/test');
 
+test('the loaded model crossfades from the print without moving the artwork frame', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  let release;
+  const ready = new Promise(resolve => { release = resolve; });
+  await page.route(/\/assets\/punctuation-loop\..*\.js/, async route => {
+    await ready;
+    await route.continue();
+  });
+  await page.goto('/', {waitUntil: 'domcontentloaded'});
+  const poster = page.locator('.study-poster');
+  await expect(poster).toHaveCSS('opacity', '1');
+  await page.evaluate(() => document.fonts.ready);
+  const before = await poster.boundingBox();
+  await page.evaluate(() => {
+    window.handoffFrames = [];
+    const sample = () => {
+      const model = Number(getComputedStyle(document.querySelector('.study-model')).opacity);
+      const poster = Number(getComputedStyle(document.querySelector('.study-poster')).opacity);
+      window.handoffFrames.push({model, poster});
+      if (model < 1) requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
+  release();
+  await expect(page.locator('.study-model')).toHaveCSS('opacity', '1');
+  const frames = await page.evaluate(() => window.handoffFrames);
+  expect(frames.some(({model, poster}) => model > 0 && model < 1 && poster > 0 && poster < 1)).toBe(true);
+  expect(frames.every(({model, poster}) => model + poster >= .99)).toBe(true);
+  expect(await poster.boundingBox()).toEqual(before);
+  expect(await page.locator('.study-model').boundingBox()).toEqual(before);
+});
+
+test('the model retains the printed cobalt ink color', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'reduce'});
+  await page.goto('/');
+  const inkColor = async () => {
+    const shot = await page.locator('.type-study').screenshot();
+    return page.evaluate(async base64 => {
+      const image = new Image();
+      image.src = `data:image/png;base64,${base64}`;
+      await image.decode();
+      const canvas = document.createElement('canvas');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(image, 0, 0);
+      const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      const colors = new Map();
+      let bluePixels = 0;
+      for (let i = 0; i < pixels.length; i += 4) {
+        const [r, g, b] = pixels.subarray(i, i + 3);
+        if (b > r * 2 && b > g * 1.4) {
+          bluePixels++;
+          const key = `${r},${g},${b}`;
+          colors.set(key, (colors.get(key) || 0) + 1);
+        }
+      }
+      const dominant = [...colors].sort((a, b) => b[1] - a[1])[0];
+      return {rgb: dominant?.[0].split(',').map(Number), coverage: dominant?.[1] / bluePixels};
+    }, shot.toString('base64'));
+  };
+  const printedInk = await inkColor();
+  expect(printedInk.rgb).toHaveLength(3);
+  await page.getByRole('button', {name: 'Rotate loop'}).click();
+  await expect(page.locator('.study-model')).toHaveCSS('opacity', '1');
+  await page.getByRole('button', {name: 'Pause rotation'}).click();
+  const modelInk = await inkColor();
+  expect(modelInk.rgb).toHaveLength(3);
+  // Compare solid ink, not the differently antialiased edges of SVG and WebGL.
+  // A stray matching shade in a lighting gradient must not pass as the ink color.
+  expect(modelInk.coverage).toBeGreaterThan(.1);
+  modelInk.rgb.forEach((channel, i) => expect(Math.abs(channel - printedInk.rgb[i])).toBeLessThanOrEqual(3));
+});
+
 test('enlarged splash navigation remains scrollable and keyboard reachable on small phones', async ({page, isMobile, browserName}) => {
   await page.emulateMedia({reducedMotion: 'reduce'});
   for (const viewport of [{width: 320, height: 568}, {width: 568, height: 320}]) {
@@ -100,6 +174,7 @@ test('the 3D loop follows a drag, holds a paused pose, and resumes on release', 
   const canvas = page.locator('.study-model');
   const pause = page.getByRole('button', {name: 'Pause rotation'});
   await expect(pause).toBeVisible();
+  await expect(canvas).toHaveCSS('opacity', '1');
   const bounds = await page.locator('.type-study').boundingBox();
   // The ticker keeps moving while rotation is paused. Compare only the artwork.
   const clip = {
@@ -142,6 +217,7 @@ test('reduced motion starts with the print and allows an explicit turn', async (
   await page.getByRole('button', {name: 'Rotate loop'}).click();
   await expect(page.getByRole('button', {name: 'Pause rotation'})).toBeVisible();
   await expect(page.locator('.study-model')).toHaveCSS('opacity', '1');
+  await expect(page.locator('.study-model')).toHaveCSS('transition-duration', '0s');
 });
 
 test('without WebGL the print and section links stay usable', async ({page, baseURL}) => {

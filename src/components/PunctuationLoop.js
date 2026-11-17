@@ -4,7 +4,6 @@ import {
   DynamicTexture,
   Engine,
   FreeCamera,
-  HemisphericLight,
   Material,
   Mesh,
   Scene,
@@ -83,8 +82,11 @@ function buildRibbons(scene, drawing) {
   const material = new StandardMaterial('Cobalt ink', scene);
   material.diffuseTexture = ink;
   material.useAlphaFromDiffuseTexture = true;
-  material.diffuseColor = Color3.FromHexString('#294bc7');
-  material.emissiveColor = Color3.FromHexString('#0c185a');
+  // Use the print's ink directly; directional lighting changes its hue as it turns.
+  material.disableLighting = true;
+  // Keep filtered glyph edges from tinting the ink; the texture supplies the cutout.
+  material.useEmissiveAsIllumination = true;
+  material.emissiveColor = Color3.FromHexString(drawing.querySelector('g[fill]').getAttribute('fill'));
   material.specularColor = Color3.Black();
   material.backFaceCulling = false;
   material.twoSidedLighting = true;
@@ -106,8 +108,6 @@ export async function createPunctuationLoop(canvas, contourUrl) {
     const camera = new FreeCamera('Print view', new Vector3(0, 0, -10.8), scene);
     camera.setTarget(Vector3.Zero());
     camera.fov = 0.48;
-    const light = new HemisphericLight('Paper light', new Vector3(-0.4, 1, -1), scene);
-    light.groundColor = new Color3(0.38, 0.42, 0.62);
     const loop = buildRibbons(scene, drawing);
     loop.rotation.x = -0.14;
     loop.rotation.y = -0.22;
