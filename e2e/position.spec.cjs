@@ -82,6 +82,35 @@ test('a mix resumes after refresh and can start over before playing', async ({pa
   await playAt(page, 0);
 });
 
+test('Start over clears a shared timestamp with blocked storage and retains the release track', async ({page}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', {get() { throw Error('Storage blocked'); }});
+  });
+  for (const path of [mix + '?t=11', release + '?track=2&t=11']) {
+    await page.goto(base + path);
+    const title = await page.locator('.track-meta').textContent();
+    await page.getByRole('button', {name: 'Start over'}).click();
+    expect(new URL(page.url()).searchParams.has('t')).toBe(false);
+    await page.reload();
+    await expect(page.getByRole('button', {name: 'Play', exact: true})).toBeVisible();
+    await expect(page.locator('.track-meta')).toHaveText(title);
+    await expect(page.getByText('Shared at 0:11')).toHaveCount(0);
+    await playAt(page, 0);
+  }
+});
+
+test('natural completion clears saved progress and allows replay from the beginning', async ({page}) => {
+  await page.goto(base + mix);
+  await playAt(page, 0);
+  await seekTo(page, 28);
+  await play(page).click();
+  await expect(play(page)).toBeVisible();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('room.listening.v1.MX001'))).toBeNull();
+  await play(page).click();
+  await expect.poll(async () => Number(await seek(page).inputValue())).toBeLessThan(3);
+  await expect.poll(async () => Number(await seek(page).inputValue())).toBeGreaterThan(0);
+});
+
 test('a copied link selects the exact release track and overrides local progress', async ({page, isMobile}) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'clipboard', {

@@ -20,7 +20,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npm audit --audit-level=low
+      - run: npm run check:dependencies
       - run: npm run lint
       - run: npm test
       - run: npm run build

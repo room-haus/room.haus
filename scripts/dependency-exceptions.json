@@ -1,0 +1,9 @@
+[
+  {
+    "url": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+    "package": "picomatch",
+    "range": "<=4.0.7",
+    "expires": "2026-12-01",
+    "reason": "No patched version is listed as of 2026-11-17. The locked instances are build/development tools using repository-controlled glob patterns, not production dependencies. The dev server binds to loopback. Remove this exception when a patch is available; do not accept untrusted glob patterns."
+  }
+]

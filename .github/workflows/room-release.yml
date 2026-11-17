@@ -32,9 +32,17 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm ci && npm test && npm run build && npm audit --audit-level=high
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser -- --project=chromium
+      - run: npm ci && npm run check:dependencies && npm run lint && npm test && npm run build
+      - name: Verify the release artifact through HTTP
+        run: |
+          node scripts/serve.mjs &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          curl --silent --show-error --fail --retry 5 --retry-connrefused http://127.0.0.1:4173/ --output /dev/null
+          node scripts/check-routes.mjs
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:browser
+      - run: npm run check:media
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: room-dist

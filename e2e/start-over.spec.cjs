@@ -26,4 +26,9 @@ test('starting over clears the opening position while retaining the ready WebGL 
   await expect(page.locator('.listening-scene')).toHaveAttribute('data-scene-state', 'ready');
   expect(await page.evaluate(() => localStorage.getItem('room.listening.v1.MX001'))).toBeNull();
   expect(new URL(page.url()).searchParams.has('t')).toBe(false);
+  await page.getByRole('button', {name: 'Play', exact: true}).click();
+  const seek = page.getByRole('slider', {name: 'Seek playback'});
+  await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(0);
+  expect(Number(await seek.inputValue())).toBeLessThan(5);
+  expect(await canvas.evaluate(node => node === document.querySelector('.listening-scene canvas'))).toBe(true);
 });

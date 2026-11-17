@@ -259,11 +259,13 @@
   pointer-events: none;
 }
 .study-model { opacity: 0; aspect-ratio: 720 / 520; }
+.type-study.has-model { touch-action: pinch-zoom; cursor: grab; user-select: none; }
+.type-study:has(.is-dragging) { cursor: grabbing; }
 .has-model .study-model {
   opacity: 1;
   pointer-events: auto;
   cursor: grab;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pinch-zoom;
   user-select: none;
 }
 .has-model .study-model.is-dragging { cursor: grabbing; }
@@ -342,6 +344,24 @@
   .entrance--study .entrance-nav a { padding: .65rem .85rem; }
   .entrance--study .entrance-nav a + a { border-left: 0; border-top: 1px solid var(--black); }
   .entrance--study .section-name { font-size: clamp(1.8rem, 8.8vw, 3rem); }
+}
+
+/* Keep the single-screen splash; let enlarged content scroll within it when needed. */
+@media (max-width: 680px), (pointer: coarse) {
+  html:has([data-room-panel=splash]:not([inert])),
+  body:has([data-room-panel=splash]:not([inert])) {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  [data-room-panel=splash] {
+    height: 100svh;
+    height: 100dvh;
+    min-height: 0;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    overflow: hidden auto;
+    overscroll-behavior: none;
+    touch-action: pan-y pinch-zoom;
+  }
 }
 
 .entrance.entrance--section {

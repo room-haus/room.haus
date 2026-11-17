@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import VideoGrid from '../../components/VideoGrid';
@@ -24,8 +24,8 @@ export const Background = (props) => (
     columns={2}
     rows={2}
     videos={[
-      mediaUrl('assets/MX022/videos/starry/MX022BGV-starry.m3u8'),
-      mediaUrl('assets/MX022/videos/static/MX022BGV-static.m3u8'),
+      sceneMediaUrl('MX022', 'MX022BGV-starry'),
+      sceneMediaUrl('MX022', 'MX022BGV-static'),
     ]}
   />
 );

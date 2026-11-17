@@ -15,6 +15,24 @@ async function hold(page, pattern) {
   return finish;
 }
 
+async function observeAudio(page) {
+  await page.addInitScript(() => {
+    const NativeAudio = window.Audio;
+    window.roomTestAudio = [];
+    window.Audio = function () {
+      const media = new NativeAudio();
+      media.canPlayType = () => ''; // Exercise deferred HLS.js, including in WebKit.
+      window.roomTestAudio.push(media);
+      return media;
+    };
+    const Context = window.AudioContext;
+    window.roomTestContexts = [];
+    if (Context) window.AudioContext = class extends Context {
+      constructor(...args) { super(...args); window.roomTestContexts.push(this); }
+    };
+  });
+}
+
 test('opening a recording keeps its sleeve and a way back while the player downloads', async ({page}) => {
   const finish = await hold(page, /\/assets\/player\.[\da-f]+\.js$/);
   await page.goto(base + '/mixes/?q=MX001');
@@ -91,6 +109,7 @@ test('audio startup can be paused while the stream player is still downloading',
     };
   });
   const finish = await hold(page, /\/assets\/hls\.[\da-f]+\.js$/);
+  await observeAudio(page);
   await page.goto(base + '/mixes/MX001/');
   const play = page.getByRole('button', {name: 'Play', exact: true});
   await play.click();
@@ -103,4 +122,48 @@ test('audio startup can be paused while the stream player is still downloading',
   } finally {
     finish(true);
   }
+  await expect.poll(() => page.evaluate(() => Boolean(window.roomTestAudio[0]?.src))).toBe(true);
+  expect(await page.evaluate(() => window.roomTestAudio[0].paused)).toBe(true);
+  await play.click();
+  await expect.poll(async () => Number(await page.getByRole('slider').inputValue())).toBeGreaterThan(0);
+});
+
+test('leaving a pending stream disposes its audio before the delayed player arrives', async ({page}) => {
+  await observeAudio(page);
+  const finish = await hold(page, /\/assets\/hls\.[\da-f]+\.js$/);
+  await page.goto('/mixes/MX001/');
+  await page.getByRole('button', {name: 'Play', exact: true}).click();
+  await expect(page.getByRole('status').filter({hasText: 'Loading audio'})).toBeVisible();
+  await page.getByRole('link', {name: 'Back to mixes'}).click();
+  await expect(page.getByRole('searchbox')).toBeVisible();
+  finish(true);
+  // Open and play a new recording: the same chunk has now finished its real initialization.
+  await page.locator('#record-MX029').click();
+  await page.getByRole('button', {name: 'Play', exact: true}).click();
+  await expect.poll(async () => Number(await page.getByRole('slider').inputValue())).toBeGreaterThan(0);
+  expect(await page.evaluate(() => ({
+    abandonedPaused: window.roomTestAudio[0].paused,
+    abandonedSource: window.roomTestAudio[0].getAttribute('src'),
+    abandonedTime: window.roomTestAudio[0].currentTime,
+    oldContextsClosed: window.roomTestContexts.slice(0, -1).every(context => context.state === 'closed'),
+  }))).toEqual({abandonedPaused: true, abandonedSource: null, abandonedTime: 0, oldContextsClosed: true});
+});
+
+test('switching release tracks during startup cannot revive the previous track', async ({page}) => {
+  await observeAudio(page);
+  const finish = await hold(page, /\/assets\/hls\.[\da-f]+\.js$/);
+  await page.goto('/releases/ROOM001-AMAL-DANCECONCEPT/');
+  await page.getByRole('button', {name: 'Play', exact: true}).click();
+  await expect(page.getByRole('status').filter({hasText: 'Loading audio'})).toBeVisible();
+  await openOptions(page);
+  await page.getByRole('button', {name: /^Tracklist/}).click();
+  const tracks = page.locator('#release-tracks li button');
+  await tracks.nth(1).click();
+  finish(true);
+  await page.getByRole('button', {name: 'Play', exact: true}).click();
+  await expect.poll(async () => Number(await page.getByRole('slider').inputValue())).toBeGreaterThan(0);
+  expect(await page.evaluate(() => ({paused: window.roomTestAudio[0].paused,
+    source: window.roomTestAudio[0].getAttribute('src'),
+    contextsClosed: window.roomTestContexts.slice(0, -1).every(context => context.state === 'closed')})))
+    .toEqual({paused: true, source: null, contextsClosed: true});
 });

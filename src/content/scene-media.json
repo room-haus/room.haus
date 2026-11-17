@@ -1,0 +1,103 @@
+{
+  "MX013": {
+    "background": "https://www.dropbox.com/s/sslop96edbf800p/mx013video.mp4?dl=1"
+  },
+  "MX019": {
+    "MX019BGV": "assets/MX019BGV/MX019BGV.m3u8"
+  },
+  "MX020": {
+    "MX020BGV": "assets/MX020BGV/MX020BGV.m3u8"
+  },
+  "MX021": {
+    "MX021BGV": "assets/MX021BGV/MX021BGV.m3u8"
+  },
+  "MX022": {
+    "MX022BGV-starry": "assets/MX022/videos/starry/MX022BGV-starry.m3u8",
+    "MX022BGV-static": "assets/MX022/videos/static/MX022BGV-static.m3u8"
+  },
+  "MX023": {
+    "MX023BGV-ColoursA": "assets/MX023/video/MX023BGV-ColoursA.m3u8",
+    "MX023BGV-ColoursB": "assets/MX023/video/MX023BGV-ColoursB.m3u8",
+    "MX023BGV-pink": "assets/MX023/video/MX023BGV-pink.m3u8"
+  },
+  "MX024": {
+    "background": "assets/MX024/video/background.m3u8"
+  },
+  "MX025": {
+    "background": "assets/MX025/video/background.m3u8"
+  },
+  "MX026": {
+    "background": "assets/MX026/video/background.m3u8"
+  },
+  "MX027": {
+    "background": "assets/MX027/video/background.m3u8"
+  },
+  "MX028": {
+    "background": "assets/MX028/video/background.m3u8"
+  },
+  "MX029": {
+    "warp": "mixes/MX029/video/warp.m3u8",
+    "bubbles": "mixes/MX029/video/bubbles.m3u8"
+  },
+  "MX030": {
+    "office": "assets/MX030/video/office.m3u8"
+  },
+  "MX031": {
+    "highway": "assets/MX031/video/highway.m3u8"
+  },
+  "MX032": {
+    "machines": "assets/MX032/video/machines.m3u8"
+  },
+  "MX033": {
+    "octo": "assets/MX033/video/octo.m3u8"
+  },
+  "MX034": {
+    "background": "assets/MX034/video/background.m3u8"
+  },
+  "MX035": {
+    "lava": "assets/MX035/video/lava.m3u8"
+  },
+  "MX036": {
+    "background": "assets/MX036/video/background.m3u8"
+  },
+  "MX037": {
+    "background": "assets/MX037/video/background.m3u8"
+  },
+  "MX038": {
+    "background": "assets/MX038/video/background.m3u8"
+  },
+  "MX039": {
+    "background": "assets/MX039/video/background.m3u8"
+  },
+  "MX040": {
+    "background": "assets/MX040/video/background.m3u8"
+  },
+  "MX041": {
+    "background": "assets/MX041/video/background.m3u8"
+  },
+  "MX042": {
+    "background": "assets/MX042/video/background.m3u8"
+  },
+  "MX043": {
+    "background": "assets/MX043/video/background.m3u8"
+  },
+  "MX044": {
+    "background": "assets/MX044/video/background.m3u8"
+  },
+  "MX045": {
+    "background": "assets/MX045/video/background.m3u8"
+  },
+  "MX046": {
+    "background": "assets/MX046/video/background.m3u8"
+  },
+  "MX047": {
+    "background": "assets/MX047/video/background.m3u8"
+  },
+  "RM001": {
+    "RM001BGV1": "assets/RM001/RM001BGV1/RM001BGV1.m3u8",
+    "RM001BGV2": "assets/RM001/RM001BGV2/RM001BGV2.m3u8",
+    "RM001BGV3": "assets/RM001/RM001BGV3/RM001BGV3.m3u8",
+    "RM001BGV4": "assets/RM001/RM001BGV4/RM001BGV4.m3u8",
+    "RM001BGV5": "assets/RM001/RM001BGV5/RM001BGV5.m3u8"
+  }
+}

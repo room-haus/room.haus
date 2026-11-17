@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import * as BABYLON from 'babylonjs';
 import CaseTexture from 'src/images/mix-art/mx023.jpg';
@@ -24,9 +24,9 @@ export const Background = (props) => (
     columns={3}
     rows={3}
     videos={[
-      mediaUrl('assets/MX023/video/MX023BGV-ColoursA.m3u8'),
-      mediaUrl('assets/MX023/video/MX023BGV-ColoursB.m3u8'),
-      mediaUrl('assets/MX023/video/MX023BGV-pink.m3u8'),
+      sceneMediaUrl('MX023', 'MX023BGV-ColoursA'),
+      sceneMediaUrl('MX023', 'MX023BGV-ColoursB'),
+      sceneMediaUrl('MX023', 'MX023BGV-pink'),
     ]}
   />
 );

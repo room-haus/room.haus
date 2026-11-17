@@ -26,6 +26,7 @@
     "postbuild": "node scripts/build-routes.mjs",
     "serve": "node scripts/serve.mjs",
     "check:media": "node scripts/check-media.mjs",
+    "check:dependencies": "node scripts/check-dependencies.mjs",
     "test": "node --test test/*.test.mjs",
     "lint": "eslint .",
     "format": "prettier --write src --ignore-unknown",

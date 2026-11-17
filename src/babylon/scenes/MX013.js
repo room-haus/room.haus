@@ -1,3 +1,4 @@
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import VideoGrid from '../../components/VideoGrid';
 import * as BABYLON from 'babylonjs';
@@ -16,5 +17,5 @@ export const build = ({scene}) => {
 };
 
 export const Background = ({source}) => (
-  <VideoGrid source={source} columns={3} rows={3} videos={['https://www.dropbox.com/s/sslop96edbf800p/mx013video.mp4?dl=1']} />
+  <VideoGrid source={source} columns={3} rows={3} videos={[sceneMediaUrl('MX013', 'background')]} />
 );

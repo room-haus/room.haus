@@ -1,4 +1,4 @@
-import {mediaUrl} from '../../content/media.mjs';
+import {sceneMediaUrl} from '../../content/sceneMedia.mjs';
 import React from 'react';
 import {VideoBackgroundScene, build} from './templates/VideoBackground';
 import CaseTexture from '../../images/mix-art/mx046.jpg';
@@ -13,7 +13,7 @@ export const Background = (props) => {
   return (
     <VideoBackgroundScene
       {...props}
-      manifestUrl={mediaUrl('assets/MX046/video/background.m3u8')}
+      manifestUrl={sceneMediaUrl('MX046', 'background')}
     />
   );
 };

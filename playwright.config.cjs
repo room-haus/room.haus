@@ -7,7 +7,7 @@ module.exports = defineConfig({
   // Hosted browsers share the runner's software GPU and audio device.
   workers: process.env.CI ? 1 : 2,
   reporter: 'list',
-  use: {reducedMotion: 'reduce'},
+  use: {baseURL: 'http://127.0.0.1:4173', reducedMotion: 'reduce'},
   projects: [
     {name: 'chromium', use: {browserName: 'chromium'}},
     {name: 'android', use: {...devices['Pixel 7'], browserName: 'chromium'}},
