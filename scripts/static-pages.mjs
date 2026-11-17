@@ -24,7 +24,7 @@ function header(section, asset) {
         <a href="https://www.instagram.com/room.haus/">Instagram<span aria-hidden="true">↗</span></a>
         <a href="mailto:info@room.haus">Email<span aria-hidden="true">↗</span></a>
       </nav>`;
-  return `<header class="site-header"><a class="wordmark" href="${detail ? '/' + section + '/' : '/'}" aria-label="${detail ? 'ROOM archive' : 'ROOM home'}">
+  return `<header class="site-header"><a class="wordmark" href="/" aria-label="ROOM home">
     <img src="${asset('logo.png')}" alt="ROOM" width="1307" height="240"></a>${links}</header>`;
 }
 
