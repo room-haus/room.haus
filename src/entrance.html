@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#eeede5" />
     <% const {page, sections} = htmlWebpackPlugin.options; const home = page.path === '/'; %>
+    <% if (home) { %><style media="(prefers-reduced-motion: no-preference)">@view-transition { navigation: auto; }</style><% } %>
     <title><%= home ? 'ROOM' : page.title + ' | ROOM' %></title>
     <meta name="description" content="<%- page.description %>" />
     <link rel="canonical" href="https://room.haus<%= page.path %>" />
@@ -60,7 +61,7 @@
         <% for (const section of sections) { const season = section.title.startsWith('S/S '); %>
         <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === page.path) { %>aria-current="page"<% } %>>
           <span class="section-label"><% if (season) { %><small>S/S</small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
-          <span class="entrance-arrow" aria-hidden="true">↗</span>
+          <span class="entrance-arrow" aria-hidden="true"><%= home && section.path === '/mixes/' ? '→' : '↗' %></span>
         </a>
         <% } %>
       </nav>

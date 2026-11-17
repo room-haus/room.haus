@@ -45,6 +45,7 @@ for (const [route, title, description, record] of pages) {
   await mkdir(dir, {recursive: true});
   const body = record ? recordBody(record, asset) : archiveBody(route === '/releases/' ? 'releases' : 'mixes', asset);
   const html = template
+    .replace(/<style id=["']?archive-slide["']?>/i, route === '/mixes/' ? '$&' : '<style id="archive-slide" media="not all">')
     .replace(/<!--catalog-head-->[\s\S]*?<!--\/catalog-head-->/, '')
     .replace(/<title[^>]*>[\s\S]*?<\/title>/i, '')
     .replace(/<meta\b[^>]*name=["']description["'][^>]*>/gi, '')

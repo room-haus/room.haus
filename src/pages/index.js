@@ -45,6 +45,8 @@ export default function App({Player = LazyPlayer}) {
   }, []);
 
   useLayoutEffect(() => {
+    // Client-side archive navigation can change which screen this same document represents.
+    document.getElementById('archive-slide').media = route.page === 'archive' && route.section === 'mixes' ? 'all' : 'not all';
     const archive = route.page === 'archive' && history.state?.archive;
     if (archive) {
       document.getElementById(`record-${archive.focus}`)?.focus({preventScroll: true});

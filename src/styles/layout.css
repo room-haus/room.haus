@@ -50,6 +50,11 @@ a { color: inherit; }
 }
 .wordmark { display: inline-flex; align-items: center; min-height: 44px; }
 .wordmark img { width: clamp(6.75rem, 13vw, 13.5rem); height: auto; }
+.archive-page .wordmark::before {
+  content: '(←)';
+  margin-right: .5em;
+  font: .78rem/1 var(--mono);
+}
 .out-links { display: flex; align-items: center; gap: clamp(.65rem, 2.8vw, 3rem); }
 .out-links a, .back-link {
   min-height: 44px; display: inline-flex; align-items: center; gap: .28em;
@@ -272,7 +277,11 @@ a { color: inherit; }
   .collection-nav a { font-size: clamp(1.95rem, 8.1vw, 2.65rem); }
   .collection-nav sup { font-size: .65rem; }
 }
-@media (max-width: 22rem) { .out-links a span { display: none; } .wordmark img { width: 5.6rem; } }
+@media (max-width: 22rem) {
+  .archive-page .wordmark::before { content: '←'; margin-right: .25em; }
+  .out-links a span { display: none; }
+  .wordmark img { width: 5.6rem; }
+}
 @media (max-height: 34rem) and (min-width: 44rem) {
   .track-meta img { width: 2.6rem; }
 }
@@ -337,3 +346,33 @@ a { color: inherit; }
   .artwork-image { max-height: 44dvh; }
   .still-object { width: min(47vw, 38vh); }
 }
+
+/* The two pages travel edge to edge while the shared ROOM mark settles into its header. */
+@media (prefers-reduced-motion: no-preference) {
+  .entrance--study .entrance-home img,
+  .archive-page .wordmark img { view-transition-name: room-wordmark; }
+
+  :root {
+    --slide-in: 100%;
+    --slide-out: -100%;
+    --slide-duration: 480ms;
+    --slide-easing: cubic-bezier(.42, 0, .18, 1);
+  }
+  :root:has(.entrance--study) { --slide-in: -100%; --slide-out: 100%; }
+  ::view-transition-group(root),
+  ::view-transition-group(room-wordmark) {
+    animation-duration: var(--slide-duration);
+    animation-timing-function: var(--slide-easing);
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: var(--slide-duration) var(--slide-easing) both;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) { animation-name: room-slide-out; }
+  ::view-transition-new(root) { animation-name: room-slide-in; }
+  ::view-transition-old(room-wordmark) { animation: none; opacity: 0; }
+  ::view-transition-new(room-wordmark) { animation: none; mix-blend-mode: normal; }
+}
+@keyframes room-slide-out { to { transform: translateX(var(--slide-out)); } }
+@keyframes room-slide-in { from { transform: translateX(var(--slide-in)); } }
