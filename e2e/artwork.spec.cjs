@@ -68,3 +68,13 @@ test('early mix controls fit a small phone in portrait and landscape', async ({p
     await options.press('Escape');
   }
 });
+
+test('the scene back button opens the archive from a direct link', async ({page}) => {
+  await page.goto(base + '/mixes/MX003/');
+  const back = page.getByRole('link', {name: 'Back to mixes'});
+  await expect(back).toBeInViewport({ratio: 1});
+  await expect(page.locator('.player-options')).not.toHaveAttribute('open', '');
+  await back.press('Enter');
+  await expect(page.getByRole('searchbox')).toBeVisible();
+  await expect(page).toHaveURL(base + '/mixes/');
+});

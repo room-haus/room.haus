@@ -30,6 +30,30 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
       const pixels = await canvas.evaluate(el => [el.width, el.height]);
       throw new Error(`Playback stopped at ${await seek.inputValue()}s. Canvas ${pixels.join('×')}.\n${transport}`, {cause: error});
     }
+    // The dock stays reachable while its sound bar is hidden. Playback and the
+    // WebGL canvas survive hiding, rotating the viewport, and showing it again.
+    const sceneSurface = await canvas.elementHandle();
+    const positionBeforeHide = Number(await seek.inputValue());
+    const hide = page.getByRole('button', {name: 'Hide sound bar'});
+    if (isMobile) await hide.tap();
+    else await hide.press('Space');
+    await expect(page.locator('#sound-bar')).toBeHidden();
+    const show = page.getByRole('button', {name: 'Show sound bar'});
+    if (!isMobile) await expect(show).toBeFocused();
+    await expect(show).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.getByRole('link', {name: 'Back to ' + collection})).toBeInViewport();
+    await expect.poll(() => page.locator('.seek').inputValue().then(Number)).toBeGreaterThan(positionBeforeHide + 1);
+    if (isMobile) {
+      const {width, height} = page.viewportSize();
+      await page.setViewportSize({width: height, height: width});
+      await expect(show).toBeInViewport({ratio: 1});
+      await expect(page.locator('#sound-bar')).toBeHidden();
+      await page.setViewportSize({width, height});
+    }
+    if (isMobile) await show.tap();
+    else await show.press('Enter');
+    await expect(seek).toBeVisible();
+    expect(await canvas.evaluate((el, original) => el === original, sceneSurface)).toBe(true);
     if (id === 'MX001') {
       const surface = await canvas.elementHandle();
       const position = Number(await seek.inputValue());
@@ -55,7 +79,6 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
       await expect.poll(() => background.evaluate(video => video.videoWidth > 0 && video.currentTime > 0), {timeout: 30000}).toBe(true);
     }
     await expect(page.locator('.listening-scene')).toHaveAttribute('data-scene-state', 'ready');
-    await openOptions(page);
     await page.getByRole('link', {name: 'Back to ' + collection}).click();
     await expect(canvas).toHaveCount(0);
     await expect(sleeve).toBeFocused();

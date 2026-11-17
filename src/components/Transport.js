@@ -28,6 +28,7 @@ export default function Transport({
   selectMode,
   children,
 }) {
+  const [soundBarVisible, setSoundBarVisible] = useState(true);
   const [showTracks, setShowTracks] = useState(false);
   const [share, setShare] = useState(null);
   const options = useRef(null);
@@ -52,6 +53,9 @@ export default function Transport({
   const {audio, time, duration, playing, status, error, seek} = player;
   const readyToSeek = duration > 0 && Number.isFinite(duration);
   const failed = status === 'error' || status === 'unavailable';
+  useEffect(() => {
+    if (failed) setSoundBarVisible(true);
+  }, [failed]);
   const loading = status === 'loading';
   const unavailable = status === 'unavailable';
   const canPause = playing || loading;
@@ -93,58 +97,81 @@ export default function Transport({
 
   return (
     <section className="transport" aria-label="Audio player">
-      <div className="transport-status" role="status">
-        {failed && (
-          <>
-            <span>{error || 'Audio stream unavailable.'}</span>{' '}
-            {fallbackURL && (
-              <a href={fallbackURL}>{record.soundcloud ? 'Listen on SoundCloud' : 'Listen on Bandcamp'} ↗</a>
-            )}
-          </>
-        )}
-        {loading && <LoadingLabel>{playing ? 'Buffering audio…' : 'Loading audio…'}</LoadingLabel>}
-      </div>
-      {status === 'idle' && time > 0 && (
-        <div className="opening-position">
-          <span>
-            {shared ? 'Shared' : 'Resume'} at {timestamp(time)}
-          </span>
-          <button
-            onClick={() => {
-              startOver();
-              playButton.current?.focus();
-            }}>
-            Start over
-          </button>
+      <div id="sound-bar" className="sound-bar" hidden={!soundBarVisible}>
+        <div className="transport-status" role="status">
+          {failed && (
+            <>
+              <span>{error || 'Audio stream unavailable.'}</span>{' '}
+              {fallbackURL && (
+                <a href={fallbackURL}>{record.soundcloud ? 'Listen on SoundCloud' : 'Listen on Bandcamp'} ↗</a>
+              )}
+            </>
+          )}
+          {loading && <LoadingLabel>{playing ? 'Buffering audio…' : 'Loading audio…'}</LoadingLabel>}
         </div>
-      )}
-      <div className="transport-row">
-        <button
-          ref={playButton}
-          className="play-action"
-          disabled={unavailable}
-          title={action}
-          aria-label={action}
-          onClick={failed ? player.retry : canPause ? player.pause : player.play}>
-          <PlayIcon playing={canPause} />
-        </button>
-        <div className="time-control">
-          <div className="wave-seek" style={{'--played': `${readyToSeek ? 100 * Math.min(time / duration, 1) : 0}%`}}>
-            <PlaybackScope audio={audio} active={playing && !reducedMotion} />
-            <input
-              type="range"
-              className="seek"
-              aria-label="Seek playback"
-              disabled={!readyToSeek}
-              min="0"
-              max={readyToSeek ? duration : 0}
-              value={readyToSeek ? Math.min(time, duration) : 0}
-              step="1"
-              aria-valuetext={`${timestamp(time)} of ${readyToSeek ? timestamp(duration) : 'unknown duration'}`}
-              onChange={(event) => seek(Number(event.target.value))}
-            />
+        {status === 'idle' && time > 0 && (
+          <div className="opening-position">
+            <span>
+              {shared ? 'Shared' : 'Resume'} at {timestamp(time)}
+            </span>
+            <button
+              onClick={() => {
+                startOver();
+                playButton.current?.focus();
+              }}>
+              Start over
+            </button>
+          </div>
+        )}
+        <div className="transport-row">
+          <button
+            ref={playButton}
+            className="play-action"
+            disabled={unavailable}
+            title={action}
+            aria-label={action}
+            onClick={failed ? player.retry : canPause ? player.pause : player.play}>
+            <PlayIcon playing={canPause} />
+          </button>
+          <div className="time-control">
+            <div className="wave-seek" style={{'--played': `${readyToSeek ? 100 * Math.min(time / duration, 1) : 0}%`}}>
+              <PlaybackScope audio={audio} active={soundBarVisible && playing && !reducedMotion} />
+              <input
+                type="range"
+                className="seek"
+                aria-label="Seek playback"
+                disabled={!readyToSeek}
+                min="0"
+                max={readyToSeek ? duration : 0}
+                value={readyToSeek ? Math.min(time, duration) : 0}
+                step="1"
+                aria-valuetext={`${timestamp(time)} of ${readyToSeek ? timestamp(duration) : 'unknown duration'}`}
+                onChange={(event) => seek(Number(event.target.value))}
+              />
+            </div>
           </div>
         </div>
+      </div>
+      <div className="player-dock">
+        <button
+          className="sound-bar-toggle"
+          aria-label={soundBarVisible ? 'Hide sound bar' : 'Show sound bar'}
+          title={soundBarVisible ? 'Hide sound bar' : 'Show sound bar'}
+          aria-expanded={soundBarVisible}
+          aria-controls="sound-bar"
+          onClick={() => setSoundBarVisible(!soundBarVisible)}>
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            aria-hidden="true">
+            <path d="M3 10v4m4-8v12m5-16v20m5-16v12m4-8v4" />
+          </svg>
+        </button>
         <details
           className="player-options"
           ref={options}
@@ -164,7 +191,21 @@ export default function Transport({
             else if (showTracks) closeTracks();
             else closeOptions();
           }}>
-          <summary ref={toggle}>Options</summary>
+          <summary ref={toggle} aria-label="Options" title="Options">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden="true">
+              <path d="M3 6h8m4 0h6M3 12h2m4 0h12M3 18h12m4 0h2" />
+              <circle cx="13" cy="6" r="2" />
+              <circle cx="7" cy="12" r="2" />
+              <circle cx="17" cy="18" r="2" />
+            </svg>
+          </summary>
           <div className="options-panel">
             <div className="track-meta">
               <img src={record.art} alt="" width="58" height="58" />

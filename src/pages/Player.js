@@ -71,6 +71,23 @@ export default function Player({record, section}) {
           </p>
         )}
       </main>
+      <a
+        className="scene-back"
+        href={history.state?.fromArchive?.url || '/' + section + '/'}
+        aria-label={`Back to ${section}`}
+        title={`Back to ${section}`}
+        onClick={(event) => returnToArchive(event, section)}>
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true">
+          <path d="m14 5-7 7 7 7M7 12h14" />
+        </svg>
+      </a>
       <Transport
         record={record}
         player={player}
@@ -86,12 +103,6 @@ export default function Player({record, section}) {
           setScene(enabled);
         }}>
         <ArtworkViewer record={record} />
-        <a
-          className="back-link"
-          href={history.state?.fromArchive?.url || '/' + section + '/'}
-          onClick={(event) => returnToArchive(event, section)}>
-          ← Back to {section}
-        </a>
         {next && (
           <a className="next-mix" href={recordPath(next)} rel="next" onClick={(event) => openNextMix(event, next)}>
             <span>Next mix</span>
