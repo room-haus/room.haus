@@ -1,17 +1,20 @@
 // Invoked by the release workflow after verifying an exact master commit.
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync, readdirSync, writeFileSync, rmSync} from 'node:fs';
+import {mkdtempSync, writeFileSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {cloudFrontSource} from './routing.mjs';
 import {records, routeOf} from './catalog.mjs';
+import {releaseFiles, releaseDigest} from './release-files.mjs';
 
 const sha = process.argv[2];
 if (!/^[a-f0-9]{40}$/.test(sha || '')) throw Error('Expected a full release commit SHA.');
 const bucket = 'room.haus';
 const distribution = 'E240MGV7PK0AIJ';
-const functionName = 'room-archive-' + sha.slice(0, 16);
-const prefix = '/_releases/' + sha;
+const files = releaseFiles('dist');
+const digest = releaseDigest('dist', files);
+const functionName = 'room-archive-' + sha.slice(0, 12) + '-' + digest.slice(0, 32);
+const prefix = '/_releases/' + sha + '/' + digest;
 const config = {Comment: 'ROOM archive ' + sha, Runtime: 'cloudfront-js-2.0'};
 function aws(...args) {
   return execFileSync('aws', [...args, '--output', 'json'], {encoding: 'utf8', maxBuffer: 8 * 1024 * 1024});
@@ -37,9 +40,7 @@ const publicPaths = [
   '/',
   '/index.html',
   ...directories.flatMap((uri) => [uri, uri.slice(0, -1)]),
-  ...readdirSync('dist', {recursive: true, withFileTypes: true})
-    .filter((file) => file.isFile())
-    .map((file) => '/' + path.relative('dist', path.join(file.parentPath, file.name)).split(path.sep).join('/')),
+  ...files.map(name => '/' + name),
 ];
 for (const item of dist.CacheBehaviors?.Items || []) {
   const pattern = '/' + item.PathPattern.replace(/^\//, '');
@@ -97,7 +98,7 @@ try {
       '--only-show-errors',
     );
     const receipt = path.join(temp, 'commit');
-    writeFileSync(receipt, sha);
+    writeFileSync(receipt, sha + '\n' + digest + '\n');
     aws('s3api', 'put-object', '--bucket', bucket, '--key', marker, '--body', receipt);
   }
   const sourcePath = path.join(temp, 'function.js');

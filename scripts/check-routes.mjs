@@ -3,12 +3,13 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {records, routeOf} from './catalog.mjs';
 const base = new URL(process.argv[2] || 'http://127.0.0.1:4173');
+const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const checks = [
   ['/', 200, 'ROOM'],
   ['/mixes/', 200, 'Mixes'],
   ['/releases/', 200, 'Releases'],
   ...records.map((record) => [routeOf(record), 200, record.id]),
-  ['/mixes/?mx=MX029', 200, 'MX029'],
+  ['/mixes/?mx=MX029', 200, 'MX029', '/mixes/MX029/'],
   ['/releases/ROOM001-AMAL-DANCECONCEPT', 200, 'Dance Concept'],
   ['/mixes/?mx=MX999', 404],
   ['/releases/unknown', 404],
@@ -23,11 +24,13 @@ function rememberAsset(value) {
 }
 async function worker() {
   while (checks.length) {
-    const [path, status, title] = checks.shift();
+    const [path, status, title, canonical = path] = checks.shift();
     const res = await fetch(new URL(path, base), {signal: AbortSignal.timeout(15000)});
     assert.equal(res.status, status, path);
     const body = await res.text();
     if (title) {
+      const file = 'dist' + canonical.replace(/\/$/, '') + '/index.html';
+      assert.equal(digest(body), digest(await readFile(file)), path + ' HTML differs from the tested build');
       assert.ok(body.match(/<title>(.*?)<\/title>/i)?.[1].includes(title), path + ' has wrong title');
       const entry = [...body.matchAll(/<script\b[^>]*\bsrc=["']?([^\s"'<>]+)/gi)];
       assert.ok(entry.length, path + ' has no entry script');
@@ -42,23 +45,22 @@ async function worker() {
   }
 }
 await Promise.all(Array.from({length: 4}, worker));
-for (const path of ['/worklets/index.js', '/models/CD/CD.babylon']) assets.add(path);
+for (const path of ['/worklets/index.js', '/models/CD/CD.babylon', '/models/MX018/jett.babylon', '/sitemap.xml']) assets.add(path);
 const entries = [...assets];
-const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
+const mime = {
+  js: /javascript/,
+  css: /text\/css/,
+  jpg: /image\/jpeg/,
+  xml: /(?:application|text)\/xml/,
+  babylon: /application\/(octet-stream|json)|text\/plain/,
+};
 async function verifyAssets() {
   while (entries.length) {
     const name = entries.shift();
     const result = await fetch(new URL(name, base), {signal: AbortSignal.timeout(20000)});
     assert.equal(result.status, 200, name);
     const type = result.headers.get('content-type') || '';
-    const expectedType = name.endsWith('.js')
-      ? /javascript/
-      : name.endsWith('.css')
-        ? /text\/css/
-        : name.endsWith('.jpg')
-          ? /image\/jpeg/
-          : /application\/(octet-stream|json)|text\/plain/;
-    assert.match(type, expectedType, name);
+    assert.match(type, mime[name.split('.').at(-1)], name);
     const expected = await readFile('dist' + name);
     assert.equal(
       digest(Buffer.from(await result.arrayBuffer())),

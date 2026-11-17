@@ -3,7 +3,7 @@ import {records, releases, routeOf} from './catalog.mjs';
 // Deploy the same lookup used by the local static server as a CloudFront viewer-request function.
 // Rewriting to distinct object keys makes the cached HTML independent of the query-string policy.
 export function cloudFrontSource(prefix = '') {
-  if (prefix && !/^\/_releases\/[a-f0-9]{40}$/.test(prefix)) throw Error('Expected a release commit SHA');
+  if (prefix && !/^\/_releases\/[a-f0-9]{40}(?:\/[a-f0-9]{64})?$/.test(prefix)) throw Error('Invalid release prefix');
   const pages = ['/mixes/', '/releases/', ...records.map(routeOf)].map((path) => path.slice(0, -1));
   return `var prefix = ${JSON.stringify(prefix)};
 var aliases = ${JSON.stringify(Object.fromEntries(releases.map((record) => [record.id, routeOf(record).slice(0, -1)])))};

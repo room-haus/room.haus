@@ -24,5 +24,12 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - name: Verify the built archive through HTTP
+        run: |
+          node scripts/serve.mjs &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          curl --silent --show-error --fail --retry 5 --retry-connrefused http://127.0.0.1:4173/ --output /dev/null
+          node scripts/check-routes.mjs
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:browser
