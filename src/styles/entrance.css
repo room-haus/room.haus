@@ -374,6 +374,7 @@
 .season-collections a[aria-current] { color: var(--stock); background: var(--black); border-color: var(--black); }
 .season-collections a:hover, .season-collections a:focus-visible { color: white; background: var(--blue); }
 .season-empty {
+  container-type: inline-size;
   display: flex;
   min-height: 18rem;
   flex-direction: column;
@@ -387,8 +388,10 @@
   border-bottom: 1px solid var(--black);
 }
 .season-empty p { font: 400 clamp(3.8rem, 12vw, 14rem)/.9 var(--display); letter-spacing: -.055em; }
-.sound-key { border: 0; padding: .48rem .9rem; background: var(--blue); color: white; font: 1rem/1.05 var(--utility); white-space: pre; }
-.sound-key:hover, .sound-key:focus-visible { background: var(--black); }
+.sound-key { border: 0; padding: .65rem; background: transparent; color: var(--black); }
+.sound-art { display: block; font: min(1.85cqi, 10px)/1 monospace; letter-spacing: 0; text-align: left; white-space: pre; }
+.sound-art > span { display: block; }
+.sound-key:hover, .sound-key:focus-visible { color: var(--blue); }
 .sound-key:active { transform: translateY(2px); }
 .sound-status { font: .85rem var(--utility); }
 .sound-status:empty { display: none; }
@@ -396,7 +399,7 @@
 .member { margin: 0; background: var(--stock); }
 .portrait { display: block; position: relative; width: 100%; padding: 0; border: 0; background: var(--black); }
 .portrait img { display: block; width: 100%; height: auto; }
-.portrait .pixel-print { position: absolute; inset: 0; height: 100%; image-rendering: pixelated; opacity: 0; }
+.portrait .pixel-print { position: absolute; inset: 0; height: 100%; image-rendering: pixelated; opacity: 0; clip-path: circle(23% at var(--patch-x, 50%) var(--patch-y, 50%)); }
 .portrait[aria-pressed=true] .pixel-print { opacity: 1; }
 @media (hover: hover) {
   .portrait:hover .pixel-print { opacity: 1; }

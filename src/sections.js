@@ -19,7 +19,18 @@ if (sound) {
 }
 
 for (const portrait of document.querySelectorAll('.portrait')) {
-  portrait.addEventListener('click', () => {
+  function positionPatch(event) {
+    const bounds = portrait.getBoundingClientRect();
+    portrait.style.setProperty('--patch-x', (event.clientX - bounds.left) / bounds.width * 100 + '%');
+    portrait.style.setProperty('--patch-y', (event.clientY - bounds.top) / bounds.height * 100 + '%');
+  }
+  portrait.addEventListener('pointermove', positionPatch);
+  portrait.addEventListener('pointerdown', positionPatch);
+  portrait.addEventListener('click', event => {
+    if (event.detail === 0) {
+      portrait.style.setProperty('--patch-x', '50%');
+      portrait.style.setProperty('--patch-y', '50%');
+    }
     portrait.setAttribute('aria-pressed', String(portrait.getAttribute('aria-pressed') !== 'true'));
   });
 }

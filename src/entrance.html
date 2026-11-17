@@ -65,9 +65,7 @@
         </div>
         <div class="season-empty" aria-label="<%= page.collection %>">
           <p>Coming soon</p>
-          <button type="button" class="sound-key" aria-label="Play bruh sound effect" hidden><span aria-hidden="true">+----------+
-| &gt; BRUH   |
-+----------+</span></button>
+          <button type="button" class="sound-key" aria-label="Play bruh sound effect" hidden><span class="sound-art" aria-hidden="true"><% for (const row of require('./content/bruh-art.json')) { %><span><%= row.replace(/ /g, '\u00a0') %></span><% } %></span></button>
           <audio controls preload="none" src="<%= require('./audio/assets/bruh.mp3') %>" aria-label="Bruh sound effect"></audio>
           <span class="sound-status" role="status"></span>
         </div>

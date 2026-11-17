@@ -1,6 +1,22 @@
 [
-  {"image": "moustafa", "name": "Moustafa Hassan", "role": "Creative Director"},
-  {"image": "peter", "name": "Peter Markoski", "role": "Sound/Tech"},
-  {"image": "nick", "name": "Nick Licitra", "role": "Tech"},
-  {"image": "av", "name": "AV", "role": "Talent"}
+  {
+    "image": "av",
+    "name": "Moustafa Hassan",
+    "role": "Creative Director"
+  },
+  {
+    "image": "peter",
+    "name": "Peter Markoski",
+    "role": "Sound/Tech"
+  },
+  {
+    "image": "nick",
+    "name": "Nick Licitra",
+    "role": "Tech"
+  },
+  {
+    "image": "moustafa",
+    "name": "AV",
+    "role": "Talent"
+  }
 ]
