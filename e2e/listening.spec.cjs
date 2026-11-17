@@ -28,7 +28,7 @@ for (const id of ['MX001', 'MX029']) {
       await tabTo(page, search);
       await page.keyboard.type(id);
     }
-    const sleeve = page.getByRole('link', {name: new RegExp(id)});
+    const sleeve = page.getByRole('list', {name: 'mixes catalogue'}).getByRole('link', {name: new RegExp(id)});
     await expect(sleeve).toHaveCount(1);
     if (isMobile)
       await expect

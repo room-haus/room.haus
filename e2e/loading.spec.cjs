@@ -128,7 +128,7 @@ test('audio startup can be paused while the stream player is still downloading',
   await expect.poll(async () => Number(await page.getByRole('slider').inputValue())).toBeGreaterThan(0);
 });
 
-test('leaving a pending stream disposes its audio before the delayed player arrives', async ({page}) => {
+test('leaving during HLS startup retains the stream when the delayed player arrives', async ({page}) => {
   await observeAudio(page);
   const finish = await hold(page, /\/assets\/hls\.[\da-f]+\.js$/);
   await page.goto('/mixes/MX001/');
@@ -136,17 +136,18 @@ test('leaving a pending stream disposes its audio before the delayed player arri
   await expect(page.getByRole('status').filter({hasText: 'Loading audio'})).toBeVisible();
   await page.getByRole('link', {name: 'Back to mixes'}).click();
   await expect(page.getByRole('searchbox')).toBeVisible();
-  finish(true);
-  // Open and play a new recording: the same chunk has now finished its real initialization.
-  await page.locator('#record-MX029').click();
-  await page.getByRole('button', {name: 'Play', exact: true}).click();
-  await expect.poll(async () => Number(await page.getByRole('slider').inputValue())).toBeGreaterThan(0);
+  const mini = page.getByRole('region', {name: 'Listening player'});
+  try {
+    await expect(mini.getByRole('status')).toContainText('Loading audio');
+  } finally {
+    finish(true);
+  }
+  await expect.poll(() => page.evaluate(() => window.roomTestAudio[0].currentTime)).toBeGreaterThan(0);
   expect(await page.evaluate(() => ({
-    abandonedPaused: window.roomTestAudio[0].paused,
-    abandonedSource: window.roomTestAudio[0].getAttribute('src'),
-    abandonedTime: window.roomTestAudio[0].currentTime,
-    oldContextsClosed: window.roomTestContexts.slice(0, -1).every(context => context.state === 'closed'),
-  }))).toEqual({abandonedPaused: true, abandonedSource: null, abandonedTime: 0, oldContextsClosed: true});
+    mediaCount: window.roomTestAudio.length,
+    paused: window.roomTestAudio[0].paused,
+    contextsOpen: window.roomTestContexts.every(context => context.state !== 'closed'),
+  }))).toEqual({mediaCount: 1, paused: false, contextsOpen: true});
 });
 
 test('switching release tracks during startup cannot revive the previous track', async ({page}) => {

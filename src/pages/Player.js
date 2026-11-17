@@ -1,32 +1,53 @@
 import StillArt from '../components/StillArt';
-import React, {lazy, Suspense, useCallback, useEffect, useRef, useState} from 'react';
+import React, {lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import usePlayer from '../audio/usePlayer';
+import MiniPlayer from '../components/MiniPlayer';
 import ArtworkViewer from '../components/ArtworkViewer';
 import {mixes} from '../content/mixes';
 import {nextMix} from '../content/catalogDisplay.mjs';
 import {openNextMix, recordPath, returnToArchive} from './navigation';
 import Transport from '../components/Transport';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {listeningLink, openingPosition, savePosition} from './listeningPosition';
+import {linkedPosition, listeningLink, openingPosition, savePosition} from './listeningPosition';
 
 const ListeningScene = lazy(() => import(/* webpackChunkName: "listening-scene" */ '../components/ListeningScene'));
 const motionQuery = '(prefers-reduced-motion: reduce)';
 
-export default function Player({record, section}) {
-  const [position, setPosition] = useState(() => openingPosition(record));
+export default function Player({entry, visible, autoplay, activeAudio, onClose, onOpen}) {
+  const {record, section} = entry;
+  const [position, setPosition] = useState(() => ({...openingPosition(record, entry.search), autoplay}));
   const {trackIndex} = position;
-  const [reducedMotion, setReducedMotion] = useState(() => matchMedia(motionQuery).matches);
-  const [scene, setScene] = useState(() => !matchMedia(motionQuery).matches);
-  const [sceneFailed, setSceneFailed] = useState(false);
-  const stage = useRef(null);
-  const next = nextMix(mixes, record);
+  const lastEntry = useRef(entry);
   const stream = record.tracks ? record.tracks[trackIndex].streamURL : record.audioSourceURL;
-  const remember = useCallback((seconds) => savePosition(record, trackIndex, seconds), [record, trackIndex]);
-  const player = usePlayer(stream, position.seconds, remember);
+  const remember = useCallback((seconds, updateURL) => {
+    savePosition(record, trackIndex, seconds, updateURL ? lastEntry.current.search : null);
+  }, [record, trackIndex]);
+  const player = usePlayer(stream, position.seconds, remember, position.autoplay);
+
+  useLayoutEffect(() => {
+    activeAudio.current = {record, audio: player.audio};
+    return () => { activeAudio.current = null; };
+  }, [activeAudio, record, player.audio]);
+
+  useLayoutEffect(() => {
+    if (lastEntry.current === entry) return;
+    lastEntry.current = entry;
+    const linked = linkedPosition(record, entry.search);
+    if (!linked?.shared) return;
+    if (linked.trackIndex === trackIndex) {
+      player.seek(linked.seconds);
+      setPosition(previous => ({...previous, shared: true}));
+    } else {
+      const playing = ['playing', 'loading'].includes(player.audio.snapshot.status);
+      setPosition({...linked, autoplay: playing});
+    }
+  }, [entry, player.audio, player.seek, record, trackIndex]);
+
   const selectTrack = (index) => {
     if (index === trackIndex) return;
+    player.pause();
     savePosition(record, index, 0);
-    setPosition({trackIndex: index, seconds: 0, shared: false});
+    setPosition({trackIndex: index, seconds: 0, shared: false, autoplay: false});
   };
   const startOver = () => {
     savePosition(record, trackIndex, 0);
@@ -34,6 +55,32 @@ export default function Player({record, section}) {
     player.seek(0);
     setPosition(previous => ({...previous, shared: false}));
   };
+
+  if (!visible) {
+    return ['idle', 'unavailable'].includes(player.status) ? null : (
+      <MiniPlayer record={record} trackIndex={trackIndex} player={player} onClose={onClose} onOpen={onOpen} />
+    );
+  }
+
+  return (
+    <ListeningRoom
+      record={record}
+      section={section}
+      player={player}
+      position={position}
+      selectTrack={selectTrack}
+      startOver={startOver}
+    />
+  );
+}
+
+function ListeningRoom({record, section, player, position, selectTrack, startOver}) {
+  const {trackIndex} = position;
+  const [reducedMotion, setReducedMotion] = useState(() => matchMedia(motionQuery).matches);
+  const [scene, setScene] = useState(() => !matchMedia(motionQuery).matches);
+  const [sceneFailed, setSceneFailed] = useState(false);
+  const stage = useRef(null);
+  const next = nextMix(mixes, record);
   const sceneError = useCallback(() => {
     setSceneFailed(true);
     setScene(false);

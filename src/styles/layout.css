@@ -377,3 +377,74 @@ a { color: inherit; }
     transition: left var(--room-slide), top var(--room-slide), width var(--room-slide);
   }
 }
+
+:root:has(.mini-player) {
+  --mini-player-height: max(60px, 4rem);
+  --mini-player-bottom: max(.5rem, env(safe-area-inset-bottom));
+  --mini-player-space: calc(var(--mini-player-height) + var(--mini-player-bottom) + .5rem);
+  scroll-padding-bottom: var(--mini-player-space);
+}
+:root:has(.mini-player-status:not(:empty)) { --mini-player-height: 4.75rem; }
+.room-shell:has(> .mini-player) { padding-bottom: var(--mini-player-space); }
+.room-shell:has(> .mini-player) > .entrance:not([inert]) {
+  min-height: calc(100svh - var(--mini-player-space));
+}
+@media (max-width: 680px), (pointer: coarse) {
+  .room-shell:has(> .mini-player) > [data-room-panel=splash]:not([inert]) {
+    height: calc(100dvh - var(--mini-player-space));
+    min-height: 0;
+  }
+}
+.mini-player {
+  position: fixed;
+  z-index: 4;
+  inset: auto max(.5rem, env(safe-area-inset-right)) var(--mini-player-bottom) max(.5rem, env(safe-area-inset-left));
+  max-width: 36rem;
+  height: var(--mini-player-height);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  padding-inline: .5rem .25rem;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid #454940;
+}
+.mini-player-record { min-width: 0; }
+.mini-player-record a {
+  min-height: 44px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: .5rem;
+  text-decoration: none;
+}
+.mini-player-record img { display: block; object-fit: cover; }
+.mini-player-meta { min-width: 0; line-height: 1.15; font-size: .9rem; }
+.mini-player-meta > span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mini-player-code { margin-inline-end: .3em; color: var(--acid); font: .7rem var(--mono); }
+.mini-player-track { color: #bcc2b5; }
+.mini-player-status {
+  margin-inline-start: calc(44px + .5rem);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  font-size: .75rem;
+  line-height: 1.1;
+  color: var(--acid);
+}
+.mini-player-status:empty { display: none; }
+.mini-player button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+.mini-player button:hover { background: #30342c; }
+.mini-player a:hover .mini-player-meta { text-decoration: underline; text-underline-offset: .15em; }
+.mini-player :focus-visible { outline-color: var(--acid); outline-offset: -2px; }

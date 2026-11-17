@@ -4,7 +4,7 @@ import Archive from './Archive';
 import NotFoundPage from './404';
 import StillArt from '../components/StillArt';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {navigate, panelForRoute, readRoute, returnToArchive} from './navigation';
+import {navigate, openRecord, panelForRoute, readRoute, recordPath, returnToArchive} from './navigation';
 import SiteHeader from '../components/SiteHeader';
 import {initStudy} from '../entrance';
 import {useRoomPanels} from './room-panels';
@@ -12,18 +12,24 @@ import {useRoomPanels} from './room-panels';
 export const loadPlayer = () => import(/* webpackChunkName: "player" */ './Player');
 const LazyPlayer = lazy(loadPlayer);
 
-function screenState(route, previousArchive) {
-  // Keep the first covers ready and retain the archive DOM throughout both directions of the slide.
-  const archive = route.page === 'archive' ? route : previousArchive;
-  return {route, archive};
+function screenState(route, previous, playing) {
+  // Keep the archive ready throughout both directions of the slide.
+  const archive = route.page === 'archive' ? route : previous.archive;
+  let session = previous.session;
+  if (route.page === 'player') {
+    const autoplay = session?.entry.record === route.record ? session.autoplay : playing;
+    session = {entry: route, autoplay};
+  }
+  return {route, archive, session};
 }
 
 export default function App({Player = LazyPlayer}) {
-  const [{route, archive}, setScreen] = useState(() =>
-    screenState(readRoute(), {page: 'archive', section: 'mixes', query: ''}),
+  const [{route, archive, session}, setScreen] = useState(() =>
+    screenState(readRoute(), {archive: {page: 'archive', section: 'mixes', query: ''}}, false),
   );
   const splash = route.page === 'splash';
   const studyStarted = useRef(false);
+  const activeAudio = useRef(null);
   useRoomPanels(route);
   useEffect(() => {
     if (splash && !studyStarted.current) {
@@ -49,8 +55,15 @@ export default function App({Player = LazyPlayer}) {
       const next = {...readRoute(), revision: ++revision};
       const crossesPanel = panelForRoute(currentRoute) !== panelForRoute(next);
       currentRoute = next;
-      const commit = () => setScreen(previous => screenState(next, previous.archive));
+      const current = activeAudio.current;
+      const playing = ['playing', 'loading'].includes(current?.audio.snapshot.status);
+      const commit = () => setScreen(previous => screenState(next, previous, playing));
       transition?.skipTransition();
+      if (next.record && playing && (next.record !== current.record || next.search)) {
+        // Start the replacement during this navigation gesture when the browser allows it.
+        flushSync(commit);
+        return;
+      }
       if (crossesPanel || !document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
         commit();
         return;
@@ -89,7 +102,8 @@ export default function App({Player = LazyPlayer}) {
     }
     const archive = route.page === 'archive' && history.state?.archive;
     if (archive) {
-      document.getElementById(`record-${archive.focus}`)?.focus({preventScroll: true});
+      const sleeve = document.getElementById(`record-${archive.focus}`);
+      (sleeve || document.querySelector('.collection-nav [aria-current]'))?.focus({preventScroll: true});
       window.scrollTo(0, archive.y);
     } else {
       window.scrollTo(0, 0);
@@ -106,33 +120,63 @@ export default function App({Player = LazyPlayer}) {
     document.title = `${title} — ROOM`;
   }, [route]);
 
-  if (panelForRoute(route) !== 'archive' || route.page === 'archive') return <Archive key={archive.section} route={archive} />;
-  if (route.page === 'missing') return <NotFoundPage section={route.section} />;
+  const visible = route.page === 'player';
+  const closePlayer = () => {
+    const target = {
+      archive: '.collection-nav [aria-current]',
+      missing: '.not-found a',
+      splash: '[data-room-panel=splash] .entrance-nav a',
+      season: '[data-room-panel=season] h1',
+      collective: '[data-room-panel=collective] h1',
+    }[route.page];
+    document.querySelector(target)?.focus({preventScroll: true});
+    setScreen(previous => ({...previous, session: null}));
+  };
+  const record = session?.entry.record;
+  const section = session?.entry.section;
+  const openPlayer = (event) => {
+    if (route.page === 'archive' && route.section === section) openRecord(event, record);
+    else navigate(event, recordPath(record));
+  };
+
   return (
-    <ErrorBoundary
-      key={route.record.id}
-      fallback={
-        <>
-          <SiteHeader section={route.section} listening />
-          <main className="page-loading">
-            Player unavailable. <a href={location.href}>Reload this recording</a>
-          </main>
-        </>
-      }>
-      <Suspense
-        fallback={
-          <main className="player-page">
-            <StillArt record={route.record} pending={`Opening ${route.record.id}…`} />
-            <a
-              className="loading-back"
-              href={history.state?.fromArchive?.url || '/' + route.section + '/'}
-              onClick={(event) => returnToArchive(event, route.section)}>
-              ← Back to {route.section}
-            </a>
-          </main>
-        }>
-        <Player key={route.record.id + ':' + (route.revision || 0)} record={route.record} section={route.section} />
-      </Suspense>
-    </ErrorBoundary>
+    <>
+      {(panelForRoute(route) !== 'archive' || route.page === 'archive') && <Archive key={archive.section} route={archive} />}
+      {route.page === 'missing' && <NotFoundPage section={route.section} />}
+      {session && (
+        <ErrorBoundary
+          key={record.id}
+          fallback={visible ? (
+            <>
+              <SiteHeader section={section} listening />
+              <main className="page-loading">
+                Player unavailable. <a href={location.href}>Reload this recording</a>
+              </main>
+            </>
+          ) : null}>
+          <Suspense
+            fallback={visible ? (
+              <main className="player-page">
+                <StillArt record={record} pending={`Opening ${record.id}…`} />
+                <a
+                  className="loading-back"
+                  href={history.state?.fromArchive?.url || '/' + section + '/'}
+                  onClick={(event) => returnToArchive(event, section)}>
+                  ← Back to {section}
+                </a>
+              </main>
+            ) : null}>
+            <Player
+              entry={session.entry}
+              visible={visible}
+              autoplay={session.autoplay}
+              activeAudio={activeAudio}
+              onClose={closePlayer}
+              onOpen={openPlayer}
+            />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+    </>
   );
 }

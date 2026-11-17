@@ -7,7 +7,7 @@ function timestamp(seconds) {
   return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, '0')}`;
 }
 
-function PlayIcon({playing}) {
+export function PlayIcon({playing}) {
   return (
     <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" fill="currentColor">
       {playing ? <path d="M5 4h5v16H5zm9 0h5v16h-5z" /> : <path d="M6 3.5v17L20 12z" />}

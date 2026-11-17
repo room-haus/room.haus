@@ -1,4 +1,4 @@
-import {recordPath} from './navigation';
+import {readRoute, recordPath} from './navigation';
 
 const keyFor = (record) => 'room.listening.v1.' + record.id;
 const first = {trackIndex: 0, seconds: 0, shared: false};
@@ -17,15 +17,19 @@ function findTrack(record, token) {
   return /^\d+$/.test(token) && number >= 1 && number <= tracks.length ? number - 1 : -1;
 }
 
-export function openingPosition(record) {
-  const params = new URLSearchParams(location.search);
-  if (params.has('track') || params.has('t')) {
-    const time = params.get('t') ?? '0';
-    const trackIndex = findTrack(record, params.get('track'));
-    if (trackIndex < 0) return first;
-    const seconds = /^\d+$/.test(time) && Number.isSafeInteger(Number(time)) ? Number(time) : 0;
-    return {trackIndex, seconds, shared: true};
-  }
+export function linkedPosition(record, search) {
+  const params = new URLSearchParams(search);
+  if (!params.has('track') && !params.has('t')) return null;
+  const time = params.get('t') ?? '0';
+  const trackIndex = findTrack(record, params.get('track'));
+  if (trackIndex < 0) return first;
+  const seconds = /^\d+$/.test(time) && Number.isSafeInteger(Number(time)) ? Number(time) : 0;
+  return {trackIndex, seconds, shared: true};
+}
+
+export function openingPosition(record, search) {
+  const linked = linkedPosition(record, search);
+  if (linked) return linked;
   try {
     const saved = JSON.parse(localStorage.getItem(keyFor(record)));
     const trackIndex = findTrack(record, saved?.track);
@@ -38,7 +42,7 @@ export function openingPosition(record) {
   return first;
 }
 
-export function savePosition(record, trackIndex, seconds) {
+export function savePosition(record, trackIndex, seconds, entrySearch = location.search) {
   const url = new URL(location.href);
   let stored = true;
   try {
@@ -55,6 +59,7 @@ export function savePosition(record, trackIndex, seconds) {
   if (!stored && seconds !== 0) return;
   // Once listening begins, a refresh resumes progress beyond the original link.
   if (url.searchParams.has('track') || url.searchParams.has('t') || (!stored && trackIndex > 0)) {
+    if (url.search !== entrySearch || readRoute().record !== record) return;
     if (!stored && record.tracks && trackIndex > 0) url.searchParams.set('track', trackToken(record.tracks[trackIndex]));
     else url.searchParams.delete('track');
     url.searchParams.delete('t');
