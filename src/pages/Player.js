@@ -1,3 +1,4 @@
+import StillArt from '../components/StillArt';
 import React, {lazy, Suspense, useCallback, useEffect, useRef, useState} from 'react';
 import usePlayer from '../audio/usePlayer';
 import ArtworkViewer from '../components/ArtworkViewer';
@@ -10,19 +11,6 @@ import {listeningLink, openingPosition, savePosition} from './listeningPosition'
 
 const ListeningScene = lazy(() => import(/* webpackChunkName: "listening-scene" */ '../components/ListeningScene'));
 const motionQuery = '(prefers-reduced-motion: reduce)';
-
-function StillArt({record}) {
-  return (
-    <div className="still-stage" aria-label={`Artwork for ${record.artist}, ${record.id}`}>
-      <div className="still-object">
-        <div className="compact-disc" aria-hidden="true">
-          {record.label && <img src={record.label} alt="" />}
-        </div>
-        <img className="still-cover" src={record.art} width="500" height="500" alt={`${record.id} cover`} />
-      </div>
-    </div>
-  );
-}
 
 export default function Player({record, section}) {
   const [position, setPosition] = useState(() => openingPosition(record));
@@ -69,7 +57,7 @@ export default function Player({record, section}) {
         <div className="stage-visual">
           {scene ? (
             <ErrorBoundary onError={sceneError}>
-              <Suspense fallback={<StillArt record={record} />}>
+              <Suspense fallback={<StillArt record={record} pending="Loading scene…" />}>
                 <ListeningScene record={record} audio={player.audio} onError={sceneError} />
               </Suspense>
             </ErrorBoundary>

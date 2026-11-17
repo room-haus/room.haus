@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [
+          "src/styles/layout.css"
+        ],
+        "createdAt": "2026-11-17T09:22:11.980Z",
+        "reason": "Codex review: SiteHeader uses this span for the decorative external-link arrow; ROOM text uses Neue Haas."
+      }
+    ]
+  }
+}

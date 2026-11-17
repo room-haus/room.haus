@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
+import StillArt from './StillArt';
+
 const fill = {position: 'absolute', inset: 0, height: '100%', width: '100%'};
 
 class BackgroundBoundary extends React.Component {
@@ -53,7 +55,9 @@ function Scene({record, audio, onError}) {
     <div className="listening-scene" style={{...fill, overflow: 'hidden'}} data-scene-state={view.ready ? 'ready' : view.failed ? 'fallback' : 'loading'}>
       {Background && <div aria-hidden="true" style={fill}><BackgroundBoundary><Background source={audio} /></BackgroundBoundary></div>}
       <canvas ref={canvas} aria-label={record.id + ' animated CD scene'} style={{...fill, display: 'block', opacity: view.ready ? 1 : 0}} />
-      {!view.ready && <img alt={record.id + ' cover artwork'} src={record.art} style={{...fill, objectFit: 'contain'}} />}
+      <div className="scene-poster" aria-hidden={view.ready}>
+        <StillArt record={record} pending={view.ready ? undefined : 'Loading scene…'} />
+      </div>
     </div>
   );
 }

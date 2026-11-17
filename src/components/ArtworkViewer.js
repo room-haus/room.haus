@@ -1,4 +1,18 @@
 import React, {useRef, useState} from 'react';
+import LoadingLabel from './LoadingLabel';
+
+function ArtworkImage({disc, src, alt}) {
+  const [state, setState] = useState('loading');
+  const name = disc ? 'disc label' : 'sleeve';
+  return (
+    <div className={disc ? 'artwork-image disc-label' : 'artwork-image'} data-state={state}>
+      <img src={src} alt={alt} onLoad={() => setState('ready')} onError={() => setState('error')} />
+      {state !== 'ready' && (
+        <p role="status">{state === 'error' ? 'Artwork unavailable.' : <LoadingLabel>Loading {name}…</LoadingLabel>}</p>
+      )}
+    </div>
+  );
+}
 
 export default function ArtworkViewer({record}) {
   const dialog = useRef(null);
@@ -36,9 +50,12 @@ export default function ArtworkViewer({record}) {
         </header>
         {side && (
           <>
-            <div className={disc ? 'artwork-image disc-label' : 'artwork-image'}>
-              <img src={image} alt={record.artist + ' · ' + record.id + (disc ? ' disc label' : ' sleeve')} />
-            </div>
+            <ArtworkImage
+              key={image}
+              disc={disc}
+              src={image}
+              alt={record.artist + ' · ' + record.id + (disc ? ' disc label' : ' sleeve')}
+            />
             <div className="artwork-controls">
               <div role="group" aria-label="Artwork">
                 {['Sleeve', 'Disc'].map((name) => (

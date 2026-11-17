@@ -8,10 +8,10 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error) {
-    this.props.onError(error);
+    this.props.onError?.(error);
   }
 
   render() {
-    return this.state.failed ? null : this.props.children;
+    return this.state.failed ? this.props.fallback ?? null : this.props.children;
   }
 }

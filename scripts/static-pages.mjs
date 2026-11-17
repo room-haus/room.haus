@@ -74,7 +74,7 @@ export function recordBody(record, asset) {
     <main class="listening-stage" aria-label="Artwork"><div class="still-stage"><div class="still-object">
       <div class="compact-disc" aria-hidden="true"><img src="${asset('cd_template_' + record.label + '.png')}" alt=""></div>
       <img class="still-cover" src="${cover}" alt="${escape(record.artist)} — ${escape(record.id)} cover" width="500" height="500">
-    </div></div></main>
+    </div><p class="stage-notice" role="status" hidden><span class="loading-label">Opening ${escape(record.id)}…</span></p></div></main>
     <details class="static-options"><summary>Options</summary><section class="options-panel" aria-label="Recording details">
       <div class="track-meta"><img src="${cover}" alt="" width="58" height="58"><div>
         <span class="catalogue-code">${escape(record.id)}</span><h1>${escape(record.artist)}</h1>

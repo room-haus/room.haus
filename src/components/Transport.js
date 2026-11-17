@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import LoadingLabel from './LoadingLabel';
 import PlaybackScope from './PlaybackScope';
 
 function timestamp(seconds) {
@@ -101,7 +102,7 @@ export default function Transport({
             )}
           </>
         )}
-        {loading && <span>Loading audio…</span>}
+        {loading && <LoadingLabel>{playing ? 'Buffering audio…' : 'Loading audio…'}</LoadingLabel>}
       </div>
       {status === 'idle' && time > 0 && (
         <div className="opening-position">
