@@ -1,6 +1,10 @@
 import React, {lazy, Suspense, useCallback, useEffect, useRef, useState} from 'react';
 import usePlayer from '../audio/usePlayer';
 import SiteHeader from '../components/SiteHeader';
+import ArtworkViewer from '../components/ArtworkViewer';
+import {mixes} from '../content/mixes';
+import {nextMix} from '../content/catalogDisplay.mjs';
+import {openNextMix, recordPath} from './navigation';
 import Transport from '../components/Transport';
 import ErrorBoundary from '../components/ErrorBoundary';
 import {listeningLink, openingPosition, savePosition} from './listeningPosition';
@@ -28,6 +32,7 @@ export default function Player({record, section}) {
   const [scene, setScene] = useState(() => !matchMedia(motionQuery).matches);
   const [sceneFailed, setSceneFailed] = useState(false);
   const stage = useRef(null);
+  const next = nextMix(mixes, record);
   const stream = record.tracks ? record.tracks[trackIndex].streamURL : record.audioSourceURL;
   const remember = useCallback((seconds) => savePosition(record, trackIndex, seconds), [record, trackIndex]);
   const player = usePlayer(stream, position.seconds, remember);
@@ -56,7 +61,7 @@ export default function Player({record, section}) {
   }, []);
 
   return (
-    <div className="player-page">
+    <div className={record.slug ? 'player-page' : 'player-page mix-player'}>
       <SiteHeader section={section} listening />
       <main
         className="listening-stage"
@@ -75,7 +80,7 @@ export default function Player({record, section}) {
             <StillArt record={record} />
           )}
         </div>
-        <div className="stage-tools" role="group" aria-label="Visual mode">
+        <div className="stage-tools" role="group" aria-label="Scene and artwork">
           <button
             aria-pressed={scene}
             onClick={() => {
@@ -88,6 +93,7 @@ export default function Player({record, section}) {
           <button aria-pressed={!scene} onClick={() => setScene(false)}>
             Still art
           </button>
+          <ArtworkViewer record={record} />
         </div>
         {sceneFailed && (
           <p role="status" className="scene-failure">
@@ -105,6 +111,11 @@ export default function Player({record, section}) {
         getLink={() => listeningLink(record, trackIndex, player.audio.position())}
         reducedMotion={reducedMotion}
       />
+      {next && (
+        <a className="next-mix" href={recordPath(next)} rel="next" onClick={event => openNextMix(event, next)}>
+          <span>Next mix</span><span>{next.id} · {next.artist} <span aria-hidden="true">→</span></span>
+        </a>
+      )}
     </div>
   );
 }

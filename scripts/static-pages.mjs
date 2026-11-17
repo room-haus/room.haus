@@ -1,3 +1,4 @@
+import {hasCoverTitle, nextMix} from '../src/content/catalogDisplay.mjs';
 import {mixes, releases, routeOf, coverName} from './catalog.mjs';
 
 const entities = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'};
@@ -41,7 +42,7 @@ export function archiveBody(section, asset) {
       `<li><a class="sleeve" href="${escape(routeOf(record))}">
       <img src="${asset(coverName(record) + '.jpg')}" alt="" width="500" height="500" decoding="async" loading="${index < 6 ? 'eager' : 'lazy'}">
       <div class="caption"><span class="catalogue-code">${escape(record.id)}</span> <span class="artist">${escape(record.artist)}</span></div>
-      ${record.slug ? `<span class="release-name">${escape(record.name)}</span>` : ''}
+      ${hasCoverTitle(record) ? `<span class="release-name">${escape(record.name)}</span>` : ''}
     </a></li>`,
   );
   return `<div class="archive-page static-archive">
@@ -55,6 +56,7 @@ export function archiveBody(section, asset) {
 export function recordBody(record, asset) {
   const section = record.slug ? 'releases' : 'mixes';
   const cover = asset(coverName(record) + '.jpg');
+  const next = nextMix(mixes, record);
   const tracklist = record.tracks
     ? `<details class="static-tracks">
     <summary class="tracks-action">Tracklist <span>${String(record.tracks.length).padStart(2, '0')}</span></summary>
@@ -70,7 +72,7 @@ export function recordBody(record, asset) {
       ([url, service]) =>
         `<a class="external-listen" href="${escape(url)}">Listen on ${service} <span aria-hidden="true">↗</span></a>`,
     );
-  return `<div class="player-page static-record">
+  return `<div class="player-page static-record${record.slug ? '' : ' mix-player'}">
     ${header(section, asset, true)}
     <main class="listening-stage" aria-label="Artwork"><div class="still-stage"><div class="still-object">
       <div class="compact-disc" aria-hidden="true"><img src="${asset('cd_template_' + record.label + '.png')}" alt=""></div>
@@ -80,6 +82,11 @@ export function recordBody(record, asset) {
       <div class="track-meta"><img src="${cover}" alt="" width="58" height="58"><div>
         <span class="catalogue-code">${escape(record.id)}</span><h1>${escape(record.artist)}</h1>
         ${record.name ? `<p>${escape(record.name)}</p>` : ''}
-      </div></div><div class="static-links">${listen.join('')}${tracklist}</div>
-    </section></div>`;
+      </div></div><div class="static-links">${listen.join('')}${tracklist}<noscript>
+        <a class="external-listen" href="${cover}">View sleeve</a>
+        <a class="external-listen" href="${asset('cd_template_' + record.label + '.png')}">View disc</a>
+      </noscript></div>
+    </section>
+    ${next ? `<a class="next-mix" href="${escape(routeOf(next))}" rel="next"><span>Next mix</span><span>${escape(next.id)} · ${escape(next.artist)} <span aria-hidden="true">→</span></span></a>` : ''}
+  </div>`;
 }

@@ -27,6 +27,18 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
     } catch (error) {
       throw new Error('Playback stopped at ' + await seek.inputValue() + 's. ' + await page.locator('.transport').innerText(), {cause: error});
     }
+    if (id === 'MX001') {
+      const surface = await canvas.elementHandle();
+      const position = Number(await seek.inputValue());
+      await page.getByRole('button', {name: 'View artwork'}).click();
+      const dialog = page.getByRole('dialog');
+      await dialog.getByRole('button', {name: 'Disc', exact: true}).click();
+      // The native modal makes the player inert, but its audio and artist scene stay mounted.
+      await expect.poll(() => page.locator('.seek').inputValue().then(Number)).toBeGreaterThan(position + 1);
+      await dialog.getByRole('button', {name: 'Close'}).click();
+      expect(await canvas.evaluate((el, original) => el === original, surface)).toBe(true);
+      await expect(page.getByRole('button', {name: 'Pause', exact: true})).toBeVisible();
+    }
     if (id === 'MX029') {
       const background = page.locator('.listening-scene video');
       await expect.poll(() => background.evaluate(video => video.videoWidth > 0 && video.currentTime > 0), {timeout: 30000}).toBe(true);

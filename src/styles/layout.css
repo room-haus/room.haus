@@ -245,3 +245,70 @@ a { color: inherit; }
 @media (max-width: 30rem) {
   .transport-links { flex-direction: column; align-items: stretch; }
 }
+
+.release-name, .track-meta p { overflow-wrap: anywhere; }
+.player-page { grid-auto-rows: auto; }
+.next-mix {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px;
+  padding: .45rem max(var(--gutter), env(safe-area-inset-right)) max(.45rem, env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+  font-size: .9rem; text-decoration: none; border-bottom: 1px solid var(--rule);
+}
+.next-mix > :first-child { flex: none; color: var(--muted); }
+.next-mix > :last-child { text-align: right; font-weight: 500; overflow-wrap: anywhere; }
+.next-mix:hover > :last-child { text-decoration: underline; }
+.next-mix:focus-visible { outline-offset: -3px; }
+.stage-tools > .artwork-trigger { margin-left: .25rem; border-left: 1px solid var(--rule); }
+.artwork-viewer {
+  width: min(42rem, calc(100% - 2rem)); max-width: none; max-height: calc(100dvh - 2rem);
+  margin: auto; border: 1px solid var(--ink); padding: 0; background: var(--paper); color: var(--ink);
+  overflow: auto; overscroll-behavior: contain;
+}
+.artwork-viewer::backdrop { background: rgb(15 17 14 / .78); }
+.artwork-header, .artwork-controls {
+  display: flex; justify-content: space-between; align-items: center; gap: .6rem;
+  padding: .5rem 1rem;
+}
+.artwork-header h2 { margin: .1rem 0 0; font-size: 1.1rem; line-height: 1.15; overflow-wrap: anywhere; }
+.artwork-image { background: #dcded6; display: grid; place-items: center; }
+.artwork-image img { display: block; max-width: 100%; max-height: min(64dvh, 37rem); object-fit: contain; }
+/* The disc PNGs contain printed ink on transparency; give them a neutral disc surface. */
+.disc-label { padding: .65rem; }
+.disc-label img {
+  border-radius: 50%;
+  background: radial-gradient(circle, #dcded6 0 6%, #626667 6.2% 7%, transparent 7.3%),
+    conic-gradient(from 40deg, #707576, #888a84, #737575, #808582, #707576);
+}
+.artwork-controls div { display: flex; border: 1px solid var(--ink); }
+.artwork-controls a { display: inline-flex; align-items: center; min-height: 44px; gap: .35em; }
+.stage-tools button, .artwork-viewer button { min-height: 44px; }
+.artwork-viewer button { padding-inline: .75rem; }
+@media (max-width: 30rem) {
+  .transport-row { grid-template-columns: minmax(0, 1fr) auto; gap: .4rem .65rem; }
+  .track-meta { grid-column: 1; grid-row: 1; }
+  .play-action { grid-column: 2; grid-row: 1; }
+  .time-control { grid-column: 1 / -1; grid-row: 2; }
+  .transport-links { grid-column: 1 / -1; grid-row: 3; flex-direction: row; justify-content: flex-start; }
+  .stage-tools { right: max(.5rem, env(safe-area-inset-right)); }
+  .stage-tools button { min-width: auto; }
+  .artwork-viewer { width: calc(100% - 1rem); }
+}
+@media (max-height: 30rem) and (orientation: landscape) {
+  .artwork-image img { max-height: 44dvh; }
+  .still-object { width: min(47vw, 38vh); }
+}
+@media (orientation: landscape) and (max-height: 30rem) and (min-width: 34rem) {
+  .mix-player { grid-template-columns: minmax(0, 1fr) clamp(14rem, 36%, 22rem); grid-template-rows: auto 1fr auto; }
+  .mix-player .site-header { grid-column: 1 / -1; min-height: 44px; }
+  .mix-player .listening-stage { grid-column: 1; grid-row: 2 / -1; }
+  .mix-player .transport { grid-column: 2; grid-row: 2; overflow: auto; display: grid; padding-block: .25rem; align-content: safe center; }
+  .mix-player .transport-row { grid-template-columns: minmax(0, 1fr) auto; gap: .2rem .5rem; }
+  .mix-player .track-meta { grid-column: 1 / -1; grid-row: 1; }
+  .mix-player .play-action { grid-column: 1 / -1; grid-row: 2; }
+  .mix-player .time-control { grid-column: 1 / -1; grid-row: 3; }
+  .mix-player .transport-links { grid-column: 1 / -1; grid-row: 4; justify-content: flex-start; gap: .25rem; }
+  .mix-player .transport-links > * { font-size: .85rem; padding-inline: .55rem; }
+  .mix-player .next-mix { grid-column: 2; grid-row: 3; }
+  .mix-player .stage-tools { right: .5rem; top: .35rem; }
+  .mix-player .stage-tools button { min-width: auto; }
+  .mix-player .still-object { width: min(30vw, 48vh); }
+}
