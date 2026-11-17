@@ -18,10 +18,8 @@ export function assetLookup(files) {
   };
 }
 
-function header(section, asset, detail = false) {
-  const links = detail
-    ? `<a class="back-link" href="/${section}/"><span aria-hidden="true">←</span> Back to ${section}</a>`
-    : `<nav class="out-links" aria-label="Contact and social links">
+function header(section, asset) {
+  const links = `<nav class="out-links" aria-label="Contact and social links">
         <a href="https://soundcloud.com/room-haus">SoundCloud<span aria-hidden="true">↗</span></a>
         <a href="https://www.instagram.com/room.haus/">Instagram<span aria-hidden="true">↗</span></a>
         <a href="mailto:info@room.haus">Email<span aria-hidden="true">↗</span></a>
@@ -72,21 +70,20 @@ export function recordBody(record, asset) {
       ([url, service]) =>
         `<a class="external-listen" href="${escape(url)}">Listen on ${service} <span aria-hidden="true">↗</span></a>`,
     );
-  return `<div class="player-page static-record${record.slug ? '' : ' mix-player'}">
-    ${header(section, asset, true)}
+  return `<div class="player-page static-record">
     <main class="listening-stage" aria-label="Artwork"><div class="still-stage"><div class="still-object">
       <div class="compact-disc" aria-hidden="true"><img src="${asset('cd_template_' + record.label + '.png')}" alt=""></div>
       <img class="still-cover" src="${cover}" alt="${escape(record.artist)} — ${escape(record.id)} cover" width="500" height="500">
     </div></div></main>
-    <section class="transport" aria-label="Recording details">
+    <details class="static-options"><summary>Options</summary><section class="options-panel" aria-label="Recording details">
       <div class="track-meta"><img src="${cover}" alt="" width="58" height="58"><div>
         <span class="catalogue-code">${escape(record.id)}</span><h1>${escape(record.artist)}</h1>
         ${record.name ? `<p>${escape(record.name)}</p>` : ''}
-      </div></div><div class="static-links">${listen.join('')}${tracklist}<noscript>
+      </div></div><div class="static-links">${listen.join('')}${tracklist}
         <a class="external-listen" href="${cover}">View sleeve</a>
         <a class="external-listen" href="${asset('cd_template_' + record.label + '.png')}">View disc</a>
-      </noscript></div>
-    </section>
+      </div>
+    <a class="back-link" href="/${section}/">← Back to ${section}</a>
     ${next ? `<a class="next-mix" href="${escape(routeOf(next))}" rel="next"><span>Next mix</span><span>${escape(next.id)} · ${escape(next.artist)} <span aria-hidden="true">→</span></span></a>` : ''}
-  </div>`;
+  </section></details></div>`;
 }

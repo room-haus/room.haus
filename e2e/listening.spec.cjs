@@ -1,3 +1,4 @@
+const {openOptions} = require('./options.cjs');
 const {test, expect} = require('@playwright/test');
 const base = process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
 
@@ -62,6 +63,7 @@ for (const id of ['MX001', 'MX029']) {
       await page.keyboard.press('ArrowRight');
     }
     await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(before);
+    await openOptions(page);
     await page.getByRole('link', {name: /Back to mixes/}).click();
     await expect(search).toHaveValue(id);
     await expect(sleeve).toBeFocused();
@@ -74,6 +76,7 @@ test('ROOM001 plays and switches to the selected release track', async ({page, i
   else await play.click();
   await checkClock(page);
   const tracks = page.getByRole('button', {name: /^Tracklist/});
+  await openOptions(page);
   await tracks.click();
   const next = page.getByRole('button', {name: /GEORGIA AVE/});
   if (isMobile) await next.tap();

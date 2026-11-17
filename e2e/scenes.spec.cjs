@@ -1,3 +1,4 @@
+const {openOptions} = require('./options.cjs');
 const {test, expect} = require('@playwright/test');
 
 test.use({reducedMotion: 'no-preference'});
@@ -30,6 +31,7 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
     if (id === 'MX001') {
       const surface = await canvas.elementHandle();
       const position = Number(await seek.inputValue());
+      await openOptions(page);
       await page.getByRole('button', {name: 'View artwork'}).click();
       const dialog = page.getByRole('dialog');
       await dialog.getByRole('button', {name: 'Disc', exact: true}).click();
@@ -38,12 +40,20 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
       await dialog.getByRole('button', {name: 'Close'}).click();
       expect(await canvas.evaluate((el, original) => el === original, surface)).toBe(true);
       await expect(page.getByRole('button', {name: 'Pause', exact: true})).toBeVisible();
+      await page.getByRole('button', {name: 'Still art', exact: true}).click();
+      await expect(canvas).toHaveCount(0);
+      await expect(page.locator('.still-cover')).toBeVisible();
+      await openOptions(page);
+      await page.getByRole('button', {name: 'Scene', exact: true}).click();
+      await expect(page.locator('.listening-scene')).toHaveAttribute('data-scene-state', 'ready', {timeout: 40000});
+      await expect(page.getByRole('button', {name: 'Pause', exact: true})).toBeVisible();
     }
     if (id === 'MX029') {
       const background = page.locator('.listening-scene video');
       await expect.poll(() => background.evaluate(video => video.videoWidth > 0 && video.currentTime > 0), {timeout: 30000}).toBe(true);
     }
     await expect(page.locator('.listening-scene')).toHaveAttribute('data-scene-state', 'ready');
+    await openOptions(page);
     await page.getByRole('link', {name: 'Back to ' + collection}).click();
     await expect(canvas).toHaveCount(0);
     await expect(sleeve).toBeFocused();

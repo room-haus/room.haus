@@ -23,9 +23,27 @@ export default function Transport({
   shared,
   startOver,
   getLink,
+  scene,
+  selectMode,
+  children,
 }) {
   const [showTracks, setShowTracks] = useState(false);
   const [share, setShare] = useState(null);
+  const options = useRef(null);
+  const toggle = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+  const closeOptions = () => {
+    options.current.open = false;
+    toggle.current.focus({preventScroll: true});
+  };
+  useEffect(() => {
+    if (!expanded) return;
+    const dismiss = (event) => {
+      if (options.current && !options.current.contains(event.target)) options.current.open = false;
+    };
+    document.addEventListener('pointerdown', dismiss);
+    return () => document.removeEventListener('pointerdown', dismiss);
+  }, [expanded]);
   const listButton = useRef(null);
   const shareButton = useRef(null);
   const linkField = useRef(null);
@@ -70,47 +88,10 @@ export default function Transport({
   useEffect(() => {
     if (!showTracks) return;
     document.querySelector('#release-tracks button[aria-pressed=true]')?.focus();
-    const keydown = (event) => {
-      if (event.key === 'Escape') closeTracks();
-    };
-    document.addEventListener('keydown', keydown);
-    return () => document.removeEventListener('keydown', keydown);
   }, [showTracks]);
 
   return (
     <section className="transport" aria-label="Audio player">
-      {showTracks && (
-        <section className="tracks-panel" id="release-tracks" aria-label="Tracklist">
-          <div className="tracks-heading">
-            <h2>Tracklist</h2>
-            <button onClick={closeTracks} aria-label="Close tracklist">
-              ×
-            </button>
-          </div>
-          <ol>
-            {tracks.map((track, index) => (
-              <li key={track.streamURL}>
-                <button
-                  aria-pressed={trackIndex === index}
-                  onClick={() => {
-                    setShare(null);
-                    selectTrack(index);
-                    closeTracks();
-                  }}>
-                  <span className="track-index">{String(index + 1).padStart(2, '0')}</span>
-                  <span>{track.name}</span>
-                  {index === trackIndex && <span className="selected-track">Selected</span>}
-                </button>
-              </li>
-            ))}
-          </ol>
-          {record.purchaseLink && (
-            <a className="release-purchase" href={record.purchaseLink}>
-              {record.name} on Bandcamp <span aria-hidden="true">↗</span>
-            </a>
-          )}
-        </section>
-      )}
       <div className="transport-status" role="status">
         {failed && (
           <>
@@ -121,26 +102,7 @@ export default function Transport({
           </>
         )}
         {loading && <span>Loading audio…</span>}
-        {share?.copied && <span>Link copied at {timestamp(share.seconds)}.</span>}
       </div>
-      {share?.url && (
-        <div
-          className="share-fallback"
-          onKeyDown={(event) => {
-            if (event.key === 'Escape') closeLink();
-          }}>
-          <label htmlFor="listening-link">Copy this link</label>
-          <input
-            ref={linkField}
-            id="listening-link"
-            aria-label="Listening link"
-            readOnly
-            value={share.url}
-            onFocus={(event) => event.target.select()}
-          />
-          <button onClick={closeLink}>Done</button>
-        </div>
-      )}
       {status === 'idle' && time > 0 && (
         <div className="opening-position">
           <span>
@@ -156,26 +118,17 @@ export default function Transport({
         </div>
       )}
       <div className="transport-row">
-        <div className="track-meta">
-          <img src={record.art} alt="" width="58" height="58" />
-          <div>
-            <span className="catalogue-code">{record.id}</span>
-            <h1>{record.artist}</h1>
-            {(selected || record.name) && <p>{selected?.name || record.name}</p>}
-          </div>
-        </div>
         <button
           ref={playButton}
           className="play-action"
           disabled={unavailable}
+          title={action}
           aria-label={action}
           onClick={failed ? player.retry : canPause ? player.pause : player.play}>
           <PlayIcon playing={canPause} />
-          <span>{action}</span>
         </button>
         <div className="time-control">
           <div className="wave-seek">
-            <PlaybackScope audio={audio} active={playing && !reducedMotion} />
             <input
               type="range"
               className="seek"
@@ -189,37 +142,132 @@ export default function Transport({
               onChange={(event) => seek(Number(event.target.value))}
             />
           </div>
-          <div className="clock">
-            <span>{timestamp(time)}</span>
-            <span>{readyToSeek ? timestamp(duration) : '–:––'}</span>
+        </div>
+        <details
+          className="player-options"
+          ref={options}
+          onToggle={(event) => {
+            const open = event.currentTarget.open;
+            setExpanded(open);
+            if (!open) {
+              setShowTracks(false);
+              setShare(null);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (event.key !== 'Escape' || !options.current.open || options.current.querySelector('dialog[open]'))
+              return;
+            event.preventDefault();
+            if (share?.url) closeLink();
+            else if (showTracks) closeTracks();
+            else closeOptions();
+          }}>
+          <summary ref={toggle}>Options</summary>
+          <div className="options-panel">
+            <div className="track-meta">
+              <img src={record.art} alt="" width="58" height="58" />
+              <div>
+                <span className="catalogue-code">{record.id}</span>
+                <h1>{record.artist}</h1>
+                {(selected || record.name) && <p>{selected?.name || record.name}</p>}
+              </div>
+            </div>
+            <div className="option-wave">
+              <PlaybackScope audio={audio} active={expanded && playing && !reducedMotion} />
+            </div>
+            <div className="clock">
+              <span>{timestamp(time)}</span>
+              <span>{readyToSeek ? timestamp(duration) : '–:––'}</span>
+            </div>
+            <div className="visual-modes" role="group" aria-label="Visual mode">
+              {[true, false].map((enabled) => (
+                <button
+                  key={String(enabled)}
+                  aria-pressed={scene === enabled}
+                  onClick={() => {
+                    selectMode(enabled);
+                    closeOptions();
+                  }}>
+                  {enabled ? 'Scene' : 'Still art'}
+                </button>
+              ))}
+            </div>
+            <div className="transport-links">
+              {tracks.length > 0 ? (
+                <button
+                  ref={listButton}
+                  className="tracks-action"
+                  aria-expanded={showTracks}
+                  aria-controls="release-tracks"
+                  onClick={() => setShowTracks(!showTracks)}>
+                  Tracklist <span>{String(tracks.length).padStart(2, '0')}</span>
+                </button>
+              ) : (
+                fallbackURL && (
+                  <a className="external-listen" href={fallbackURL}>
+                    SoundCloud <span aria-hidden="true">↗</span>
+                  </a>
+                )
+              )}
+              <button
+                className="share-action"
+                ref={shareButton}
+                onClick={copyLink}
+                aria-label="Share listening link"
+                title="Copy a link at the current time">
+                Share
+              </button>
+            </div>
+            {showTracks && (
+              <section className="tracks-panel" id="release-tracks" aria-label="Tracklist">
+                <div className="tracks-heading">
+                  <h2>Tracklist</h2>
+                  <button onClick={closeTracks} aria-label="Close tracklist">
+                    ×
+                  </button>
+                </div>
+                <ol>
+                  {tracks.map((track, index) => (
+                    <li key={track.streamURL}>
+                      <button
+                        aria-pressed={trackIndex === index}
+                        onClick={() => {
+                          setShare(null);
+                          selectTrack(index);
+                          closeTracks();
+                        }}>
+                        <span className="track-index">{String(index + 1).padStart(2, '0')}</span>
+                        <span>{track.name}</span>
+                        {index === trackIndex && <span className="selected-track">Selected</span>}
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+                {record.purchaseLink && (
+                  <a className="release-purchase" href={record.purchaseLink}>
+                    {record.name} on Bandcamp <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </section>
+            )}
+            <div className="option-actions">{children}</div>
+            {share?.copied && <p role="status">Link copied at {timestamp(share.seconds)}.</p>}
+            {share?.url && (
+              <div className="share-fallback">
+                <label htmlFor="listening-link">Copy this link</label>
+                <input
+                  ref={linkField}
+                  id="listening-link"
+                  aria-label="Listening link"
+                  readOnly
+                  value={share.url}
+                  onFocus={(event) => event.target.select()}
+                />
+                <button onClick={closeLink}>Done</button>
+              </div>
+            )}
           </div>
-        </div>
-        <div className="transport-links">
-          {tracks.length > 0 ? (
-            <button
-              ref={listButton}
-              className="tracks-action"
-              aria-expanded={showTracks}
-              aria-controls="release-tracks"
-              onClick={() => setShowTracks(!showTracks)}>
-              Tracklist <span>{String(tracks.length).padStart(2, '0')}</span>
-            </button>
-          ) : (
-            fallbackURL && (
-              <a className="external-listen" href={fallbackURL}>
-                SoundCloud <span aria-hidden="true">↗</span>
-              </a>
-            )
-          )}
-          <button
-            className="share-action"
-            ref={shareButton}
-            onClick={copyLink}
-            aria-label="Share listening link"
-            title="Copy a link at the current time">
-            Share
-          </button>
-        </div>
+        </details>
       </div>
     </section>
   );

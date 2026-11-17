@@ -1,3 +1,4 @@
+const {openOptions} = require('./options.cjs');
 const {test, expect} = require('@playwright/test');
 const base = 'http://127.0.0.1:4173';
 
@@ -14,6 +15,7 @@ test('browse titled mixes, inspect both artworks and return to the filtered wall
   await page.goto(base + '/mixes/?q=Music+for+Rain');
   const sleeve = page.getByRole('link', {name: /MX009 Sami Music for Rain/});
   await activate(page, sleeve, isMobile);
+  await activate(page, page.locator('.player-options > summary'), isMobile);
   const trigger = page.getByRole('button', {name: 'View artwork'});
   await activate(page, trigger, isMobile);
   const dialog = page.getByRole('dialog', {name: 'Sami artwork'});
@@ -26,6 +28,8 @@ test('browse titled mixes, inspect both artworks and return to the filtered wall
   else await page.keyboard.press('Escape');
   await expect(trigger).toBeFocused();
   await activate(page, page.getByRole('link', {name: /Next mix MX010 · Harry/}), isMobile);
+  await page.getByRole('button', {name: 'Play', exact:true}).waitFor();
+  await openOptions(page);
   await expect(page.getByRole('heading', {name: 'Harry', exact: true})).toBeVisible();
   await expect(page.getByRole('button', {name: 'Play', exact: true})).toBeVisible();
   await activate(page, page.getByRole('link', {name: 'Back to mixes'}), isMobile);
@@ -41,17 +45,26 @@ test('early mix controls fit a small phone in portrait and landscape', async ({p
     [568, 320],
   ]) {
     await page.setViewportSize({width, height});
-    const trigger = page.getByRole('button', {name: 'View artwork'});
-    await expect(trigger).toBeInViewport({ratio: 1});
+    const options = page.locator('.player-options > summary');
+    const stage = await page.locator('.listening-stage').boundingBox();
+    expect(stage).toEqual({x:0, y:0, width, height});
+    await expect(options).toBeInViewport({ratio: 1});
     await expect(page.getByRole('slider')).toBeInViewport({ratio: 1});
-    await expect(page.getByRole('button', {name: 'Share listening link'})).toBeInViewport({ratio: 1});
-    await expect(page.getByRole('link', {name: /Next mix MX004/})).toBeInViewport({ratio: 1});
+    await expect(page.getByRole('button', {name:'View artwork'})).toHaveCount(0);
+    await expect(page.getByRole('button', {name:'Scene',exact:true})).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await options.press('Enter');
+    await expect(page.getByRole('button',{name:'Still art',exact:true})).toHaveAttribute('aria-pressed','true');
+    await page.getByRole('button',{name:'Still art',exact:true}).click();
+    await expect(options).toBeFocused();
+    await openOptions(page);
+    const trigger = page.getByRole('button', {name: 'View artwork'});
     await trigger.click();
     for (const name of ['Sleeve', 'Disc', 'Close']) {
       const button = page.getByRole('dialog').getByRole('button', {name, exact: true});
       await expect(button).toBeInViewport({ratio: 1});
       await button.click();
     }
+    await options.press('Escape');
   }
 });

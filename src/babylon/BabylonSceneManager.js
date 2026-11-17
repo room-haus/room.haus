@@ -8,7 +8,14 @@ export default class BabylonSceneManager {
     this.engine = new BABYLON.Engine(canvas, true, {stencil: true, audioEngine: false});
     this.engine.enableOfflineSupport = false;
     BABYLON.SceneLoader.ShowLoadingScreen = false;
-    this.resize = () => this.engine.resize();
+    this.resize = () => {
+      this.engine.resize();
+      const camera = this.scene?.activeCamera;
+      if (!camera || !this.sceneFov || !canvas.clientWidth) return;
+      // Preserve the jewel case's horizontal framing on tall phone screens.
+      const scale = Math.max(1, 0.68 * canvas.clientHeight / canvas.clientWidth);
+      camera.fov = 2 * Math.atan(Math.tan(this.sceneFov / 2) * scale);
+    };
     if (typeof ResizeObserver !== 'undefined') {
       this.observer = new ResizeObserver(this.resize);
       this.observer.observe(canvas);
@@ -31,6 +38,7 @@ export default class BabylonSceneManager {
       if (this.closed) return;
     }
     config.build({scene, canvas: this.canvas, engine: this.engine, audio, assetsLoaded: Boolean(config.sceneAssetsPath)});
+    this.sceneFov = scene.activeCamera.fov;
     this.resize();
     let ready = false;
     this.engine.runRenderLoop(() => {
