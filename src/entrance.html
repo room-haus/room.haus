@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f3f3ed" />
+    <meta name="theme-color" content="#eeede5" />
     <% const {page, sections} = htmlWebpackPlugin.options; const home = page.path === '/'; %>
     <title><%= home ? 'ROOM' : page.title + ' | ROOM' %></title>
     <meta name="description" content="<%- page.description %>" />
@@ -16,29 +16,33 @@
   <body>
     <main class="entrance">
       <header class="entrance-header">
-        <a class="entrance-home" href="/" aria-label="ROOM home"><span aria-hidden="true"></span>room.haus</a>
-        <span>Visual studio &amp; music platform</span>
+        <% if (home) { %><h1><% } %>
+        <a class="entrance-home" href="/" aria-label="<%= home ? 'ROOM' : 'ROOM home' %>">
+          <img src="<%= require('./images/logo.png') %>" alt="ROOM" width="1307" height="240" />
+        </a>
+        <% if (home) { %></h1><% } %>
+        <p class="entrance-descriptor">Visual studio &amp;<br />music platform</p>
       </header>
+
       <% if (home) { %>
-      <section class="entrance-poster" aria-label="ROOM">
-        <div class="poster-type">
-          <h1><img class="poster-mark" src="<%= require('./images/logo.png') %>" alt="ROOM" width="1307" height="240" /></h1>
-          <p>Virtual Imprints</p>
-        </div>
-        <figure class="poster-figure">
-          <div class="poster-disc" aria-hidden="true"></div>
-          <figcaption>MX001&nbsp; / &nbsp;Eddy Bauer</figcaption>
-        </figure>
-      </section>
+      <figure class="imprint-poster">
+        <img class="imprint-art" src="<%= require('./images/mix-art/rm004.jpg') %>" alt="Black-and-white sleeve for ilikeit" width="500" height="500" />
+        <figcaption>
+          <p class="imprint-title">Virtual Imprints</p>
+          <div class="imprint-credit"><span>ROOM004</span><span>Sir E.U &amp; Tooth Choir</span></div>
+        </figcaption>
+      </figure>
       <% } else { %>
       <section class="section-poster">
-        <div><h1><%- page.title %></h1><p><%- page.note %></p></div>
+        <h1><%- page.title %></h1><p><%- page.note %></p>
       </section>
       <% } %>
+
       <nav class="entrance-nav" aria-label="ROOM sections">
-        <% for (const section of sections) { %>
-        <a href="<%= section.path %>" <% if (section.path === page.path) { %>aria-current="page"<% } %>>
-          <span><%- section.title %></span><span class="entrance-arrow" aria-hidden="true">↗</span>
+        <% for (const section of sections) { const season = section.title.startsWith('S/S '); %>
+        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === page.path) { %>aria-current="page"<% } %>>
+          <span class="section-label"><% if (season) { %><small>S/S</small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
+          <span class="entrance-arrow" aria-hidden="true">↗</span>
         </a>
         <% } %>
       </nav>

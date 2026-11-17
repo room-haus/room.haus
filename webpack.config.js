@@ -68,6 +68,10 @@ module.exports = (_env, argv) => ({
     new EnvironmentPlugin({ROOM_MEDIA_ORIGIN: '', ROOM_MX029_AUDIO_URL: ''}),
     new MiniCssExtractPlugin({filename: 'assets/[name].[contenthash:12].css'}),
     new CopyPlugin({patterns: [
+      ...['instrumentserif', 'googlesanscode'].map((family) => ({
+        from: path.join(src, 'styles/fonts', family, 'OFL.txt'),
+        to: 'assets/' + family + '-license.[contenthash:12].txt',
+      })),
       {from: path.join(src, 'audio/worklets/OnsetWorkletProcessor'), to: 'worklets', info: {minimized: true}},
       {from: path.join(modelRoot, 'CD/*.{jpg,png}'), to: 'models/CD/[name][ext]'},
       {from: path.join(src, 'babylon/textures/environment.dds'), to: 'models/CD/environment.dds'},
