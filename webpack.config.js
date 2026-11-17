@@ -4,11 +4,13 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const entrancePages = require('./src/content/entrance.json');
+const sections = [{path: '/mixes/', title: 'S/S 2017-2019'}, ...entrancePages.slice(1)];
 const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
 module.exports = (_env, argv) => ({
-  entry: './src/index.js',
+  entry: {main: './src/index.js', entrance: './src/entrance.js'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -21,7 +23,12 @@ module.exports = (_env, argv) => ({
   },
   devServer: {
     host: '127.0.0.1',
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        ...entrancePages.map(({path}) => ({from: new RegExp('^' + path.slice(0, -1) + '/?$'), to: path + 'index.html'})),
+        {from: /^\/[^.]*$/, to: '/mixes/index.html'},
+      ],
+    },
     static: false,
     client: {overlay: {errors: true, warnings: false}},
   },
@@ -66,7 +73,20 @@ module.exports = (_env, argv) => ({
       {from: path.join(src, 'babylon/textures/environment.dds'), to: 'models/CD/environment.dds'},
       {from: path.join(modelRoot, 'MX018/environment.dds'), to: 'models/MX018/environment.dds'},
     ]}),
-    new HtmlWebpackPlugin({template: './src/index.html', favicon: './src/favicon.png'}),
+    new HtmlWebpackPlugin({
+      filename: 'mixes/index.html',
+      chunks: ['main'],
+      template: './src/index.html',
+      favicon: './src/favicon.png',
+    }),
+    ...entrancePages.map((page) => new HtmlWebpackPlugin({
+      filename: page.path.slice(1) + 'index.html',
+      chunks: ['entrance'],
+      template: './src/entrance.html',
+      favicon: './src/favicon.png',
+      page,
+      sections,
+    })),
   ],
   optimization: {
     runtimeChunk: 'single',

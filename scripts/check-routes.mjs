@@ -1,3 +1,4 @@
+import entrancePages from '../src/content/entrance.json' with {type: 'json'};
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
@@ -5,7 +6,7 @@ import {records, routeOf} from './catalog.mjs';
 const base = new URL(process.argv[2] || 'http://127.0.0.1:4173');
 const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const checks = [
-  ['/', 200, 'ROOM'],
+  ...entrancePages.map(({path, title}) => [path, 200, title]),
   ['/mixes/', 200, 'Mixes'],
   ['/releases/', 200, 'Releases'],
   ...records.map((record) => [routeOf(record), 200, record.id]),

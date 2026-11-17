@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f3ed" />
+    <% const {page, sections} = htmlWebpackPlugin.options; const home = page.path === '/'; %>
+    <title><%= home ? 'ROOM' : page.title + ' | ROOM' %></title>
+    <meta name="description" content="<%- page.description %>" />
+    <link rel="canonical" href="https://room.haus<%= page.path %>" />
+    <meta property="og:title" content="<%- home ? 'ROOM' : page.title + ' | ROOM' %>" />
+    <meta property="og:description" content="<%- page.description %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://room.haus<%= page.path %>" />
+  </head>
+  <body>
+    <main class="entrance">
+      <header class="entrance-header">
+        <a class="entrance-home" href="/" aria-label="ROOM home"><span aria-hidden="true"></span>room.haus</a>
+        <span>Visual studio &amp; music platform</span>
+      </header>
+      <% if (home) { %>
+      <section class="entrance-poster" aria-label="ROOM">
+        <div class="poster-type">
+          <h1><img class="poster-mark" src="<%= require('./images/logo.png') %>" alt="ROOM" width="1307" height="240" /></h1>
+          <p>Virtual Imprints</p>
+        </div>
+        <figure class="poster-figure">
+          <div class="poster-disc" aria-hidden="true"></div>
+          <figcaption>MX001&nbsp; / &nbsp;Eddy Bauer</figcaption>
+        </figure>
+      </section>
+      <% } else { %>
+      <section class="section-poster">
+        <div><h1><%- page.title %></h1><p><%- page.note %></p></div>
+      </section>
+      <% } %>
+      <nav class="entrance-nav" aria-label="ROOM sections">
+        <% for (const section of sections) { %>
+        <a href="<%= section.path %>" <% if (section.path === page.path) { %>aria-current="page"<% } %>>
+          <span><%- section.title %></span><span class="entrance-arrow" aria-hidden="true">↗</span>
+        </a>
+        <% } %>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+import entrancePages from '../src/content/entrance.json' with {type: 'json'};
 import {mkdir, readdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {records, mixes, routeOf, coverName, validateCatalog} from './catalog.mjs';
@@ -7,12 +8,11 @@ import {archiveBody, assetLookup, escape, recordBody} from './static-pages.mjs';
 const site = 'https://room.haus';
 const dist = path.resolve('dist');
 validateCatalog();
-const template = await readFile(path.join(dist, 'index.html'), 'utf8');
+const template = await readFile(path.join(dist, 'mixes/index.html'), 'utf8');
 const asset = assetLookup(await readdir(path.join(dist, 'assets')));
 const root = /(<div id=(?:"root"|'root'|root)>)(?:<!--catalog-->[\s\S]*?<!--\/catalog-->)?<\/div>/i;
 if (!root.test(template)) throw Error('Missing archive mount in the HTML template');
 const pages = [
-  ['/', 'ROOM', 'Independent mixes and releases from ROOM.'],
   ['/mixes/', 'Mixes | ROOM', 'Browse the ROOM mix archive.'],
   ['/releases/', 'Releases | ROOM', 'Explore records released by ROOM.'],
   ...records.map((record) => [
@@ -52,10 +52,11 @@ for (const [route, title, description, record] of pages) {
     .replace(root, (_, opening) => opening + '<!--catalog-->' + body + '<!--/catalog--></div>');
   await writeFile(path.join(dir, 'index.html'), html);
 }
+const routes = [...entrancePages.map(({path}) => path), ...pages.map(([route]) => route)];
 await writeFile(
   path.join(dist, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    pages.map(([route]) => '  <url><loc>' + escape(site + route) + '</loc></url>').join('\n') +
+    routes.map((route) => '  <url><loc>' + escape(site + route) + '</loc></url>').join('\n') +
     '\n</urlset>\n',
 );
 await writeFile(
@@ -64,4 +65,4 @@ await writeFile(
 );
 await mkdir('release', {recursive: true});
 await writeFile('release/room-routes.js', cloudFrontSource());
-console.log('Built ' + pages.length + ' public pages, the sitemap and the CDN route table.');
+console.log('Built ' + routes.length + ' public pages, the sitemap and the CDN route table.');

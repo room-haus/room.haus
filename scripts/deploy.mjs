@@ -1,4 +1,5 @@
 // Invoked by the release workflow after verifying an exact master commit.
+import entrancePages from '../src/content/entrance.json' with {type: 'json'};
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync, writeFileSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -31,6 +32,7 @@ if (!origin || !origin.DomainName.startsWith(bucket + '.s3') || origin.OriginPat
   throw Error('Check ROOM bucket/origin mapping before deploying.');
 // An ordered behavior takes precedence over the default viewer-request handler.
 const directories = [
+  ...entrancePages.slice(1).map(({path}) => path),
   '/mixes/',
   '/releases/',
   ...records.map(routeOf),

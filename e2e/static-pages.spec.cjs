@@ -4,8 +4,21 @@ const {test, expect} = require('@playwright/test');
 test.describe('archive without JavaScript', () => {
   test.use({javaScriptEnabled: false});
 
+  test('the new season and collective can be opened from the splash and bookmarked', async ({page, baseURL}) => {
+    await page.goto(new URL('/', baseURL || 'http://127.0.0.1:4173').href);
+    for (const label of ['S/S 2026', 'Collective']) {
+      await page.getByRole('link', {name: label, exact: true}).click();
+      await page.reload();
+      await expect(page.getByRole('heading', {name: label})).toBeVisible();
+      await expect(page.getByRole('link', {name: label})).toHaveAttribute('aria-current', 'page');
+      await page.getByRole('link', {name: 'ROOM home'}).click();
+      await expect(page.getByRole('heading', {name: 'ROOM'})).toBeVisible();
+    }
+  });
+
   test('browse a mix and a release using the published HTML', async ({page, baseURL}) => {
     await page.goto(new URL('/', baseURL || 'http://127.0.0.1:4173').href);
+    await page.getByRole('link', {name: 'S/S 2017-2019'}).click();
     await page.getByRole('link', {name: 'MX001 Eddy Bauer'}).click();
     await openOptions(page);
     await expect(page.getByRole('heading', {name: 'Eddy Bauer'})).toBeVisible();
