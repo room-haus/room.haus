@@ -61,3 +61,31 @@ test('a direct archive visit supports reduced motion, return, and filtered histo
   await page.getByRole('link', {name: 'S/S 2017-2019'}).click();
   await expect(search).toHaveValue('');
 });
+
+test('every section shares one document and retains its interactions through history', async ({page}) => {
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  const documents = [];
+  page.on('request', request => {
+    if (request.resourceType() === 'document') documents.push(request.url());
+  });
+  await page.goto('/');
+  const season = page.locator('[data-room-panel=season]');
+  const collective = page.locator('[data-room-panel=collective]');
+  await page.getByRole('link', {name: 'F/W 2026', exact: true}).click();
+  await expect(season).not.toHaveAttribute('inert');
+  await page.getByRole('link', {name: 'Releases', exact: true}).click();
+  await expect(page).toHaveURL(new RegExp('fw-2026/releases/$'));
+  await expect(page.getByRole('link', {name: 'Releases', exact: true})).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('button', {name: 'Play bruh sound effect'})).toBeVisible();
+  await page.getByRole('link', {name: 'Collective', exact: true}).click();
+  await expect(collective).not.toHaveAttribute('inert');
+  await expect(page.getByRole('button', {name: /Pixelate portrait/})).toHaveCount(4);
+  await page.goBack();
+  await expect(season).not.toHaveAttribute('inert');
+  await expect(page.getByRole('link', {name: 'Releases', exact: true})).toHaveAttribute('aria-current', 'page');
+  await page.goBack();
+  await expect(page.getByRole('link', {name: 'Mixes', exact: true})).toHaveAttribute('aria-current', 'page');
+  await page.getByRole('link', {name: 'ROOM home', exact: true}).click();
+  await expect(page.getByRole('heading', {name: 'ROOM', exact: true})).toBeVisible();
+  expect(documents).toHaveLength(1);
+});

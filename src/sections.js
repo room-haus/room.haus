@@ -7,6 +7,17 @@ if (sound) {
   const status = document.querySelector('.sound-status');
   sound.controls = false;
   key.hidden = false;
+  sound.addEventListener('waiting', () => { status.textContent = 'Loading sound…'; });
+  sound.addEventListener('playing', () => {
+    status.textContent = '';
+    key.classList.add('is-playing');
+  });
+  for (const event of ['ended', 'pause']) {
+    sound.addEventListener(event, () => {
+      status.textContent = '';
+      key.classList.remove('is-playing');
+    });
+  }
   key.addEventListener('click', async () => {
     status.textContent = '';
     sound.currentTime = 0;
@@ -20,6 +31,13 @@ if (sound) {
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 for (const portrait of document.querySelectorAll('.portrait')) {
+  const photo = portrait.querySelector('img');
+  portrait.dataset.imageState = 'loading';
+  photo.decode().then(() => {
+    portrait.dataset.imageState = 'ready';
+  }).catch(() => {
+    portrait.dataset.imageState = 'failed';
+  });
   const pixels = portrait.querySelector('.pixel-print');
   const coarse = document.createElement('canvas');
   coarse.className = 'pixel-print pixel-core';

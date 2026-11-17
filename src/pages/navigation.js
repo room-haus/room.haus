@@ -10,6 +10,10 @@ export function readRoute() {
   const path = url.pathname.replace(/\/$/, '');
   const query = url.searchParams.get('q') || '';
   if (path === '' || path === '/index.html') return {page: 'splash'};
+  if (path === '/fw-2026' || path === '/fw-2026/releases') {
+    return {page: 'season', collection: path.endsWith('/releases') ? 'Releases' : 'Mixes'};
+  }
+  if (path === '/collective') return {page: 'collective'};
   const match = /^\/(mixes|releases)(?:\/([^/]+))?$/.exec(path);
   if (!match) return {page: 'missing', section: 'mixes'};
   const [, section, id] = match;
@@ -53,4 +57,8 @@ export function returnToArchive(event, section) {
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   event.preventDefault();
   window.history.go(-1 - (history.state.mixSteps || 0));
+}
+
+export function panelForRoute(route) {
+  return ['splash', 'season', 'collective'].includes(route.page) ? route.page : 'archive';
 }

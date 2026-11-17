@@ -1,24 +1,42 @@
 import {useLayoutEffect} from 'react';
+import {panelForRoute} from './navigation';
 
 export function useRoomPanels(route) {
   useLayoutEffect(() => {
     const shell = document.querySelector('.room-shell');
-    const home = shell.querySelector('.entrance');
-    const archive = shell.querySelector('#root');
-    const mark = shell.querySelector('.room-mark');
-    const onHome = route.page === 'splash';
-    const active = onHome ? home : archive;
+    const panels = [
+      shell.querySelector('[data-room-panel=splash]'),
+      shell.querySelector('#root'),
+      shell.querySelector('[data-room-panel=season]'),
+      shell.querySelector('[data-room-panel=collective]'),
+    ];
+    const index = ['splash', 'archive', 'season', 'collective'].indexOf(panelForRoute(route));
+    const active = panels[index];
     const previousScroll = window.scrollY;
+    const outgoing = panels.find(panel => !panel.inert);
     const crossing = active.inert;
-    home.inert = !onHome;
-    archive.inert = onHome;
+    panels.forEach((panel, position) => {
+      panel.style.setProperty('--panel-shift', position < index ? '-100%' : '100%');
+      panel.inert = panel !== active;
+      if (panel === active) panel.removeAttribute('aria-hidden');
+      else panel.setAttribute('aria-hidden', 'true');
+    });
     if (crossing) {
       window.scrollTo(0, 0);
-      (onHome ? archive : home).scrollTop = previousScroll;
+      if (outgoing) outgoing.scrollTop = previousScroll;
       active.scrollTop = 0;
     }
 
-    const logo = active.querySelector(onHome ? '.entrance-home img' : '.archive-page .wordmark img');
+    const season = panels[2];
+    season.querySelector('.season-empty').setAttribute('aria-label', route.collection || 'Mixes');
+    for (const link of season.querySelectorAll('.season-collections a')) {
+      if (link.textContent.trim() === (route.collection || 'Mixes')) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    }
+    if (index !== 2) season.querySelector('audio').pause();
+
+    const logo = active.querySelector('.entrance-home img, .archive-page .wordmark img');
+    const mark = shell.querySelector('.room-mark');
     mark.hidden = !logo;
     if (!logo) return;
     function alignMark() {
@@ -29,7 +47,6 @@ export function useRoomPanels(route) {
       mark.style.width = bounds.width + 'px';
     }
     alignMark();
-    // Establish the initial pose before enabling interpolation.
     mark.getBoundingClientRect();
     shell.dataset.ready = '';
     const observer = new ResizeObserver(alignMark);

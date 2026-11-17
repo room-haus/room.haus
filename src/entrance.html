@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#eeede5" />
-    <% const {page, sections} = htmlWebpackPlugin.options; const archive = !page; const home = archive || page.path === '/'; %>
+    <% const {page, sections} = htmlWebpackPlugin.options; const archive = !page; const home = archive || page.path === '/'; const initialPanel = home ? 'splash' : page.collection ? 'season' : 'collective'; %>
     <title><%= home ? 'ROOM' : page.title + ' | ROOM' %></title>
     <% if (!archive) { %>
     <meta name="description" content="<%- page.description %>" />
@@ -16,18 +16,19 @@
     <% } %>
   </head>
   <body>
-    <% if (home) { %><div class="room-shell"><% } %>
-    <main <%= archive ? 'inert' : '' %> class="entrance entrance--study<%= home ? '' : ' entrance--section' %>">
+    <div class="room-shell">
+    <% for (const panel of ['splash', 'season', 'collective']) { const homePanel = panel === 'splash'; const seasonPanel = panel === 'season'; const active = !archive && panel === initialPanel; %>
+    <main data-room-panel="<%= panel %>" <%- active ? '' : 'inert aria-hidden="true"' %> class="entrance entrance--study<%= homePanel ? '' : ' entrance--section' %>">
       <header class="entrance-header">
-        <% if (home) { %><h1><% } %>
-        <a class="entrance-home" href="/" aria-label="<%= home ? 'ROOM' : 'ROOM home' %>">
+        <% if (homePanel) { %><h1><% } %>
+        <a class="entrance-home" href="/" aria-label="<%= homePanel ? 'ROOM' : 'ROOM home' %>">
           <img src="<%= require('./images/logo.png') %>" alt="ROOM" width="1307" height="240" />
         </a>
-        <% if (home) { %></h1><% } %>
+        <% if (homePanel) { %></h1><% } %>
         <p class="entrance-descriptor">Visual studio &amp;<br />music platform</p>
       </header>
 
-      <% if (home) { %>
+      <% if (homePanel) { %>
       <section class="type-study" aria-label="Virtual Imprints punctuation study">
         <div class="study-rules" aria-hidden="true"></div>
         <div class="study-overprint" aria-hidden="true">
@@ -53,17 +54,17 @@
           <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>
         </div>
       </section>
-      <% } else if (page.collection) { %>
+      <% } else if (seasonPanel) { %>
       <section class="season-page">
         <div class="section-heading">
-          <h1><%= page.title %></h1>
+          <h1 tabindex="-1">F/W 2026</h1>
           <nav class="season-collections" aria-label="F/W 2026 collections">
             <% for (const [label, path] of [['Mixes', '/fw-2026/'], ['Releases', '/fw-2026/releases/']]) { %>
-            <a href="<%= path %>" <%= label === page.collection ? 'aria-current="page"' : '' %>><%= label %></a>
+            <a href="<%= path %>" <%= label === (page?.collection || 'Mixes') ? 'aria-current="page"' : '' %>><%= label %></a>
             <% } %>
           </nav>
         </div>
-        <div class="season-empty" aria-label="<%= page.collection %>">
+        <div class="season-empty" aria-label="<%= page?.collection || 'Mixes' %>">
           <p>Coming soon</p>
           <button type="button" class="sound-key" aria-label="Play bruh sound effect" hidden><span class="sound-art" aria-hidden="true"><% for (const row of require('./content/bruh-art.json')) { %><span><%= row.replace(/ /g, '\u00a0') %></span><% } %></span></button>
           <audio controls preload="none" src="<%= require('./audio/assets/bruh.mp3') %>" aria-label="Bruh sound effect"></audio>
@@ -72,7 +73,7 @@
       </section>
       <% } else { %>
       <section class="collective-page">
-        <div class="section-heading"><h1>Collective</h1></div>
+        <div class="section-heading"><h1 tabindex="-1">Collective</h1></div>
         <div class="member-grid">
           <% for (const member of require('./content/collective.json')) { %>
           <figure class="member">
@@ -89,17 +90,16 @@
 
       <nav class="entrance-nav" aria-label="ROOM sections">
         <% for (const section of sections) { const season = /^(S\/S|F\/W) /.test(section.title); %>
-        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === (page?.section || page?.path)) { %>aria-current="page"<% } %>>
+        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === (seasonPanel ? '/fw-2026/' : panel === 'collective' ? '/collective/' : '/')) { %>aria-current="page"<% } %>>
           <span class="section-label"><% if (season) { %><small><%= section.title.slice(0, 3) %></small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
-          <span class="entrance-arrow" aria-hidden="true"><%= home && section.path === '/mixes/' ? '→' : '↗' %></span>
+          <span class="entrance-arrow" aria-hidden="true"><%= section.path === '/mixes/' ? '→' : '↗' %></span>
         </a>
         <% } %>
       </nav>
     </main>
-    <% if (home) { %>
-      <div id="root"<%= archive ? '' : ' inert' %>></div>
+    <% } %>
+      <div id="root"<%- archive ? '' : ' inert aria-hidden="true"' %>></div>
       <img class="room-mark" src="<%= require('./images/logo.png') %>" alt="" aria-hidden="true" hidden />
     </div>
-    <% } %>
   </body>
 </html>

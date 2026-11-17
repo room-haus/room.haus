@@ -10,7 +10,7 @@ const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
 module.exports = (_env, argv) => ({
-  entry: {main: './src/index.js', entrance: './src/sections.js'},
+  entry: {main: './src/index.js'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -88,7 +88,7 @@ module.exports = (_env, argv) => ({
     }),
     ...entrancePages.map((page) => new HtmlWebpackPlugin({
       filename: page.path.slice(1) + 'index.html',
-      chunks: [page.path === '/' ? 'main' : 'entrance'],
+      chunks: ['main'],
       template: './src/entrance.html',
       favicon: './src/favicon.png',
       page,

@@ -1,5 +1,6 @@
 import {createRoot} from 'react-dom/client';
 import './styles/layout.css';
+import './sections';
 import App, {loadPlayer} from './pages';
 
 // Preserve bookmarked searches from the original homepage.

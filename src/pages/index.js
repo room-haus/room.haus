@@ -4,7 +4,7 @@ import Archive from './Archive';
 import NotFoundPage from './404';
 import StillArt from '../components/StillArt';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {navigate, readRoute, returnToArchive} from './navigation';
+import {navigate, panelForRoute, readRoute, returnToArchive} from './navigation';
 import SiteHeader from '../components/SiteHeader';
 import {initStudy} from '../entrance';
 import {useRoomPanels} from './room-panels';
@@ -33,18 +33,25 @@ export default function App({Player = LazyPlayer}) {
   }, [splash]);
 
   useLayoutEffect(() => {
-    const seasonLink = document.querySelector('.entrance-nav a[href="/mixes/"]');
-    const enterSeason = event => navigate(event, '/mixes/');
+    const shell = document.querySelector('.room-shell');
+    const enterSection = event => {
+      const link = event.target.closest('a[href]');
+      if (!link || link.target || link.hasAttribute('download')) return;
+      const url = new URL(link.href);
+      if (url.origin === location.origin && /^\/(?:mixes|releases|fw-2026(?:\/releases)?|collective)?\/?$/.test(url.pathname)) {
+        navigate(event, url.pathname + url.search + url.hash);
+      }
+    };
     let revision = 0;
     let transition;
     let currentRoute = readRoute();
     const update = () => {
       const next = {...readRoute(), revision: ++revision};
-      const crossesSplash = currentRoute.page === 'splash' || next.page === 'splash';
+      const crossesPanel = panelForRoute(currentRoute) !== panelForRoute(next);
       currentRoute = next;
       const commit = () => setScreen(previous => screenState(next, previous.archive));
       transition?.skipTransition();
-      if (crossesSplash || !document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (crossesPanel || !document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
         commit();
         return;
       }
@@ -59,20 +66,25 @@ export default function App({Player = LazyPlayer}) {
     const previous = history.scrollRestoration;
     history.scrollRestoration = 'manual';
     window.addEventListener('popstate', update);
-    seasonLink.addEventListener('click', enterSeason);
+    shell.addEventListener('click', enterSection);
     return () => {
       revision++;
       transition?.skipTransition();
       window.removeEventListener('popstate', update);
-      seasonLink.removeEventListener('click', enterSeason);
+      shell.removeEventListener('click', enterSection);
       history.scrollRestoration = previous;
     };
   }, []);
 
   useLayoutEffect(() => {
-    if (route.page === 'splash') {
-      document.title = 'ROOM';
-      if (route.revision) document.querySelector('.entrance-nav a[href="/mixes/"]').focus({preventScroll: true});
+    if (panelForRoute(route) !== 'archive') {
+      document.title = route.page === 'splash' ? 'ROOM' : (route.page === 'season' ? 'F/W 2026 · ' + route.collection : 'Collective') + ' — ROOM';
+      if (route.revision) {
+        const panel = document.querySelector('[data-room-panel="' + route.page + '"]');
+        if (!panel.contains(document.activeElement)) {
+          panel.querySelector(route.page === 'splash' ? '.entrance-nav a' : 'h1').focus({preventScroll: true});
+        }
+      }
       return;
     }
     const archive = route.page === 'archive' && history.state?.archive;
@@ -94,7 +106,7 @@ export default function App({Player = LazyPlayer}) {
     document.title = `${title} — ROOM`;
   }, [route]);
 
-  if (splash || route.page === 'archive') return <Archive key={archive.section} route={archive} />;
+  if (panelForRoute(route) !== 'archive' || route.page === 'archive') return <Archive key={archive.section} route={archive} />;
   if (route.page === 'missing') return <NotFoundPage section={route.section} />;
   return (
     <ErrorBoundary

@@ -358,8 +358,8 @@ a { color: inherit; }
   visibility: hidden;
   pointer-events: none;
 }
-.room-shell > .entrance[inert] { transform: translateX(-100%); }
-.room-shell > #root[inert] { transform: translateX(100%); }
+.room-shell > .entrance[inert], .room-shell > #root[inert] { transform: translateX(var(--panel-shift, 100%)); }
+.room-shell > [data-room-panel=splash][inert] { --panel-shift: -100%; }
 .room-mark {
   position: absolute;
   z-index: 2;
