@@ -90,9 +90,9 @@
         <div class="member-grid">
           <% for (const member of require('./content/collective.json')) { %>
           <figure class="member">
-            <button class="portrait" type="button" aria-label="Pixelate portrait of <%- member.name %>" aria-pressed="false">
+            <button class="portrait" type="button" aria-label="Reveal haunted portrait of <%- member.name %>" aria-pressed="false">
               <img src="<%= require('./images/collective/' + member.image + '.jpg') %>" alt="Fictional businessman in a studio portrait" width="720" height="900" />
-              <img class="pixel-print" src="<%= require('./images/collective/' + member.image + '-pixels.png') %>" alt="" width="32" height="40" />
+              <img class="pixel-print" src="<%= require('./images/collective/' + member.image + '-demonic-pixels.png') %>" alt="" width="64" height="80" />
             </button>
             <figcaption><span><%- member.name %></span><small><%- member.role %></small></figcaption>
           </figure>
