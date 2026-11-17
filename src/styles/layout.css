@@ -110,6 +110,29 @@ a { color: inherit; }
 .not-found h1 { font-size: clamp(2.2rem, 7vw, 6rem); font-weight: 500; letter-spacing: -.055em; line-height: 1.05; margin: .1em 0 .4em; }
 .page-loading { padding-top: 2rem; }
 
+.loading-label { display: inline-flex; align-items: center; gap: .65em; font: .78rem/1.4 var(--mono); }
+.loading-label::before {
+  content: ''; flex: none; width: 1.1em; height: 1.1em; box-sizing: border-box;
+  border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0 1px, transparent 1.5px);
+}
+.stage-notice, .loading-back {
+  position: absolute; left: max(var(--gutter), env(safe-area-inset-left));
+  padding: .45rem .7rem; color: var(--paper); background: var(--ink);
+}
+.stage-notice { top: max(1rem, env(safe-area-inset-top)); font-size: .875rem; pointer-events: none; }
+.loading-back { bottom: max(1rem, env(safe-area-inset-bottom)); min-height: 44px; display: grid; align-items: center; }
+.transport-status .loading-label::before { color: var(--acid); }
+@media (prefers-reduced-motion: no-preference) {
+  .loading-label::before { animation: room-turn 1.2s linear infinite; }
+  .sleeve img[data-pending][loading="eager"] {
+    background: linear-gradient(100deg, #ddded7 30%, #e9eae4 50%, #ddded7 70%) 100% 0 / 250% 100%;
+    animation: room-sleeve 2s ease-in-out infinite;
+  }
+}
+@keyframes room-turn { to { transform: rotate(1turn); } }
+@keyframes room-sleeve { to { background-position: -66.67% 0; } }
+
 .player-page { position: relative; height: 100vh; height: 100dvh; background: var(--ink); }
 .listening-stage { position: absolute; inset: 0; isolation: isolate; overflow: hidden; background: #bebfb8; }
 .listening-stage:focus { outline: none; }
@@ -128,7 +151,7 @@ a { color: inherit; }
 .transport, .static-options {
   --focus: var(--acid); position: absolute; z-index: 2; left: 50%; transform: translateX(-50%);
   bottom: max(.5rem, env(safe-area-inset-bottom)); color: var(--paper); background: #171916eb;
-  width: min(18rem, calc(100% - 2rem)); padding: 0 .35rem;
+  width: min(36rem, calc(100% - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right))); padding: 0 .35rem;
 }
 .transport-row { display: grid; align-items: center; grid-template-columns: auto minmax(0, 1fr) auto; gap: .5rem; }
 .static-options { width: auto; }
@@ -142,7 +165,6 @@ a { color: inherit; }
   overflow-y: auto; overscroll-behavior: contain; padding: .9rem; background: var(--ink);
 }
 .options-panel .track-meta { margin-bottom: .5rem; }
-.option-wave { position: relative; height: 1rem; }
 .options-panel .clock { margin-bottom: .75rem; }
 .visual-modes, .transport-links, .static-links { display: flex; flex-wrap: wrap; gap: .35rem; margin-block: .4rem; }
 .visual-modes button, .artwork-trigger, .artwork-viewer button {
@@ -162,14 +184,15 @@ a { color: inherit; }
 .play-action:disabled { background: #b4bca9; }
 .time-control { min-width: 0; }
 .wave-seek { height: 44px; position: relative; }
-.wave-seek::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #81857b; }
+.wave-seek::before { content: ''; position: absolute; inset: 4px 0; border: 1px solid #777b72; background: linear-gradient(to right, #ffffff2e var(--played), transparent var(--played)); }
+.wave-seek::after { content: ''; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #81857b70; pointer-events: none; }
 .playback-scope { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.seek { appearance: none; -webkit-appearance: none; position: relative; display: block; width: 100%; height: 100%; margin: 0; background: transparent; cursor: pointer; }
+.seek { appearance: none; -webkit-appearance: none; position: relative; z-index: 1; display: block; width: 100%; height: 100%; margin: 0; background: transparent; cursor: pointer; }
 .seek:disabled { cursor: default; }
-.seek::-webkit-slider-runnable-track { height: 9px; background: transparent; }
-.seek::-moz-range-track { height: 100%; background: transparent; }
-.seek::-webkit-slider-thumb { appearance: none; width: 9px; height: 9px; background: var(--paper); border: none; border-radius: 50%; }
-.seek::-moz-range-thumb { width: 9px; height: 9px; background: var(--paper); border: none; border-radius: 50%; }
+.seek::-webkit-slider-runnable-track { height: 32px; background: transparent; }
+.seek::-moz-range-track { height: 32px; background: transparent; }
+.seek::-webkit-slider-thumb { appearance: none; width: 2px; height: 32px; background: var(--paper); border: none; border-radius: 0; }
+.seek::-moz-range-thumb { width: 2px; height: 32px; background: var(--paper); border: none; border-radius: 0; }
 .seek:disabled::-webkit-slider-thumb { background: #81857b; }
 .seek:disabled::-moz-range-thumb { background: #81857b; }
 .clock { display: flex; justify-content: space-between; font-size: .72rem; margin-top: .19rem; color: #d1d5cb; }
@@ -259,8 +282,10 @@ a { color: inherit; }
   padding: .5rem 1rem;
 }
 .artwork-header h2 { margin: .1rem 0 0; font-size: 1.1rem; line-height: 1.15; overflow-wrap: anywhere; }
-.artwork-image { background: #dcded6; display: grid; place-items: center; }
-.artwork-image img { display: block; max-width: 100%; max-height: min(64dvh, 37rem); object-fit: contain; }
+.artwork-image { position: relative; aspect-ratio: 1; max-height: min(64dvh, 37rem); width: 100%; background: #dcded6; display: grid; place-items: center; }
+.artwork-image img { display: block; min-height: 0; max-width: 100%; height: 100%; object-fit: contain; }
+.artwork-image[data-state]:not([data-state="ready"]) img { visibility: hidden; }
+.artwork-image p { position: absolute; font: .78rem/1.4 var(--mono); }
 /* The disc PNGs contain printed ink on transparency; give them a neutral disc surface. */
 .disc-label { padding: .65rem; }
 .disc-label img {
@@ -275,6 +300,6 @@ a { color: inherit; }
   .artwork-viewer { width: calc(100% - 1rem); }
 }
 @media (max-height: 30rem) and (orientation: landscape) {
-  .artwork-image img { max-height: 44dvh; }
+  .artwork-image { max-height: 44dvh; }
   .still-object { width: min(47vw, 38vh); }
 }

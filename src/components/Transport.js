@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import LoadingLabel from './LoadingLabel';
 import PlaybackScope from './PlaybackScope';
 
 function timestamp(seconds) {
@@ -101,7 +102,7 @@ export default function Transport({
             )}
           </>
         )}
-        {loading && <span>Loading audio…</span>}
+        {loading && <LoadingLabel>{playing ? 'Buffering audio…' : 'Loading audio…'}</LoadingLabel>}
       </div>
       {status === 'idle' && time > 0 && (
         <div className="opening-position">
@@ -128,7 +129,8 @@ export default function Transport({
           <PlayIcon playing={canPause} />
         </button>
         <div className="time-control">
-          <div className="wave-seek">
+          <div className="wave-seek" style={{'--played': `${readyToSeek ? 100 * Math.min(time / duration, 1) : 0}%`}}>
+            <PlaybackScope audio={audio} active={playing && !reducedMotion} />
             <input
               type="range"
               className="seek"
@@ -171,9 +173,6 @@ export default function Transport({
                 <h1>{record.artist}</h1>
                 {(selected || record.name) && <p>{selected?.name || record.name}</p>}
               </div>
-            </div>
-            <div className="option-wave">
-              <PlaybackScope audio={audio} active={expanded && playing && !reducedMotion} />
             </div>
             <div className="clock">
               <span>{timestamp(time)}</span>

@@ -51,6 +51,13 @@ for (const id of ['MX001', 'MX029']) {
       await page.keyboard.press('Space');
     }
     const seek = await checkClock(page);
+    // Reduced motion keeps the seek control interactive without drawing a live trace.
+    const waveform = page.locator('.wave-seek canvas');
+    await expect(waveform).toBeVisible();
+    expect(await waveform.evaluate(canvas => {
+      const context = canvas.getContext('2d');
+      return context.getImageData(0, 0, canvas.width, canvas.height).data.some(value => value !== 0);
+    })).toBe(false);
     if (isMobile) await page.getByRole('button', {name: 'Pause', exact: true}).tap();
     else await page.keyboard.press('Space');
     await expect(play).toBeVisible();
