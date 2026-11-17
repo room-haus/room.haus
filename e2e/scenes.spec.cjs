@@ -26,7 +26,9 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
     try {
       await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(1);
     } catch (error) {
-      throw new Error('Playback stopped at ' + await seek.inputValue() + 's. ' + await page.locator('.transport').innerText(), {cause: error});
+      const transport = await page.locator('.transport').ariaSnapshot();
+      const pixels = await canvas.evaluate(el => [el.width, el.height]);
+      throw new Error(`Playback stopped at ${await seek.inputValue()}s. Canvas ${pixels.join('×')}.\n${transport}`, {cause: error});
     }
     if (id === 'MX001') {
       const surface = await canvas.elementHandle();

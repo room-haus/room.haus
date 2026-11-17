@@ -41,6 +41,7 @@ export default class BabylonSceneManager {
     this.sceneFov = scene.activeCamera.fov;
     this.resize();
     let ready = false;
+    let slowFrames = 0;
     this.engine.runRenderLoop(() => {
       if (this.closed) return;
       try {
@@ -49,6 +50,15 @@ export default class BabylonSceneManager {
         if (!ready && scene.isReady()) {
           ready = true;
           onReady(config.Background);
+        } else if (ready && this.engine.getHardwareScalingLevel() < 2) {
+          // Full-screen rendering can saturate a phone or software GPU. Only
+          // reduce the drawing buffer after sustained slow visible frames.
+          const elapsed = this.engine.getDeltaTime();
+          slowFrames = !document.hidden && elapsed > 50 && elapsed < 1000 ? slowFrames + 1 : 0;
+          if (slowFrames >= 12) {
+            this.engine.setHardwareScalingLevel(this.engine.getHardwareScalingLevel() + 0.5);
+            slowFrames = 0;
+          }
         }
       } catch (error) {
         onError(error);
