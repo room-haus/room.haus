@@ -28,7 +28,7 @@
       <section class="type-study" aria-label="Virtual Imprints punctuation study">
         <div class="study-rules" aria-hidden="true"></div>
         <div class="study-bleed" aria-hidden="true">
-          <div><%= '((( ROOM.HAUS ))) (( VIRTUAL IMPRINTS )) '.repeat(10) %></div>
+          <div class="study-ticker"><div class="ticker-track"><% for (let copy = 0; copy < 2; copy++) { %><span><%= '(( VIRTUAL IMPRINTS )) ((ROOM.HAUS)) '.repeat(8) %></span><% } %></div></div>
           <div><%= '(( )) [[ ]] {{ }} //// '.repeat(15) %></div>
         </div>
         <div class="study-columns" aria-hidden="true">
@@ -38,7 +38,7 @@
         </div>
         <p class="study-title">Virtual<br />Imprints</p>
         <img class="study-form study-poster" src="<%= require('./images/punctuation-study.svg') %>" alt="A cobalt loop built from tightly layered rows of brackets and parentheses" width="720" height="520" />
-        <canvas class="study-form study-model" width="720" height="520" aria-hidden="true"></canvas>
+        <canvas class="study-form study-model" width="720" height="520" role="group" aria-label="Punctuation loop. Drag, swipe or use arrow keys to turn." aria-hidden="true"></canvas>
         <button class="rotation-toggle" type="button" hidden>Rotate loop</button>
         <div class="study-proof" aria-hidden="true">
           <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>

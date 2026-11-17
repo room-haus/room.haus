@@ -51,6 +51,8 @@ if (stage) {
         return;
       }
       model = loaded;
+      canvas.tabIndex = 0;
+      canvas.removeAttribute('aria-hidden');
       stage.classList.add('has-model');
       update();
     } catch {
