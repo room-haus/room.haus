@@ -17,7 +17,7 @@
   </head>
   <body>
     <% if (home) { %><div class="room-shell"><% } %>
-    <main <%= archive ? 'inert' : '' %> class="entrance<%= home ? ' entrance--study' : '' %>">
+    <main <%= archive ? 'inert' : '' %> class="entrance entrance--study<%= home ? '' : ' entrance--section' %>">
       <header class="entrance-header">
         <% if (home) { %><h1><% } %>
         <a class="entrance-home" href="/" aria-label="<%= home ? 'ROOM' : 'ROOM home' %>">
@@ -53,16 +53,46 @@
           <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>
         </div>
       </section>
+      <% } else if (page.collection) { %>
+      <section class="season-page">
+        <div class="section-heading">
+          <h1><%= page.title %></h1>
+          <nav class="season-collections" aria-label="F/W 2026 collections">
+            <% for (const [label, path] of [['Mixes', '/fw-2026/'], ['Releases', '/fw-2026/releases/']]) { %>
+            <a href="<%= path %>" <%= label === page.collection ? 'aria-current="page"' : '' %>><%= label %></a>
+            <% } %>
+          </nav>
+        </div>
+        <div class="season-empty" aria-label="<%= page.collection %>">
+          <p>Coming soon</p>
+          <button type="button" class="sound-key" aria-label="Play bruh sound effect" hidden><span aria-hidden="true">+----------+
+| &gt; BRUH   |
++----------+</span></button>
+          <audio controls preload="none" src="<%= require('./audio/assets/bruh.mp3') %>" aria-label="Bruh sound effect"></audio>
+          <span class="sound-status" role="status"></span>
+        </div>
+      </section>
       <% } else { %>
-      <section class="section-poster">
-        <h1><%- page.title %></h1><p><%- page.note %></p>
+      <section class="collective-page">
+        <div class="section-heading"><h1>Collective</h1></div>
+        <div class="member-grid">
+          <% for (const member of require('./content/collective.json')) { %>
+          <figure class="member">
+            <button class="portrait" type="button" aria-label="Pixelate portrait of <%- member.name %>" aria-pressed="false">
+              <img src="<%= require('./images/collective/' + member.image + '.jpg') %>" alt="Fictional businessman in a studio portrait" width="720" height="900" />
+              <img class="pixel-print" src="<%= require('./images/collective/' + member.image + '-pixels.png') %>" alt="" width="32" height="40" />
+            </button>
+            <figcaption><span><%- member.name %></span><small><%- member.role %></small></figcaption>
+          </figure>
+          <% } %>
+        </div>
       </section>
       <% } %>
 
       <nav class="entrance-nav" aria-label="ROOM sections">
-        <% for (const section of sections) { const season = section.title.startsWith('S/S '); %>
-        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === page?.path) { %>aria-current="page"<% } %>>
-          <span class="section-label"><% if (season) { %><small>S/S</small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
+        <% for (const section of sections) { const season = /^(S\/S|F\/W) /.test(section.title); %>
+        <a href="<%= section.path %>" aria-label="<%- section.title %>" <% if (section.path === (page?.section || page?.path)) { %>aria-current="page"<% } %>>
+          <span class="section-label"><% if (season) { %><small><%= section.title.slice(0, 3) %></small> <% } %><span class="section-name"><%- season ? section.title.slice(4) : section.title %></span></span>
           <span class="entrance-arrow" aria-hidden="true"><%= home && section.path === '/mixes/' ? '→' : '↗' %></span>
         </a>
         <% } %>

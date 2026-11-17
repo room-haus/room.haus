@@ -12,6 +12,7 @@ var pages = ${JSON.stringify(Object.fromEntries(pages.map((path) => [path, 1])))
 function handler(event) {
   var request = event.request;
   var path = request.uri.replace(/\\/$/, '');
+  if (path === '/ss-2026' || path === '/ss-2026/index.html') return {statusCode:301, headers:{location:{value:'/fw-2026/'}}};
   if (path === '' || path === '/index.html') {
     request.uri = prefix + '/index.html';
     return request;

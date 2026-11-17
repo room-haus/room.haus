@@ -61,7 +61,7 @@ await writeFile(
 );
 await writeFile(
   path.join(dist, '_redirects'),
-  mixes.map((record) => '/mixes/ mx=' + record.id + ' ' + routeOf(record) + ' 301!').join('\n') + '\n',
+  '/ss-2026/ /fw-2026/ 301!\n' + mixes.map((record) => '/mixes/ mx=' + record.id + ' ' + routeOf(record) + ' 301!').join('\n') + '\n',
 );
 await mkdir('release', {recursive: true});
 await writeFile('release/room-routes.js', cloudFrontSource());

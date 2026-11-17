@@ -5,12 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const entrancePages = require('./src/content/entrance.json');
-const sections = [{path: '/mixes/', title: 'S/S 2017-2019'}, ...entrancePages.slice(1)];
+const sections = [{path: '/mixes/', title: 'S/S 2017-2019'}, ...entrancePages.slice(1).filter(page => !page.section)];
 const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
 module.exports = (_env, argv) => ({
-  entry: {main: './src/index.js', entrance: ['./src/styles/layout.css', './src/styles/entrance.css']},
+  entry: {main: './src/index.js', entrance: './src/sections.js'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -25,6 +25,7 @@ module.exports = (_env, argv) => ({
     host: '127.0.0.1',
     historyApiFallback: {
       rewrites: [
+        {from: /^\/ss-2026\/?$/, to: '/fw-2026/index.html'},
         ...entrancePages.map(({path}) => ({from: new RegExp('^' + path.slice(0, -1) + '/?$'), to: path + 'index.html'})),
         {from: /^\/[^.]*$/, to: '/mixes/index.html'},
       ],

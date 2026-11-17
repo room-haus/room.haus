@@ -15,6 +15,7 @@ const types = {
   '.json': 'application/json',
   '.svg': 'image/svg+xml',
   '.jpg': 'image/jpeg',
+  '.mp3': 'audio/mpeg',
   '.png': 'image/png',
   '.webp': 'image/webp',
   '.woff2': 'font/woff2',
@@ -36,6 +37,10 @@ const server = createServer(async (req, res) => {
         querystring: Object.fromEntries([...url.searchParams].map(([k, value]) => [k, {value}])),
       },
     });
+    if (result.headers?.location) {
+      res.writeHead(result.statusCode, {Location: result.headers.location.value}).end();
+      return;
+    }
     if (result.statusCode) {
       res.writeHead(result.statusCode, {'Content-Type': 'text/html'}).end(result.body);
       return;
@@ -44,8 +49,10 @@ const server = createServer(async (req, res) => {
     const sample = process.env.ROOM_MX029_SAMPLE_DIR && /^\/sample\/mx029\/(index\.m3u8|MX029-\d+\.ts)$/.exec(url.pathname);
     const directory = sample ? resolve(process.env.ROOM_MX029_SAMPLE_DIR) : root;
     const file = resolve(directory, sample ? sample[1] : '.' + decodeURIComponent(result.uri));
-    if (!file.startsWith(directory + sep) || !(await stat(file)).isFile()) throw Error('Not found');
-    res.writeHead(200, {'Content-Type': types[extname(file)] || 'application/octet-stream'});
+    if (!file.startsWith(directory + sep)) throw Error('Not found');
+    const info = await stat(file);
+    if (!info.isFile()) throw Error('Not found');
+    res.writeHead(200, {'Content-Type': types[extname(file)] || 'application/octet-stream', 'Content-Length': info.size});
     if (req.method === 'HEAD') res.end();
     else
       createReadStream(file)

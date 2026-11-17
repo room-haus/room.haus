@@ -316,7 +316,7 @@
   flex-wrap: wrap;
 }
 .entrance--study .entrance-nav a + a { border-top: 0; border-left: 1px solid var(--black); }
-.entrance--study .entrance-nav a[href='/ss-2026/'] { background: var(--blue); color: white; }
+.entrance--study .entrance-nav a[href='/fw-2026/'] { background: var(--blue); color: white; }
 .entrance--study .section-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: .5em; }
 .entrance--study .section-name { font-size: clamp(2.1rem, 4.15vw, 5.5rem); }
 .entrance--study .entrance-arrow { align-self: center; }
@@ -342,4 +342,69 @@
   .entrance--study .entrance-nav a { padding: .65rem .85rem; }
   .entrance--study .entrance-nav a + a { border-left: 0; border-top: 1px solid var(--black); }
   .entrance--study .section-name { font-size: clamp(1.8rem, 8.8vw, 3rem); }
+}
+
+.entrance--section { grid-template-rows: auto 1fr auto; }
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .7rem 2rem;
+  padding: .65rem 0 .8rem;
+  border-block: 1px solid var(--black);
+}
+.section-heading h1 {
+  font: 400 clamp(3.3rem, 8vw, 8rem)/.95 var(--display);
+  letter-spacing: -.055em;
+}
+.season-page { display: grid; grid-template-rows: auto 1fr; }
+.season-collections { display: flex; gap: .35rem; }
+.season-collections a {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: .55rem .9rem;
+  border: 1px solid;
+  color: var(--black);
+  font: 400 1rem/1 var(--utility);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.season-collections a[aria-current] { color: var(--stock); background: var(--black); border-color: var(--black); }
+.season-collections a:hover, .season-collections a:focus-visible { color: white; background: var(--blue); }
+.season-empty {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem .7rem;
+  gap: 1.3rem;
+  background:
+    linear-gradient(90deg, #16191529 1px, transparent 1px) 0 0 / 16.6667% 100%,
+    linear-gradient(#16191529 1px, transparent 1px) 0 0 / 100% 25%, #e6e5db;
+  border-bottom: 1px solid var(--black);
+}
+.season-empty p { font: 400 clamp(3.8rem, 12vw, 14rem)/.9 var(--display); letter-spacing: -.055em; }
+.sound-key { border: 0; padding: .48rem .9rem; background: var(--blue); color: white; font: 1rem/1.05 var(--utility); white-space: pre; }
+.sound-key:hover, .sound-key:focus-visible { background: var(--black); }
+.sound-key:active { transform: translateY(2px); }
+.sound-status { font: .85rem var(--utility); }
+.sound-status:empty { display: none; }
+.member-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--black); border-block-end: 1px solid; }
+.member { margin: 0; background: var(--stock); }
+.portrait { display: block; position: relative; width: 100%; padding: 0; border: 0; background: var(--black); }
+.portrait img { display: block; width: 100%; height: auto; }
+.portrait .pixel-print { position: absolute; inset: 0; height: 100%; image-rendering: pixelated; opacity: 0; }
+.portrait[aria-pressed=true] .pixel-print { opacity: 1; }
+@media (hover: hover) {
+  .portrait:hover .pixel-print { opacity: 1; }
+}
+.portrait:focus-visible { outline: 3px solid var(--blue); outline-offset: -4px; z-index: 1; }
+.member figcaption { display: grid; gap: .45rem; padding: .75rem .65rem 1rem; }
+.member figcaption span { font: 400 clamp(1.65rem, 3.3vw, 4rem)/.98 var(--display); letter-spacing: -.035em; }
+.member figcaption small { font: .78rem/1.25 var(--utility); text-transform: uppercase; }
+@media (max-width: 760px) {
+  .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

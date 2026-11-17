@@ -6,7 +6,7 @@ test.describe('archive without JavaScript', () => {
 
   test('the new season and collective can be opened from the splash and bookmarked', async ({page, baseURL}) => {
     await page.goto(new URL('/', baseURL || 'http://127.0.0.1:4173').href);
-    for (const label of ['S/S 2026', 'Collective']) {
+    for (const label of ['F/W 2026', 'Collective']) {
       await page.getByRole('link', {name: label, exact: true}).click();
       await page.reload();
       await expect(page.getByRole('heading', {name: label})).toBeVisible();

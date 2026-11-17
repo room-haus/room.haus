@@ -1,5 +1,6 @@
 [
   {"path": "/", "title": "ROOM", "description": "ROOM is a visual studio and independent music platform. Explore the seasons and collective."},
-  {"path": "/ss-2026/", "title": "S/S 2026", "description": "The new season from ROOM.", "note": "New season in preparation."},
-  {"path": "/collective/", "title": "Collective", "description": "The ROOM collective.", "note": "Collective details to follow."}
+  {"path": "/fw-2026/", "title": "F/W 2026", "description": "Mixes for ROOM Fall/Winter 2026.", "collection": "Mixes"},
+  {"path": "/fw-2026/releases/", "section": "/fw-2026/", "title": "F/W 2026", "description": "Releases for ROOM Fall/Winter 2026.", "collection": "Releases"},
+  {"path": "/collective/", "title": "Collective", "description": "Meet the ROOM collective."}
 ]
