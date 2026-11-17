@@ -37,7 +37,9 @@
           <% } %>
         </div>
         <p class="study-title">Virtual<br />Imprints</p>
-        <img class="study-form" src="<%= require('./images/punctuation-study.svg') %>" alt="A cobalt loop built from tightly layered rows of brackets and parentheses" width="720" height="520" />
+        <img class="study-form study-poster" src="<%= require('./images/punctuation-study.svg') %>" alt="A cobalt loop built from tightly layered rows of brackets and parentheses" width="720" height="520" />
+        <canvas class="study-form study-model" width="720" height="520" aria-hidden="true"></canvas>
+        <button class="rotation-toggle" type="button" hidden>Rotate loop</button>
         <div class="study-proof" aria-hidden="true">
           <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>
         </div>

@@ -196,6 +196,22 @@
   transform: translate(-50%, -50%) rotate(-8deg);
   pointer-events: none;
 }
+.study-model { opacity: 0; aspect-ratio: 720 / 520; }
+.has-model .study-model { opacity: 1; }
+.has-model .study-poster { opacity: 0; }
+.rotation-toggle {
+  position: absolute;
+  top: 1.6rem;
+  right: .65rem;
+  z-index: 1;
+  min-height: 44px;
+  padding: .4em .8em;
+  background: var(--stock);
+  border: 1px solid var(--black);
+  color: var(--black);
+  font: .75rem/1 var(--utility);
+}
+.rotation-toggle:hover, .rotation-toggle:focus-visible { background: var(--black); color: var(--stock); }
 .study-proof {
   position: absolute;
   left: 1.2%;
