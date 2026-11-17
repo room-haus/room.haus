@@ -29,12 +29,7 @@
         <div class="study-rules" aria-hidden="true"></div>
         <div class="study-overprint" aria-hidden="true">
           <div class="split-imprint"><span>IMPRINTS</span><span>IMPRINTS</span></div>
-          <div class="season-screen">S/S</div>
-          <div class="bracket-fan">
-            <% for (let row = 0; row < 13; row++) { %>
-            <span style="--row: <%= row %>"><%= '[('.repeat(3 + row) %><%= ')]'.repeat(3 + row) %></span>
-            <% } %>
-          </div>
+          <div class="asterisk-screen">*</div>
           <div class="proof-slug">/// (( VIRTUAL IMPRINTS )) /// ROOM.HAUS /// (( VIRTUAL IMPRINTS )) ///</div>
         </div>
         <div class="study-bleed" aria-hidden="true">
@@ -49,6 +44,7 @@
         <p class="study-title">Virtual<br />Imprints</p>
         <img class="study-form study-poster" src="<%= require('./images/punctuation-study.svg') %>" alt="A cobalt loop built from tightly layered rows of brackets and parentheses" width="720" height="520" />
         <canvas class="study-form study-model" width="720" height="520" role="group" aria-label="Punctuation loop. Drag, swipe or use arrow keys to turn." aria-hidden="true"></canvas>
+        <span class="loop-key-hint" aria-hidden="true">Arrow keys to turn</span>
         <button class="rotation-toggle" type="button" hidden>Rotate loop</button>
         <div class="study-proof" aria-hidden="true">
           <% for (const row of ['( ( ( ( (', '() () () ()', '(())(())(())', '((()))((()))', '((((()))))']) { %><span><%= row %></span><% } %>

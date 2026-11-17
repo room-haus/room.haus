@@ -172,13 +172,12 @@
   -webkit-text-stroke: 1px #827f74;
   color: transparent;
 }
-.season-screen {
+.asterisk-screen {
   position: absolute;
-  right: -.12em;
-  top: 8%;
+  right: -.045em;
+  top: 12%;
   transform: rotate(8deg) skewX(-12deg);
-  font: 400 32cqi/.88 var(--display);
-  letter-spacing: -.12em;
+  font: 400 46cqi/.88 var(--display);
   color: #9a3726;
   background: repeating-linear-gradient(-40deg, #a63721 0 1px, transparent 1px 3px);
   background-clip: text;
@@ -186,28 +185,13 @@
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: .65px #a63721;
 }
-.bracket-fan {
-  position: absolute;
-  left: 62%;
-  top: 53%;
-  transform: rotate(-18deg);
-  color: #252622;
-  font: 400 clamp(.65rem, 1.12cqi, 1.5rem)/.7 var(--utility);
-  letter-spacing: -.19em;
-}
-.bracket-fan span {
-  display: block;
-  transform: translateX(calc(var(--row) * -.25em)) skewX(-12deg);
-  text-shadow: 1px 1px #b46045;
-}
 .proof-slug {
   position: absolute;
   left: -2em;
-  bottom: 17%;
+  bottom: calc(17% + 5cqi);
   width: max-content;
   padding: .17em .4em;
-  transform: rotate(-8deg);
-  transform-origin: left center;
+  transform: rotate(8deg);
   background: #20211c;
   color: var(--stock);
   font: 400 clamp(.8rem, 1.9cqi, 2.8rem)/.95 var(--utility);
@@ -283,8 +267,19 @@
   user-select: none;
 }
 .has-model .study-model.is-dragging { cursor: grabbing; }
-.type-study:has(.study-model:focus-visible) { outline: 3px solid var(--blue); outline-offset: -3px; }
 .study-model:focus-visible { outline: none; }
+.loop-key-hint { display: none; }
+.study-model:focus-visible + .loop-key-hint {
+  display: block;
+  position: absolute;
+  top: 1.6rem;
+  left: .65rem;
+  padding: .4em .6em;
+  background: var(--black);
+  color: var(--stock);
+  font: .75rem/1 var(--utility);
+  pointer-events: none;
+}
 .study-proof { pointer-events: none; }
 .has-model .study-poster { opacity: 0; }
 .rotation-toggle {
@@ -334,9 +329,8 @@
   .study-columns { bottom: 8%; width: 33.333%; height: 9%; grid-template-columns: 1fr; }
   .study-columns span + span { display: none; }
   .split-imprint { top: 5%; font-size: 34cqi; }
-  .season-screen { top: 32%; right: -.2em; font-size: 66cqi; }
-  .bracket-fan { top: 68%; left: 42%; }
-  .proof-slug { bottom: 17%; font-size: 3.9cqi; }
+  .asterisk-screen { top: 32%; font-size: 70cqi; }
+  .proof-slug { font-size: 3.9cqi; }
   .study-title { top: 11%; font-size: 26cqi; }
   .study-form { top: 54%; left: 57%; width: min(171%, 93svh); }
   .study-bleed > :last-child { font-size: 17cqi; }
