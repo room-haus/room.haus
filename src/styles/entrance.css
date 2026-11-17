@@ -397,9 +397,9 @@
 .sound-status:empty { display: none; }
 .member-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--black); border-block-end: 1px solid; }
 .member { margin: 0; background: var(--stock); }
-.portrait { display: block; position: relative; width: 100%; padding: 0; border: 0; background: var(--black); }
+.portrait { overflow: hidden; display: block; position: relative; width: 100%; padding: 0; border: 0; background: var(--black); }
 .portrait img { display: block; width: 100%; height: auto; }
-.portrait .pixel-print { position: absolute; inset: 0; height: 100%; image-rendering: pixelated; opacity: 0; clip-path: circle(23% at var(--patch-x, 50%) var(--patch-y, 50%)); }
+.portrait .pixel-print { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; image-rendering: pixelated; opacity: 0; clip-path: circle(var(--patch-radius, 23%) at var(--patch-x, 50%) var(--patch-y, 50%)); }
 .portrait[aria-pressed=true] .pixel-print { opacity: 1; }
 @media (hover: hover) {
   .portrait:hover .pixel-print { opacity: 1; }
@@ -410,4 +410,16 @@
 .member figcaption small { font: .78rem/1.25 var(--utility); text-transform: uppercase; }
 @media (max-width: 760px) {
   .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* A finer cobalt echo follows the moving, coarser patch. */
+.portrait .pixel-trail { --patch-radius: 14%; filter: sepia(1) saturate(5) hue-rotate(175deg) contrast(1.3); }
+.portrait .pixel-trail-1 { --patch-radius: 8%; filter: sepia(1) saturate(4) hue-rotate(325deg) contrast(1.4); }
+.portrait[aria-pressed=true] .pixel-trail { opacity: 0; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .portrait:hover .pixel-trail { opacity: 0; }
+  .portrait:hover.is-scrambling .pixel-trail { opacity: .8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait .pixel-trail, .portrait .pixel-core { display: none; }
 }
