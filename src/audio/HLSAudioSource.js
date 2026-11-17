@@ -3,6 +3,10 @@ import AudioBand from './AudioBand';
 import BPMDetectorWorkletNode from './BPMDetectorWorkletNode';
 import {FREQ_BIN_COUNT} from './constants';
 
+function openingTime(seconds, duration) {
+  return duration > 0 && seconds >= duration ? 0 : seconds;
+}
+
 export default class HLSAudioSource {
   constructor(url, startTime = 0) {
     this.url = url;
@@ -45,7 +49,7 @@ export default class HLSAudioSource {
       const duration = Number.isFinite(media.duration) ? media.duration : 0;
       if (this.pendingTime > 0 && media.readyState >= 1 && duration > 0) {
         // A stale or out-of-range link starts at the beginning of the available recording.
-        const target = this.pendingTime < duration ? this.pendingTime : 0;
+        const target = openingTime(this.pendingTime, duration);
         try {
           media.currentTime = target;
           if (Math.abs(media.currentTime - target) < 1) this.pendingTime = 0;
@@ -132,6 +136,10 @@ export default class HLSAudioSource {
     clearTimeout(this.timeout);
     this.media?.pause();
     if (this.url) this.update({playing: false, status: 'paused'});
+  }
+
+  seekLinkedPosition(seconds) {
+    this.seek(openingTime(seconds, this.snapshot.duration));
   }
 
   seek(seconds) {

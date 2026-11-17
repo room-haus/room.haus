@@ -245,6 +245,19 @@ test('a same-record timestamp history entry seeks the retained audio without rep
   expect(await mediaState(page)).toHaveLength(1);
 });
 
+test('an out-of-range timestamp restarts the retained audio at the beginning', async ({page}) => {
+  await page.goto(mix + '?t=15');
+  await play(page).click();
+  await expect.poll(async () => (await mediaState(page))[0]?.time || 0).toBeGreaterThan(15);
+  await page.evaluate((path) => {
+    history.pushState(null, '', path + '?t=999');
+    dispatchEvent(new PopStateEvent('popstate'));
+  }, mix);
+  await expect.poll(async () => (await mediaState(page))[0].time).toBeLessThan(5);
+  await confirmPlaying(page);
+  expect(await mediaState(page)).toEqual([expect.objectContaining({paused: false})]);
+});
+
 test('a same-release history link applies its selected track and timestamp', async ({page}) => {
   await page.goto(release);
   await play(page).click();

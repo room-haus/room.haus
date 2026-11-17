@@ -35,13 +35,13 @@ export default function Player({entry, visible, autoplay, activeAudio, onClose, 
     const linked = linkedPosition(record, entry.search);
     if (!linked?.shared) return;
     if (linked.trackIndex === trackIndex) {
-      player.seek(linked.seconds);
+      player.audio.seekLinkedPosition(linked.seconds);
       setPosition(previous => ({...previous, shared: true}));
     } else {
       const playing = ['playing', 'loading'].includes(player.audio.snapshot.status);
       setPosition({...linked, autoplay: playing});
     }
-  }, [entry, player.audio, player.seek, record, trackIndex]);
+  }, [entry, player.audio, record, trackIndex]);
 
   const selectTrack = (index) => {
     if (index === trackIndex) return;
