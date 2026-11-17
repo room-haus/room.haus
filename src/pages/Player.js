@@ -30,7 +30,9 @@ export default function Player({record, section}) {
   };
   const startOver = () => {
     savePosition(record, trackIndex, 0);
-    setPosition({trackIndex, seconds: 0, shared: false});
+    // Keep the audio object attached to the live scene. The opening time only seeds that object.
+    player.seek(0);
+    setPosition(previous => ({...previous, shared: false}));
   };
   const sceneError = useCallback(() => {
     setSceneFailed(true);

@@ -135,10 +135,15 @@ export default class HLSAudioSource {
   }
 
   seek(seconds) {
-    if (this.media && Number.isFinite(seconds) && this.snapshot.duration > 0) {
-      this.media.currentTime = Math.max(0, Math.min(seconds, this.snapshot.duration));
-      this.update({time: this.media.currentTime});
+    if (!Number.isFinite(seconds)) return;
+    if (!this.media || this.snapshot.duration <= 0) {
+      this.pendingTime = Math.max(0, seconds);
+      this.update({time: this.pendingTime});
+      return;
     }
+    this.pendingTime = 0;
+    this.media.currentTime = Math.max(0, Math.min(seconds, this.snapshot.duration));
+    this.update({time: this.media.currentTime});
   }
 
   isPlaying() { return this.snapshot.playing; }
