@@ -28,7 +28,7 @@ function handler(event) {
     request.uri = prefix + path + '/index.html';
     return request;
   }
-  if (!/\\.[^/]+$/.test(path)) {
+  if (path === '/underlevel' || path.indexOf('/underlevel/') === 0 || !/\\.[^/]+$/.test(path)) {
     return {statusCode: 404, statusDescription: 'Not Found', headers: {'content-type': {value:'text/html; charset=utf-8'}},
       body:'<!doctype html><html lang="en"><title>Record unavailable | ROOM</title><h1>Record unavailable</h1><a href="/mixes/">Browse the ROOM archive</a></html>'};
   }

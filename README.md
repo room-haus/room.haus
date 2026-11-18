@@ -20,6 +20,10 @@ Open `/labs` for the seasonal experiment workspace. The intentionally plain logi
 
 The six initial studies use the existing Babylon renderer, loaded only after entering the workspace. Each study retains its controls while switching tabs; reset restores that study and its camera. Drag or use arrow keys to orbit, scroll/pinch or use plus/minus to zoom, and save a PNG with **Save image**. Reduced-motion preferences start the studies paused. Add experiments to `src/labs/studies.js` and their scene construction/updates to `src/labs/scene.js`. Run `npm run test:browser -- e2e/labs.spec.cjs` for login, scene switching, controls, export, mobile layouts and WebGL recovery checks.
 
+In **Experiences**, **Open The Underlevel** launches a full-screen MX029 dungeon inside Labs. Escape or Exit closes it and stops playback; the former `/underlevel/` URL returns 404.
+
+For Underlevel architecture, controls, signal mappings and validation evidence, see [the implementation notes](docs/underlevel/README.md) and [UX map](docs/underlevel/UX-MAP.md). Run `npm run typecheck:underlevel` and `npm run test:browser -- e2e/underlevel.spec.cjs` for its focused checks.
+
 ## Maintain the collection
 
 Edit the records in `src/content/mixes/records.json` and `src/content/releases/records.json`. Each record refers to the keys exported by the cover and CD label indexes in `src/images`. Retain each published ID and release slug so shared links keep working. The build checks the catalog, creates a static page with cover and artist metadata for each recording, and emits a CDN route function. It accepts both historic mix query links and canonical record paths.

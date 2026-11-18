@@ -43,6 +43,12 @@
 .labs-empty > .labs-eyebrow { color: var(--labs-muted); }
 .labs-empty h2 { font-size: clamp(1.75rem, 3vw, 3rem); font-weight: 400; letter-spacing: -.045em; margin-block: 1rem; }
 .labs-empty p { max-width: 28rem; font-size: .94rem; line-height: 1.5; color: var(--labs-muted); }
+.labs-launch { min-height: 44px; padding: .6rem .85rem; border: 1px solid var(--labs-ink); background: transparent; color: var(--labs-ink); }
+.labs-launch:hover { background: #dce0ee; }
+.labs-experience-modal { position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; overflow: auto; overscroll-behavior: contain; background: #07090e; color: #f4ebce; }
+.labs-experience-modal::backdrop { background: #07090e; }
+.labs-experience-loading { padding: 2rem; }
+.labs-experience-loading button { min-height: 44px; color: inherit; border: 1px solid currentColor; background: transparent; padding: .6rem; }
 .labs-nav { display: flex; flex-direction: column; gap: .3rem; margin-inline: -.25rem; }
 .labs-nav button { position: relative; display: flex; align-items: center; gap: .8rem; text-align: left; background: transparent; border: 0; min-height: 48px; padding: .6rem .7rem; font-size: .87rem; }
 .labs-nav button:hover { background: #e0e2d8; }

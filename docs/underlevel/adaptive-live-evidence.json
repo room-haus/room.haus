@@ -1,0 +1,6930 @@
+{
+  "source": "MX029 original CDN / production bundle",
+  "samples": [
+    {
+      "time": 0.502132,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.113",
+        "time": "0.23",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.1646509090909066,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.350",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 0
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 0
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 0.720229,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.113",
+        "time": "0.23",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.1646509090909066,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.350",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 0
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 0
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 0.977295,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.130",
+        "time": "0.78",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.5678334545454452,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.350",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 0
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 0
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 1.195828,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.130",
+        "time": "0.78",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.5678334545454452,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.350",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 0
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 1
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 1.43093,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.131",
+        "time": "1.31",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.9520181818181754,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.351",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 0
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 1
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 1.709569,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.131",
+        "time": "1.31",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":0.9520181818181754,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.351",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 1
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 1
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 1.927256,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.949",
+        "time": "1.87",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":1.359422545454539,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.357",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 2.18702,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.949",
+        "time": "1.87",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":1.359422545454539,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.357",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 2.406168,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.949",
+        "time": "1.87",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":1.359422545454539,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.357",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 2.667392,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "2.41",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":1.7499403636363695,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.376",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 2.925714,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "2.41",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":1.7499403636363695,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.376",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 3.169524,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "2.93",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.1277919999999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.392",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 3.390555,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "2.93",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.1277919999999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.392",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 3.638363,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "3.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.4950894545454503,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.414",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 3.88187,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "3.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.4950894545454503,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.414",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 4.098322,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "3.98",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.891939636363635,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.446",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 4.327619,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "3.98",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":2.891939636363635,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.446",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 4.570999,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "4.51",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":3.281455272727271,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.472",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 4.786213,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "4.51",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":3.281455272727271,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.472",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 4.989388,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "4.51",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":3.281455272727271,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.472",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 5.288345,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "5.05",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":3.670864,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.497",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 5.506032,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "5.05",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":3.670864,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.497",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 5.761451,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.992",
+        "time": "5.63",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.09535781818181,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.521",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 5.994901,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.992",
+        "time": "5.63",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.09535781818181,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.521",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 6.230486,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.995",
+        "time": "6.17",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.484579636363626,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.549",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 6.458379,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.995",
+        "time": "6.17",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.484579636363626,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.549",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 6.68975,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.995",
+        "time": "6.17",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.484579636363626,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.549",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 6.928456,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.717",
+        "time": "6.69",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.865473454545446,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.572",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 7.137234,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.717",
+        "time": "6.69",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":4.865473454545446,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.572",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 7.410068,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.684",
+        "time": "7.19",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.230822545454554,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.594",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 7.649172,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.684",
+        "time": "7.19",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.230822545454554,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.594",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 7.884836,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.678",
+        "time": "7.71",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.606563636363634,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.616",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 8.140537,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.678",
+        "time": "7.71",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.606563636363634,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.616",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 8.352047,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.525",
+        "time": "8.23",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.9823047272727345,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.639",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 8.556553,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.525",
+        "time": "8.23",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.9823047272727345,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.639",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 8.77424,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.525",
+        "time": "8.23",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.9823047272727345,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.639",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The Bone Listener stands within reach of the lantern light.",
+      "kind": "bone",
+      "beat": "false"
+    },
+    {
+      "time": 9.877907,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.267",
+        "time": "9.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":7.120082181818176,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.694",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 10.118095,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.267",
+        "time": "9.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":7.120082181818176,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.694",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 10.614422,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.267",
+        "time": "9.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":7.120082181818176,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.694",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 10.859573,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.000",
+        "time": "10.61",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":7.71957963636363,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "cue",
+        "mana": "0.708",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 1
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 11.116553,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.000",
+        "time": "10.61",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":7.71957963636363,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "cue",
+        "mana": "0.708",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 11.41551,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.987",
+        "time": "11.12",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.084765818181825,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.720",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 11.680377,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.987",
+        "time": "11.12",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.084765818181825,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.720",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 11.921968,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "11.68",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.495012363636368,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.732",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 12.167256,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "11.68",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.495012363636368,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.732",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 12.382041,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "12.25",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.907358545454537,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.751",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 12.651002,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "12.25",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":8.907358545454537,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.751",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 12.90449,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "12.83",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":9.33356218181819,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.770",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 13.114094,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "12.83",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":9.33356218181819,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.770",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 13.350253,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "12.83",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":9.33356218181819,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.770",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 13.580771,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.998",
+        "time": "13.35",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":9.709562181818187,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.791",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 13.862313,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.998",
+        "time": "13.35",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":9.709562181818187,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.791",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 14.122894,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "13.86",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.081682181818183,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.810",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 14.358639,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "13.86",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.081682181818183,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.810",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 14.651791,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "14.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.497530181818176,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.831",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 14.918821,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "14.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.497530181818176,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.831",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 15.1278,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "14.99",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.904912727272734,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.853",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 15.401689,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "14.99",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":10.904912727272734,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.853",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 15.693787,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "15.50",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.269882181818172,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.875",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 15.969524,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "15.50",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.269882181818172,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.875",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 16.184158,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.991",
+        "time": "16.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.6690829090909,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.898",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 16.481709,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.991",
+        "time": "16.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.6690829090909,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.898",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 16.736563,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.994",
+        "time": "16.57",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.049045818181826,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.920",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 8
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 16.944762,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.994",
+        "time": "16.57",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.049045818181826,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.920",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 17.270517,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.907",
+        "time": "17.09",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.43120800000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.943",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 17.516553,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.907",
+        "time": "17.09",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.43120800000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.943",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 17.740045,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.904",
+        "time": "17.66",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.840634909090898,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.969",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 17.972891,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.904",
+        "time": "17.66",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.840634909090898,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.969",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 18.189932,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "0.904",
+        "time": "17.66",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":12.840634909090898,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.969",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 18.451912,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.891",
+        "time": "18.19",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":13.229041454545454,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.996",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 18.710972,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.891",
+        "time": "18.19",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":13.229041454545454,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.996",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 18.97941,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.758",
+        "time": "18.71",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":13.608181818181823,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 7
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 19.253901,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.758",
+        "time": "18.71",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":13.608181818181823,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 19.510567,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.407",
+        "time": "19.25",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.003031999999992,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 19.751474,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.407",
+        "time": "19.25",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.003031999999992,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 19.964892,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.310",
+        "time": "19.80",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.400549818181823,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 20.195556,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.310",
+        "time": "19.80",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.400549818181823,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 20.427755,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.310",
+        "time": "19.80",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.400549818181823,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 20.646668,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.262",
+        "time": "20.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.856549090909084,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 20.955395,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.262",
+        "time": "20.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":14.856549090909084,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 21.211429,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.249",
+        "time": "20.96",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":15.240530181818174,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 21.458141,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.249",
+        "time": "20.96",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":15.240530181818174,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 21.737509,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.631",
+        "time": "21.53",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":15.659884363636365,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 21.942857,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.631",
+        "time": "21.53",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":15.659884363636365,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 22.160658,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.653",
+        "time": "22.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.03091119999999,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 22.399544,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.653",
+        "time": "22.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.03091119999999,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 22.653968,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.496",
+        "time": "22.58",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.462555999999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 22.860045,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.496",
+        "time": "22.58",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.462555999999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 23.125232,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.496",
+        "time": "22.58",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.462555999999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 23.365849,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.290",
+        "time": "23.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.900433599999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 3
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 23.640279,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.290",
+        "time": "23.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":16.900433599999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 2
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 23.942676,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.323",
+        "time": "23.64",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":17.312474399999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 24.165343,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.323",
+        "time": "23.64",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":17.312474399999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 24.406014,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.384",
+        "time": "24.17",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":17.732500000000005,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 24.67253,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.384",
+        "time": "24.17",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":17.732500000000005,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 24.959079,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.233",
+        "time": "24.67",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":18.138295199999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 25.240091,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.233",
+        "time": "24.67",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":18.138295199999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 25.475193,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.143",
+        "time": "25.24",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":18.592072800000004,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 25.76254,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.143",
+        "time": "25.24",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":18.592072800000004,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 3
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 26.029569,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.326",
+        "time": "25.76",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.010032000000002,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 2
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 26.284378,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.326",
+        "time": "25.76",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.010032000000002,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The eye remains visible. In EXPLORE, click or tap it to attack.",
+      "kind": "eye",
+      "beat": "false"
+    },
+    {
+      "time": 26.534163,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.837",
+        "time": "26.28",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.427728000000002,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 26.792925,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.837",
+        "time": "26.28",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.427728000000002,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 27.016417,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.729",
+        "time": "26.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.834339999999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 27.222493,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.729",
+        "time": "26.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":19.834339999999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 27.489524,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.588",
+        "time": "27.35",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":20.279656,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 27.730431,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.588",
+        "time": "27.35",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":20.279656,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 27.97424,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.588",
+        "time": "27.35",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":20.279656,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 28.192123,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.728",
+        "time": "27.97",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":20.77939200000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 28.400907,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.728",
+        "time": "27.97",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":20.77939200000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 28.662132,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.572",
+        "time": "28.51",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":21.210007999999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 28.882721,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.572",
+        "time": "28.51",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":21.210007999999995,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 29.126531,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.584",
+        "time": "29.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":21.652804800000013,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 0
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 29.355828,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.584",
+        "time": "29.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":21.652804800000013,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 29.568235,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.584",
+        "time": "29.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":21.652804800000013,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 29.793679,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.733",
+        "time": "29.57",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.05481440000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 30.028896,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.733",
+        "time": "29.57",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.05481440000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 30.264308,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.626",
+        "time": "30.09",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.468308,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 30.49941,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.626",
+        "time": "30.09",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.468308,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 30.722902,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.681",
+        "time": "30.58",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.862222399999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 30.9522,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.681",
+        "time": "30.58",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":22.862222399999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 31.21093,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.542",
+        "time": "31.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":23.30572320000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 31.442721,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.542",
+        "time": "31.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":23.30572320000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 31.677823,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.542",
+        "time": "31.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":23.30572320000001,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 31.933243,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.751",
+        "time": "31.68",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":23.742507999999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 32.244577,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.751",
+        "time": "31.68",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":23.742507999999997,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 32.519546,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.621",
+        "time": "32.24",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.010929913323831532}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 32.790878,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.621",
+        "time": "32.24",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.010929913323831532}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 33.05941,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.711",
+        "time": "32.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.1055527757972914}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 33.30322,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.711",
+        "time": "32.79",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.1055527757972914}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    },
+    {
+      "time": 33.570097,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.500",
+        "time": "33.30",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.26450958263425345}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 33.811156,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.500",
+        "time": "33.30",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.26450958263425345}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 3
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 34.022305,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.273",
+        "time": "33.87",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.4944516513436847}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 34.284263,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "CATACOMBS",
+        "gate": "0.000",
+        "audioRms": "0.273",
+        "time": "33.87",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.4944516513436847}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 34.568707,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.660",
+        "time": "34.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.7520353642636357}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 34.774785,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.660",
+        "time": "34.43",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.7520353642636357}",
+        "renderState": "ready",
+        "enemy": "",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 2
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 35.027302,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.426",
+        "time": "34.93",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.9880541952797228}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 1
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 35.239184,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.426",
+        "time": "34.93",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.9880541952797228}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 35.462676,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.426",
+        "time": "34.93",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.9880541952797228}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 35.674786,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.259",
+        "time": "35.46",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.2166262338324128}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 35.889342,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.259",
+        "time": "35.46",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.2166262338324128}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 4
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 36.118213,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.170",
+        "time": "35.96",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.3941527042495936}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 3
+        },
+        {
+          "band": "High",
+          "level": 0
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 36.341549,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.170",
+        "time": "35.96",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.3941527042495936}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 36.554458,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.776",
+        "time": "36.48",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.523615542488298}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 3
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 36.768798,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.776",
+        "time": "36.48",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.523615542488298}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 8
+        },
+        {
+          "band": "Power",
+          "level": 4
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 36.994963,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.776",
+        "time": "36.48",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.523615542488298}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 8
+        },
+        {
+          "band": "High",
+          "level": 7
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 37.227392,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.909",
+        "time": "37.00",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707919739727325}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 7
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 37.459592,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.909",
+        "time": "37.00",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707919739727325}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 7
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 37.723502,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.669",
+        "time": "37.52",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 5
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 37.944178,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.669",
+        "time": "37.52",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 38.243265,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.558",
+        "time": "38.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 4
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 38.453441,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.558",
+        "time": "38.04",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 2
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 38.664127,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.727",
+        "time": "38.56",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 38.868176,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.727",
+        "time": "38.56",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 1
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 39.104065,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.612",
+        "time": "39.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 39.320091,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.612",
+        "time": "39.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 39.531973,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.612",
+        "time": "39.07",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 39.740952,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.436",
+        "time": "39.56",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 39.952834,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.436",
+        "time": "39.56",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 40.170975,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.653",
+        "time": "40.10",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 40.411085,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.653",
+        "time": "40.10",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 4
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 5
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 40.63177,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.813",
+        "time": "40.61",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 7
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 40.8415,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.813",
+        "time": "40.61",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 5
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 41.050298,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.813",
+        "time": "40.61",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 7
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": "The markings around the transmitter are different from the rest of the masonry.",
+      "kind": "chamber",
+      "beat": "false"
+    },
+    {
+      "time": 41.264762,
+      "stage": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "0.769",
+        "time": "41.13",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":1.5707963267948966}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "1.000",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      },
+      "meters": [
+        {
+          "band": "Bass",
+          "level": 3
+        },
+        {
+          "band": "Mid",
+          "level": 6
+        },
+        {
+          "band": "High",
+          "level": 6
+        },
+        {
+          "band": "Power",
+          "level": 6
+        }
+      ],
+      "message": " ",
+      "kind": "",
+      "beat": "false"
+    }
+  ],
+  "views": [
+    {
+      "label": "desktop",
+      "errors": [],
+      "overflow": false,
+      "player": "You\nListener\nPlayer health (no automatic damage)\nHP 3/3\nShared mana\nMP 100\n\nNavigation mode\nDRIFT",
+      "canvas": {
+        "x": 366.421875,
+        "y": 82,
+        "width": 627.140625,
+        "height": 468.34375
+      }
+    },
+    {
+      "label": "mobile",
+      "errors": [],
+      "overflow": false,
+      "player": "You\nListener\nPlayer health (no automatic damage)\nHP 3/3\nShared mana\nMP 38\n\nNavigation mode\nDRIFT",
+      "canvas": {
+        "x": 19,
+        "y": 82,
+        "width": 374,
+        "height": 278.5
+      }
+    }
+  ]
+}

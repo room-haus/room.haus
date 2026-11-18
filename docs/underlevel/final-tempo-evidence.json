@@ -1,0 +1,239 @@
+{
+  "source": "Original MX029 CDN; final bundle; seek to70 then continued playback",
+  "samples": [
+    {
+      "time": "70.00",
+      "bpm": null,
+      "confidence": null,
+      "rms": "0.000",
+      "gate": "0.000"
+    },
+    {
+      "time": "70.15",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.846",
+      "gate": "0.000"
+    },
+    {
+      "time": "71.66",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.886",
+      "gate": "0.000"
+    },
+    {
+      "time": "72.74",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.768",
+      "gate": "0.000"
+    },
+    {
+      "time": "73.74",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.430",
+      "gate": "0.000"
+    },
+    {
+      "time": "75.30",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.138",
+      "gate": "0.000"
+    },
+    {
+      "time": "76.30",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.116",
+      "gate": "0.000"
+    },
+    {
+      "time": "77.88",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.127",
+      "gate": "0.000"
+    },
+    {
+      "time": "78.89",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.853",
+      "gate": "0.418"
+    },
+    {
+      "time": "79.93",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.794",
+      "gate": "1.000"
+    },
+    {
+      "time": "81.53",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.804",
+      "gate": "1.000"
+    },
+    {
+      "time": "82.54",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.830",
+      "gate": "1.000"
+    },
+    {
+      "time": "83.55",
+      "bpm": 48.0,
+      "confidence": 0.46,
+      "rms": "0.258",
+      "gate": "1.000"
+    },
+    {
+      "time": "84.56",
+      "bpm": 48.0,
+      "confidence": 0.49,
+      "rms": "0.412",
+      "gate": "1.000"
+    },
+    {
+      "time": "86.08",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.447",
+      "gate": "1.000"
+    },
+    {
+      "time": "87.09",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.268",
+      "gate": "1.000"
+    },
+    {
+      "time": "88.11",
+      "bpm": 0.0,
+      "confidence": 0.0,
+      "rms": "0.508",
+      "gate": "1.000"
+    },
+    {
+      "time": "89.64",
+      "bpm": 49.0,
+      "confidence": 0.64,
+      "rms": "0.340",
+      "gate": "1.000"
+    },
+    {
+      "time": "90.67",
+      "bpm": 50.0,
+      "confidence": 0.69,
+      "rms": "0.414",
+      "gate": "1.000"
+    },
+    {
+      "time": "91.68",
+      "bpm": 50.0,
+      "confidence": 0.74,
+      "rms": "0.519",
+      "gate": "1.000"
+    },
+    {
+      "time": "92.69",
+      "bpm": 50.0,
+      "confidence": 0.72,
+      "rms": "0.844",
+      "gate": "1.000"
+    },
+    {
+      "time": "93.69",
+      "bpm": 50.0,
+      "confidence": 0.7,
+      "rms": "0.497",
+      "gate": "1.000"
+    },
+    {
+      "time": "94.71",
+      "bpm": 50.0,
+      "confidence": 0.65,
+      "rms": "0.649",
+      "gate": "1.000"
+    },
+    {
+      "time": "95.72",
+      "bpm": 51.0,
+      "confidence": 0.62,
+      "rms": "0.932",
+      "gate": "1.000"
+    },
+    {
+      "time": "96.72",
+      "bpm": 51.0,
+      "confidence": 0.7,
+      "rms": "0.299",
+      "gate": "1.000"
+    },
+    {
+      "time": "97.75",
+      "bpm": 52.0,
+      "confidence": 0.8,
+      "rms": "0.237",
+      "gate": "1.000"
+    },
+    {
+      "time": "98.77",
+      "bpm": 52.0,
+      "confidence": 0.81,
+      "rms": "0.497",
+      "gate": "1.000"
+    },
+    {
+      "time": "99.78",
+      "bpm": 52.0,
+      "confidence": 0.84,
+      "rms": "0.487",
+      "gate": "1.000"
+    },
+    {
+      "time": "100.79",
+      "bpm": 52.0,
+      "confidence": 0.83,
+      "rms": "0.635",
+      "gate": "1.000"
+    },
+    {
+      "time": "101.81",
+      "bpm": 53.0,
+      "confidence": 0.8,
+      "rms": "0.809",
+      "gate": "1.000"
+    },
+    {
+      "time": "102.82",
+      "bpm": 53.0,
+      "confidence": 0.82,
+      "rms": "0.836",
+      "gate": "1.000"
+    },
+    {
+      "time": "103.84",
+      "bpm": 54.0,
+      "confidence": 0.84,
+      "rms": "0.627",
+      "gate": "1.000"
+    },
+    {
+      "time": "105.38",
+      "bpm": 54.0,
+      "confidence": 0.86,
+      "rms": "0.343",
+      "gate": "1.000"
+    }
+  ],
+  "errors": [
+    "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-000.ts: net::ERR_ABORTED"
+  ]
+}

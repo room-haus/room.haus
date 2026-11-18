@@ -12,3 +12,12 @@ test('labs resolves directly in local and versioned production releases', () => 
     assert.equal(handler({request: {uri: '/labs/unknown', querystring: {}}}).statusCode, 404);
   }
 });
+
+test('the retired Underlevel URLs never resolve to a standalone page', () => {
+  for (const prefix of ['', '/_releases/' + 'a'.repeat(40) + '/' + 'b'.repeat(64)]) {
+    const handler = runInNewContext(cloudFrontSource(prefix) + '\nhandler');
+    for (const uri of ['/underlevel', '/underlevel/', '/underlevel/index.html']) {
+      assert.equal(handler({request: {uri, querystring: {}}}).statusCode, 404, uri);
+    }
+  }
+});

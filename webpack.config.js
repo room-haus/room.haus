@@ -23,6 +23,13 @@ module.exports = (_env, argv) => ({
   },
   devServer: {
     host: '127.0.0.1',
+    setupMiddlewares: (middlewares, server) => {
+      server.app.use((request, response, next) => {
+        if (/^\/underlevel(?:\/|$)/.test(request.path)) response.status(404).send('Not found');
+        else next();
+      });
+      return middlewares;
+    },
     historyApiFallback: {
       rewrites: [
         {from: /^\/labs\/?$/, to: '/labs/index.html'},
@@ -34,9 +41,10 @@ module.exports = (_env, argv) => ({
     static: false,
     client: {overlay: {errors: true, warnings: false}},
   },
-  resolve: {alias: {src}},
+  resolve: {alias: {src}, extensions: ['.tsx', '.ts', '.js', '.mjs', '.json']},
   module: {
     rules: [
+      {test: /\.tsx?$/, include: path.join(src, 'experiences/underlevel'), loader: 'babel-loader', options: {envName: argv.mode, presets: ['@babel/preset-typescript']}},
       {test: /\.js$/, include: src, exclude: /worklets/, loader: 'babel-loader', options: {envName: argv.mode}},
       {test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader']},
       {
