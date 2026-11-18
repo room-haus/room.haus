@@ -10,7 +10,7 @@ const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
 module.exports = (_env, argv) => ({
-  entry: {main: './src/index.js'},
+  entry: {main: './src/index.js', labs: './src/labs/index.js'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -25,6 +25,7 @@ module.exports = (_env, argv) => ({
     host: '127.0.0.1',
     historyApiFallback: {
       rewrites: [
+        {from: /^\/labs\/?$/, to: '/labs/index.html'},
         {from: /^\/ss-2026\/?$/, to: '/fw-2026/index.html'},
         ...entrancePages.map(({path}) => ({from: new RegExp('^' + path.slice(0, -1) + '/?$'), to: path + 'index.html'})),
         {from: /^\/[^.]*$/, to: '/mixes/index.html'},
@@ -78,6 +79,12 @@ module.exports = (_env, argv) => ({
       {from: path.join(src, 'babylon/textures/environment.dds'), to: 'models/CD/environment.dds'},
       {from: path.join(modelRoot, 'MX018/environment.dds'), to: 'models/MX018/environment.dds'},
     ]}),
+    new HtmlWebpackPlugin({
+      filename: 'labs/index.html',
+      chunks: ['labs'],
+      template: './src/labs/index.html',
+      favicon: './src/favicon.png',
+    }),
     new HtmlWebpackPlugin({
       filename: 'mixes/index.html',
       chunks: ['main'],
