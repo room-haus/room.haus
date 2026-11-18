@@ -1,0 +1,85 @@
+{
+  "source": "Original ROOM Azure CDN MX029, no interception or local replacement",
+  "media_seconds": [
+    2.09,
+    153.26
+  ],
+  "samples": 128,
+  "all_graphics_ready": true,
+  "paused_samples": 0,
+  "insufficient_buffer_samples": 0,
+  "fps": {
+    "min": 10.0,
+    "median": 38.0,
+    "max": 62.0
+  },
+  "performance_context": "Headless Chromium while full cross-browser regression suite ran concurrently; not a physical-device benchmark",
+  "draw_calls": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "quiet_and_return": [
+    {
+      "time": "73.17",
+      "rms": "0.330",
+      "gate": "0.000"
+    },
+    {
+      "time": "74.22",
+      "rms": "0.086",
+      "gate": "0.000"
+    },
+    {
+      "time": "75.37",
+      "rms": "0.071",
+      "gate": "0.000"
+    },
+    {
+      "time": "76.42",
+      "rms": "0.052",
+      "gate": "0.000"
+    },
+    {
+      "time": "77.94",
+      "rms": "0.084",
+      "gate": "0.000"
+    },
+    {
+      "time": "78.98",
+      "rms": "0.915",
+      "gate": "0.485"
+    },
+    {
+      "time": "80.01",
+      "rms": "0.671",
+      "gate": "1.000"
+    },
+    {
+      "time": "81.58",
+      "rms": "0.738",
+      "gate": "1.000"
+    }
+  ],
+  "errors": [
+    "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-000.ts: net::ERR_ABORTED"
+  ],
+  "cors": [
+    {
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+      "status": 200,
+      "cors": "*"
+    },
+    {
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-000.ts",
+      "status": 200,
+      "cors": "*"
+    },
+    {
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-000.ts",
+      "status": 200,
+      "cors": "*"
+    }
+  ]
+}

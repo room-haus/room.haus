@@ -1,0 +1,138 @@
+{
+  "source": "Original MX029 CDN stream, local production bundle",
+  "samples": [],
+  "views": [
+    {
+      "name": "desktop",
+      "label": "corridor",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "7.52",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.470871999999996,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.373",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      }
+    },
+    {
+      "name": "desktop",
+      "label": "eye",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "34.78",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.919019912845327}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.387",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      }
+    },
+    {
+      "name": "desktop",
+      "label": "message",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "15.73",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.442365090909085,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.386",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      }
+    },
+    {
+      "name": "mobile",
+      "label": "corridor",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "7.83",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":5.693493818181816,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "bone-listener",
+        "enemyHealth": "3",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.389",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000"
+      }
+    },
+    {
+      "name": "mobile",
+      "label": "eye",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "TRANSMITTER",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "34.82",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":24,\"yaw\":0.9376162371699357}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.391",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      }
+    },
+    {
+      "name": "mobile",
+      "label": "message",
+      "data": {
+        "mode": "DRIFT",
+        "chapter": "THRESHOLD",
+        "gate": "0.000",
+        "audioRms": "1.000",
+        "time": "15.64",
+        "pose": "{\"x\":0,\"y\":1.65,\"z\":11.374665454545452,\"yaw\":0}",
+        "renderState": "ready",
+        "enemy": "hollow-eye",
+        "reaction": "",
+        "signalSource": "live",
+        "mana": "0.376",
+        "tempoPulse": "0.000",
+        "tempoColor": "0.000",
+        "bpm": "0.00",
+        "beatConfidence": "0.000",
+        "enemyHealth": "3"
+      }
+    }
+  ]
+}

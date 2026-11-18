@@ -92,7 +92,8 @@ test('categories group the 3D studies and retain the selected study and settings
   for (const [title, hash] of [['Experiences', 'experiences'], ['Interactives', 'interactives'], ['Audio experiments', 'audio-experiments']]) {
     await categories.getByRole('button', {name: title, exact: true}).click();
     await expect(page.getByRole('heading', {name: title, exact: true})).toBeVisible();
-    await expect(page.getByRole('heading', {name: 'No experiments yet.'})).toBeVisible();
+    await expect(page.getByRole('heading', {name: title === 'Experiences' ? 'The Underlevel' : 'No experiments yet.'})).toBeVisible();
+    if (title === 'Experiences') await expect(page.getByRole('button', {name: 'Open The Underlevel ↗'})).toBeVisible();
     await expect(page.locator('.labs-stage')).toHaveCount(0);
     await expect(page).toHaveURL(new RegExp('#' + hash + '$'));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
