@@ -1,0 +1,61 @@
+{
+  "node": {
+    "passed": 105,
+    "failed": 0
+  },
+  "fullBrowser": {
+    "passed": 223,
+    "skipped": 8,
+    "failed": 0
+  },
+  "finalSharedDelta": {
+    "passed": 57,
+    "skipped": 3,
+    "failed": 0
+  },
+  "rallyBrowser": {
+    "passed": 28,
+    "skipped": 2,
+    "failed": 0
+  },
+  "finalCaptureRefresh": {
+    "passed": 3,
+    "failed": 0
+  },
+  "routes": 99,
+  "assets": 94,
+  "soak": {
+    "wallMinutes": 30,
+    "samples": 180,
+    "sourceModes": [
+      "live"
+    ],
+    "finite": true,
+    "monotonicSimulationTime": true,
+    "monotonicContacts": true,
+    "contacts": 937,
+    "recoveries": 0,
+    "invalidRecoveries": 0,
+    "meshes": 14,
+    "drawCalls": 14,
+    "triangles": 2988,
+    "errors": [],
+    "frameTiming": {
+      "windowSeconds": 60,
+      "count": 2831,
+      "p50": 16.699999999953434,
+      "p95": 33.4000000001397,
+      "max": 200
+    },
+    "afterClose": {
+      "canvasCount": 0
+    },
+    "transport": "THE ONLY SOUND\nSaad Ashraf\nMX029 / ROOM mix\nPause mix\nMix position\n30:03 / 61:28\nVolume"
+  },
+  "limits": {
+    "physicalPhone": false,
+    "hardwareGpuQualified": false,
+    "subjectiveListeningReviewed": false,
+    "fullMixReviewed": false
+  }
+}

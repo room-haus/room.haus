@@ -1,0 +1,18 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 6 tests using 1 worker
+
+(node:54834) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.5s)
+  ✓  2 [chromium] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (4.4s)
+(node:54854) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [android] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.5s)
+  ✓  4 [android] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (3.9s)
+(node:54869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [mobile-webkit] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.7s)
+  ✓  6 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (3.7s)
+
+  6 passed (18.5s)

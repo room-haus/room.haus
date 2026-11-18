@@ -6,7 +6,7 @@ ROOM is a visual studio and an independent music platform. The archive pairs eac
 
 Use the Node version in `.nvmrc` (`nvm install && nvm use` with nvm), then run `npm ci` and `npm start`. For the production build, run `npm run build` followed by `npm run serve`. The static preview is available at http://127.0.0.1:4173.
 
-Use `npm test` for catalog and routing checks, `npm run lint` for source checks, and `node scripts/check-routes.mjs` against the running preview. Run `npx playwright install chromium webkit` followed by `npm run test:browser` to exercise the real player. Those browser tests serve the local production build and play real audio from the configured media origin. Live media checks require network access.
+Use `npm test` for catalog and routing checks, `npm run lint` for source checks, and `node scripts/check-routes.mjs` against the running preview. Run `npx playwright install chromium webkit` followed by `npm run test:browser:public` to exercise the public site and real player. Run `npm run test:browser:labs` for internal Labs features, or `npm run test:browser` for the complete suite. Normal CI runs public E2E; Labs/all E2E is available through manual **Check ROOM** workflow selection. See [testing suites](docs/testing.md) for scope and release compatibility. Those browser tests serve the local production build and play real audio from the configured media origin. Live media checks require network access.
 
 Use `npm run check:dependencies` for the release dependency gate. It runs the complete npm audit and rejects all findings except explicitly documented, unexpired development-only exceptions in `scripts/dependency-exceptions.json`. Registry errors, unknown advisories and production exposure fail the check. The temporary picomatch exception expires on **December 1, 2026 (00:00 UTC)**; remove it as soon as a patched dependency is available. It accepts a known build-tool risk for repository-controlled glob patterns, not a clean raw audit. Do not feed untrusted glob patterns to these tools. The development server remains loopback-only.
 
@@ -14,7 +14,7 @@ The browser suite includes small-screen/enlarged-text access, delayed audio canc
 
 ## Labs playground
 
-The sidebar groups experiments into **3D animations**, **Experiences**, **Interactives**, and **Audio experiments**. The six initial studies are sub-tabs of 3D animations; the other categories start empty. Category and study links can be bookmarked, and legacy study links still open. Switching categories retains the selected study and its settings for the current workspace session.
+The sidebar groups experiments into **3D animations**, **Experiences**, **Interactives**, and **Audio experiments**. The six geometry studies remain under 3D animations. Experiences contains The Underlevel; Interactives contains Hanging Balance, Endless Rally and Odd Ensemble. Audio experiments is an empty starting point. Category and study links can be bookmarked, and legacy study links still open. Switching categories retains the selected study and its settings for the current workspace session.
 
 Open `/labs` for the seasonal experiment workspace. The intentionally plain login accepts username `admin` and password `BigSmall`. This is a client-side convenience gate, not secure authentication; do not put private material behind it. The session lasts in the current browser tab until sign-out or tab closure. Labs is excluded from the sitemap and marked `noindex, nofollow`.
 
@@ -23,6 +23,8 @@ The six initial studies use the existing Babylon renderer, loaded only after ent
 In **Experiences**, **Open The Underlevel** launches a full-screen MX029 dungeon inside Labs. Escape or Exit closes it and stops playback; the former `/underlevel/` URL returns 404.
 
 For Underlevel architecture, controls, signal mappings and validation evidence, see [the implementation notes](docs/underlevel/README.md) and [UX map](docs/underlevel/UX-MAP.md). Run `npm run typecheck:underlevel` and `npm run test:browser -- e2e/underlevel.spec.cjs` for its focused checks.
+
+In **Interactives**, **Hanging Balance**, **Endless Rally** and **Odd Ensemble** share one listening host and an untouched DJ mix. Each opens inside Labs with Watch/Keep control, keyboard/touch alternatives, reduced motion and a composed poster fallback. Add launchers through `src/labs/experiences.js`; do not create another audio owner. Run `npm run typecheck:experiences` and the listening-toys, endless-rally and odd-ensemble browser suites for focused checks. Architecture and limitations: [shared contract](docs/superpowers/specs/2026-11-18-listening-toys/README.md), [Hanging Balance](docs/hanging-balance/README.md), [Endless Rally](docs/endless-rally/README.md), [Odd Ensemble](docs/odd-ensemble/README.md).
 
 ## Maintain the collection
 

@@ -4,6 +4,7 @@ import '../styles/layout.css';
 import './labs.css';
 import logo from '../images/logo.png';
 import {ExperienceModal} from './ExperienceModal';
+import {experiences} from './experiences';
 import {categories, defaults, palettes, selectionFromHash, studies} from './studies';
 
 const sessionKey = 'room-labs-session';
@@ -74,8 +75,8 @@ function Stage({study, settings, paused, reset, apiRef, onState}) {
 
 function Workspace({onLogout}) {
   const experienceLauncher = useRef(null);
-  const [experienceOpen, setExperienceOpen] = useState(false);
-  const closeExperience = useCallback(() => setExperienceOpen(false), []);
+  const [activeExperienceId, setActiveExperienceId] = useState(null);
+  const closeExperience = useCallback(() => setActiveExperienceId(null), []);
   const initial = selectionFromHash(location.hash);
   const [section, setSection] = useState(initial?.category || '3d-animations');
   const [active, setActive] = useState(initial?.study || studies[0].id);
@@ -91,6 +92,7 @@ function Workspace({onLogout}) {
   const study = studies.find(item => item.id === active);
   const category = categories.find(item => item.id === section);
   const is3D = section === '3d-animations';
+  const categoryExperiences = experiences.filter(item => (item.category || 'experiences') === section);
   const settings = values[active];
   function update(key, value) { setValues(previous => ({...previous, [active]: {...previous[active], [key]: value}})); }
   function select(id) {
@@ -144,7 +146,7 @@ function Workspace({onLogout}) {
       <p className="labs-sidebar-intro">A space for<br />unfinished ideas.</p>
       <div className="labs-nav-heading labs-category-heading"><span>Playgrounds</span><span>{String(categories.length).padStart(2, '0')}</span></div>
       <nav ref={categoryNavigation} aria-label="Experiment categories" className="labs-categories">
-        {categories.map(item => <button type="button" key={item.id} aria-label={item.title} aria-current={item.id === section ? 'true' : undefined} onClick={() => selectCategory(item.id)}><span>{item.title}</span><span className="labs-category-count" aria-hidden="true">{item.id === '3d-animations' ? String(studies.length).padStart(2, '0') : item.id === 'experiences' ? '01' : '00'}</span></button>)}
+        {categories.map(item => <button type="button" key={item.id} aria-label={item.title} aria-current={item.id === section ? 'true' : undefined} onClick={() => selectCategory(item.id)}><span>{item.title}</span><span className="labs-category-count" aria-hidden="true">{item.id === '3d-animations' ? String(studies.length).padStart(2, '0') : String(experiences.filter(experience => (experience.category || 'experiences') === item.id).length).padStart(2, '0')}</span></button>)}
       </nav>
       {is3D && <div className="labs-subnav-group"><div className="labs-nav-heading labs-subnav-heading"><span>3D animations</span><span>{String(studies.length).padStart(2, '0')}</span></div>
       <nav ref={studyNavigation} aria-label="3D animation experiments" className="labs-nav">
@@ -165,10 +167,10 @@ function Workspace({onLogout}) {
         <button className="labs-wireframe" type="button" disabled={active === 'elastic-grid'} title={active === 'elastic-grid' ? 'The elastic grid is already a wireframe.' : undefined} aria-pressed={active === 'elastic-grid' || settings.wireframe} onClick={() => update('wireframe', !settings.wireframe)}>Wireframe <span aria-hidden="true">{active === 'elastic-grid' || settings.wireframe ? '☑' : '□'}</span></button>
       </section>
       <footer className="labs-study-footer"><p><span className="labs-eyebrow">POSSIBLE DIRECTIONS</span>{study.note}</p><button type="button" disabled={stageState !== 'ready'} onClick={save}>Save image <span aria-hidden="true">↓</span></button></footer>
-      </> : section === 'experiences' ? <section className="labs-empty" aria-label="Experiences experiments"><span className="labs-eyebrow">A PLACE BENEATH ROOM</span><h2>The Underlevel</h2><p>A passive-first audiovisual dungeon. Let MX029 guide you from the corridor into the hall.</p><button type="button" className="labs-launch" ref={experienceLauncher} onClick={() => setExperienceOpen(true)}>Open The Underlevel ↗</button></section> : <section className="labs-empty" aria-label={category.title + ' experiments'}><span className="labs-eyebrow">AN OPEN SPACE</span><h2>No experiments yet.</h2><p>{category.empty}</p></section>}
+      </> : categoryExperiences.length > 0 ? <section className="labs-experience-list" aria-label={category.title + ' experiments'}>{categoryExperiences.map(experience => <article className="labs-experience-card" key={experience.id}><img src={experience.poster} alt="" loading="lazy" /><div><span className="labs-eyebrow">PROTOTYPE</span><h2>{experience.title}</h2><p>{experience.description}</p><button type="button" className="labs-launch" onClick={event => {experienceLauncher.current = event.currentTarget; setPaused(true); setActiveExperienceId(experience.id);}}>Open {experience.title} ↗</button></div></article>)}</section> : <section className="labs-empty" aria-label={category.title + ' experiments'}><span className="labs-eyebrow">AN OPEN SPACE</span><h2>No experiments yet.</h2><p>{category.empty}</p></section>}
       <p className="labs-notice" role="status">{notice}</p>
     </main>
-    {experienceOpen && <ExperienceModal returnFocusRef={experienceLauncher} onClose={closeExperience} />}
+    {activeExperienceId && <ExperienceModal experience={experiences.find(item => item.id === activeExperienceId)} returnFocusRef={experienceLauncher} onClose={closeExperience} />}
   </div>;
 }
 

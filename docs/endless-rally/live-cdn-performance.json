@@ -1,0 +1,130 @@
+{
+  "origin": "http://127.0.0.1:4190",
+  "media": "Configured catalog MX029 CDN",
+  "hardware": "Apple M1 Max",
+  "platform": "darwin",
+  "browser": "159.0.8154.6",
+  "mobileEmulation": false,
+  "requestedSeconds": 30,
+  "errors": [],
+  "samples": [
+    {
+      "wallTime": 12509.600000023842,
+      "source": "live",
+      "diagnostics": {
+        "returning": 0,
+        "ballX": -0.25269514931854825,
+        "ballZ": -1.9789653116592159,
+        "nearX": -1.8143392326338754e-11,
+        "nearTarget": 0,
+        "controlWeight": 0,
+        "speed": 1.9044822194111761,
+        "collisions": 4,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0
+      },
+      "resources": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "returning": 0,
+        "ballX": -0.25269514931854825,
+        "ballZ": -1.9789653116592159,
+        "nearX": -1.8143392326338754e-11,
+        "nearTarget": 0,
+        "controlWeight": 0,
+        "speed": 1.9044822194111761,
+        "collisions": 4,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0,
+        "meshes": 32,
+        "drawCalls": 32,
+        "triangles": 2988
+      }
+    },
+    {
+      "wallTime": 22518.299999952316,
+      "source": "live",
+      "diagnostics": {
+        "returning": 0,
+        "ballX": -1.1886466802010862,
+        "ballZ": -1.6090388312522694,
+        "nearX": 0.05282210049352727,
+        "nearTarget": 0.05282209734432399,
+        "controlWeight": 0,
+        "speed": 1.884320750724358,
+        "collisions": 7,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0
+      },
+      "resources": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "returning": 0,
+        "ballX": -1.1886466802010862,
+        "ballZ": -1.6090388312522694,
+        "nearX": 0.05282210049352727,
+        "nearTarget": 0.05282209734432399,
+        "controlWeight": 0,
+        "speed": 1.884320750724358,
+        "collisions": 7,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0,
+        "meshes": 32,
+        "drawCalls": 32,
+        "triangles": 2988
+      }
+    },
+    {
+      "wallTime": 32533.600000023842,
+      "source": "live",
+      "diagnostics": {
+        "returning": 0,
+        "ballX": -0.9447186217495245,
+        "ballZ": 1.418638188379335,
+        "nearX": -0.044949376326432935,
+        "nearTarget": -0.05837321018334478,
+        "controlWeight": 0,
+        "speed": 1.8114593693694803,
+        "collisions": 12,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0
+      },
+      "resources": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "returning": 0,
+        "ballX": -0.9447186217495245,
+        "ballZ": 1.418638188379335,
+        "nearX": -0.044949376326432935,
+        "nearTarget": -0.05837321018334478,
+        "controlWeight": 0,
+        "speed": 1.8114593693694803,
+        "collisions": 12,
+        "recoveries": 0,
+        "invalidRecoveries": 0,
+        "returnProgress": 0,
+        "meshes": 32,
+        "drawCalls": 32,
+        "triangles": 2988
+      }
+    }
+  ],
+  "frameTiming": {
+    "count": 1333,
+    "p50": 16.700000000000728,
+    "p95": 33.400000000001455,
+    "max": 133.29999999999927
+  },
+  "transport": "THE ONLY SOUND\nSaad Ashraf\nMX029 / ROOM mix\nPause mix\nMix position\n0:30 / 61:28\nVolume",
+  "afterClose": {
+    "canvasCount": 0
+  }
+}

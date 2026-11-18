@@ -1,0 +1,2099 @@
+{
+  "hardware": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpus": "Apple M1 Max"
+  },
+  "origin": "http://127.0.0.1:4195",
+  "mode": "webpack development, HMR/live reload disabled; live CDN",
+  "durationTarget": 1800,
+  "started": "2026-11-18T19:25:56.647Z",
+  "samples": [
+    {
+      "wall": 1795029956695,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 0.5833333333333335,
+      "lowStretch": 1.0071747032272138,
+      "lowLean": 0.00829976476858135,
+      "knuckleStretch": 1.0095779287958324,
+      "pipStretch": 0.9790310935940342,
+      "onsetNods": 0,
+      "pokes": 0,
+      "neighbourReactions": 0,
+      "gestures": 0,
+      "pending": 0,
+      "brightness": 0,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 0.663758,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795029986746,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 19.150000000000194,
+      "lowStretch": 0.9791133485971675,
+      "lowLean": 0.019447345254921734,
+      "knuckleStretch": 0.9826284157411916,
+      "pipStretch": 0.9872332956740928,
+      "onsetNods": 7,
+      "pokes": 0,
+      "neighbourReactions": 1,
+      "gestures": 1,
+      "pending": 0,
+      "brightness": 0.4356797727552756,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 30.714289,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030016773,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 39.69999999999903,
+      "lowStretch": 0.9790495548973263,
+      "lowLean": 0.01948263090317747,
+      "knuckleStretch": 1.008086353006525,
+      "pipStretch": 0.9789866689433053,
+      "onsetNods": 16,
+      "pokes": 0,
+      "neighbourReactions": 2,
+      "gestures": 2,
+      "pending": 0,
+      "brightness": 0.41440721416153525,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 60.740622,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030046961,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 61.749999999997776,
+      "lowStretch": 0.9695429367556955,
+      "lowLean": -0.01975142566258101,
+      "knuckleStretch": 1.0114711518442248,
+      "pipStretch": 1.0073609210550885,
+      "onsetNods": 28,
+      "pokes": 0,
+      "neighbourReactions": 4,
+      "gestures": 4,
+      "pending": 0,
+      "brightness": 0.3547410501306602,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 90.927935,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030077151,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 76.16666666666363,
+      "lowStretch": 0.9555749957146006,
+      "lowLean": 0.0005406342189008002,
+      "knuckleStretch": 1.0106439024057325,
+      "pipStretch": 1.021500598387076,
+      "onsetNods": 38,
+      "pokes": 0,
+      "neighbourReactions": 4,
+      "gestures": 4,
+      "pending": 0,
+      "brightness": 0.3505743956755356,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 121.118186,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030107174,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 89.1166666666629,
+      "lowStretch": 0.9688560385134357,
+      "lowLean": 0.024463594097770783,
+      "knuckleStretch": 0.9820775126423948,
+      "pipStretch": 1.020570445284708,
+      "onsetNods": 43,
+      "pokes": 0,
+      "neighbourReactions": 5,
+      "gestures": 5,
+      "pending": 0,
+      "brightness": 0.34643511251066306,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 151.142304,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030137189,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 103.56666666666207,
+      "lowStretch": 0.9342945513320697,
+      "lowLean": 0.015202924000041036,
+      "knuckleStretch": 0.9882315035689666,
+      "pipStretch": 1.0135913238003318,
+      "onsetNods": 50,
+      "pokes": 0,
+      "neighbourReactions": 6,
+      "gestures": 6,
+      "pending": 0,
+      "brightness": 0.3430730449437704,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 181.156841,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030167242,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 118.98333333332786,
+      "lowStretch": 0.9684855595013663,
+      "lowLean": 0.0019241528857943742,
+      "knuckleStretch": 0.9903509977845796,
+      "pipStretch": 0.9786759664065582,
+      "onsetNods": 53,
+      "pokes": 0,
+      "neighbourReactions": 7,
+      "gestures": 7,
+      "pending": 0,
+      "brightness": 0.39678372288919544,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 211.208707,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030197304,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 132.44999999999754,
+      "lowStretch": 0.942067456750017,
+      "lowLean": -0.023101631919038194,
+      "knuckleStretch": 1.016410880410892,
+      "pipStretch": 0.9785929583810316,
+      "onsetNods": 56,
+      "pokes": 0,
+      "neighbourReactions": 8,
+      "gestures": 8,
+      "pending": 0,
+      "brightness": 0.3554146719386167,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 241.272744,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030227329,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 147.63333333334296,
+      "lowStretch": 0.9627312088858054,
+      "lowLean": -0.023098126824084433,
+      "knuckleStretch": 1.017904129936471,
+      "pipStretch": 1.008942424831876,
+      "onsetNods": 61,
+      "pokes": 0,
+      "neighbourReactions": 9,
+      "gestures": 9,
+      "pending": 0,
+      "brightness": 0.3542357743905955,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 271.297828,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030257379,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 162.3000000000213,
+      "lowStretch": 0.9398469023455317,
+      "lowLean": -0.008718599126363006,
+      "knuckleStretch": 1.0141025890416389,
+      "pipStretch": 1.0209091075000924,
+      "onsetNods": 62,
+      "pokes": 0,
+      "neighbourReactions": 10,
+      "gestures": 10,
+      "pending": 0,
+      "brightness": 0.35428642652400427,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 301.345669,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030287425,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 179.500000000035,
+      "lowStretch": 0.9474963135083099,
+      "lowLean": -0.010239298113634165,
+      "knuckleStretch": 1.0146162737958697,
+      "pipStretch": 0.9869458987861693,
+      "onsetNods": 64,
+      "pokes": 0,
+      "neighbourReactions": 11,
+      "gestures": 11,
+      "pending": 0,
+      "brightness": 0.355477255907454,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 331.393573,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030317480,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 196.11666666671488,
+      "lowStretch": 0.9670051901828784,
+      "lowLean": -0.00684661578192046,
+      "knuckleStretch": 1.0023505560576798,
+      "pipStretch": 1.0110739780399678,
+      "onsetNods": 70,
+      "pokes": 0,
+      "neighbourReactions": 12,
+      "gestures": 12,
+      "pending": 0,
+      "brightness": 0.36192339373944704,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 361.447619,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030347489,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 214.51666666672952,
+      "lowStretch": 0.9727740169297595,
+      "lowLean": -0.017461714177759973,
+      "knuckleStretch": 0.9847157769290129,
+      "pipStretch": 1.0205704452851139,
+      "onsetNods": 74,
+      "pokes": 0,
+      "neighbourReactions": 13,
+      "gestures": 13,
+      "pending": 0,
+      "brightness": 0.4107796125204793,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 391.458581,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030377541,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 234.90000000007907,
+      "lowStretch": 0.9704123623305747,
+      "lowLean": -0.02188269949547201,
+      "knuckleStretch": 1.0054188730456979,
+      "pipStretch": 1.0208560329052494,
+      "onsetNods": 81,
+      "pokes": 0,
+      "neighbourReactions": 14,
+      "gestures": 14,
+      "pending": 0,
+      "brightness": 0.3685079665240484,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 421.509247,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030407695,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 253.3166666667604,
+      "lowStretch": 0.966518589449663,
+      "lowLean": -0.013595757467068101,
+      "knuckleStretch": 0.982702186388398,
+      "pipStretch": 1.0104676757278523,
+      "onsetNods": 84,
+      "pokes": 0,
+      "neighbourReactions": 15,
+      "gestures": 15,
+      "pending": 0,
+      "brightness": 0.37307358112256406,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 451.660045,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030437737,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 277.20000000007656,
+      "lowStretch": 0.9392446237975041,
+      "lowLean": 0.022782863552431913,
+      "knuckleStretch": 0.9872490792384988,
+      "pipStretch": 0.9795335150529914,
+      "onsetNods": 85,
+      "pokes": 0,
+      "neighbourReactions": 17,
+      "gestures": 17,
+      "pending": 0,
+      "brightness": 0.3670798006340009,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 481.703764,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030467794,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 301.2500000000547,
+      "lowStretch": 0.9545447360047473,
+      "lowLean": -0.02413981181821559,
+      "knuckleStretch": 0.9952863416560158,
+      "pipStretch": 1.0179418543599796,
+      "onsetNods": 91,
+      "pokes": 0,
+      "neighbourReactions": 18,
+      "gestures": 18,
+      "pending": 0,
+      "brightness": 0.40122931017611113,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 511.761252,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030497847,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 322.7166666667018,
+      "lowStretch": 0.9597894227127384,
+      "lowLean": -0.002385021179416679,
+      "knuckleStretch": 0.9801085796501312,
+      "pipStretch": 0.9877897562265173,
+      "onsetNods": 93,
+      "pokes": 0,
+      "neighbourReactions": 19,
+      "gestures": 19,
+      "pending": 0,
+      "brightness": 0.37719970091420446,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 541.813823,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030527862,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 346.2000000000138,
+      "lowStretch": 0.9323284521989261,
+      "lowLean": 0.018429066436282657,
+      "knuckleStretch": 0.982339382623599,
+      "pipStretch": 1.017741032489353,
+      "onsetNods": 99,
+      "pokes": 0,
+      "neighbourReactions": 21,
+      "gestures": 21,
+      "pending": 0,
+      "brightness": 0.3745223762010209,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 571.830232,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030557931,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 366.9666666666616,
+      "lowStretch": 0.9360685344284594,
+      "lowLean": -0.012431414423189503,
+      "knuckleStretch": 1.0120640287650076,
+      "pipStretch": 1.0204713702124923,
+      "onsetNods": 106,
+      "pokes": 0,
+      "neighbourReactions": 22,
+      "gestures": 22,
+      "pending": 0,
+      "brightness": 0.37301437042484514,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 601.899985,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030587948,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 388.849999999975,
+      "lowStretch": 0.9529132014850131,
+      "lowLean": -0.01778298669740926,
+      "knuckleStretch": 1.0166429668239423,
+      "pipStretch": 0.9856409281294352,
+      "onsetNods": 113,
+      "pokes": 0,
+      "neighbourReactions": 23,
+      "gestures": 24,
+      "pending": 1,
+      "brightness": 0.36832541251254725,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 631.91573,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030618004,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 411.86666666662074,
+      "lowStretch": 0.9515541750804226,
+      "lowLean": 0.024143813102446798,
+      "knuckleStretch": 1.0137986280122575,
+      "pipStretch": 1.0130410099072267,
+      "onsetNods": 126,
+      "pokes": 0,
+      "neighbourReactions": 25,
+      "gestures": 25,
+      "pending": 0,
+      "brightness": 0.3601966823032148,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 661.96898,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030648141,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 429.2333333332716,
+      "lowStretch": 0.9690032550500625,
+      "lowLean": 0.02447136631799071,
+      "knuckleStretch": 1.0134119734622697,
+      "pipStretch": 0.9785538409132551,
+      "onsetNods": 132,
+      "pokes": 0,
+      "neighbourReactions": 26,
+      "gestures": 26,
+      "pending": 0,
+      "brightness": 0.36708692221171324,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 692.10809,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030678159,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 448.3166666665876,
+      "lowStretch": 0.9620440909908545,
+      "lowLean": 0.018360992588962895,
+      "knuckleStretch": 0.9833986736685204,
+      "pipStretch": 0.9802184880392533,
+      "onsetNods": 133,
+      "pokes": 0,
+      "neighbourReactions": 28,
+      "gestures": 28,
+      "pending": 0,
+      "brightness": 0.35859691947724637,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 722.126077,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030708172,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 466.99999999990393,
+      "lowStretch": 0.9809799706185869,
+      "lowLean": 0.005645178422593206,
+      "knuckleStretch": 1.0173375457815745,
+      "pipStretch": 1.0057489722718347,
+      "onsetNods": 133,
+      "pokes": 0,
+      "neighbourReactions": 28,
+      "gestures": 28,
+      "pending": 0,
+      "brightness": 0.36608216840454755,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 752.139582,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030738212,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 484.499999999888,
+      "lowStretch": 0.829753314168766,
+      "lowLean": 0.0013332072368193177,
+      "knuckleStretch": 1.0052268154781077,
+      "pipStretch": 1.013578555190236,
+      "onsetNods": 133,
+      "pokes": 0,
+      "neighbourReactions": 30,
+      "gestures": 30,
+      "pending": 0,
+      "brightness": 0.35665795095225494,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 782.178685,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030768233,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 507.7999999998668,
+      "lowStretch": 0.9588093767243386,
+      "lowLean": -0.018820460167929216,
+      "knuckleStretch": 1.0067691006824127,
+      "pipStretch": 0.9835012458028402,
+      "onsetNods": 134,
+      "pokes": 0,
+      "neighbourReactions": 31,
+      "gestures": 31,
+      "pending": 0,
+      "brightness": 0.3590025152653889,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 812.199184,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030798254,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 534.2833333331761,
+      "lowStretch": 0.9806197573597372,
+      "lowLean": 0.012234951189562098,
+      "knuckleStretch": 0.9844677163154478,
+      "pipStretch": 0.9824562130602035,
+      "onsetNods": 136,
+      "pokes": 0,
+      "neighbourReactions": 33,
+      "gestures": 33,
+      "pending": 0,
+      "brightness": 0.41800118511735557,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 842.219683,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030828266,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 560.8166666664853,
+      "lowStretch": 0.9371509844250487,
+      "lowLean": -0.0036913781189057654,
+      "knuckleStretch": 1.0178926676857292,
+      "pipStretch": 0.9810134161571594,
+      "onsetNods": 141,
+      "pokes": 0,
+      "neighbourReactions": 35,
+      "gestures": 35,
+      "pending": 0,
+      "brightness": 0.3771769755104022,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 872.231474,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030858346,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 587.899999999794,
+      "lowStretch": 0.9379252376939448,
+      "lowLean": 0.11131850049124878,
+      "knuckleStretch": 0.8626593570915575,
+      "pipStretch": 0.9781867861167826,
+      "onsetNods": 146,
+      "pokes": 0,
+      "neighbourReactions": 37,
+      "gestures": 37,
+      "pending": 0,
+      "brightness": 0.3772881528010552,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 902.312925,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030888494,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 613.5999999997706,
+      "lowStretch": 0.8398257571400256,
+      "lowLean": 0.011476214698512108,
+      "knuckleStretch": 1.0003120873041262,
+      "pipStretch": 0.9811773547603093,
+      "onsetNods": 152,
+      "pokes": 0,
+      "neighbourReactions": 39,
+      "gestures": 39,
+      "pending": 0,
+      "brightness": 0.3693285091903552,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 932.461134,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030918563,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 635.099999999751,
+      "lowStretch": 0.9478509178255033,
+      "lowLean": 0.020513955786089465,
+      "knuckleStretch": 0.9820620412832377,
+      "pipStretch": 0.9904254384530499,
+      "onsetNods": 161,
+      "pokes": 0,
+      "neighbourReactions": 40,
+      "gestures": 40,
+      "pending": 0,
+      "brightness": 0.3623207724268986,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 962.530975,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030948726,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 645.3499999997417,
+      "lowStretch": 0.9465770662118862,
+      "lowLean": -0.018430906574389005,
+      "knuckleStretch": 1.0079686955086908,
+      "pipStretch": 1.0027355300980947,
+      "onsetNods": 164,
+      "pokes": 0,
+      "neighbourReactions": 40,
+      "gestures": 41,
+      "pending": 1,
+      "brightness": 0.3673778504234941,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 992.695325,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795030978753,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 654.8499999997331,
+      "lowStretch": 0.9418590765288505,
+      "lowLean": -0.0002445743701768937,
+      "knuckleStretch": 1.017371584259795,
+      "pipStretch": 0.9895179483221451,
+      "onsetNods": 164,
+      "pokes": 0,
+      "neighbourReactions": 41,
+      "gestures": 41,
+      "pending": 0,
+      "brightness": 0.36961793758820066,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1022.721612,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031008830,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 668.6499999997205,
+      "lowStretch": 0.9449028175682634,
+      "lowLean": 0.022625286293374843,
+      "knuckleStretch": 1.0066470964527494,
+      "pipStretch": 1.001358227303289,
+      "onsetNods": 164,
+      "pokes": 0,
+      "neighbourReactions": 42,
+      "gestures": 42,
+      "pending": 0,
+      "brightness": 0.3694276431156947,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1052.795646,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031038985,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 677.7999999997122,
+      "lowStretch": 0.940898562841161,
+      "lowLean": -0.019795363691255948,
+      "knuckleStretch": 1.017869153089733,
+      "pipStretch": 1.0130541012190943,
+      "onsetNods": 165,
+      "pokes": 0,
+      "neighbourReactions": 43,
+      "gestures": 43,
+      "pending": 0,
+      "brightness": 0.3788779209396019,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1082.952562,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031069083,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 694.6333333330302,
+      "lowStretch": 0.9612736349000891,
+      "lowLean": -0.02072958419495056,
+      "knuckleStretch": 1.011320534737451,
+      "pipStretch": 0.9929457122841415,
+      "onsetNods": 173,
+      "pokes": 0,
+      "neighbourReactions": 44,
+      "gestures": 44,
+      "pending": 0,
+      "brightness": 0.3746556137326581,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1113.049305,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031099163,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 709.0333333330171,
+      "lowStretch": 1.0093114305110649,
+      "lowLean": -0.02251029330681471,
+      "knuckleStretch": 1.0179129572302927,
+      "pipStretch": 1.01558680883512,
+      "onsetNods": 177,
+      "pokes": 0,
+      "neighbourReactions": 45,
+      "gestures": 45,
+      "pending": 0,
+      "brightness": 0.4244300373577024,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1143.130652,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031129188,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 729.0499999996656,
+      "lowStretch": 0.9700135280445806,
+      "lowLean": -0.01869295925312342,
+      "knuckleStretch": 0.9830538164118773,
+      "pipStretch": 1.0183025694652568,
+      "onsetNods": 188,
+      "pokes": 0,
+      "neighbourReactions": 46,
+      "gestures": 46,
+      "pending": 0,
+      "brightness": 0.3786745156518252,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1173.153379,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031159216,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 755.7499999996413,
+      "lowStretch": 0.9461893395173756,
+      "lowLean": 0.010320972692489955,
+      "knuckleStretch": 1.0177793042807979,
+      "pipStretch": 1.0207633017350426,
+      "onsetNods": 202,
+      "pokes": 0,
+      "neighbourReactions": 48,
+      "gestures": 48,
+      "pending": 0,
+      "brightness": 0.3499806417266711,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1203.183421,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031189259,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 780.3166666662856,
+      "lowStretch": 0.9551606335084246,
+      "lowLean": -0.017385518430941615,
+      "knuckleStretch": 1.0125798363590146,
+      "pipStretch": 0.9907328580206808,
+      "onsetNods": 207,
+      "pokes": 0,
+      "neighbourReactions": 49,
+      "gestures": 50,
+      "pending": 1,
+      "brightness": 0.34486594793018893,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1233.227145,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031219333,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 806.266666666262,
+      "lowStretch": 0.9670827617076895,
+      "lowLean": 0.01448592092970848,
+      "knuckleStretch": 0.9827952561906061,
+      "pipStretch": 0.9834906711123051,
+      "onsetNods": 213,
+      "pokes": 0,
+      "neighbourReactions": 51,
+      "gestures": 51,
+      "pending": 0,
+      "brightness": 0.37668242443195327,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1263.302323,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031249345,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 833.1333333329043,
+      "lowStretch": 0.9436212636496869,
+      "lowLean": -0.003418028726271673,
+      "knuckleStretch": 1.0143963828802618,
+      "pipStretch": 0.9910426105432772,
+      "onsetNods": 217,
+      "pokes": 0,
+      "neighbourReactions": 53,
+      "gestures": 53,
+      "pending": 0,
+      "brightness": 0.3816714409955348,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1293.312187,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031279373,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 862.5999999995441,
+      "lowStretch": 0.9507844300535389,
+      "lowLean": -0.023704929195925366,
+      "knuckleStretch": 0.9919136469875978,
+      "pipStretch": 1.0130541012218366,
+      "onsetNods": 219,
+      "pokes": 0,
+      "neighbourReactions": 54,
+      "gestures": 55,
+      "pending": 1,
+      "brightness": 0.38035963934237776,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1323.340045,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031309381,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 891.8333333328509,
+      "lowStretch": 0.9440771300092355,
+      "lowLean": 0.010786204476594438,
+      "knuckleStretch": 0.984065694402624,
+      "pipStretch": 0.9808467189031789,
+      "onsetNods": 219,
+      "pokes": 0,
+      "neighbourReactions": 56,
+      "gestures": 56,
+      "pending": 0,
+      "brightness": 0.376706097572256,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1353.349442,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031339402,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 921.6666666661571,
+      "lowStretch": 1.0032227042037505,
+      "lowLean": 0.022192799498494644,
+      "knuckleStretch": 1.0001863631085093,
+      "pipStretch": 1.017750361359682,
+      "onsetNods": 226,
+      "pokes": 0,
+      "neighbourReactions": 58,
+      "gestures": 58,
+      "pending": 0,
+      "brightness": 0.4158202612242797,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1383.366531,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031369407,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 951.2166666661302,
+      "lowStretch": 0.9614771217159196,
+      "lowLean": -0.012207456367467364,
+      "knuckleStretch": 1.0174884639607007,
+      "pipStretch": 0.9806926128582164,
+      "onsetNods": 232,
+      "pokes": 0,
+      "neighbourReactions": 60,
+      "gestures": 60,
+      "pending": 0,
+      "brightness": 0.3879731083842804,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1413.372517,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031399424,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 980.9999999994365,
+      "lowStretch": 0.9586630859916297,
+      "lowLean": -0.021243060391666437,
+      "knuckleStretch": 1.0110286817172418,
+      "pipStretch": 1.0184890456595852,
+      "onsetNods": 232,
+      "pokes": 0,
+      "neighbourReactions": 61,
+      "gestures": 61,
+      "pending": 0,
+      "brightness": 0.37901323140230714,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1443.391244,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031429442,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1010.5166666660763,
+      "lowStretch": 0.9613904084689897,
+      "lowLean": 0.014196591871633493,
+      "knuckleStretch": 0.9884931788717264,
+      "pipStretch": 0.97987131941597,
+      "onsetNods": 242,
+      "pokes": 0,
+      "neighbourReactions": 63,
+      "gestures": 63,
+      "pending": 0,
+      "brightness": 0.3564116101259643,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1473.410204,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031459451,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1040.0999999993828,
+      "lowStretch": 0.9936008646900919,
+      "lowLean": 0.018869445484318844,
+      "knuckleStretch": 0.9836430949247709,
+      "pipStretch": 1.0208560329088296,
+      "onsetNods": 263,
+      "pokes": 0,
+      "neighbourReactions": 65,
+      "gestures": 65,
+      "pending": 0,
+      "brightness": 0.4097096113037514,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1503.417502,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031489461,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1069.883333332689,
+      "lowStretch": 0.9597009948635327,
+      "lowLean": -0.015593521617146186,
+      "knuckleStretch": 0.9999451493160301,
+      "pipStretch": 0.9796377431762822,
+      "onsetNods": 282,
+      "pokes": 0,
+      "neighbourReactions": 67,
+      "gestures": 67,
+      "pending": 0,
+      "brightness": 0.37913998308853214,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1533.429277,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031519468,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1098.5499999993297,
+      "lowStretch": 0.964982658531515,
+      "lowLean": -0.011074876117002207,
+      "knuckleStretch": 1.0160443125015015,
+      "pipStretch": 1.0171393063564735,
+      "onsetNods": 295,
+      "pokes": 0,
+      "neighbourReactions": 68,
+      "gestures": 68,
+      "pending": 0,
+      "brightness": 0.3815425068445158,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1563.436433,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031549466,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1126.2166666659712,
+      "lowStretch": 0.9595478746698134,
+      "lowLean": 0.023313441246779462,
+      "knuckleStretch": 0.98229662701469,
+      "pipStretch": 1.0183112430138712,
+      "onsetNods": 309,
+      "pokes": 0,
+      "neighbourReactions": 70,
+      "gestures": 70,
+      "pending": 0,
+      "brightness": 0.34154612521450184,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1593.319902,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031579469,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1154.199999999279,
+      "lowStretch": 0.955872611477652,
+      "lowLean": -0.020269745488977715,
+      "knuckleStretch": 1.0166920693012764,
+      "pipStretch": 0.989832408191134,
+      "onsetNods": 318,
+      "pokes": 0,
+      "neighbourReactions": 72,
+      "gestures": 72,
+      "pending": 0,
+      "brightness": 0.38472979411593544,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1623.327347,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031609484,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1182.9166666659196,
+      "lowStretch": 0.9452812281784571,
+      "lowLean": -0.004937898034509821,
+      "knuckleStretch": 0.9990903323403494,
+      "pipStretch": 0.9907328580139027,
+      "onsetNods": 329,
+      "pokes": 0,
+      "neighbourReactions": 74,
+      "gestures": 74,
+      "pending": 0,
+      "brightness": 0.37921291748326236,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1653.344943,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031639505,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1211.9499999992265,
+      "lowStretch": 0.9489654989882815,
+      "lowLean": 0.024425440670165742,
+      "knuckleStretch": 0.9824867151172841,
+      "pipStretch": 1.018994352296245,
+      "onsetNods": 348,
+      "pokes": 0,
+      "neighbourReactions": 76,
+      "gestures": 76,
+      "pending": 0,
+      "brightness": 0.37551252565702703,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1683.365442,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031669531,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1240.8499999992002,
+      "lowStretch": 0.9475329366565811,
+      "lowLean": -0.009494108405865521,
+      "knuckleStretch": 1.0087258342960141,
+      "pipStretch": 0.9792369706926913,
+      "onsetNods": 367,
+      "pokes": 0,
+      "neighbourReactions": 78,
+      "gestures": 78,
+      "pending": 0,
+      "brightness": 0.37531420063843224,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1713.391746,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031699554,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1270.3999999991734,
+      "lowStretch": 0.9602658433899754,
+      "lowLean": -0.02168581601425428,
+      "knuckleStretch": 1.0173375457788005,
+      "pipStretch": 1.0197348673619013,
+      "onsetNods": 384,
+      "pokes": 0,
+      "neighbourReactions": 80,
+      "gestures": 80,
+      "pending": 0,
+      "brightness": 0.39761727719281287,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1743.415377,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031729563,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1300.1833333324796,
+      "lowStretch": 0.9640210762608469,
+      "lowLean": 0.011359241519918592,
+      "knuckleStretch": 1.002936218484794,
+      "pipStretch": 0.979655550526577,
+      "onsetNods": 400,
+      "pokes": 0,
+      "neighbourReactions": 81,
+      "gestures": 81,
+      "pending": 0,
+      "brightness": 0.4095592643328425,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1773.424036,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    },
+    {
+      "wall": 1795031756656,
+      "source": "live",
+      "mode": "watch",
+      "motion": 1,
+      "simTime": 1327.233333332455,
+      "lowStretch": 0.9508001719069084,
+      "lowLean": 0.0019636871663160534,
+      "knuckleStretch": 1.0006686440731085,
+      "pipStretch": 0.9793258899059872,
+      "onsetNods": 415,
+      "pokes": 0,
+      "neighbourReactions": 83,
+      "gestures": 83,
+      "pending": 0,
+      "brightness": 0.37416617752627335,
+      "meshes": 16,
+      "drawCalls": 16,
+      "triangles": 21818,
+      "media": [
+        {
+          "time": 1800.515918,
+          "paused": false,
+          "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+          "volume": 1,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "listeners": 37
+    }
+  ],
+  "errors": [],
+  "wallSeconds": 1800.011,
+  "frameMs": {
+    "count": 40653,
+    "p50": 33.300000000046566,
+    "p95": 116.59999999997672,
+    "max": 783.4000000000233
+  },
+  "closed": {
+    "media": [
+      {
+        "paused": true,
+        "src": null
+      }
+    ],
+    "contexts": [
+      "closed"
+    ],
+    "listeners": 20
+  },
+  "listenerBaseline": 7,
+  "reopen": [
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    },
+    {
+      "listeners": 20,
+      "activeMedia": 0,
+      "activeContexts": 0
+    }
+  ]
+}

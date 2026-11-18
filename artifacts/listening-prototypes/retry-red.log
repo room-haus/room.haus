@@ -1,0 +1,36 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 1 test using 1 worker
+
+(node:57683) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened (18.6s)
+
+
+  1) [chromium] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: /enter.*play mix/i })
+    Expected: visible
+    Timeout: 18000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: /enter.*play mix/i }) with timeout 18000ms
+      - waiting for getByRole('button', { name: /enter.*play mix/i })
+
+
+      303 |   await page.getByRole('button', {name: 'Back to Labs', exact: true}).click();
+      304 |   await page.getByRole('button', {name: 'Open The Underlevel ↗'}).click();
+    > 305 |   await expect(page.getByRole('button', {name: /enter.*play mix/i})).toBeVisible();
+          |                                                                      ^
+      306 |   expect(blocked).toBe(true);
+      307 |   expect(await page.evaluate(() => window.__underlevelMedia.length)).toBe(0);
+      308 | });
+        at /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/e2e/underlevel.spec.cjs:305:70
+
+    Error Context: test-results/underlevel-Underlevel-retr-1e7af-iled-download-when-reopened-chromium/error-context.md
+
+  1 failed
+    [chromium] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened

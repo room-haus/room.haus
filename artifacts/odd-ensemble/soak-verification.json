@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "wallSeconds": 1800.011,
+  "sampleCount": 61,
+  "finalSimulationSeconds": 1327.233333332455,
+  "gestures": 83,
+  "neighbourResponses": 83,
+  "listenerBaseline": 7,
+  "closedListeners": 20,
+  "reopenCycles": 10,
+  "pageErrors": []
+}

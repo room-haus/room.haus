@@ -1,0 +1,13 @@
+{
+  "captured": "2026-11-18T20:19:47.375384+00:00",
+  "files": {
+    "package.json": "504e0c2aedcc62f7db6746db1eeb85fc639de51d5d84d26c94d2ba71fc402b60",
+    "playwright.config.cjs": "4d1a46b1c7a7d8a1776ea1dea85d3b6cbe1809114ea1915ff935e0a603c71c97",
+    "playwright.public.config.cjs": "0678bbce49eff349b897e69dbc8f53b03131255262d09289e0f1233193b2d8da",
+    "playwright.labs.config.cjs": "6c976bdefd10139956050127487e38bd989fdd9bc5775c4092f53503486d5c96",
+    "playwright.suites.cjs": "d5ef77f0d8aacc386b653197defd26ea344603baf9daf024f19da7246199ce21",
+    ".github/workflows/room-check.yml": "e734c3d362a6299196a8b4ff499f9b2d2cb18d6a8b5b9afb53e88f97ded04888",
+    ".github/workflows/room-release.yml": "9287a6a0c5c871f2f775f09a7415be26b9c7664e82130b24e837ea71d47e6ef5"
+  },
+  "scope": "Post-full-matrix suite selection and CI policy; no prototype source changes."
+}

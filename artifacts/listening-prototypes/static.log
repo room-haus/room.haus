@@ -1,0 +1,21 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 typecheck:experiences
+> tsc -p tsconfig.experiences.json
+
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 typecheck:underlevel
+> tsc -p tsconfig.underlevel.json
+
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 lint
+> eslint .
+
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 check:dependencies
+> node scripts/check-dependencies.mjs
+
+Dependency policy passed (0 explicitly excepted development findings).

@@ -1,0 +1,19 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser:public
+> playwright test --config=playwright.public.config.cjs --grep every section shares --workers=1
+
+
+Running 3 tests using 1 worker
+
+(node:63918) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › e2e/archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history (3.3s)
+(node:64057) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [android] › e2e/archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history (2.7s)
+(node:64099) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [mobile-webkit] › e2e/archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history (4.0s)
+
+  3 passed (11.3s)

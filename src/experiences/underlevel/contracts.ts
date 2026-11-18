@@ -1,12 +1,8 @@
 export type Mode = 'DRIFT' | 'EXPLORE' | 'STILL';
 export type Direction = 'forward' | 'back' | 'left' | 'right';
 export type Chapter = 'THRESHOLD' | 'CATACOMBS' | 'TRANSMITTER' | 'THE HALL' | 'AFTERIMAGE';
-export interface AudioFrame {
-  time: number; playing: boolean; available: boolean;
-  rms: number; sub: number; bass: number; lowMid: number; mid: number; high: number;
-  brightness: number; onset: number; intensity: number; bpm: number; beatConfidence: number;
-  tempoBeats?: number; tempoPulses?: number;
-}
+export type {AudioFrame, PlaybackSnapshot} from '../shared/audio/contracts.ts';
+import type {AudioFrame} from '../shared/audio/contracts.ts';
 export interface Cue { id: string; time: number; kind: 'breakdown' | 'build' | 'drop' | 'transition' | 'outro'; intensity: number; chapter: Chapter }
 export interface WorldEvent { id: string; time: number; type: 'artifact-awaken' | 'open-gate' | 'reveal-room' | 'change-atmosphere'; magnitude: number; targetId?: string }
 export interface DirectorState { time: number; cycleTime: number; chapter: Chapter; gateOpen: number; reveal: number; artifact: number; atmosphere: number; palette: 'ember' | 'violet'; events: WorldEvent[] }
@@ -18,7 +14,6 @@ export interface NavigationState { mode: Mode; pose: Pose; resumeOffered: boolea
 export interface SceneFrame { audio: AudioFrame; director: DirectorState; navigation: NavigationState; reducedMotion: boolean; motion: number; delta: number; response?: WorldResponse; encounters?: EncounterSnapshot }
 export interface SceneMetrics { fps: number; meshes: number; drawCalls: number; width: number; height: number }
 export interface SceneHandle { update(frame: SceneFrame): void; metrics(): SceneMetrics; dispose(): void }
-export interface PlaybackSnapshot { playing: boolean; status: string; time: number; duration: number; error: string | null }
 
 /** Shared perceptual mappings: one truth for renderer, HUD and UX documentation. */
 export interface WorldResponse {

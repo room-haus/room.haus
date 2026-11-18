@@ -255,7 +255,7 @@ test('Underlevel modal keeps Labs inert, closes with Escape or Exit, and release
   await expect.poll(() => page.evaluate(() => document.querySelector('dialog').contains(document.activeElement))).toBe(true);
   expect(await dialog.evaluate(element => element.matches(':modal'))).toBe(true);
   // A native modal can tab into browser chrome, but never into the inert Labs UI.
-  await page.locator('.labs-launch').evaluate(element => element.focus());
+  await page.getByRole('button', {name: 'Open The Underlevel ↗'}).evaluate(element => element.focus());
   expect(await page.locator('#labs-root').evaluate(element => element.contains(document.activeElement))).toBe(false);
   for (let i = 0; i < 8; i++) {
     await page.keyboard.press('Tab');

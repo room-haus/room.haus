@@ -1,0 +1,11 @@
+{
+  "hardware": "Apple M1 Max",
+  "platform": "darwin",
+  "browser": "Chromium 159.0.8154.6",
+  "mode": "Playwright headless",
+  "rendererProbe": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+  "rendererProbeEvidence": "/Users/pmarko.alt/.local/state/hermes-orchestration/command-evidence/a07d143783f748adbe30b8dff310263d/output.log",
+  "physicalPhoneTested": false,
+  "physicalGpuPerformanceQualified": false,
+  "concurrency": "Browser matrices and other listening-toy soaks shared this Mac. The last mobile sample ran after browser matrices; another passive soak remained active."
+}

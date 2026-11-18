@@ -41,7 +41,14 @@ jobs:
           curl --silent --show-error --fail --retry 5 --retry-connrefused http://127.0.0.1:4173/ --output /dev/null
           node scripts/check-routes.mjs
       - run: npx playwright install --with-deps chromium webkit
-      - run: npm run test:browser
+      - name: Verify public browser flows
+        run: |
+          # Older rollback commits predate the suite split; retain their original check.
+          if node -e "process.exit(require('./package.json').scripts['test:browser:public'] ? 0 : 1)"; then
+            npm run test:browser:public
+          else
+            npm run test:browser
+          fi
       - run: npm run check:media
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

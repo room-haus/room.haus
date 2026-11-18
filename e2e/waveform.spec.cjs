@@ -14,7 +14,7 @@ async function trace(canvas) {
 }
 
 test('the main waveform reacts to the music and seeks with Options closed', async ({page, isMobile}) => {
-  await page.goto('http://127.0.0.1:4173/mixes/MX029/?t=30');
+  await page.goto((process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173') + '/mixes/MX029/?t=30');
   // Start from still art, then enable motion without changing the visual mode.
   await expect(page.getByRole('button', {name: 'Play', exact: true})).toBeVisible();
   await page.emulateMedia({reducedMotion: 'no-preference'});
@@ -52,7 +52,7 @@ test('the main waveform reacts to the music and seeks with Options closed', asyn
 });
 
 test('the compact waveform reacts to the recording and holds still when paused', async ({page}) => {
-  await page.goto('http://127.0.0.1:4173/mixes/MX029/?t=30');
+  await page.goto((process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173') + '/mixes/MX029/?t=30');
   const play = page.getByRole('button', {name: 'Play', exact: true});
   await expect(play).toBeVisible();
   await page.emulateMedia({reducedMotion: 'no-preference'});

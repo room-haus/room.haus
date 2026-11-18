@@ -1,0 +1,334 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser
+> playwright test --list
+
+Listing tests:
+  [chromium] › archive-transition.spec.cjs:14:1 › returning from a recording preserves the archive appearance and filter
+  [chromium] › archive-transition.spec.cjs:30:1 › history can reverse a live slide without dropping either screen or resetting the loop
+  [chromium] › archive-transition.spec.cjs:76:1 › a direct archive visit supports reduced motion, return, and filtered history
+  [chromium] › archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history
+  [chromium] › artwork.spec.cjs:14:1 › browse titled mixes, inspect both artworks and return to the filtered wall
+  [chromium] › artwork.spec.cjs:40:1 › early mix controls fit a small phone in portrait and landscape
+  [chromium] › artwork.spec.cjs:72:1 › the scene back button opens the archive from a direct link
+  [chromium] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [chromium] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [chromium] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [chromium] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [chromium] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [chromium] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [chromium] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [chromium] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [chromium] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [chromium] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [chromium] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [chromium] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [chromium] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [chromium] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [chromium] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [chromium] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [chromium] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [chromium] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [chromium] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [chromium] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [chromium] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [chromium] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [chromium] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [chromium] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [chromium] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [chromium] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [chromium] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [chromium] › listening.spec.cjs:19:3 › MX001 opens from a filtered cover wall and supports play, pause, seek and return
+  [chromium] › listening.spec.cjs:19:3 › MX029 opens from a filtered cover wall and supports play, pause, seek and return
+  [chromium] › listening.spec.cjs:79:1 › ROOM001 plays and switches to the selected release track
+  [chromium] › listening.spec.cjs:102:1 › failed mix can retry without leaving its cover or transport
+  [chromium] › loading.spec.cjs:36:1 › opening a recording keeps its sleeve and a way back while the player downloads
+  [chromium] › loading.spec.cjs:55:1 › an explicit scene request shows progress and recovers to still art on failure
+  [chromium] › loading.spec.cjs:78:1 › artwork stays the same size while a slow disc loads and can switch back
+  [chromium] › loading.spec.cjs:103:1 › audio startup can be paused while the stream player is still downloading
+  [chromium] › loading.spec.cjs:131:1 › leaving during HLS startup retains the stream when the delayed player arrives
+  [chromium] › loading.spec.cjs:153:1 › switching release tracks during startup cannot revive the previous track
+  [chromium] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [chromium] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [chromium] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [chromium] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [chromium] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [chromium] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [chromium] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [chromium] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [chromium] › persistent-listening.spec.cjs:96:1 › the same media clock advances across the archive and static panels
+  [chromium] › persistent-listening.spec.cjs:119:1 › static panel keyboard controls pause, resume and close while keeping a checkpoint
+  [chromium] › persistent-listening.spec.cjs:145:1 › returning to the same record via the player and history retains audio and time
+  [chromium] › persistent-listening.spec.cjs:169:1 › switching records replaces playing media and keeps a paused selection paused
+  [chromium] › persistent-listening.spec.cjs:187:1 › switching away from a pending stream cannot revive it
+  [chromium] › persistent-listening.spec.cjs:205:1 › closing a pending stream prevents a delayed start
+  [chromium] › persistent-listening.spec.cjs:225:1 › the selected release track stays visible in the compact player
+  [chromium] › persistent-listening.spec.cjs:240:1 › a same-record timestamp history entry seeks the retained audio without replacing it
+  [chromium] › persistent-listening.spec.cjs:256:1 › an out-of-range timestamp restarts the retained audio at the beginning
+  [chromium] › persistent-listening.spec.cjs:269:1 › a same-release history link applies its selected track and timestamp
+  [chromium] › persistent-listening.spec.cjs:284:1 › an invalid release history link restores the first track and opening time
+  [chromium] › persistent-listening.spec.cjs:308:1 › the scene leaves the DOM and reconnects to the same media on return
+  [chromium] › persistent-listening.spec.cjs:327:1 › a refused handoff exposes Retry and can still play the new recording
+  [chromium] › persistent-listening.spec.cjs:350:1 › the compact waveform seeks with pointer or touch and keyboard while paused
+  [chromium] › persistent-listening.spec.cjs:395:1 › the compact controls fit a narrow viewport and leave the splash links clear
+  [chromium] › portraits.spec.cjs:4:1 › haunted portraits stay hidden until activated and toggle with a tap or keyboard
+  [chromium] › portraits.spec.cjs:30:1 › hover reveals only a moving pixel patch and restores the normal portrait on exit
+  [chromium] › position.spec.cjs:68:1 › a mix resumes after refresh and can start over before playing
+  [chromium] › position.spec.cjs:85:1 › Start over clears a shared timestamp with blocked storage and retains the release track
+  [chromium] › position.spec.cjs:102:1 › natural completion clears saved progress and allows replay from the beginning
+  [chromium] › position.spec.cjs:114:1 › a copied link selects the exact release track and overrides local progress
+  [chromium] › position.spec.cjs:156:1 › invalid links, blocked storage and clipboard still allow playback and manual copying
+  [chromium] › punctuation-loop.spec.cjs:3:1 › the home scene warms while browsing mixes and stays paused until shown
+  [chromium] › punctuation-loop.spec.cjs:47:1 › a failed background download retries when home is opened
+  [chromium] › punctuation-loop.spec.cjs:63:1 › the loaded model crossfades from the print without moving the artwork frame
+  [chromium] › punctuation-loop.spec.cjs:95:1 › the model retains the printed cobalt ink color
+  [chromium] › punctuation-loop.spec.cjs:137:1 › enlarged splash navigation remains scrollable and keyboard reachable on small phones
+  [chromium] › punctuation-loop.spec.cjs:179:1 › the entire artwork captures drags and the mobile splash stays in the viewport
+  [chromium] › punctuation-loop.spec.cjs:231:1 › the 3D loop follows a drag, holds a paused pose, and resumes on release
+  [chromium] › punctuation-loop.spec.cjs:273:1 › reduced motion starts with the print and allows an explicit turn
+  [chromium] › punctuation-loop.spec.cjs:283:1 › without WebGL the print and section links stay usable
+  [chromium] › punctuation-loop.spec.cjs:302:1 › the marquee scrolls left and respects reduced motion
+  [chromium] › scenes.spec.cjs:6:3 › MX001 renders its animated CD, plays, and returns to its cover
+  [chromium] › scenes.spec.cjs:6:3 › MX029 renders its animated CD, plays, and returns to its cover
+  [chromium] › scenes.spec.cjs:6:3 › ROOM001 renders its animated CD, plays, and returns to its cover
+  [chromium] › start-over.spec.cjs:3:1 › starting over clears the opening position while retaining the ready WebGL scene
+  [chromium] › static-pages.spec.cjs:7:3 › archive without JavaScript › the new season and collective can be opened from the splash and bookmarked
+  [chromium] › static-pages.spec.cjs:19:3 › archive without JavaScript › browse a mix and a release using the published HTML
+  [chromium] › static-pages.spec.cjs:50:1 › record HTML remains usable while the player loads and hands off to one interactive view
+  [chromium] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [chromium] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [chromium] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [chromium] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [chromium] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [chromium] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [chromium] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [chromium] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [chromium] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [chromium] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [chromium] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [chromium] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [chromium] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [chromium] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [chromium] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [chromium] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+  [chromium] › waveform.spec.cjs:16:1 › the main waveform reacts to the music and seeks with Options closed
+  [chromium] › waveform.spec.cjs:54:1 › the compact waveform reacts to the recording and holds still when paused
+  [android] › archive-transition.spec.cjs:14:1 › returning from a recording preserves the archive appearance and filter
+  [android] › archive-transition.spec.cjs:30:1 › history can reverse a live slide without dropping either screen or resetting the loop
+  [android] › archive-transition.spec.cjs:76:1 › a direct archive visit supports reduced motion, return, and filtered history
+  [android] › archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history
+  [android] › artwork.spec.cjs:14:1 › browse titled mixes, inspect both artworks and return to the filtered wall
+  [android] › artwork.spec.cjs:40:1 › early mix controls fit a small phone in portrait and landscape
+  [android] › artwork.spec.cjs:72:1 › the scene back button opens the archive from a direct link
+  [android] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [android] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [android] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [android] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [android] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [android] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [android] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [android] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [android] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [android] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [android] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [android] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [android] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [android] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [android] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [android] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [android] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [android] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [android] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [android] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [android] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [android] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [android] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [android] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [android] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [android] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [android] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [android] › listening.spec.cjs:19:3 › MX001 opens from a filtered cover wall and supports play, pause, seek and return
+  [android] › listening.spec.cjs:19:3 › MX029 opens from a filtered cover wall and supports play, pause, seek and return
+  [android] › listening.spec.cjs:79:1 › ROOM001 plays and switches to the selected release track
+  [android] › listening.spec.cjs:102:1 › failed mix can retry without leaving its cover or transport
+  [android] › loading.spec.cjs:36:1 › opening a recording keeps its sleeve and a way back while the player downloads
+  [android] › loading.spec.cjs:55:1 › an explicit scene request shows progress and recovers to still art on failure
+  [android] › loading.spec.cjs:78:1 › artwork stays the same size while a slow disc loads and can switch back
+  [android] › loading.spec.cjs:103:1 › audio startup can be paused while the stream player is still downloading
+  [android] › loading.spec.cjs:131:1 › leaving during HLS startup retains the stream when the delayed player arrives
+  [android] › loading.spec.cjs:153:1 › switching release tracks during startup cannot revive the previous track
+  [android] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [android] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [android] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [android] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [android] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [android] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [android] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [android] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [android] › persistent-listening.spec.cjs:96:1 › the same media clock advances across the archive and static panels
+  [android] › persistent-listening.spec.cjs:119:1 › static panel keyboard controls pause, resume and close while keeping a checkpoint
+  [android] › persistent-listening.spec.cjs:145:1 › returning to the same record via the player and history retains audio and time
+  [android] › persistent-listening.spec.cjs:169:1 › switching records replaces playing media and keeps a paused selection paused
+  [android] › persistent-listening.spec.cjs:187:1 › switching away from a pending stream cannot revive it
+  [android] › persistent-listening.spec.cjs:205:1 › closing a pending stream prevents a delayed start
+  [android] › persistent-listening.spec.cjs:225:1 › the selected release track stays visible in the compact player
+  [android] › persistent-listening.spec.cjs:240:1 › a same-record timestamp history entry seeks the retained audio without replacing it
+  [android] › persistent-listening.spec.cjs:256:1 › an out-of-range timestamp restarts the retained audio at the beginning
+  [android] › persistent-listening.spec.cjs:269:1 › a same-release history link applies its selected track and timestamp
+  [android] › persistent-listening.spec.cjs:284:1 › an invalid release history link restores the first track and opening time
+  [android] › persistent-listening.spec.cjs:308:1 › the scene leaves the DOM and reconnects to the same media on return
+  [android] › persistent-listening.spec.cjs:327:1 › a refused handoff exposes Retry and can still play the new recording
+  [android] › persistent-listening.spec.cjs:350:1 › the compact waveform seeks with pointer or touch and keyboard while paused
+  [android] › persistent-listening.spec.cjs:395:1 › the compact controls fit a narrow viewport and leave the splash links clear
+  [android] › portraits.spec.cjs:4:1 › haunted portraits stay hidden until activated and toggle with a tap or keyboard
+  [android] › portraits.spec.cjs:30:1 › hover reveals only a moving pixel patch and restores the normal portrait on exit
+  [android] › position.spec.cjs:68:1 › a mix resumes after refresh and can start over before playing
+  [android] › position.spec.cjs:85:1 › Start over clears a shared timestamp with blocked storage and retains the release track
+  [android] › position.spec.cjs:102:1 › natural completion clears saved progress and allows replay from the beginning
+  [android] › position.spec.cjs:114:1 › a copied link selects the exact release track and overrides local progress
+  [android] › position.spec.cjs:156:1 › invalid links, blocked storage and clipboard still allow playback and manual copying
+  [android] › punctuation-loop.spec.cjs:3:1 › the home scene warms while browsing mixes and stays paused until shown
+  [android] › punctuation-loop.spec.cjs:47:1 › a failed background download retries when home is opened
+  [android] › punctuation-loop.spec.cjs:63:1 › the loaded model crossfades from the print without moving the artwork frame
+  [android] › punctuation-loop.spec.cjs:95:1 › the model retains the printed cobalt ink color
+  [android] › punctuation-loop.spec.cjs:137:1 › enlarged splash navigation remains scrollable and keyboard reachable on small phones
+  [android] › punctuation-loop.spec.cjs:179:1 › the entire artwork captures drags and the mobile splash stays in the viewport
+  [android] › punctuation-loop.spec.cjs:231:1 › the 3D loop follows a drag, holds a paused pose, and resumes on release
+  [android] › punctuation-loop.spec.cjs:273:1 › reduced motion starts with the print and allows an explicit turn
+  [android] › punctuation-loop.spec.cjs:283:1 › without WebGL the print and section links stay usable
+  [android] › punctuation-loop.spec.cjs:302:1 › the marquee scrolls left and respects reduced motion
+  [android] › scenes.spec.cjs:6:3 › MX001 renders its animated CD, plays, and returns to its cover
+  [android] › scenes.spec.cjs:6:3 › MX029 renders its animated CD, plays, and returns to its cover
+  [android] › scenes.spec.cjs:6:3 › ROOM001 renders its animated CD, plays, and returns to its cover
+  [android] › start-over.spec.cjs:3:1 › starting over clears the opening position while retaining the ready WebGL scene
+  [android] › static-pages.spec.cjs:7:3 › archive without JavaScript › the new season and collective can be opened from the splash and bookmarked
+  [android] › static-pages.spec.cjs:19:3 › archive without JavaScript › browse a mix and a release using the published HTML
+  [android] › static-pages.spec.cjs:50:1 › record HTML remains usable while the player loads and hands off to one interactive view
+  [android] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [android] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [android] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [android] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [android] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [android] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [android] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [android] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [android] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [android] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [android] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [android] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [android] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [android] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [android] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [android] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+  [android] › waveform.spec.cjs:16:1 › the main waveform reacts to the music and seeks with Options closed
+  [android] › waveform.spec.cjs:54:1 › the compact waveform reacts to the recording and holds still when paused
+  [mobile-webkit] › archive-transition.spec.cjs:14:1 › returning from a recording preserves the archive appearance and filter
+  [mobile-webkit] › archive-transition.spec.cjs:30:1 › history can reverse a live slide without dropping either screen or resetting the loop
+  [mobile-webkit] › archive-transition.spec.cjs:76:1 › a direct archive visit supports reduced motion, return, and filtered history
+  [mobile-webkit] › archive-transition.spec.cjs:92:1 › every section shares one document and retains its interactions through history
+  [mobile-webkit] › artwork.spec.cjs:14:1 › browse titled mixes, inspect both artworks and return to the filtered wall
+  [mobile-webkit] › artwork.spec.cjs:40:1 › early mix controls fit a small phone in portrait and landscape
+  [mobile-webkit] › artwork.spec.cjs:72:1 › the scene back button opens the archive from a direct link
+  [mobile-webkit] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [mobile-webkit] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [mobile-webkit] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [mobile-webkit] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [mobile-webkit] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [mobile-webkit] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [mobile-webkit] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [mobile-webkit] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [mobile-webkit] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [mobile-webkit] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [mobile-webkit] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [mobile-webkit] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [mobile-webkit] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [mobile-webkit] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [mobile-webkit] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [mobile-webkit] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [mobile-webkit] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [mobile-webkit] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [mobile-webkit] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [mobile-webkit] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [mobile-webkit] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [mobile-webkit] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [mobile-webkit] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [mobile-webkit] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [mobile-webkit] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [mobile-webkit] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [mobile-webkit] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [mobile-webkit] › listening.spec.cjs:19:3 › MX001 opens from a filtered cover wall and supports play, pause, seek and return
+  [mobile-webkit] › listening.spec.cjs:19:3 › MX029 opens from a filtered cover wall and supports play, pause, seek and return
+  [mobile-webkit] › listening.spec.cjs:79:1 › ROOM001 plays and switches to the selected release track
+  [mobile-webkit] › listening.spec.cjs:102:1 › failed mix can retry without leaving its cover or transport
+  [mobile-webkit] › loading.spec.cjs:36:1 › opening a recording keeps its sleeve and a way back while the player downloads
+  [mobile-webkit] › loading.spec.cjs:55:1 › an explicit scene request shows progress and recovers to still art on failure
+  [mobile-webkit] › loading.spec.cjs:78:1 › artwork stays the same size while a slow disc loads and can switch back
+  [mobile-webkit] › loading.spec.cjs:103:1 › audio startup can be paused while the stream player is still downloading
+  [mobile-webkit] › loading.spec.cjs:131:1 › leaving during HLS startup retains the stream when the delayed player arrives
+  [mobile-webkit] › loading.spec.cjs:153:1 › switching release tracks during startup cannot revive the previous track
+  [mobile-webkit] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [mobile-webkit] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [mobile-webkit] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [mobile-webkit] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [mobile-webkit] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [mobile-webkit] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [mobile-webkit] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [mobile-webkit] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [mobile-webkit] › persistent-listening.spec.cjs:96:1 › the same media clock advances across the archive and static panels
+  [mobile-webkit] › persistent-listening.spec.cjs:119:1 › static panel keyboard controls pause, resume and close while keeping a checkpoint
+  [mobile-webkit] › persistent-listening.spec.cjs:145:1 › returning to the same record via the player and history retains audio and time
+  [mobile-webkit] › persistent-listening.spec.cjs:169:1 › switching records replaces playing media and keeps a paused selection paused
+  [mobile-webkit] › persistent-listening.spec.cjs:187:1 › switching away from a pending stream cannot revive it
+  [mobile-webkit] › persistent-listening.spec.cjs:205:1 › closing a pending stream prevents a delayed start
+  [mobile-webkit] › persistent-listening.spec.cjs:225:1 › the selected release track stays visible in the compact player
+  [mobile-webkit] › persistent-listening.spec.cjs:240:1 › a same-record timestamp history entry seeks the retained audio without replacing it
+  [mobile-webkit] › persistent-listening.spec.cjs:256:1 › an out-of-range timestamp restarts the retained audio at the beginning
+  [mobile-webkit] › persistent-listening.spec.cjs:269:1 › a same-release history link applies its selected track and timestamp
+  [mobile-webkit] › persistent-listening.spec.cjs:284:1 › an invalid release history link restores the first track and opening time
+  [mobile-webkit] › persistent-listening.spec.cjs:308:1 › the scene leaves the DOM and reconnects to the same media on return
+  [mobile-webkit] › persistent-listening.spec.cjs:327:1 › a refused handoff exposes Retry and can still play the new recording
+  [mobile-webkit] › persistent-listening.spec.cjs:350:1 › the compact waveform seeks with pointer or touch and keyboard while paused
+  [mobile-webkit] › persistent-listening.spec.cjs:395:1 › the compact controls fit a narrow viewport and leave the splash links clear
+  [mobile-webkit] › portraits.spec.cjs:4:1 › haunted portraits stay hidden until activated and toggle with a tap or keyboard
+  [mobile-webkit] › portraits.spec.cjs:30:1 › hover reveals only a moving pixel patch and restores the normal portrait on exit
+  [mobile-webkit] › position.spec.cjs:68:1 › a mix resumes after refresh and can start over before playing
+  [mobile-webkit] › position.spec.cjs:85:1 › Start over clears a shared timestamp with blocked storage and retains the release track
+  [mobile-webkit] › position.spec.cjs:102:1 › natural completion clears saved progress and allows replay from the beginning
+  [mobile-webkit] › position.spec.cjs:114:1 › a copied link selects the exact release track and overrides local progress
+  [mobile-webkit] › position.spec.cjs:156:1 › invalid links, blocked storage and clipboard still allow playback and manual copying
+  [mobile-webkit] › punctuation-loop.spec.cjs:3:1 › the home scene warms while browsing mixes and stays paused until shown
+  [mobile-webkit] › punctuation-loop.spec.cjs:47:1 › a failed background download retries when home is opened
+  [mobile-webkit] › punctuation-loop.spec.cjs:63:1 › the loaded model crossfades from the print without moving the artwork frame
+  [mobile-webkit] › punctuation-loop.spec.cjs:95:1 › the model retains the printed cobalt ink color
+  [mobile-webkit] › punctuation-loop.spec.cjs:137:1 › enlarged splash navigation remains scrollable and keyboard reachable on small phones
+  [mobile-webkit] › punctuation-loop.spec.cjs:179:1 › the entire artwork captures drags and the mobile splash stays in the viewport
+  [mobile-webkit] › punctuation-loop.spec.cjs:231:1 › the 3D loop follows a drag, holds a paused pose, and resumes on release
+  [mobile-webkit] › punctuation-loop.spec.cjs:273:1 › reduced motion starts with the print and allows an explicit turn
+  [mobile-webkit] › punctuation-loop.spec.cjs:283:1 › without WebGL the print and section links stay usable
+  [mobile-webkit] › punctuation-loop.spec.cjs:302:1 › the marquee scrolls left and respects reduced motion
+  [mobile-webkit] › scenes.spec.cjs:6:3 › MX001 renders its animated CD, plays, and returns to its cover
+  [mobile-webkit] › scenes.spec.cjs:6:3 › MX029 renders its animated CD, plays, and returns to its cover
+  [mobile-webkit] › scenes.spec.cjs:6:3 › ROOM001 renders its animated CD, plays, and returns to its cover
+  [mobile-webkit] › start-over.spec.cjs:3:1 › starting over clears the opening position while retaining the ready WebGL scene
+  [mobile-webkit] › static-pages.spec.cjs:7:3 › archive without JavaScript › the new season and collective can be opened from the splash and bookmarked
+  [mobile-webkit] › static-pages.spec.cjs:19:3 › archive without JavaScript › browse a mix and a release using the published HTML
+  [mobile-webkit] › static-pages.spec.cjs:50:1 › record HTML remains usable while the player loads and hands off to one interactive view
+  [mobile-webkit] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [mobile-webkit] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [mobile-webkit] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [mobile-webkit] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [mobile-webkit] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [mobile-webkit] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [mobile-webkit] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [mobile-webkit] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [mobile-webkit] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [mobile-webkit] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [mobile-webkit] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [mobile-webkit] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [mobile-webkit] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [mobile-webkit] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [mobile-webkit] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [mobile-webkit] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+  [mobile-webkit] › waveform.spec.cjs:16:1 › the main waveform reacts to the music and seeks with Options closed
+  [mobile-webkit] › waveform.spec.cjs:54:1 › the compact waveform reacts to the recording and holds still when paused
+Total: 327 tests in 17 files

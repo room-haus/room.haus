@@ -178,7 +178,7 @@ test('enlarged splash navigation remains scrollable and keyboard reachable on sm
 
 test('the entire artwork captures drags and the mobile splash stays in the viewport', async ({page, isMobile, browserName}) => {
   await page.emulateMedia({reducedMotion: 'no-preference'});
-  await page.goto('http://127.0.0.1:4173/');
+  await page.goto((process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173') + '/');
   const stage = page.locator('.type-study');
   const canvas = page.locator('.study-model');
   await expect(stage).toHaveClass(/has-model/);

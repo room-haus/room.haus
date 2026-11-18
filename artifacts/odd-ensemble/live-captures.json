@@ -1,0 +1,98 @@
+[
+  {
+    "kind": "desktop",
+    "source": "live",
+    "diagnostics": {
+      "simTime": 11.350000000000144,
+      "lowStretch": 0.9980872767778476,
+      "lowLean": 0.0239421007846874,
+      "knuckleStretch": 0.9999999999996921,
+      "pipStretch": 1.0104820516730717,
+      "onsetNods": 6,
+      "pokes": 1,
+      "neighbourReactions": 1,
+      "gestures": 0,
+      "pending": 0,
+      "brightness": 0.3917499851665419
+    },
+    "media": [
+      {
+        "time": 23.777234,
+        "paused": false,
+        "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+        "rate": 1,
+        "volume": 1
+      }
+    ],
+    "overflow": false,
+    "zoom": {
+      "font": "32px",
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "kind": "android",
+    "source": "live",
+    "diagnostics": {
+      "simTime": 12.250000000000188,
+      "lowStretch": 0.993082722355394,
+      "lowLean": -0.008591389661100315,
+      "knuckleStretch": 1.000000000000001,
+      "pipStretch": 0.9926390779220315,
+      "onsetNods": 5,
+      "pokes": 1,
+      "neighbourReactions": 1,
+      "gestures": 0,
+      "pending": 0,
+      "brightness": 0.3910312349584942
+    },
+    "media": [
+      {
+        "time": 19.399642,
+        "paused": false,
+        "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+        "rate": 1,
+        "volume": 1
+      }
+    ],
+    "overflow": false,
+    "zoom": {
+      "font": "32px",
+      "overflow": false
+    },
+    "errors": []
+  },
+  {
+    "kind": "webkit",
+    "source": "ambient",
+    "diagnostics": {
+      "simTime": 4.716666666666655,
+      "lowStretch": 0.9982194128115239,
+      "lowLean": 0.02339070797987022,
+      "knuckleStretch": 0.9998599639653037,
+      "pipStretch": 1.001740636717261,
+      "onsetNods": 0,
+      "pokes": 1,
+      "neighbourReactions": 1,
+      "gestures": 0,
+      "pending": 0,
+      "brightness": 0
+    },
+    "media": [
+      {
+        "time": 4.55611142830664,
+        "paused": false,
+        "src": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+        "rate": 1,
+        "volume": 1
+      }
+    ],
+    "overflow": false,
+    "zoom": {
+      "font": "32px",
+      "overflow": false
+    },
+    "errors": []
+  }
+]

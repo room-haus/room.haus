@@ -1,0 +1,13 @@
+{
+  "all": 327,
+  "public": 174,
+  "labs": 153,
+  "overlap": 0,
+  "omitted": 0,
+  "automaticCaseReductionPercent": 46.8,
+  "workflowSelections": "passed",
+  "releaseCommandBranches": [
+    "run test:browser",
+    "run test:browser:public"
+  ]
+}
