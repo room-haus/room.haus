@@ -1,0 +1,170 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test
+> node --test test/*.test.mjs
+
+✔ each catalog item has artwork, a distinct valid route and secure media (1.920459ms)
+✔ each permalink resolves to its own shareable document with or without the trailing slash (0.527709ms)
+✔ archive pages, unknown routes and missing assets have distinct behavior (0.131666ms)
+✔ CloudFront selects isolated release objects and retains shared fingerprinted assets (0.846875ms)
+✔ the named development advisory is visible and temporarily excepted through its dependency chain (0.953958ms)
+✔ production exposure, unknown advisories, changed ranges and critical severity cannot use the exception (0.247792ms)
+✔ exceptions expire at the start of their expiry date (0.67475ms)
+✔ broken audit responses and unresolved dependency chains fail closed (0.198375ms)
+✔ publishing switches only after uploads and verifies the selected release (1116.443125ms)
+✔ failed public verification restores the prior function and compression setting (898.634708ms)
+✔ first-release rollback removes its viewer-request association and preserves other associations (812.585375ms)
+✔ rollback refuses to overwrite a concurrent release (689.964709ms)
+✔ upload failure never switches the live distribution or marks the upload complete (330.447042ms)
+(node:63966) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/audio/FeatureExtractor.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ swept wall, paddle and bumper contacts reflect without tunnelling (1.358916ms)
+✔ open goal misses recover in 1.2 seconds while intercepted balls reflect (0.936708ms)
+✔ shared prediction is bounded, sees wall/bumper rebounds and never mutates snapshots (0.744375ms)
+✔ corner fixtures and overlapping geometry terminate within the contact budget (0.208292ms)
+✔ stalled and nonfinite balls recover with distinct diagnostics (1.146792ms)
+✔ absolute slider and held drag control near paddle; Watch blends without snapping (4.207458ms)
+✔ nudge cooldown is simulation-time based and unavailable while returning or inactive (0.497583ms)
+✔ host autonomy blends manual authority once and held drag retains authority (0.577ms)
+✔ invalid features stay neutral and live travel speed eases over four seconds (5.678ms)
+✔ nudge enters Control without taking paddle ownership and Gentle caps its deflection (0.211375ms)
+✔ return path travels outside the court before continuously reaching the serve (0.24875ms)
+✔ selection is allowed frozen and reset playhead deterministically changes the serve (0.13125ms)
+✔ equal-time wall and goal resolves solid first and prediction stops at eight contacts (0.106917ms)
+✔ cached onsets accent once; frozen recovery state is exact; seek clears impacts (4.391125ms)
+✔ same seed and inputs reproduce collision and recovery outcomes independently of snapshots (19.908833ms)
+✔ inactive samples cannot replay an onset and Gentle collisions suppress elastic squash (0.14175ms)
+✔ 30-minute passive soak keeps one finite bounded ball and no invalid recovery (328.601917ms)
+(node:63967) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/hanging-balance/MobileSimulation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ counterweight produces signed mechanical equilibrium, persists through Watch and Settle (63.372875ms)
+✔ same seed, actions and features produce identical states; release never teleports (26.047125ms)
+✔ cached onsets are consumed once; grabbed target and Gentle reject transients (35.635208ms)
+✔ inactive freezes and invalid features match neutral external drive (20.825ms)
+✔ 30 simulated minutes of sustained drive, rapid grabs and nudges stay bounded (1128.842459ms)
+✔ labs resolves directly in local and versioned production releases (1.932833ms)
+✔ the retired Underlevel URLs never resolve to a standalone page (1.606083ms)
+(node:63969) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/shared/audio/FeatureExtractor.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sample sequence retains transient until next extraction, including high-refresh frames without physics steps (0.8085ms)
+✔ analysis exceptions and unavailable samples remain ambient without changing playback (0.226417ms)
+✔ visibility return resynchronizes playhead without seek; actual jumps still reset (0.663875ms)
+✔ real elapsed time tolerates continuous media progress across a rendering stall (0.138166ms)
+✔ a failed source replaced during seeking cannot leave retry permanently inactive (0.220667ms)
+✔ invalid or out-of-range analysis is neutral ambient data, never amplified features (0.138292ms)
+(node:63970) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/shared/FixedStepClock.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ clock caps stalls at three fixed steps and resumes without catch-up (0.64575ms)
+✔ held scene or slider input prevents timeout; return blends and preserves keep control (0.1925ms)
+✔ frozen rejects manipulation but allows selection; Gentle starts still and reset preserves media position (3.73425ms)
+✔ rejected IDs, unsupported controls and commands do not claim Control (0.126542ms)
+✔ slider ownership lasts through hold; Settle releases scene grab and rejected cooldown does not extend control (31.091417ms)
+✔ a stall drops old fractional backlog as well as excess elapsed time (0.090042ms)
+✔ the artwork area captures vertical drags outside the canvas and keeps momentum (16.042833ms)
+✔ holding before release, cancellation, and pause discard stale momentum (1.080792ms)
+✔ health checks read both boundary segments and follow standalone video redirects (123.709541ms)
+✔ missing scene video, missing variant segment, empty media and missing CORS fail health checks (29.313542ms)
+✔ a prefixed mirror retains exact catalog paths and only the MX029 recording takes its sample override (0.713584ms)
+✔ scene backgrounds and video textures use the same portable inventory as health checks (1.004125ms)
+✔ MX018 keeps its full authored triangles, normals, UV seams, materials and transforms (1254.155292ms)
+(node:63982) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/odd-ensemble/EnsembleSimulation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ extreme actions and thirty simulated minutes stay bounded (368.143083ms)
+✔ same seed/actions replay exactly; 30/60Hz rendering produces identical fixed-step state (26.188041ms)
+✔ held input owns its member; release and Watch preserve physical channels; Keep control persists (6.76275ms)
+✔ one fresh onset makes one nod; pokes have one-hop delayed response and shared cooldown (0.55425ms)
+✔ inactive and motion-zero freeze exactly; seek clears queued responses and grab (0.248583ms)
+✔ ambient ignores all audio bands; Gentle disables onset/poke impulses and neighbour reactions (9.820416ms)
+✔ invalid live features behave as neutral and passive gestures remain sparse over ten minutes (65.943417ms)
+✔ runtime suspension discards pending reactions while retaining deformation (0.265ms)
+✔ a held member rejects conflicting selection and remains the directional target (0.095375ms)
+✔ Gentle poke immediately after a zero-step resume or reset never injects an impulse (0.193666ms)
+✔ the neighbour receiving an autonomous reaction is the member being attended to (29.175458ms)
+✔ release damps toward the current musical pose even when Keep control remains set (0.69375ms)
+✔ group response cooldown never swallows another member’s local poke (0.133708ms)
+✔ rebuilds of one commit get isolated CDN objects when asset bytes or paths change (29.503791ms)
+✔ the cover walls link to every record in catalogue order (1.266583ms)
+✔ every document has its recording details, artwork, destinations and ordered tracks before JavaScript (2.462792ms)
+✔ the published wall shows distinct mix titles, and Next mix follows the complete catalog exactly once (1.54ms)
+(node:63987) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/audio/FeatureExtractor.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ silent analysis stays neutral and available (5.4885ms)
+✔ bounded band and RMS features respond to frequency and adapt to steady levels (102.009666ms)
+✔ unequal sustained bands stay unequal after the mix settles (32.061292ms)
+✔ a 6 dB band change remains visible and spectral noise below the band floor stays dark (37.654542ms)
+✔ a nearby transient inside the cooldown cannot generate a second onset (0.565791ms)
+✔ tempo requires repeated coherent transients and expires after a breakdown (121.4085ms)
+✔ tempo recovers repeating loudness changes without isolated spectral onsets (41.964916ms)
+✔ aperiodic variations do not produce a tempo estimate (26.178541ms)
+✔ cue lookup reconstructs state at boundaries and ignores backward crossings (0.676625ms)
+✔ native WebKit plays with analysis unavailable on one element (1.211166ms)
+✔ analyzed playback samples at 30 Hz and clears features on pause or either seek path (3.333791ms)
+(node:63990) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/director/ExperienceDirector.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ authored cue opens the gate; a kick cannot open it early (0.673542ms)
+✔ seeking reconstructs chapter and gate, without replaying stale events (0.442792ms)
+✔ repeat loops have deterministic states and cue IDs are unique by cycle (0.178416ms)
+✔ paused signal emits no reactive events and live features shape mood without changing layout (0.125416ms)
+✔ a camera in the gate clearance keeps physical door open across a backwards seek (0.102459ms)
+(node:63993) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/world/DungeonGraph.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ DRIFT and STILL acknowledge without damage, while EXPLORE applies cooldown and disperses on the third hit (1.073709ms)
+✔ seeking, crossing a cycle boundary, or re-entering restores health and clears acknowledgment (0.836458ms)
+✔ a forward playback jump within a cycle keeps encounter health (0.1275ms)
+✔ mana charges from analyzed playback and casting reacts without harming targets (0.850333ms)
+✔ wall, facing direction and closed gate prevent targeting (0.154083ms)
+✔ an uninterrupted authored drift route exposes all three enemies (11.963083ms)
+✔ a narrow camera frustum excludes targets that are visible in the default view (0.145458ms)
+✔ paused analysis and cue-only fallback label the source with no fake bands (0.26325ms)
+✔ live signals drive distinct stepped controls and reduced motion removes cadence and dust (0.218292ms)
+✔ torch pulses follow measured tempo and color progresses over eight beats (0.232417ms)
+✔ the tempo clock keeps lighting phase continuous across estimate changes (0.2505ms)
+✔ torch tempo modulation is neutral without a usable estimate or motion (0.128292ms)
+(node:63995) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/director/Narration.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ room narration follows actual position rather than the music chapter (3.979ms)
+✔ lines hold then leave a gap, and pause preserves the current message (0.238042ms)
+✔ audible properties are mentioned only with eligible analysis (0.349417ms)
+✔ sustained music changes queue a line without interrupting a hold or gap (2.297333ms)
+✔ attacks, dispersals and casts respect the current line and quiet gap (0.2285ms)
+✔ long playback avoids recent lines across loops and seeded replay is reproducible (3.124125ms)
+✔ a media repeat preserves history while an explicit seek resets the narrator (2.134667ms)
+(node:63997) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/underlevel/director/ExperienceDirector.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ decoration seeds preserve connected topology and the authored route (3.623208ms)
+✔ drift samples remain inside floor tiles over consecutive loops and match after seeking (15.759333ms)
+✔ manual movement is eased and waits for an open gate (0.300708ms)
+✔ manual control interrupts drift in place and offers an explicit resume after idle (0.152709ms)
+✔ still and reduced motion hold position through changes in audio time (0.122917ms)
+✔ manual takeover from a partial turn blends to a cardinal heading (0.147958ms)
+✔ manual movement respects the relic occupying a chamber tile (0.091ms)
+✔ resuming drift routes around the relic (0.428125ms)
+✔ resuming drift joins safely from the opposite side of the gate (15.910541ms)
+ℹ tests 117
+ℹ suites 0
+ℹ pass 117
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3924.9885

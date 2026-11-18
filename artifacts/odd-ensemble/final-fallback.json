@@ -1,0 +1,23 @@
+[
+  {
+    "kind": "desktop",
+    "canvasVisibility": "hidden",
+    "playbackAdvances": true,
+    "mediaCount": 1,
+    "source": "live"
+  },
+  {
+    "kind": "android",
+    "canvasVisibility": "hidden",
+    "playbackAdvances": true,
+    "mediaCount": 1,
+    "source": "live"
+  },
+  {
+    "kind": "webkit",
+    "canvasVisibility": "hidden",
+    "playbackAdvances": true,
+    "mediaCount": 1,
+    "source": "ambient"
+  }
+]

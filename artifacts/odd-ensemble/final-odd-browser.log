@@ -1,0 +1,37 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+Running 24 tests using 1 worker
+
+(node:49493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (8.0s)
+  ✓   2 [chromium] › e2e/odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe (5.3s)
+  ✓   3 [chromium] › e2e/odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus (4.2s)
+  ✓   4 [chromium] › e2e/odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport (5.5s)
+  ✓   5 [chromium] › e2e/odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls (820ms)
+  ✓   6 [chromium] › e2e/odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member (24.7s)
+  ✓   7 [chromium] › e2e/odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable (2.0s)
+  ✓   8 [chromium] › e2e/odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable (1.9s)
+(node:50249) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [android] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (4.9s)
+  ✓  10 [android] › e2e/odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe (3.5s)
+  ✓  11 [android] › e2e/odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus (2.6s)
+  ✓  12 [android] › e2e/odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport (3.1s)
+  ✓  13 [android] › e2e/odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls (819ms)
+  ✓  14 [android] › e2e/odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member (23.3s)
+  ✓  15 [android] › e2e/odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable (2.0s)
+  ✓  16 [android] › e2e/odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable (1.7s)
+(node:50366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix (4.4s)
+  ✓  18 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe (2.0s)
+  ✓  19 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus (1.7s)
+  ✓  20 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport (3.1s)
+  ✓  21 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls (1.3s)
+  -  22 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  ✓  23 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable (1.3s)
+  ✓  24 [mobile-webkit] › e2e/odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable (1.3s)
+
+  1 skipped
+  23 passed (1.9m)

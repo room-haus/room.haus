@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 const {openOptions} = require('./options.cjs');
-const base = 'http://127.0.0.1:4173';
+const base = process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
 
 // Keep requests pending until the test has inspected the interface, independent of machine speed.
 async function hold(page, pattern) {

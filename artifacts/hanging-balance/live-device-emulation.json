@@ -1,0 +1,91 @@
+[
+  {
+    "name": "desktop",
+    "playing": true,
+    "source": "live",
+    "timing": {
+      "frames": 1768,
+      "p95": 50,
+      "max": 216.6999999999971,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.01558378545927873,
+        "recoveries": 0,
+        "onsetImpulses": 22,
+        "simTime": 59.0166666666646,
+        "meshes": 21,
+        "drawCalls": 21,
+        "triangles": 7868
+      }
+    },
+    "interaction": {
+      "left": 0.38276874810209555,
+      "right": -0.4478521575319964
+    },
+    "layout": {
+      "innerWidth": 1440,
+      "document": 1440,
+      "dialog": 1440
+    },
+    "errors": [],
+    "cleanup": true
+  },
+  {
+    "name": "android",
+    "playing": true,
+    "source": "live",
+    "timing": {
+      "frames": 3271,
+      "p95": 33.30000000000291,
+      "max": 183.40000000000146,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.019576652594708647,
+        "recoveries": 0,
+        "onsetImpulses": 22,
+        "simTime": 60.583333333331176,
+        "meshes": 21,
+        "drawCalls": 21,
+        "triangles": 7868
+      }
+    },
+    "interaction": {
+      "left": 0.3826341948220927,
+      "right": -0.45086731422225784,
+      "touchGrab": "bell",
+      "touchReleased": ""
+    },
+    "layout": {
+      "innerWidth": 412,
+      "document": 412,
+      "dialog": 412
+    },
+    "errors": [],
+    "cleanup": true
+  },
+  {
+    "name": "webkit",
+    "playing": true,
+    "source": "ambient",
+    "timing": null,
+    "interaction": {
+      "left": 0.3790466187879366,
+      "right": -0.45633747300141586
+    },
+    "layout": {
+      "innerWidth": 390,
+      "document": 390,
+      "dialog": 390
+    },
+    "errors": [],
+    "cleanup": true
+  }
+]

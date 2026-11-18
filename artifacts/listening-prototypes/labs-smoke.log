@@ -1,0 +1,19 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser:labs
+> playwright test --config=playwright.labs.config.cjs --grep categories group --workers=1
+
+
+Running 3 tests using 1 worker
+
+(node:64220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.5s)
+(node:64282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [android] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.5s)
+(node:64310) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [mobile-webkit] › e2e/labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings (1.3s)
+
+  3 passed (5.8s)

@@ -155,3 +155,5 @@
   .labs-login { padding: 1.2rem; }
 }
 @media (prefers-reduced-motion: no-preference) { .labs-nav button { transition: background-color 140ms, color 140ms; } }
+
+.labs-experience-list{display:grid;gap:24px}.labs-experience-card{display:grid;grid-template-columns:minmax(160px,36%) minmax(0,1fr);border:1px solid #d0d0c8;background:#f5f5ef}.labs-experience-card>img{width:100%;height:100%;max-height:280px;object-fit:cover}.labs-experience-card>div{padding:28px}.labs-experience-card h2{font-size:32px;letter-spacing:-.04em;font-weight:400;margin:8px 0}.labs-experience-card p{max-width:440px;line-height:1.5}.labs-experience-card .labs-launch{min-height:44px;margin-top:12px}@media(max-width:600px){.labs-experience-card{grid-template-columns:1fr}.labs-experience-card>img{height:180px}.labs-experience-card>div{padding:20px}}

@@ -1,0 +1,1477 @@
+{
+  "started": 1795028452738,
+  "elapsed": 421.677,
+  "samples": [
+    {
+      "time": 1795028463185,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.006874029679947627,
+        "recoveries": 0,
+        "onsetImpulses": 7,
+        "simTime": 10.133333333333416
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.006874029679947627,
+        "recoveries": 0,
+        "onsetImpulses": 7,
+        "simTime": 10.133333333333416,
+        "meshes": 21,
+        "drawCalls": 8421,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 10.704469,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028473218,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.01719389019851983,
+        "recoveries": 0,
+        "onsetImpulses": 11,
+        "simTime": 19.90000000000015
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.01719389019851983,
+        "recoveries": 0,
+        "onsetImpulses": 11,
+        "simTime": 19.90000000000015,
+        "meshes": 21,
+        "drawCalls": 15057,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 20.735509,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028483287,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.021889558751002555,
+        "recoveries": 0,
+        "onsetImpulses": 14,
+        "simTime": 29.44999999999961
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.021889558751002555,
+        "recoveries": 0,
+        "onsetImpulses": 14,
+        "simTime": 29.44999999999961,
+        "meshes": 21,
+        "drawCalls": 20244,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 30.80127,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028493308,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0036709043809769236,
+        "recoveries": 0,
+        "onsetImpulses": 16,
+        "simTime": 38.04999999999912
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0036709043809769236,
+        "recoveries": 0,
+        "onsetImpulses": 16,
+        "simTime": 38.04999999999912,
+        "meshes": 21,
+        "drawCalls": 24948,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 40.826624,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028503325,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.031917939916402856,
+        "recoveries": 0,
+        "onsetImpulses": 18,
+        "simTime": 47.849999999998566
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.031917939916402856,
+        "recoveries": 0,
+        "onsetImpulses": 18,
+        "simTime": 47.849999999998566,
+        "meshes": 21,
+        "drawCalls": 33222,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 50.844102,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028513334,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.008798626048902568,
+        "recoveries": 0,
+        "onsetImpulses": 19,
+        "simTime": 57.49999999999802
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.008798626048902568,
+        "recoveries": 0,
+        "onsetImpulses": 19,
+        "simTime": 57.49999999999802,
+        "meshes": 21,
+        "drawCalls": 42861,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 60.850794,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028523478,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.005509431257617834,
+        "recoveries": 0,
+        "onsetImpulses": 24,
+        "simTime": 67.51666666666412
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.005509431257617834,
+        "recoveries": 0,
+        "onsetImpulses": 24,
+        "simTime": 67.51666666666412,
+        "meshes": 21,
+        "drawCalls": 55041,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 70.995011,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028533492,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0013215338212202515,
+        "recoveries": 0,
+        "onsetImpulses": 26,
+        "simTime": 77.23333333333024
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0013215338212202515,
+        "recoveries": 0,
+        "onsetImpulses": 26,
+        "simTime": 77.23333333333024,
+        "meshes": 21,
+        "drawCalls": 63651,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 81.010483,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028543506,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0031780123115334805,
+        "recoveries": 0,
+        "onsetImpulses": 33,
+        "simTime": 87.216666666663
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0031780123115334805,
+        "recoveries": 0,
+        "onsetImpulses": 33,
+        "simTime": 87.216666666663,
+        "meshes": 21,
+        "drawCalls": 75411,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 91.023046,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028553515,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.005771281048970197,
+        "recoveries": 0,
+        "onsetImpulses": 40,
+        "simTime": 97.19999999999577
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.005771281048970197,
+        "recoveries": 0,
+        "onsetImpulses": 40,
+        "simTime": 97.19999999999577,
+        "meshes": 21,
+        "drawCalls": 87108,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 101.032925,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028563535,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0075812016700844516,
+        "recoveries": 0,
+        "onsetImpulses": 46,
+        "simTime": 106.99999999999521
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0075812016700844516,
+        "recoveries": 0,
+        "onsetImpulses": 46,
+        "simTime": 106.99999999999521,
+        "meshes": 21,
+        "drawCalls": 99120,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 111.052336,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028573541,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.008122734841539456,
+        "recoveries": 0,
+        "onsetImpulses": 52,
+        "simTime": 116.76666666666132
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.008122734841539456,
+        "recoveries": 0,
+        "onsetImpulses": 52,
+        "simTime": 116.76666666666132,
+        "meshes": 21,
+        "drawCalls": 109326,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 121.057234,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028583575,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0020396293718508243,
+        "recoveries": 0,
+        "onsetImpulses": 55,
+        "simTime": 126.33333333332745
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0020396293718508243,
+        "recoveries": 0,
+        "onsetImpulses": 55,
+        "simTime": 126.33333333332745,
+        "meshes": 21,
+        "drawCalls": 114744,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 131.091156,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028593592,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.005614915447722788,
+        "recoveries": 0,
+        "onsetImpulses": 59,
+        "simTime": 136.00000000000037
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.005614915447722788,
+        "recoveries": 0,
+        "onsetImpulses": 59,
+        "simTime": 136.00000000000037,
+        "meshes": 21,
+        "drawCalls": 120918,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 141.108377,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028603601,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.005238958461505577,
+        "recoveries": 0,
+        "onsetImpulses": 65,
+        "simTime": 145.6166666666747
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.005238958461505577,
+        "recoveries": 0,
+        "onsetImpulses": 65,
+        "simTime": 145.6166666666747,
+        "meshes": 21,
+        "drawCalls": 126378,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 151.115465,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028613661,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.009890633081213924,
+        "recoveries": 0,
+        "onsetImpulses": 70,
+        "simTime": 153.0000000000139
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.009890633081213924,
+        "recoveries": 0,
+        "onsetImpulses": 70,
+        "simTime": 153.0000000000139,
+        "meshes": 21,
+        "drawCalls": 129738,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 161.178882,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028623672,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0011179660253481946,
+        "recoveries": 0,
+        "onsetImpulses": 75,
+        "simTime": 161.15000000002038
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0011179660253481946,
+        "recoveries": 0,
+        "onsetImpulses": 75,
+        "simTime": 161.15000000002038,
+        "meshes": 21,
+        "drawCalls": 134484,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 171.190164,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028633693,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.011203489052186986,
+        "recoveries": 0,
+        "onsetImpulses": 80,
+        "simTime": 170.9333333333615
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.011203489052186986,
+        "recoveries": 0,
+        "onsetImpulses": 80,
+        "simTime": 170.9333333333615,
+        "meshes": 21,
+        "drawCalls": 141855,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 181.208604,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028643703,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.006240375208795395,
+        "recoveries": 0,
+        "onsetImpulses": 87,
+        "simTime": 180.91666666670278
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.006240375208795395,
+        "recoveries": 0,
+        "onsetImpulses": 87,
+        "simTime": 180.91666666670278,
+        "meshes": 21,
+        "drawCalls": 153300,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 191.219267,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028653712,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.005577257637817182,
+        "recoveries": 0,
+        "onsetImpulses": 90,
+        "simTime": 190.58333333337714
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.005577257637817182,
+        "recoveries": 0,
+        "onsetImpulses": 90,
+        "simTime": 190.58333333337714,
+        "meshes": 21,
+        "drawCalls": 163737,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 201.229932,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028663728,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0029529681119370267,
+        "recoveries": 0,
+        "onsetImpulses": 91,
+        "simTime": 200.13333333338474
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0029529681119370267,
+        "recoveries": 0,
+        "onsetImpulses": 91,
+        "simTime": 200.13333333338474,
+        "meshes": 21,
+        "drawCalls": 174468,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 211.243537,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028673744,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.02088628390685024,
+        "recoveries": 0,
+        "onsetImpulses": 92,
+        "simTime": 210.15000000005938
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.02088628390685024,
+        "recoveries": 0,
+        "onsetImpulses": 92,
+        "simTime": 210.15000000005938,
+        "meshes": 21,
+        "drawCalls": 186942,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 221.260045,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028683764,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0023869553176058605,
+        "recoveries": 0,
+        "onsetImpulses": 93,
+        "simTime": 219.8500000000671
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0023869553176058605,
+        "recoveries": 0,
+        "onsetImpulses": 93,
+        "simTime": 219.8500000000671,
+        "meshes": 21,
+        "drawCalls": 194754,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 231.282106,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028693775,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.009027924858993388,
+        "recoveries": 0,
+        "onsetImpulses": 96,
+        "simTime": 229.66666666674158
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.009027924858993388,
+        "recoveries": 0,
+        "onsetImpulses": 96,
+        "simTime": 229.66666666674158,
+        "meshes": 21,
+        "drawCalls": 201747,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 241.292206,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028703779,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0018729640939590612,
+        "recoveries": 0,
+        "onsetImpulses": 97,
+        "simTime": 239.30000000008258
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0018729640939590612,
+        "recoveries": 0,
+        "onsetImpulses": 97,
+        "simTime": 239.30000000008258,
+        "meshes": 21,
+        "drawCalls": 208026,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 251.296616,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028713788,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.001720737543616754,
+        "recoveries": 0,
+        "onsetImpulses": 100,
+        "simTime": 249.23333333342381
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.001720737543616754,
+        "recoveries": 0,
+        "onsetImpulses": 100,
+        "simTime": 249.23333333342381,
+        "meshes": 21,
+        "drawCalls": 214620,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 261.302857,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028723826,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0117701368578264,
+        "recoveries": 0,
+        "onsetImpulses": 103,
+        "simTime": 259.0000000000931
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0117701368578264,
+        "recoveries": 0,
+        "onsetImpulses": 103,
+        "simTime": 259.0000000000931,
+        "meshes": 21,
+        "drawCalls": 220689,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 271.343222,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028733842,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.006364463356603372,
+        "recoveries": 0,
+        "onsetImpulses": 104,
+        "simTime": 268.75000000008424
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.006364463356603372,
+        "recoveries": 0,
+        "onsetImpulses": 104,
+        "simTime": 268.75000000008424,
+        "meshes": 21,
+        "drawCalls": 229845,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 281.35619,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028743863,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.016566329851076044,
+        "recoveries": 0,
+        "onsetImpulses": 107,
+        "simTime": 278.81666666674175
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.016566329851076044,
+        "recoveries": 0,
+        "onsetImpulses": 107,
+        "simTime": 278.81666666674175,
+        "meshes": 21,
+        "drawCalls": 241542,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 291.378503,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028753888,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.009028978662698901,
+        "recoveries": 0,
+        "onsetImpulses": 108,
+        "simTime": 288.71666666673275
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.009028978662698901,
+        "recoveries": 0,
+        "onsetImpulses": 108,
+        "simTime": 288.71666666673275,
+        "meshes": 21,
+        "drawCalls": 252609,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 301.403719,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028764065,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.003633374485905889,
+        "recoveries": 0,
+        "onsetImpulses": 0,
+        "simTime": 3.983333333333324
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.003633374485905889,
+        "recoveries": 0,
+        "onsetImpulses": 0,
+        "simTime": 3.983333333333324,
+        "meshes": 21,
+        "drawCalls": 257712,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 311.579864,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028774079,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.002952043856800722,
+        "recoveries": 0,
+        "onsetImpulses": 2,
+        "simTime": 13.333333333333576
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.002952043856800722,
+        "recoveries": 0,
+        "onsetImpulses": 2,
+        "simTime": 13.333333333333576,
+        "meshes": 21,
+        "drawCalls": 264180,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 321.596022,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028784124,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.010863773370206237,
+        "recoveries": 0,
+        "onsetImpulses": 4,
+        "simTime": 23.01666666666664
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.010863773370206237,
+        "recoveries": 0,
+        "onsetImpulses": 4,
+        "simTime": 23.01666666666664,
+        "meshes": 21,
+        "drawCalls": 272223,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 331.639002,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028794134,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0034476618611353456,
+        "recoveries": 0,
+        "onsetImpulses": 6,
+        "simTime": 31.9333333333328
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0034476618611353456,
+        "recoveries": 0,
+        "onsetImpulses": 6,
+        "simTime": 31.9333333333328,
+        "meshes": 21,
+        "drawCalls": 279027,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 341.649705,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028804272,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0038969927136113824,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 39.99999999999901
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0038969927136113824,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 39.99999999999901,
+        "meshes": 21,
+        "drawCalls": 283416,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 351.788118,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028814298,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.011193604104573544,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 44.84999999999874
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.011193604104573544,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 44.84999999999874,
+        "meshes": 21,
+        "drawCalls": 285537,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 361.816222,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028824308,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.020147018126333693,
+        "recoveries": 0,
+        "onsetImpulses": 0,
+        "simTime": 3.1999999999999935
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.020147018126333693,
+        "recoveries": 0,
+        "onsetImpulses": 0,
+        "simTime": 3.1999999999999935,
+        "meshes": 21,
+        "drawCalls": 287784,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 371.825655,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028834321,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.00484202252663061,
+        "recoveries": 0,
+        "onsetImpulses": 2,
+        "simTime": 12.150000000000183
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.00484202252663061,
+        "recoveries": 0,
+        "onsetImpulses": 2,
+        "simTime": 12.150000000000183,
+        "meshes": 21,
+        "drawCalls": 296226,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 381.837642,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028844335,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0004989504722840409,
+        "recoveries": 0,
+        "onsetImpulses": 4,
+        "simTime": 22.133333333333358
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0004989504722840409,
+        "recoveries": 0,
+        "onsetImpulses": 4,
+        "simTime": 22.133333333333358,
+        "meshes": 21,
+        "drawCalls": 308511,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 391.853955,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028854340,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0008571334219457091,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 31.216666666666175
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0008571334219457091,
+        "recoveries": 0,
+        "onsetImpulses": 8,
+        "simTime": 31.216666666666175,
+        "meshes": 21,
+        "drawCalls": 317919,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 401.858265,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028864355,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": -0.0063755107817546185,
+        "recoveries": 0,
+        "onsetImpulses": 13,
+        "simTime": 40.36666666666566
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": -0.0063755107817546185,
+        "recoveries": 0,
+        "onsetImpulses": 13,
+        "simTime": 40.36666666666566,
+        "meshes": 21,
+        "drawCalls": 326781,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 411.873186,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    },
+    {
+      "time": 1795028874407,
+      "state": {
+        "counterweight": 0.5,
+        "topAngle": 0.0014410656401867166,
+        "recoveries": 0,
+        "onsetImpulses": 22,
+        "simTime": 50.39999999999842
+      },
+      "metrics": {
+        "source": "live",
+        "mode": "watch",
+        "motion": 1,
+        "counterweight": 0.5,
+        "topAngle": 0.0014410656401867166,
+        "recoveries": 0,
+        "onsetImpulses": 22,
+        "simTime": 50.39999999999842,
+        "meshes": 21,
+        "drawCalls": 339129,
+        "triangles": 7868
+      },
+      "media": [
+        {
+          "time": 421.921088,
+          "paused": false,
+          "rate": 1,
+          "volume": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "heap": 18200000
+    }
+  ],
+  "errors": []
+}

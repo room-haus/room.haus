@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.underlevel.json",
+  "include": [
+    "src/experiences/**/*"
+  ]
+}

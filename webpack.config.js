@@ -44,7 +44,7 @@ module.exports = (_env, argv) => ({
   resolve: {alias: {src}, extensions: ['.tsx', '.ts', '.js', '.mjs', '.json']},
   module: {
     rules: [
-      {test: /\.tsx?$/, include: path.join(src, 'experiences/underlevel'), loader: 'babel-loader', options: {envName: argv.mode, presets: ['@babel/preset-typescript']}},
+      {test: /\.tsx?$/, include: path.join(src, 'experiences'), loader: 'babel-loader', options: {envName: argv.mode, presets: ['@babel/preset-typescript']}},
       {test: /\.js$/, include: src, exclude: /worklets/, loader: 'babel-loader', options: {envName: argv.mode}},
       {test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader']},
       {

@@ -1,0 +1,13 @@
+{
+  "requests": [
+    {
+      "phase": "opened",
+      "url": "http://127.0.0.1:4196/assets/odd-ensemble.7abde3b714be.css"
+    },
+    {
+      "phase": "opened",
+      "url": "http://127.0.0.1:4196/assets/odd-ensemble.389d72441444.js"
+    }
+  ],
+  "pass": true
+}

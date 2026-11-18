@@ -15,7 +15,7 @@ for (const [id, collection] of [['MX001', 'mixes'], ['MX029', 'mixes'], ['ROOM00
         return element;
       };
     });
-    await page.goto('http://127.0.0.1:4173/' + collection + '/');
+    await page.goto((process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173') + '/' + collection + '/');
     const sleeve = page.locator('#record-' + id);
     if (isMobile) await sleeve.tap();
     else {

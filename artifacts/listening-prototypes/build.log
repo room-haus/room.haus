@@ -1,0 +1,11 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 build
+> webpack --mode production
+
+webpack compiled successfully
+
+> room-haus@1.0.0 postbuild
+> node scripts/build-routes.mjs
+
+Built 89 public pages, the sitemap and the CDN route table.

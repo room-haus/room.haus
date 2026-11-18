@@ -1,0 +1,32 @@
+{
+  "captured": "2026-11-18T19:54:21.241577+00:00",
+  "files": {
+    "src/experiences/odd-ensemble/index.tsx": "5c4629c3ca8d6998a41e51e55e2909e4ab666cdfa69d8f77af1a73417237b87d",
+    "src/experiences/odd-ensemble/BabylonEnsemble.ts": "26004074581de98b7efd3c1471926e0a4fc6364000789c880018d3e1fa16ed2a",
+    "src/experiences/odd-ensemble/mapAudio.ts": "a8b605dee364ec65e9215d5cd488d680bdd049bf7492edaeb9cf2919d2dbbcbe",
+    "src/experiences/odd-ensemble/odd-ensemble.css": "d06aaae2142f51c39e789df600c89d5638dba462b0c472ff17d8177f36115023",
+    "src/experiences/odd-ensemble/EnsembleSimulation.ts": "abbe7cdea1314dc690764962d331b4ed142c9b368548a92335afc4ba3d575956",
+    "src/experiences/odd-ensemble/config.ts": "41d317afef6d388e894068391e7899dcf6d600e2b92ad5299bacfe6ed4774798",
+    "src/experiences/odd-ensemble/assets/poster.svg": "8bbf02a82c0a900db755aedb84141dfeed3c70e655efbecd8c6208b63edb073c",
+    "src/experiences/odd-ensemble/assets/README.md": "7a63541bf9b54a58a8148fac8c845528535850bcede236c0abe2b93561292c22",
+    "src/experiences/shared/listening-toy.css": "dc358386ecbc15f4d51bb3af7ccc73f5082504fe21f4e5967e5a0937ba6b3b76",
+    "src/experiences/shared/FixedStepClock.ts": "38a037fe416109d5aadd2afceedf5442124b780304005c12be0588f7ce0e0a9b",
+    "src/experiences/shared/contracts.ts": "37b660a04d42ee57e00482f0767344ea030292805956b4bc287fe3a5f6037bdd",
+    "src/experiences/shared/ListeningSession.ts": "a37bc5f04fff4e42747d4326a3fc7c79778cefa3a33faffb595d11c9d86967c7",
+    "src/experiences/shared/ListeningToy.tsx": "6dcc71d37f34e88c546f7013cff7fbf531cb847ddc96ea3b77dea69708ed53ba",
+    "src/experiences/shared/InteractionDirector.ts": "a1d7577fc0073941334df1aed124383cc55abec3f1572455abb0aac616adacd9",
+    "src/experiences/shared/ToyRuntime.ts": "bb951693ea2d269555e0efdadd2c1aaa823c11b83373244c847fd6a57ac5d792",
+    "src/experiences/shared/assets.d.ts": "95f8bcf6beab02329732eae3cbafe060b3ec95d7cbb834f50fbb4f0b329d42e7",
+    "src/experiences/shared/audio/TempoEstimator.ts": "2afcd18c60101c0e191e7542f01c8f8ecdb9f8a48f888fb53168d83cbbfb15fd",
+    "src/experiences/shared/audio/contracts.ts": "065b80f1230174396560d4267c69c1668d53a24fbf3a92bb42ad4eb8d47c48c7",
+    "src/experiences/shared/audio/AudioController.ts": "c23ea1905e6850f56af290108dac9825145a8ff58c59a292147378e97e3dd771",
+    "src/experiences/shared/audio/FeatureExtractor.ts": "72173ec4ad0af1fded2774733e2a48039f27ffa649d6837eececd9d80ff759d9",
+    "src/labs/experiences.js": "7bfdb75a4a1db4a777b0be21b6dd459c7a2c0d4363d42a6986ed678ec34c69ba",
+    "src/labs/ExperienceModal.js": "9375cac9d96b87d1f3601658e9d56a06054165bf893fc820789a3c174460c874"
+  },
+  "deltaFromSoakStart": [
+    "src/experiences/odd-ensemble/odd-ensemble.css",
+    "src/labs/experiences.js"
+  ],
+  "scope": "Non-ready canvas visibility CSS; concurrent user-requested Hanging Balance and Endless Rally category moves only. All Odd simulation and shared runtime/audio files unchanged."
+}

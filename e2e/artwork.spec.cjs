@@ -1,6 +1,6 @@
 const {openOptions} = require('./options.cjs');
 const {test, expect} = require('@playwright/test');
-const base = 'http://127.0.0.1:4173';
+const base = process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
 
 async function activate(page, control, isMobile) {
   if (isMobile) return control.tap();

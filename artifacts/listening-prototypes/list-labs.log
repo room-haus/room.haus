@@ -1,0 +1,160 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser:labs
+> playwright test --config=playwright.labs.config.cjs --list
+
+Listing tests:
+  [chromium] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [chromium] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [chromium] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [chromium] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [chromium] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [chromium] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [chromium] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [chromium] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [chromium] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [chromium] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [chromium] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [chromium] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [chromium] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [chromium] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [chromium] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [chromium] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [chromium] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [chromium] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [chromium] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [chromium] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [chromium] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [chromium] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [chromium] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [chromium] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [chromium] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [chromium] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [chromium] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [chromium] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [chromium] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [chromium] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [chromium] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [chromium] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [chromium] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [chromium] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [chromium] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [chromium] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [chromium] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [chromium] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [chromium] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [chromium] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [chromium] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [chromium] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [chromium] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [chromium] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [chromium] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [chromium] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [chromium] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [chromium] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [chromium] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [chromium] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [chromium] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+  [android] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [android] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [android] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [android] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [android] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [android] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [android] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [android] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [android] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [android] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [android] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [android] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [android] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [android] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [android] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [android] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [android] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [android] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [android] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [android] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [android] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [android] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [android] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [android] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [android] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [android] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [android] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [android] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [android] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [android] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [android] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [android] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [android] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [android] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [android] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [android] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [android] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [android] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [android] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [android] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [android] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [android] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [android] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [android] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [android] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [android] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [android] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [android] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [android] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [android] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [android] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+  [mobile-webkit] › endless-rally.spec.cjs:17:1 › Rally opens without audio, uses slider keyboard, pauses motion independently and closes cleanly
+  [mobile-webkit] › endless-rally.spec.cjs:34:1 › reduced motion starts composed and explicit Gentle motion enables controls
+  [mobile-webkit] › endless-rally.spec.cjs:42:1 › renderer failure retains one mix, transport and close
+  [mobile-webkit] › endless-rally.spec.cjs:50:1 › manual miss returns quietly; Watch, manual and recovery screenshots
+  [mobile-webkit] › endless-rally.spec.cjs:84:1 › keyboard and touch buttons, seek reset, hidden lifecycle and 200 percent text
+  [mobile-webkit] › endless-rally.spec.cjs:115:1 › audio error gives retry; ten reopen cycles never overlap media
+  [mobile-webkit] › endless-rally.spec.cjs:132:1 › high-DPI desktop directly grabs the paddle and follows a rightward drag
+  [mobile-webkit] › endless-rally.spec.cjs:150:1 › close during Returning and ten playing reopen cycles dispose every owned source
+  [mobile-webkit] › endless-rally.spec.cjs:167:1 › context loss and scene retry keep the same advancing mix
+  [mobile-webkit] › endless-rally.spec.cjs:178:1 › lower control strip supports pointer cancellation and touch takeover
+  [mobile-webkit] › labs.spec.cjs:12:1 › login rejects incorrect credentials, retains the session, and signs out
+  [mobile-webkit] › labs.spec.cjs:29:1 › all six studies render, controls work, and settings survive switching
+  [mobile-webkit] › labs.spec.cjs:56:1 › WebGL failure leaves navigation and a useful recovery state
+  [mobile-webkit] › labs.spec.cjs:71:1 › wheel zoom stays inside the canvas without scrolling the page
+  [mobile-webkit] › labs.spec.cjs:86:1 › categories group the 3D studies and retain the selected study and settings
+  [mobile-webkit] › listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks
+  [mobile-webkit] › listening-toys.spec.cjs:48:1 › pause freezes pose and disables manipulation; seek resets safely while paused
+  [mobile-webkit] › listening-toys.spec.cjs:56:1 › pointer cancellation releases the compliant grab and Settle preserves weight
+  [mobile-webkit] › listening-toys.spec.cjs:63:1 › reduced motion starts still, Gentle is explicit, OS preference pauses again
+  [mobile-webkit] › listening-toys.spec.cjs:71:1 › hidden tab releases input and resumes held pose without resetting counterweight
+  [mobile-webkit] › listening-toys.spec.cjs:79:1 › context loss falls back without pausing or recreating mix; retry replaces only renderer
+  [mobile-webkit] › listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label
+  [mobile-webkit] › listening-toys.spec.cjs:89:1 › audio failure holds motion and offers Retry mix
+  [mobile-webkit] › listening-toys.spec.cjs:95:1 › ten close/reopen cycles stop every source, close contexts and restore launcher focus
+  [mobile-webkit] › listening-toys.spec.cjs:107:1 › responsive layout, 200 percent text and touch target controls stay accessible
+  [mobile-webkit] › listening-toys.spec.cjs:120:1 › a long render stall drops physics time without interpreting continuous playback as a seek
+  [mobile-webkit] › listening-toys.spec.cjs:126:1 › a second touch cannot steal a held object through the native counterweight range
+  [mobile-webkit] › odd-ensemble.spec.cjs:12:1 › Odd Ensemble visible selection, Space and direction controls do not alter the mix
+  [mobile-webkit] › odd-ensemble.spec.cjs:22:1 › tap pokes, drag wins after eight pixels, cancellation and second pointers are safe
+  [mobile-webkit] › odd-ensemble.spec.cjs:35:1 › pause motion freezes while mix advances; seek resets and close cleans playback/focus
+  [mobile-webkit] › odd-ensemble.spec.cjs:41:1 › reduced motion starts still and Gentle has no transient poke; renderer loss retains transport
+  [mobile-webkit] › odd-ensemble.spec.cjs:46:1 › original poster fallback and responsive 200 percent text retain usable controls
+  [mobile-webkit] › odd-ensemble.spec.cjs:54:1 › held ownership survives timeout and a second finger cannot change the selected member
+  [mobile-webkit] › odd-ensemble.spec.cjs:67:1 › actual 200 percent text has no visual viewport overflow and pointer controls remain operable
+  [mobile-webkit] › odd-ensemble.spec.cjs:72:1 › desktop 200 percent text keeps every member name fully readable
+  [mobile-webkit] › underlevel.spec.cjs:49:1 › Underlevel starts only by gesture; reduced motion holds STILL and controls fit
+  [mobile-webkit] › underlevel.spec.cjs:64:1 › Underlevel audio clock reconstructs reveal and manual controls keep ownership
+  [mobile-webkit] › underlevel.spec.cjs:86:1 › Underlevel WebGL failure keeps the canonical native audio player
+  [mobile-webkit] › underlevel.spec.cjs:100:1 › Underlevel pause stops media and seeking stays available
+  [mobile-webkit] › underlevel.spec.cjs:112:1 › Underlevel permits deliberate exploration while the mix is paused
+  [mobile-webkit] › underlevel.spec.cjs:123:1 › Underlevel does not lower a sought gate through a visitor in STILL
+  [mobile-webkit] › underlevel.spec.cjs:136:1 › Underlevel responds to OS reduced motion during playback
+  [mobile-webkit] › underlevel.spec.cjs:146:1 › Underlevel enemies react in DRIFT and take attacks only in EXPLORE
+  [mobile-webkit] › underlevel.spec.cjs:170:1 › Underlevel HUD explains signal mappings and encounters reset on seek
+  [mobile-webkit] › underlevel.spec.cjs:184:1 › Underlevel character cards accept direct pointer attacks and hold mana while paused
+  [mobile-webkit] › underlevel.spec.cjs:203:1 › Underlevel mobile targeting excludes a card outside the viewport
+  [mobile-webkit] › underlevel.spec.cjs:215:1 › Underlevel narration holds on pause and follows actual location after seeking
+  [mobile-webkit] › underlevel.spec.cjs:235:1 › Underlevel player card reflects mode and shared mana
+  [mobile-webkit] › underlevel.spec.cjs:249:1 › Underlevel modal keeps Labs inert, closes with Escape or Exit, and releases playback
+  [mobile-webkit] › underlevel.spec.cjs:280:1 › Underlevel has no standalone URL and a Labs refresh does not reopen it
+  [mobile-webkit] › underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened
+Total: 153 tests in 5 files

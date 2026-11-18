@@ -1,0 +1,91 @@
+{
+  "origin": "http://127.0.0.1:4196",
+  "mode": "built, live CDN; headless desktop; video has no audio track",
+  "samples": [
+    {
+      "wallSeconds": 0,
+      "simTime": 0.49999999999999994,
+      "lowStretch": 1.006609652545331,
+      "lowLean": 0.007590763495947599,
+      "knuckleStretch": 1.010596594300219,
+      "pipStretch": 0.9786693614205844,
+      "onsetNods": 0,
+      "pokes": 0,
+      "neighbourReactions": 0,
+      "gestures": 0,
+      "pending": 0,
+      "brightness": 0
+    },
+    {
+      "wallSeconds": 61.915,
+      "simTime": 21.450000000000063,
+      "lowStretch": 0.9907123362132807,
+      "lowLean": 0.024022142287013964,
+      "knuckleStretch": 1.009238614519339,
+      "pipStretch": 0.9932695816902184,
+      "onsetNods": 10,
+      "pokes": 0,
+      "neighbourReactions": 1,
+      "gestures": 1,
+      "pending": 0,
+      "brightness": 0.39370086351593897
+    },
+    {
+      "wallSeconds": 124.405,
+      "simTime": 45.89999999999868,
+      "lowStretch": 0.9415417429317386,
+      "lowLean": -0.02399500831720389,
+      "knuckleStretch": 1.0176606173763603,
+      "pipStretch": 0.9822589675108241,
+      "onsetNods": 18,
+      "pokes": 0,
+      "neighbourReactions": 2,
+      "gestures": 2,
+      "pending": 0,
+      "brightness": 0.3540125505940126
+    },
+    {
+      "wallSeconds": 187.511,
+      "simTime": 78.74999999999682,
+      "lowStretch": 0.9605064759556715,
+      "lowLean": -0.019657493651059805,
+      "knuckleStretch": 1.007433928854777,
+      "pipStretch": 0.984179172951838,
+      "onsetNods": 41,
+      "pokes": 0,
+      "neighbourReactions": 5,
+      "gestures": 5,
+      "pending": 0,
+      "brightness": 0.34989884532581644
+    },
+    {
+      "wallSeconds": 249.468,
+      "simTime": 128.4999999999944,
+      "lowStretch": 0.9628622754936177,
+      "lowLean": -0.01066976327819804,
+      "knuckleStretch": 0.9833079307025528,
+      "pipStretch": 1.0188226452417872,
+      "onsetNods": 48,
+      "pokes": 0,
+      "neighbourReactions": 8,
+      "gestures": 8,
+      "pending": 0,
+      "brightness": 0.35341650985508255
+    },
+    {
+      "wallSeconds": 310.127,
+      "simTime": 178.4000000000341,
+      "lowStretch": 0.9552970232113414,
+      "lowLean": -0.11061731167949648,
+      "knuckleStretch": 1.0173375457983154,
+      "pipStretch": 0.9786298746775478,
+      "onsetNods": 61,
+      "pokes": 0,
+      "neighbourReactions": 12,
+      "gestures": 12,
+      "pending": 0,
+      "brightness": 0.3547234155635196
+    }
+  ],
+  "video": "passive-and-poke.webm"
+}

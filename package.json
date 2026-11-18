@@ -31,7 +31,10 @@
     "lint": "eslint .",
     "format": "prettier --write src --ignore-unknown",
     "test:browser": "playwright test",
-    "typecheck:underlevel": "tsc -p tsconfig.underlevel.json"
+    "typecheck:underlevel": "tsc -p tsconfig.underlevel.json",
+    "typecheck:experiences": "tsc -p tsconfig.experiences.json",
+    "test:browser:public": "playwright test --config=playwright.public.config.cjs",
+    "test:browser:labs": "playwright test --config=playwright.labs.config.cjs"
   },
   "devDependencies": {
     "@babel/core": "8.1.2",

@@ -1,5 +1,13 @@
 name: Check ROOM
 on:
+  workflow_dispatch:
+    inputs:
+      browser_suite:
+        description: 'Browser suite to run manually'
+        required: true
+        default: labs
+        type: choice
+        options: [public, labs, all]
   pull_request:
   push:
     branches: [master]
@@ -23,6 +31,7 @@ jobs:
       - run: npm run check:dependencies
       - run: npm run lint
       - run: npm run typecheck:underlevel
+      - run: npm run typecheck:experiences
       - run: npm test
       - run: npm run build
       - name: Verify the built archive through HTTP
@@ -33,4 +42,12 @@ jobs:
           curl --silent --show-error --fail --retry 5 --retry-connrefused http://127.0.0.1:4173/ --output /dev/null
           node scripts/check-routes.mjs
       - run: npx playwright install --with-deps chromium webkit
-      - run: npm run test:browser
+      - name: Public browser checks
+        if: github.event_name != 'workflow_dispatch' || inputs.browser_suite == 'public'
+        run: npm run test:browser:public
+      - name: Manual Labs browser checks
+        if: github.event_name == 'workflow_dispatch' && inputs.browser_suite == 'labs'
+        run: npm run test:browser:labs
+      - name: Manual complete browser checks
+        if: github.event_name == 'workflow_dispatch' && inputs.browser_suite == 'all'
+        run: npm run test:browser

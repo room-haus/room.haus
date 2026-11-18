@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700">
+  <rect width="1000" height="700" fill="#e8e6df"/>
+  <ellipse cx="500" cy="564" rx="293" ry="45" fill="#d0cfc6"/>
+  <path d="M305 153 727 153 810 552 204 552Z" fill="#bec4b5"/>
+  <path d="M315 145 716 145 789 528 221 528Z" fill="#e7b8a4"/>
+  <path d="M315 145 221 528 206 519 300 136ZM716 145 789 528 805 519 730 136Z" fill="#f2e9ce"/>
+  <path d="m273 337 481 0" stroke="#bf9280" stroke-width="2" stroke-dasharray="7 8"/>
+  <path d="m409 199 142 0 0 26-142 0Z" fill="#d8ddc8" transform="rotate(-3 480 210)"/>
+  <path d="m382 459 159 0 0 33-159 0Z" fill="#2448c4" transform="rotate(3 462 475)"/>
+  <ellipse cx="584" cy="328" rx="37" ry="18" fill="#ae8878"/>
+  <path d="M554 327v-22c0-36 61-36 61 0v22h-15v-24c0-16-31-16-31 0v24Z" fill="#d5e24b"/>
+  <ellipse cx="443" cy="369" rx="21" ry="9" fill="#b08a7b"/>
+  <circle cx="439" cy="355" r="19" fill="#242928"/>
+  <path d="M430 339q22 15 9 34" stroke="#768fff" stroke-width="4" fill="none"/>
+  <text x="45" y="60" font-family="monospace" font-size="15" letter-spacing="2" fill="#3b4039">ROOM / LISTENING TOYS</text>
+  <text x="45" y="650" font-family="serif" font-size="45" fill="#242928">An endless, imperfect rally.</text>
+  <text x="955" y="650" text-anchor="end" font-family="monospace" font-size="14" fill="#3b4039">NO SCORE. JUST STAY.</text>
+</svg>

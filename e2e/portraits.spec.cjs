@@ -1,5 +1,5 @@
 const {test, expect} = require('@playwright/test');
-const origin = process.env.ROOM_PREVIEW_ORIGIN || 'http://127.0.0.1:4173';
+const origin = process.env.ROOM_PREVIEW_ORIGIN || process.env.ROOM_TEST_ORIGIN || 'http://127.0.0.1:4173';
 
 test('haunted portraits stay hidden until activated and toggle with a tap or keyboard', async ({page, isMobile}) => {
   await page.goto(origin + '/collective/');
