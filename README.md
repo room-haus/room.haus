@@ -12,6 +12,14 @@ Use `npm run check:dependencies` for the release dependency gate. It runs the co
 
 The browser suite includes small-screen/enlarged-text access, delayed audio cancellation, reset/replay, and an archive screenshot comparison before and after navigation. Screenshot comparisons run within the same browser session to avoid platform/font-specific golden images. Unit tests exercise dependency-policy failures, missing/CORS-blocked media and deployment rollback through a fake AWS executable; these tests do not access a real AWS account.
 
+## Labs playground
+
+The sidebar groups experiments into **3D animations**, **Experiences**, **Interactives**, and **Audio experiments**. The six initial studies are sub-tabs of 3D animations; the other categories start empty. Category and study links can be bookmarked, and legacy study links still open. Switching categories retains the selected study and its settings for the current workspace session.
+
+Open `/labs` for the seasonal experiment workspace. The intentionally plain login accepts username `admin` and password `BigSmall`. This is a client-side convenience gate, not secure authentication; do not put private material behind it. The session lasts in the current browser tab until sign-out or tab closure. Labs is excluded from the sitemap and marked `noindex, nofollow`.
+
+The six initial studies use the existing Babylon renderer, loaded only after entering the workspace. Each study retains its controls while switching tabs; reset restores that study and its camera. Drag or use arrow keys to orbit, scroll/pinch or use plus/minus to zoom, and save a PNG with **Save image**. Reduced-motion preferences start the studies paused. Add experiments to `src/labs/studies.js` and their scene construction/updates to `src/labs/scene.js`. Run `npm run test:browser -- e2e/labs.spec.cjs` for login, scene switching, controls, export, mobile layouts and WebGL recovery checks.
+
 ## Maintain the collection
 
 Edit the records in `src/content/mixes/records.json` and `src/content/releases/records.json`. Each record refers to the keys exported by the cover and CD label indexes in `src/images`. Retain each published ID and release slug so shared links keep working. The build checks the catalog, creates a static page with cover and artist metadata for each recording, and emits a CDN route function. It accepts both historic mix query links and canonical record paths.

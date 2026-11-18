@@ -9,6 +9,8 @@ const checks = [
   ...entrancePages.map(({path, title}) => [path, 200, title]),
   ['/mixes/', 200, 'Mixes'],
   ['/releases/', 200, 'Releases'],
+  ['/labs/', 200, 'Labs'],
+  ['/labs', 200, 'Labs', '/labs/'],
   ...records.map((record) => [routeOf(record), 200, record.id]),
   ['/mixes/?mx=MX029', 200, 'MX029', '/mixes/MX029/'],
   ['/releases/ROOM001-AMAL-DANCECONCEPT', 200, 'Dance Concept'],
