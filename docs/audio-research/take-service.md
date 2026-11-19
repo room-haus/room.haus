@@ -34,7 +34,7 @@ Every request body is limited to 64 KiB on the JSON write routes. Each handler a
 
 ## Retention and the backend handoff
 
-Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry. A previously bound request can finish after expiry or a subsequent reduction in write limits. Retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
+Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry, including after cleanup has removed the private manifest. The maker retains the edited recipe and must prepare and audition it again before publishing. A previously bound request can finish after expiry or a subsequent reduction in write limits. Retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
 
 ```sh
 node scripts/reclaim-take-staging.mjs .cache/local-takes
@@ -44,6 +44,6 @@ Stop the service processes using that store before running cleanup. New local st
 
 Cleanup removes expired unbound preparation manifests, unreferenced staged PCM and partial staging writes. It keeps active manifests and every durable publication binding, including an interrupted publication whose preparation expired. It can remove a staged copy still in use when the immutable permanent object verifies against the same digest. The response reports expired manifests and staged bytes removed. Published manifests, permanent PCM, request bindings and source files sit outside its deletion scope.
 
-The service can still open older stores created before this lock protocol. The maintenance command refuses them because an older process could write without holding the lock. To migrate, take the old service offline, initialize a fresh managed directory with this release, stop the new service, then copy the old data collections into it before switching the configured store path. The existing preview store remains in place.
+The service can still open older stores created before this lock protocol. The maintenance command refuses them because an older process could write without holding the lock. Before adopting an empty directory ever shared with an older service, stop every older service using it and keep it off that directory. An idle legacy writer may have opened the empty directory without creating files. To migrate an existing populated store, take the old service offline, initialize a fresh managed directory with this release, stop the new service, then copy the old data collections into it before switching the configured store path. The existing preview store remains in place.
 
 Before enabling hosted anonymous writes, the existing backend owner must supply the deployment environment and durable store, a storage budget and a retention schedule coordinated with live publication on that backend. Route the API independently of static releases, enforce aggregate quotas, constrain CORS and verify independent cross-device reads and retries across service restarts and two static releases. If the host uses expiring asset URLs, verify that reopening the stable take link obtains fresh references after expiry. The loopback service uses same-origin binary GETs.

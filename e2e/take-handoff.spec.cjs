@@ -365,3 +365,28 @@ test('current write limits govern variation while saved playback remains availab
   await button(page, 'Make a variation').click();
   await expect(page.getByText('1 of 24 throws')).toBeVisible();
 });
+
+test('a missing private preparation keeps the draft and requires a fresh audition', async ({browser, baseURL}, info) => {
+  const context = await fresh(browser, baseURL, info.project.use);
+  try {
+    const page = await context.newPage();
+    await maker(page);
+    const first = await prepare(page);
+    // Exercise the real service response for an unbound ID that no longer has a manifest.
+    await page.route('**/v1/takes', async route => {
+      const body = route.request().postDataJSON();
+      const response = await route.fetch({postData: {...body, preparationId: 'f'.repeat(32)}});
+      await route.fulfill({response});
+    }, {times: 1});
+    await button(page, 'Publish take').click();
+    await expect(page.getByRole('alert')).toContainText('Your draft is still here');
+    await expect(button(page, 'Publish take')).toHaveCount(0);
+    const next = await prepare(page);
+    expect(next.preparationId).not.toBe(first.preparationId);
+    expect(next.recipe).toEqual(first.recipe);
+    expect(next.take.sha256).toBe(first.take.sha256);
+    await publish(page);
+  } finally {
+    await context.close();
+  }
+});

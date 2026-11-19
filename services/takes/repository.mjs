@@ -20,6 +20,7 @@ export class TakeError extends Error {
 
 const unavailable = () => new TakeError(503, 'The saved audio is temporarily unavailable.');
 const missing = () => new TakeError(404, 'Take or preparation unavailable.');
+const expired = () => new TakeError(410, 'Preparation unavailable. Prepare and audition this draft again.');
 
 // A previously published pair can still be served from its stable PCM envelope
 // when this editor cannot interpret the performance that created it.
@@ -70,7 +71,7 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
       throw unavailable();
     }
     if (scope === 'preparations' && !allowExpired && record.expiresAt <= Date.now()) {
-      throw new TakeError(410, 'Preparation expired. Prepare and audition this draft again.');
+      throw expired();
     }
     return record;
   }
@@ -125,7 +126,11 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
     const key = 'requests/' + hash(requestId);
     let binding = await document(key);
     if (!binding) {
-      const preparation = await saved('preparations', preparationId);
+      const preparation = await saved('preparations', preparationId).catch(error => {
+        // Cleanup can already have removed the expired private manifest.
+        if (error.status === 404) throw expired();
+        throw error;
+      });
       normalizeRecipe(preparation.recipe, writeLimits);
       await store.putIfAbsent(key, JSON.stringify({preparationId, id: opaqueId()}));
       binding = await document(key);

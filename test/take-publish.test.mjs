@@ -182,7 +182,7 @@ test('input limits, invalid parents and unknown IDs fail without publishing or e
     assert.equal((await get(origin, '/v1/passage?' + new URLSearchParams({...recipe.passage, ...overrides}))).status, 400);
   }
   assert.equal((await post(origin, '/v1/preparations', 'x'.repeat(70000))).status, 413);
-  assert.equal((await post(origin, '/v1/takes', {preparationId: 'a'.repeat(32), requestId: randomUUID()})).status, 404);
+  assert.equal((await post(origin, '/v1/takes', {preparationId: 'a'.repeat(32), requestId: randomUUID()})).status, 410);
   assert.equal((await get(origin, '/v1/takes/bad!')).status, 404);
   assert.equal((await get(origin, '/v1/takes/' + 'b'.repeat(32))).status, 404);
   assert.equal((await get(origin, '/v1/audio/' + 'c'.repeat(64))).status, 404);

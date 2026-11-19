@@ -112,6 +112,8 @@ test('offline cleanup reclaims expired and orphaned staging, preserving active, 
   await reclaimTakeStaging(root);
   const fresh = setup(root);
   assert.equal(await fresh.store.read('preparations/' + expired.preparationId), null);
+  await assert.rejects(fresh.repo.publish({preparationId: expired.preparationId, requestId: 'after-cleanup'}), {status: 410});
+  await assert.rejects(fresh.repo.take(expired.preparationId), {status: 404});
   assert.equal(await fresh.store.read('prepared-audio/' + expired.take.sha256), null);
   assert.equal(await fresh.store.read(orphan), null);
   await assert.rejects(readFile(temp), {code: 'ENOENT'});
