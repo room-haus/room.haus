@@ -7,7 +7,7 @@ import {getCatalog, loadPassage, serviceMissing} from '../takes/api.ts';
 import type {Catalog} from '../takes/api.ts';
 import {renderPublication} from '../takes/Publication.tsx';
 import {PlaybackScope} from '../takes/PlaybackScope.tsx';
-import type {RecipeV1} from '../takes/recipe.mjs';
+import type {SpaceRecipeV1} from '../takes/recipe.mjs';
 import {normalizeRecipe, SPACE_TAKE_DEFAULTS} from '../takes/recipe.mjs';
 import './space.css';
 
@@ -33,7 +33,7 @@ function ContinuousStudy({onClose}:{onClose:()=>void}){
 
 
 export default function AudioSpace({onClose}: {onClose: () => void}) {
-  const [retained, setRetained] = useState<RecipeV1>();
+  const [retained, setRetained] = useState<SpaceRecipeV1>();
   const [study, setStudy] = useState(false), [catalog, setCatalog] = useState<Catalog>();
   const [failure, setFailure] = useState<'missing' | 'retry'>(), [attempt, setAttempt] = useState(0);
   useEffect(() => {

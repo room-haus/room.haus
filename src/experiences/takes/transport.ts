@@ -1,6 +1,6 @@
 import {captureFragment} from './fragment-asset.mjs';
 import {decodePCM} from './pcm.ts';
-import type {RecipeV1, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
+import type {SpaceRecipeV1, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
 import {renderTake} from './render.mjs';
 import {SPACE_TAKE_OUTPUT_GAIN, SPACE_TAKE_PROCESSOR_NAME, SPACE_TAKE_WORKLET_URL} from './space-render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
@@ -31,13 +31,13 @@ export class TakeTransport {
   ready = false;
   original = false;
 
-  private recipe: RecipeV1;
+  private recipe: SpaceRecipeV1;
   private pcm: ArrayBuffer;
   readonly recording: boolean;
   private offset: number;
   private events: TransportEvents;
 
-  constructor(recipe: RecipeV1, pcm: ArrayBuffer, recording: boolean, offset: number, events: TransportEvents) {
+  constructor(recipe: SpaceRecipeV1, pcm: ArrayBuffer, recording: boolean, offset: number, events: TransportEvents) {
     this.recipe = recipe;
     this.pcm = pcm;
     this.recording = recording;

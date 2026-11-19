@@ -1,5 +1,5 @@
 import React, {useMemo, useRef, useState} from 'react';
-import type {RecipeV1, SpaceGesture} from './recipe.mjs';
+import type {SpaceRecipeV1, SpaceGesture} from './recipe.mjs';
 import {editGesture} from './edits.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
 
@@ -18,7 +18,7 @@ function ThrowRow({gesture, disabled, apply}: {gesture: SpaceGesture; disabled: 
     <button disabled={disabled || !seconds} onClick={() => apply({type: 'move', id: gesture.id, startFrame: Math.round(Number(seconds) * RATE)})}>Move</button>
     <button disabled={disabled} onClick={() => apply({type: 'remove', id: gesture.id})}>Remove</button></li>;
 }
-export function Timeline({recipe, maxGestures, disabled, position, setPosition, apply}: {recipe: RecipeV1; maxGestures: number; disabled: boolean; position: number;
+export function Timeline({recipe, maxGestures, disabled, position, setPosition, apply}: {recipe: SpaceRecipeV1; maxGestures: number; disabled: boolean; position: number;
   setPosition: (frame: number) => void; apply: (op: Parameters<typeof editGesture>[1]) => void}) {
   const length = recipe.passage.endFrame - recipe.passage.startFrame;
   return <section className="take-timeline" aria-label="Timeline"><h2>Throw timeline</h2>
@@ -56,7 +56,7 @@ function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGe
     <span aria-hidden="true">{index + 1}</span></button></>;
 }
 
-export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?: ArrayBuffer; recipe: RecipeV1; frame: number; select: (f: number) => void; move: (id: string, startFrame: number) => void; disabled: boolean}) {
+export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?: ArrayBuffer; recipe: SpaceRecipeV1; frame: number; select: (f: number) => void; move: (id: string, startFrame: number) => void; disabled: boolean}) {
   const length = recipe.passage.endFrame - recipe.passage.startFrame;
   const levels = useMemo(() => {
     if (!pcm) return [];

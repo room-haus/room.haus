@@ -1,3 +1,4 @@
+import {createMemoryRender} from './memory-render.mjs';
 import {normalizeRecipe} from './recipe.mjs';
 import {createSpaceRender, SPACE_TAKE_GUARD} from './space-render.mjs';
 import {TAKE_SOURCE_BYTES_PER_FRAME, TAKE_SOURCE_CHANNELS, TAKE_SOURCE_FORMAT, TAKE_SOURCE_SAMPLE_RATE} from './source.mjs';
@@ -12,9 +13,9 @@ const quantize = value => Math.max(-guardPCM, Math.min(guardPCM, Math.round(valu
 /**
  * Prepare the exact half-open passage for audition and publication.
  * Version 1 Space recipes have no material dependencies.
- * @param {unknown} input @param {SourcePCM} sourcePCM @param {unknown} [_materials]
+ * @param {unknown} input @param {SourcePCM} sourcePCM @param {ReadonlyMap<string, Uint8Array>} [materials]
  */
-export function renderTake(input, sourcePCM, _materials) {
+export function renderTake(input, sourcePCM, materials) {
   const recipe = normalizeRecipe(input);
   const frameCount = recipe.passage.endFrame - recipe.passage.startFrame;
   const {pcm, sampleRate, channels, format} = sourcePCM ?? {};
@@ -24,7 +25,9 @@ export function renderTake(input, sourcePCM, _materials) {
     throw new RangeError('Source PCM must match the selected passage.');
   }
 
-  const engine = createSpaceRender(sampleRate, recipe.rendererVersion, frameCount, recipe.gestures);
+  const engine = recipe.experiment === 'audio-memory'
+    ? createMemoryRender(recipe.gestures, frameCount, materials)
+    : createSpaceRender(sampleRate, recipe.rendererVersion, frameCount, recipe.gestures);
   const dry = new Uint8Array(pcm.byteLength);
   const take = new Uint8Array(pcm.byteLength);
   const source = new DataView(pcm.buffer, pcm.byteOffset, pcm.byteLength);

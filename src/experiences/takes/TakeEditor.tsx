@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import type {RecipeV1, SpaceTakeSettings, TakePassage} from './recipe.mjs';
+import type {SpaceRecipeV1, SpaceTakeSettings, TakePassage} from './recipe.mjs';
 import {normalizeRecipe, samePassage} from './recipe.mjs';
 import {editGesture, replaceTakePassage} from './edits.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
@@ -12,9 +12,9 @@ export type Bounds = {startFrame: number; endFrame: number};
 export type SourceOverview = {id: string; revision: string; totalFrames: number; curatedRange: Bounds; denseRange: Bounds;
   peaks: {framesPerPeak: number; values: number[][]}[]};
 export type LoadPassage = (passage: TakePassage, signal: AbortSignal) => Promise<ArrayBuffer>;
-export type PublicationControls = (props: {recipe: RecipeV1; busy: boolean; stop: () => void}) => React.ReactNode;
-type EditorProps = {draft: RecipeV1; source: SourceOverview; loadPassage: LoadPassage; maxPassageFrames: number; maxGestures: number;
-  onDraftChange?: (draft: RecipeV1) => void; renderPublication?: PublicationControls; header?: React.ReactNode};
+export type PublicationControls = (props: {recipe: SpaceRecipeV1; busy: boolean; stop: () => void}) => React.ReactNode;
+type EditorProps = {draft: SpaceRecipeV1; source: SourceOverview; loadPassage: LoadPassage; maxPassageFrames: number; maxGestures: number;
+  onDraftChange?: (draft: SpaceRecipeV1) => void; renderPublication?: PublicationControls; header?: React.ReactNode};
 
 const message = (error: unknown) => error instanceof Error ? error.message : 'The passage could not load.';
 
@@ -80,10 +80,10 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
   const owner = useRef<TakeTransport | null>(null);
   const request = useRef<AbortController | null>(null);
   const padOwner = useRef<string | number | null>(null);
-  const change = (next: RecipeV1) => { current.current = next; setRecipe(next); onDraftChange?.(next); };
+  const change = (next: SpaceRecipeV1) => { current.current = next; setRecipe(next); onDraftChange?.(next); };
   const stop = () => owner.current?.end();
 
-  const load = async (next: RecipeV1) => {
+  const load = async (next: SpaceRecipeV1) => {
     if (owner.current) return;
     const previous = current.current;
     request.current?.abort();

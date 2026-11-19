@@ -17,7 +17,8 @@ function Listener({saved}: {saved: SavedTake}) {
   const draft = useMemo(() => {
     if (saved.editable === false) return null;
     try {
-      return forkTake({id: saved.id, recipe: normalizeRecipe(saved.recipe)});
+      const recipe = normalizeRecipe(saved.recipe);
+      return recipe.experiment === 'audio-space' ? forkTake({id: saved.id, recipe}) : null;
     } catch {
       return null;
     }
