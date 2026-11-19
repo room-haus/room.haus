@@ -4,7 +4,9 @@ import {stat} from 'node:fs/promises';
 import {resolve, sep, extname} from 'node:path';
 import {runInNewContext} from 'node:vm';
 import {cloudFrontSource} from './routing.mjs';
+import {localTakeService} from './local-take-service.mjs';
 
+const takes = await localTakeService(process.env);
 const route = runInNewContext(cloudFrontSource() + '\nhandler');
 const root = resolve('dist');
 const types = {
@@ -26,11 +28,12 @@ const types = {
 };
 const server = createServer(async (req, res) => {
   try {
+    const url = new URL(req.url, 'http://localhost');
+    if (takes && url.pathname.startsWith('/v1/')) return await takes(req, res, url);
     if (req.method !== 'HEAD' && req.method !== 'GET') {
       res.writeHead(405).end();
       return;
     }
-    const url = new URL(req.url, 'http://localhost');
     const result = route({
       request: {
         uri: url.pathname,

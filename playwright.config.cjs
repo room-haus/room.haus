@@ -15,5 +15,10 @@ module.exports = defineConfig({
     {name: 'android', use: {...devices['Pixel 7'], browserName: 'chromium'}},
     {name: 'mobile-webkit', use: {...devices['iPhone 13'], browserName: 'webkit'}},
   ],
-  webServer: {command: 'node scripts/serve.mjs', url: baseURL + '/', env: {PORT: new URL(baseURL).port || '4173'}, reuseExistingServer: !process.env.CI},
+  webServer: {
+    command: 'node scripts/serve.mjs',
+    url: baseURL + '/',
+    env: {PORT: new URL(baseURL).port || '4173', ROOM_TAKE_FIXTURE: process.env.ROOM_TAKE_SOURCE_DIR ? '0' : '1'},
+    reuseExistingServer: !process.env.CI,
+  },
 });
