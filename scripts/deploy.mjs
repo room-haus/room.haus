@@ -35,6 +35,7 @@ const directories = [
   ...entrancePages.slice(1).map(({path}) => path),
   '/mixes/',
   '/releases/',
+  '/takes/',
   ...records.map(routeOf),
   ...records.filter((record) => record.slug).map((record) => '/releases/' + record.id + '/'),
 ];

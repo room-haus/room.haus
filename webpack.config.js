@@ -9,8 +9,9 @@ const sections = [{path: '/mixes/', title: 'S/S 2017-2019'}, ...entrancePages.sl
 const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
-module.exports = (_env, argv) => ({
-  entry: {main: './src/index.js', labs: './src/labs/index.js'},
+const site = (_env, argv) => ({
+  name: 'site',
+  entry: {main: './src/index.js', labs: './src/labs/index.js', takes: './src/experiences/takes/TakePage.tsx'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -32,6 +33,7 @@ module.exports = (_env, argv) => ({
     },
     historyApiFallback: {
       rewrites: [
+        {from: /^\/takes\/?$/, to: '/takes/index.html'},
         {from: /^\/labs\/?$/, to: '/labs/index.html'},
         {from: /^\/ss-2026\/?$/, to: '/fw-2026/index.html'},
         ...entrancePages.map(({path}) => ({from: new RegExp('^' + path.slice(0, -1) + '/?$'), to: path + 'index.html'})),
@@ -89,6 +91,12 @@ module.exports = (_env, argv) => ({
       {from: path.join(modelRoot, 'MX018/environment.dds'), to: 'models/MX018/environment.dds'},
     ]}),
     new HtmlWebpackPlugin({
+      filename: 'takes/index.html',
+      chunks: ['takes'],
+      template: './src/experiences/takes/index.html',
+      favicon: './src/favicon.png',
+    }),
+    new HtmlWebpackPlugin({
       filename: 'labs/index.html',
       chunks: ['labs'],
       template: './src/labs/index.html',
@@ -130,3 +138,23 @@ module.exports = (_env, argv) => ({
   },
   stats: 'errors-warnings',
 });
+
+module.exports = (env, argv) => [
+  site(env, argv),
+  {
+    // AudioWorkletGlobalScope has no DOM, development socket or shared site runtime.
+    name: 'space-take-worklet',
+    dependencies: ['site'],
+    target: false,
+    devtool: false,
+    entry: {'space-take-v1':'./src/experiences/takes/space-worklet.mjs', 'memory-take-v1':'./src/experiences/takes/memory-worklet.mjs'},
+    output: {
+      path: path.join(__dirname, 'dist'),
+      publicPath: '/',
+      filename: 'worklets/[name].js',
+      chunkFormat: false,
+      chunkLoading: false,
+    },
+    stats: 'errors-warnings',
+  },
+];

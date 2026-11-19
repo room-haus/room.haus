@@ -5,7 +5,7 @@ import {records, releases, routeOf} from './catalog.mjs';
 // Rewriting to distinct object keys makes the cached HTML independent of the query-string policy.
 export function cloudFrontSource(prefix = '') {
   if (prefix && !/^\/_releases\/[a-f0-9]{40}(?:\/[a-f0-9]{64})?$/.test(prefix)) throw Error('Invalid release prefix');
-  const pages = [...entrancePages.slice(1).map(({path}) => path), '/mixes/', '/releases/', '/labs/', ...records.map(routeOf)].map((path) => path.slice(0, -1));
+  const pages = [...entrancePages.slice(1).map(({path}) => path), '/mixes/', '/releases/', '/labs/', '/takes/', ...records.map(routeOf)].map((path) => path.slice(0, -1));
   return `var prefix = ${JSON.stringify(prefix)};
 var aliases = ${JSON.stringify(Object.fromEntries(releases.map((record) => [record.id, routeOf(record).slice(0, -1)])))};
 var pages = ${JSON.stringify(Object.fromEntries(pages.map((path) => [path, 1])))};

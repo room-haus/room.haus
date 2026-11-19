@@ -1,22 +1,11 @@
 import type {ModuleFactory,ResearchAudio} from '../shared/audio/research/ResearchAudio.ts';
 
-export const MEMORY_SECONDS=4,REPEAT_SECONDS=12,GRAIN_SECONDS=.2,STEP=.0625;
+import {windowSamples, grainRange, memoryTick, REPEAT_SECONDS, ONSET_SECONDS} from './material.mjs';
+export {windowSamples, grainChoice, REPEAT_SECONDS, GRAIN_SECONDS, STEP} from './material.mjs';
+export const MEMORY_SECONDS=4;
 const clamp=(n:number|undefined,min:number,max:number,fallback:number)=>Number.isFinite(n)?Math.max(min,Math.min(max,n!)):fallback;
 export function memorySettings(p:Readonly<Record<string,number>>){
   return {length:clamp(p.length,.25,2,1),density:Math.round(clamp(p.density,1,8,3)),mode:Math.round(clamp(p.mode,0,1,0))};
-}
-/** Short equal boundaries for repetition; Hann for overlapping grains. */
-export function windowSamples(input:Float32Array,rate:number,hann:boolean){
-  const output=new Float32Array(input.length),fade=Math.max(1,Math.round(.015*rate));
-  for(let i=0;i<input.length;i++){
-    const gain=hann?.5-.5*Math.cos(2*Math.PI*i/Math.max(1,input.length-1)):Math.min(1,i/fade,(input.length-1-i)/fade);
-    output[i]=(Number.isFinite(input[i])?input[i]:0)*gain;
-  }
-  return output;
-}
-/** Stateless seed: skipped ticks never change later choices. */
-export function grainChoice(index:number){
-  let n=(Math.floor(index)+0x529a)>>>0;n=Math.imul(n^(n>>>16),0x45d9f3b);n=Math.imul(n^(n>>>16),0x45d9f3b);return (n^(n>>>16))>>>29;
 }
 export function prepareFragment(context:BaseAudioContext,source:AudioBuffer){
   const copy=(offset:number,length:number,hann:boolean)=>{
@@ -24,8 +13,11 @@ export function prepareFragment(context:BaseAudioContext,source:AudioBuffer){
     for(let c=0;c<buffer.numberOfChannels;c++)buffer.copyToChannel(windowSamples(source.getChannelData(c).subarray(offset,offset+length),source.sampleRate,hann),c);
     return buffer;
   };
-  const length=Math.min(source.length,Math.floor(2*source.sampleRate)),grainLength=Math.min(length,Math.floor(GRAIN_SECONDS*source.sampleRate));
-  return {repeat:copy(0,length,false),grains:Array.from({length:8},(_,i)=>copy(Math.round((length-grainLength)*i/7),grainLength,true))};
+  const length=Math.min(source.length,Math.floor(2*source.sampleRate));
+  return {repeat:copy(0,length,false),grains:Array.from({length:8},(_,i)=>{
+    const {offset,frames}=grainRange(length,source.sampleRate,i);
+    return copy(offset,frames,true);
+  })};
 }
 
 /** Fragment lifetime belongs to the shared module scope, never to a second source. */
@@ -75,26 +67,20 @@ export class MemoryFragment {
   play(mediaTime:number){
     this.reconcile();if(!this.active||!this.prepared||!this.captured||this.pending)return false;
     const owner=this.owner,context=owner.context!,settings={...this.settings},prepared=this.prepared;
-    this.cancel?.();owner.clock.setTempo(240);owner.clock.anchor(mediaTime+.025);this.generation=owner.diagnostics().generation;
+    this.cancel?.();owner.clock.setTempo(240);owner.clock.anchor(mediaTime+ONSET_SECONDS);this.generation=owner.diagnostics().generation;
     this.until=context.currentTime+REPEAT_SECONDS;this.playing=true;
-    const interval=Math.ceil(this.captured.duration/STEP*(1+(8-settings.density)/4));
-    const epoch=this.epoch,origin=context.currentTime;
+    const duration=this.captured.duration;
+    const epoch=this.epoch;
     // The shared clock intentionally drops elapsed grid events, including zero.
     // Give the gesture a prompt, windowed onset instead of waiting one interval.
-    owner.playBuffer(settings.mode===0?prepared.repeat:prepared.grains[0],context.currentTime+.025,settings.mode===0?.5:.36);
+    owner.playBuffer(settings.mode===0?prepared.repeat:prepared.grains[0],context.currentTime+ONSET_SECONDS,settings.mode===0?.5:.36);
     this.cancel=owner.clock.repeat(.25,(at,_generation,index)=>{
       if(epoch!==this.epoch)return;
       if(at>=this.until){if(context.currentTime>=this.until){owner.stop('Memory finished; fragment discarded. Hearing Original.');this.dispose();}return;}
       if(index===0)return;
-      let buffer:AudioBuffer;
-      if(settings.mode===0){if(index%interval!==0)return;buffer=prepared.repeat;}
-      else{
-        if(index%Math.ceil(8/settings.density)!==0)return;
-        // A slowly traversed fragment with seeded local scatter. Original pitch,
-        // no beat/key detection, no claim of high-fidelity time stretching.
-        const scan=Math.min(7,Math.floor((at-origin)/REPEAT_SECONDS*8));
-        buffer=prepared.grains[Math.max(0,Math.min(7,scan+grainChoice(index)%3-1))];
-      }
+      const grain=memoryTick(settings.mode===0?'repeat':'dissolve',settings.density,duration,index);
+      if(grain===null)return;
+      const buffer=grain===-1?prepared.repeat:prepared.grains[grain];
       if(at+buffer.duration<=this.until)owner.playBuffer(buffer,at,settings.mode===0?.5:.36);
     });
     return true;

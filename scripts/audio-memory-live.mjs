@@ -9,7 +9,7 @@ for(const [name,engine] of [['chromium',chromium],['webkit',webkit]]){
       const native=AudioBuffer.prototype.copyToChannel;AudioBuffer.prototype.copyToChannel=function(data,...args){let peak=0,sum=0;for(const v of data){peak=Math.max(peak,Math.abs(v));sum+=v*v;}window.__memorySamples.push({length:data.length,rate:this.sampleRate,peak,rms:Math.sqrt(sum/data.length)});return native.call(this,data,...args);};
       const Native=window.AudioContext;if(Native)window.AudioContext=class extends Native{constructor(...args){super(...args);window.__memoryContexts.push(this);}};
     });
-    await page.goto((process.env.ROOM_TEST_ORIGIN||'http://127.0.0.1:4266')+'/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await page.getByRole('button',{name:'Play source',exact:true}).click();
+    await page.goto((process.env.ROOM_TEST_ORIGIN||'http://127.0.0.1:4266')+'/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await page.getByRole('button',{name:'Open live fragment study'}).click();await page.getByRole('button',{name:'Play source',exact:true}).click();
     await page.waitForFunction(()=>document.querySelector('[data-audio-research]')?.dataset.playing==='true',{},{timeout:25000});
     const listen=page.getByRole('button',{name:'Start recent listening',exact:true});
     try{await listen.waitFor({state:'visible',timeout:2000});await page.waitForFunction(()=>!Array.from(document.querySelectorAll('button')).find(b=>b.textContent==='Start recent listening')?.disabled,{},{timeout:5000});}catch{/* Native HLS may honestly remain unsupported. */}

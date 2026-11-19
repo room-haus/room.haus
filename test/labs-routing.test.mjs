@@ -21,3 +21,16 @@ test('the retired Underlevel URLs never resolve to a standalone page', () => {
     }
   }
 });
+
+test('a forwarded take resolves to the public shell with its ID in every release', () => {
+  for (const prefix of ['', '/_releases/' + 'a'.repeat(40) + '/' + 'b'.repeat(64)]) {
+    const handler = runInNewContext(cloudFrontSource(prefix) + '\nhandler');
+    const querystring = {id: {value: 'ab'.repeat(16)}};
+    for (const uri of ['/takes', '/takes/']) {
+      const request = handler({request: {uri, querystring}});
+      assert.equal(request.uri, prefix + '/takes/index.html');
+      assert.equal(request.querystring.id.value, querystring.id.value);
+    }
+    assert.equal(handler({request: {uri:'/takes/unknown', querystring}}).statusCode, 404);
+  }
+});

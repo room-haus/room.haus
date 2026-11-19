@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {ResearchHost} from '../shared/audio/research/ResearchHost.tsx';
 import type {ResearchAudio} from '../shared/audio/research/ResearchAudio.ts';
 import {delaySeconds,spaceDefaults,spaceProcessor} from './processor.ts';
+import {TakeLauncher} from '../takes/TakeLauncher.tsx';
 import './space.css';
 
 const configure=(research:ResearchAudio)=>{research.install('processor',spaceProcessor);research.update('processor',spaceDefaults);research.setLevel(.5);};
@@ -20,6 +21,11 @@ function SpaceControls({research,disabled}:{research:ResearchAudio;disabled:bool
     <p className="research-note">{delay?'Filtered repeats: 80 Hz–6.5 kHz, feedback capped at 48%.':'Close / air: two generated responses, 0.18 / 0.9 seconds. Decay blends their tails.'} The dry mix stays present. Delay / Reverb chooses the effect; Processed turns it on. Compare sparse gaps with dense transients; more space can hide detail.</p>
   </div>;
 }
-export default function AudioSpace({onClose}:{onClose:()=>void}){
+function ContinuousStudy({onClose}:{onClose:()=>void}){
   return <ResearchHost title="Space & echoes" description="Press Play source, then Processed to hear filtered echoes or a compact reverb. Raise Effect level to explore the space, then compare with Original. Listen for intimacy and rhythmic space, and for the point where detail starts to blur." onClose={onClose} configure={configure} showReferenceTools={false} controls={props=><SpaceControls {...props}/>}/>;
+}
+
+
+export default function AudioSpace({onClose}: {onClose: () => void}) {
+  return <TakeLauncher experiment="audio-space" onClose={onClose} study={<ContinuousStudy onClose={onClose}/>}/>;
 }

@@ -1,0 +1,66 @@
+.take-editor,.take-launch { box-sizing:border-box; min-height:100%; padding:1rem clamp(1rem,5vw,5rem) 3rem; background:#f4f3ec; color:#30352e; font:1rem/1.45 'Neue Haas','Helvetica Neue',Helvetica,Arial,sans-serif; overflow-wrap:anywhere }
+.take-editor *, .take-launch * { box-sizing:border-box }
+.take-body { max-width:52rem; margin:auto }
+.take-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; border-bottom:1px solid #b8bcb0; padding-bottom:.5rem }
+.take-header span,.take-bounds { font:.72rem/1.5 var(--mono,monospace); letter-spacing:.04em }
+.take-editor h1,.take-launch h1 { font-size:clamp(2.5rem,6vw,5rem); font-weight:400; line-height:1; letter-spacing:-.065em; margin:1.75rem 0 .35rem }
+.take-byline { margin:0; color:#555b50 }.take-byline span { white-space:nowrap }
+.take-meter { display:flex; gap:.5rem; align-items:baseline; margin:1.5rem 0 .25rem; font-variant-numeric:tabular-nums }
+.take-meter span:first-child { font-size:2rem; letter-spacing:-.045em }.take-meter span:last-child { color:#565c53 }
+.take-wave,.take-overview { position:relative; height:5rem; color:#2448c4; background:#e6e8dc; border-inline:1px solid #8b9683; overflow:hidden }
+.take-wave svg,.take-overview svg { width:100%; height:100%; display:block }
+.take-wave i,.take-overview i { position:absolute; height:100%; top:0; min-width:2px; border-inline:1px solid #2448c4; background:rgb(36 72 196 / 21%); pointer-events:none }
+.take-wave b { position:absolute; top:0; bottom:0; width:2px; background:#30352e }
+.take-wave input { position:absolute; inset:0; margin:0; width:100%; height:100%; opacity:0; cursor:crosshair }
+.take-wave:focus-within,.take-editor :focus-visible,.take-launch :focus-visible { outline:3px solid #2448c4; outline-offset:3px }
+.take-bounds,.take-range summary { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:.35rem }
+.take-bounds { padding:.35rem 0 1rem; color:#52584f }
+.take-editor button,.take-launch button,.take-editor input { min-height:44px; font:inherit; color:inherit; min-width:0; max-width:100%; accent-color:#2448c4 }
+.take-editor button,.take-launch button { padding:.58rem .88rem; cursor:pointer; background:transparent; border:1px solid #979f90; border-radius:0 }
+.take-editor .take-primary,.take-editor .take-pad[aria-pressed=true] { color:#fff; background:#2448c4; border-color:#2448c4 }
+.take-editor button:disabled { opacity:.55; cursor:default }.take-pad { touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none }
+.take-actions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.45rem }.take-actions button { min-height:3.25rem }
+.take-editor [role=status] { margin:.65rem 0 .15rem; font-weight:600 }.take-hint,.take-timeline p,.take-range p { margin:.2rem 0 1rem; color:#565c53 }
+.take-editor h2 { font-size:1.35rem; letter-spacing:-.025em; margin:0 0 .9rem; font-weight:500 }
+.take-editor details,.take-timeline { border-top:1px solid #bcc1b3; margin-top:.65rem }.take-editor summary { padding:.8rem 0; font-weight:500; min-height:44px; cursor:pointer }
+.take-range summary { display:list-item }.take-range summary span { display:inline-block; margin-inline-start:.5rem; font-size:.82rem; font-weight:400; font-variant-numeric:tabular-nums }
+.take-overview { height:3rem; color:#717867 }.take-row { display:flex; align-items:end; flex-wrap:wrap; gap:.6rem; margin:.7rem 0 }
+.take-row label { flex:1 1 8rem }.take-editor label { display:grid; gap:.2rem; font-size:.86rem }.take-editor input[type=number] { padding:.4rem; width:100%; background:transparent; border:1px solid #989f92; font-variant-numeric:tabular-nums }
+.take-settings label { grid-template-columns:1fr auto }.take-settings input { grid-column:1/-1 }.take-editor input[type=range] { width:100% }
+.take-timeline { padding:1rem 0 }.take-timeline ol { margin:0; padding:0; list-style:none }.take-timeline li { border-top:1px solid #c8ccbe; display:flex; align-items:end; gap:.5rem; flex-wrap:wrap; padding:.65rem 0 }
+.take-timeline li span { flex-basis:100%; font-variant-numeric:tabular-nums }.take-timeline li label { min-width:6rem; flex:1 }
+.take-error { color:#842d19 }.take-confirm { padding:.75rem 0 }.take-launch section { max-width:52rem; margin:auto }
+.space-study-link { display:block; border-top:1px solid #a7ad9f; background:#f4f3ec; color:#30352e; padding:1rem clamp(1rem,5vw,5rem) }
+.space-study-link button { font:inherit; min-height:44px; padding:.6rem 1rem; color:#30352e; background:transparent; border:1px solid #979f90; cursor:pointer }
+.take-wave .take-handle { position:absolute; top:0; height:44px; min-width:44px; width:44px; padding:0; background:transparent; border:0; color:white; touch-action:none; cursor:grab }
+.take-wave .take-handle span { display:block; width:24px; margin:auto; background:#2448c4; padding:.1rem; font:.75rem/1.5 monospace }
+.take-overview input { position:absolute; inset:0; margin:0; width:100%; height:100%; opacity:0; cursor:crosshair }
+.take-overview:focus-within { outline:3px solid #2448c4; outline-offset:2px }
+.take-range input:not([type]) { padding:.5rem; border:1px solid #979f90; border-radius:0; background:transparent }
+.take-wave .take-throw { min-width:1px; border:0; box-shadow:inset 1px 0 #2448c4 }
+.take-page {margin:0;background:#f4f3ec}
+.take-public {min-height:100vh}
+.take-public .take-header {max-width:68rem;margin:auto}
+.take-public .take-header a {color:inherit;text-decoration:none;font-weight:750;letter-spacing:-.075em;font-size:1.75rem}
+.take-public .take-listener {padding:clamp(.75rem,5vh,4rem) 0 1.5rem}
+.take-public .take-listener h1 {margin-top:1rem}
+.take-public .take-editor {padding:1rem 0;border-top:1px solid #a7ad9f}
+.take-editor .take-edit-title {font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.045em;margin:1rem 0 .35rem}
+.take-compare .take-actions {margin:.6rem 0}
+.take-compare button[aria-pressed=true] {border:2px solid #2448c4;color:#1839a5;font-weight:600}
+.take-publish {border-top:1px solid #979f90;padding:1.25rem 0}
+.take-publish p {margin:.65rem 0}
+.take-shared {display:flex;align-items:center;flex-wrap:wrap;gap:.75rem}
+.take-shared input {flex-basis:100%;padding:.5rem}
+.take-editor a {color:#193da5}
+.take-editor select { min-height:44px; min-width:0; font:inherit; color:inherit; background:#f4f3ec; border:1px solid #979f90 }
+.take-timeline .take-proof,.take-timeline .take-row { flex-basis:100%; width:100%; margin:0 }
+.take-proof summary { font-variant-numeric:tabular-nums; }
+.take-proof code { overflow-wrap:anywhere }
+
+.take-timeline li > button[aria-pressed] { width:100%; text-align:left; font-variant-numeric:tabular-nums }
+.take-timeline li > button[aria-pressed=true] { border-color:#2448c4; color:#1839a5 }
+
+.take-meter { flex-wrap:wrap }
+.take-meter span { white-space:nowrap }
+.take-memory-actions { grid-template-columns:repeat(auto-fit,minmax(min(100%,6.5em),1fr)) }
