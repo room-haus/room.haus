@@ -9,11 +9,12 @@ const stamp=(time:number)=>`${Math.floor(time/60)}:${String(Math.floor(time%60))
 export interface ResearchHostProps {
   title:string;description:string;onClose:()=>void;
   configure:(research:ResearchAudio)=>void;
-  controls?:(props:{research:ResearchAudio;disabled:boolean})=>ReactNode;
+  controls?:(props:{research:ResearchAudio;disabled:boolean;readMediaTime:()=>number})=>ReactNode;
   showReferenceTools?:boolean;
+  armLabel?:string|null;processedLabel?:string;levelLabel?:string;
 }
 /** Sound-first presentation of the same ListeningSession and modal, with no renderer. */
-export function ResearchHost({title,description,onClose,configure,controls,showReferenceTools=true}:ResearchHostProps){
+export function ResearchHost({title,description,onClose,configure,controls,showReferenceTools=true,armLabel='Processed',processedLabel='Processed',levelLabel='Effect level'}:ResearchHostProps){
   const [source,setSource]=useState('mix'),[session,setSession]=useState<ListeningSession|null>(null);
   const [,refresh]=useState(0),[resetCount,setResetCount]=useState(0),[captureUrl,setCaptureUrl]=useState('');
   const [capturing,setCapturing]=useState(false);
@@ -38,14 +39,14 @@ export function ResearchHost({title,description,onClose,configure,controls,showR
       <label className="research-position"><span>Source position <output>{stamp(playback?.time||0)} / {stamp(playback?.duration||0)}</output></span><input aria-label="Source position" type="range" min="0" max={playback?.duration||1} step=".1" value={Math.min(playback?.time||0,playback?.duration||1)} disabled={!playback?.duration} onChange={event=>{session!.seek(Number(event.target.value));refresh(n=>n+1);}}/></label>
     </section>
     <section className="research-comparison" aria-label="Listening comparison">
-      <div className="research-buttons"><button aria-pressed={!armed} onClick={()=>research?.original()}>Original</button><button aria-pressed={armed} disabled={disabled} onClick={()=>research?.arm()}>Processed</button><button onClick={()=>{research?.reset();if(research)configure(research);setResetCount(n=>n+1);setCapturing(false);setCaptureUrl('');}}>Reset effect</button><button className="research-stop" onClick={()=>{research?.stop();setCapturing(false);}}>Stop effects</button></div>
+      <div className="research-buttons"><button aria-pressed={!armed} onClick={()=>research?.original()}>Original</button>{armLabel!==null&&<button aria-pressed={armed} disabled={disabled} onClick={()=>research?.arm()}>{armLabel}</button>}<button onClick={()=>{research?.reset();if(research)configure(research);setResetCount(n=>n+1);setCapturing(false);setCaptureUrl('');}}>Reset effect</button><button className="research-stop" onClick={()=>{research?.stop();setCapturing(false);}}>Stop effects</button></div>
       <p role="status">{playback?.error||diagnostics?.reason||'Choose a source, then press Play source.'}</p>
-      <p className="research-note">Hearing <strong>{armed?'Processed':'Original'}</strong>{source==='mix'?' · MX029':' · generated reference'}. Effects start off. Stop effects keeps the source playing.</p>
+      <p className="research-note">{armed&&processedLabel!=='Processed'?'Layer state: ':'Hearing '}<strong>{armed?processedLabel:'Original'}</strong>{source==='mix'?' · MX029':' · generated reference'}. Effects start off. Stop effects keeps the source playing.</p>
     </section>
     <section className="research-control-grid" aria-label="Experiment controls">
-      <label>Effect level<input aria-label="Effect level" type="range" min="0" max="1" step=".05" defaultValue=".5" key={resetCount} disabled={disabled} onChange={event=>research?.setLevel(Number(event.target.value))}/></label>
-      {research&&<div key={'controls'+resetCount}>{controls?.({research,disabled})}</div>}
-      <div><span className="research-eyebrow">OUTPUT / SAME HEADROOM IN BOTH MODES</span><p className="research-meter">{diagnostics?.peak?`${(20*Math.log10(diagnostics.peak)).toFixed(1)} dBFS peak`:'— dBFS peak'}</p><p className="research-note">Fixed −6 dB headroom. Guard ceiling −0.18 dBFS. Peak is sampled, not a loudness match.</p></div>
+      <label>{levelLabel}<input aria-label={levelLabel} type="range" min="0" max="1" step=".05" defaultValue=".5" key={resetCount} disabled={disabled} onChange={event=>research?.setLevel(Number(event.target.value))}/></label>
+      {research&&<div key={'controls'+resetCount}>{controls?.({research,disabled,readMediaTime:()=>session!.snapshot().time})}</div>}
+      <div><span className="research-eyebrow">{capable?'OUTPUT / SAME HEADROOM IN BOTH MODES':'OUTPUT / ORIGINAL'}</span><p className="research-meter">{diagnostics?.peak?`${(20*Math.log10(diagnostics.peak)).toFixed(1)} dBFS peak`:'— dBFS peak'}</p><p className="research-note">{capable?'Fixed −6 dB headroom. Guard ceiling −0.18 dBFS. Peak is sampled, not a loudness match.':'Matched output metering unavailable for this source/browser. Original playback is preserved.'}</p></div>
     </section>
     {showReferenceTools&&<section className="research-control-grid research-tools" aria-label="Shared reference tools">
       <div><h2>Clock check</h2><label>Manual tempo (BPM)<input aria-label="Manual tempo (BPM)" type="number" min="40" max="240" defaultValue="120" disabled={disabled} onChange={event=>research?.clock.setTempo(Number(event.target.value))}/></label>

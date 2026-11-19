@@ -1,0 +1,170 @@
+[
+  {
+    "project": "chromium",
+    "source": "Actual generated 8s / 120 BPM WAV through ListeningSession and shared owner, no source substitution",
+    "intervalSeconds": 7,
+    "anchorDisplaySeconds": 0.21,
+    "anchorRoundingMs": 0.5,
+    "hits": [
+      {
+        "at": 0.454307,
+        "audio": 0.37333333333333335,
+        "media": 0.373243
+      },
+      {
+        "at": 1.4574616666666667,
+        "audio": 1.3706666666666667,
+        "media": 1.372755
+      },
+      {
+        "at": 2.458761333333334,
+        "audio": 2.3733333333333335,
+        "media": 2.374122
+      },
+      {
+        "at": 3.457152666666667,
+        "audio": 3.3706666666666667,
+        "media": 3.373064
+      },
+      {
+        "at": 4.458815333333333,
+        "audio": 4.373333333333333,
+        "media": 4.374068
+      },
+      {
+        "at": 5.4562056666666665,
+        "audio": 5.370666666666667,
+        "media": 5.374011
+      },
+      {
+        "at": 6.459335333333333,
+        "audio": 6.373333333333333,
+        "media": 6.373548
+      }
+    ],
+    "errorsMs": [
+      -5.783333333333307,
+      -0.4499999999998394,
+      -0.4500000000002835,
+      -0.4499999999998394,
+      -0.4499999999998394,
+      -0.4499999999998394,
+      -0.4499999999998394
+    ],
+    "maxAbsoluteErrorMs": 5.783333333333307,
+    "endMinusStartDriftMs": 5.333333333333467,
+    "scope": "Scheduled starts versus media/audio mapping sampled at source.start; excludes physical audio output latency and is not live DJ beat alignment."
+  },
+  {
+    "project": "android",
+    "source": "Actual generated 8s / 120 BPM WAV through ListeningSession and shared owner, no source substitution",
+    "intervalSeconds": 7,
+    "anchorDisplaySeconds": 0.212,
+    "anchorRoundingMs": 0.5,
+    "hits": [
+      {
+        "at": 0.45746433333333336,
+        "audio": 0.37333333333333335,
+        "media": 0.378237
+      },
+      {
+        "at": 1.461034,
+        "audio": 1.376,
+        "media": 1.377334
+      },
+      {
+        "at": 2.457865333333334,
+        "audio": 2.3733333333333335,
+        "media": 2.377836
+      },
+      {
+        "at": 3.460859,
+        "audio": 3.376,
+        "media": 3.377509
+      },
+      {
+        "at": 4.458695333333333,
+        "audio": 4.373333333333333,
+        "media": 4.377006
+      },
+      {
+        "at": 5.462111,
+        "audio": 5.376,
+        "media": 5.376257
+      },
+      {
+        "at": 6.458423333333333,
+        "audio": 6.373333333333333,
+        "media": 6.377278
+      }
+    ],
+    "errorsMs": [
+      0.3680000000000905,
+      0.368000000000146,
+      0.36800000000036803,
+      0.36800000000036803,
+      0.36799999999992394,
+      0.36799999999903577,
+      0.36799999999992394
+    ],
+    "maxAbsoluteErrorMs": 0.36800000000036803,
+    "endMinusStartDriftMs": -1.6653345369377348e-13,
+    "scope": "Scheduled starts versus media/audio mapping sampled at source.start; excludes physical audio output latency and is not live DJ beat alignment."
+  },
+  {
+    "project": "mobile-webkit",
+    "source": "Actual generated 8s / 120 BPM WAV through ListeningSession and shared owner, no source substitution",
+    "intervalSeconds": 7,
+    "anchorDisplaySeconds": 0,
+    "anchorRoundingMs": 0.5,
+    "hits": [
+      {
+        "at": 0.5128139999313279,
+        "audio": 0.416,
+        "media": 0.15356274996884167
+      },
+      {
+        "at": 2.047294081964414,
+        "audio": 1.9573333333333334,
+        "media": 1.1602681680130384
+      },
+      {
+        "at": 3.0474040837334933,
+        "audio": 2.965333333333333,
+        "media": 2.1681921662700208
+      },
+      {
+        "at": 4.047900415382596,
+        "audio": 3.973333333333333,
+        "media": 3.175630167997504
+      },
+      {
+        "at": 5.046286083024654,
+        "audio": 4.952,
+        "media": 4.155805083676514
+      },
+      {
+        "at": 6.045914666021815,
+        "audio": 5.96,
+        "media": 5.164340083997124
+      },
+      {
+        "at": 7.046669041660756,
+        "audio": 6.968,
+        "media": 6.171442333343297
+      }
+    ],
+    "errorsMs": [
+      0.37674990016961507,
+      0.2289166441189483,
+      0.26291667018130127,
+      0.19725004676685032,
+      0.09116670116782188,
+      0.25475001894026406,
+      0.11137500405311584
+    ],
+    "maxAbsoluteErrorMs": 0.37674990016961507,
+    "endMinusStartDriftMs": -0.2653748961164992,
+    "scope": "Scheduled starts versus media/audio mapping sampled at source.start; excludes physical audio output latency and is not live DJ beat alignment."
+  }
+]

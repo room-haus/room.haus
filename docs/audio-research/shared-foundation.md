@@ -92,7 +92,7 @@ The owner calls `clock.sync(audioTime, mediaTime, running)` every25ms, independe
 
 `setTempo(bpm)` clamps40–240 and establishes manual tempo. It cancels prior scheduling and invalidates phase. `tap(mediaTime)` uses up to five taps (intervals0.25–1.5s) and establishes tempo/phase; there is no automatic beat-grid claim. `anchor(mediaTime)` deliberately establishes phase for an already set tempo. The host's Anchor quiet pulse establishes its displayed manual tempo then anchors at the current playhead.
 
-`repeat(beatDivision, (audioTime,generation)=>...)` accepts0.25–16 beats and at most four subscriptions. Callbacks schedule only the next100ms. The supplied audio time must be used by a source's `start(time)`, not an animation frame. Duplicate ticks retain the last grid index. A stalled JS thread drops elapsed beats; it does not replay a backlog. `cancel()` increments generation, clears subscriptions/phase and cancels tracked voices. Tempo remains for deliberate re-anchoring. Context suspension, tab hiding and source interruption require explicit re-arm; there is no auto-resume pulse.
+`repeat(beatDivision, (audioTime,generation,gridIndex)=>...)` accepts0.25–16 beats and at most four subscriptions. The additive third argument (Task03) is the existing integer index relative to the current anchor and requested division; two-argument consumers remain compatible. Callbacks schedule only the next100ms. The supplied audio time must be used by a source's `start(time)`, not an animation frame. Duplicate ticks retain the last grid index. A stalled JS thread drops elapsed beats; it does not replay a backlog. `cancel()` increments generation, clears subscriptions/phase and cancels tracked voices. Tempo remains for deliberate re-anchoring. Context suspension, tab hiding and source interruption require explicit re-arm; there is no auto-resume pulse.
 
 ```ts
 research.clock.setTempo(120);
@@ -165,6 +165,18 @@ ROOM_TEST_ORIGIN=http://127.0.0.1:4217/labs/ node scripts/audio-research-evidenc
 Preview: `http://127.0.0.1:4217/labs/#audio-experiments`, then Open Audio routing check. The existing Labs client-side gate is unchanged. Final reference renders measure Original RMS0.03785591/peak0.375 and Processed RMS0.03701368/peak0.28018743: about0.20dB RMS difference without normalization. They are intentionally at similar practical levels; perceptual loudness still needs audition.
 
 ### Implementation choices and known limits
+
+Task03 local follow-on: ResearchHost has optional `armLabel`, `processedLabel`
+and `levelLabel` (existing defaults retained). `armLabel:null` hides generic arming when an experiment provides its own explicit combined start/anchor action. Its controls render props include
+`readMediaTime():number`, which reads the existing session snapshot at the user
+gesture instead of anchoring to the displayed 100ms snapshot. AudioClock's callback
+adds the existing grid index as argument three. No timing algorithm, source route,
+bus, voice bound or lifecycle policy changed. The rhythm module owns only kit
+buffers, lane masks and elapsed/queued position deduplication; all voice admission
+and cancellation stays shared. Details and verification: [additional-rhythm.md](additional-rhythm.md).
+The host's unsupported-path meter note also avoids claiming matched guard/headroom
+when no research graph is available. The kit manifest records Task03's copied-buffer
+attack calibration separately from the unchanged shared sample generator.
 
 Task 01 local follow-on: `ResearchHost` adds optional `showReferenceTools` (default
 true), and source replacement remounts its controls to match configured defaults.

@@ -14,6 +14,9 @@
     "rim": "0.12s, 470/1510Hz sine pair, exp(-65t)"
   },
   "processing": "All kit samples use a 1ms attack / 5ms release and clamp at ±0.65. Loop clamps at ±0.75. No mastering or hardware authenticity claim.",
+  "consumerProcessing": {
+    "audio-rhythm": "Copies kick/clap/closed-hat, scales each waveform to 0.9 sample peak, then uses voice gains 0.3/0.4/0.5. Shared kit generation is unchanged. Voices use the shared layer level * 0.5 and fixed sum 0.5; default level 0.5. Three 24kHz Float32 buffers total 104640 bytes. No additional source filenames or samples."
+  },
   "references": {
     "loop": "8 seconds / four bars / 120 BPM; kick/snare/clap/hats/rim pattern explicitly in makeReference",
     "tone": "8 seconds / 440 Hz sine / peak0.3 /10ms edges",
