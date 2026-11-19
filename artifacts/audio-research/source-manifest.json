@@ -1,0 +1,28 @@
+{
+  "branch": "codex/listening-prototypes",
+  "baseRevision": "9b4ae3065b578c4f97198097282728f65d57a002",
+  "status": "uncommitted local Task00 implementation; prompt pack pre-existed",
+  "sha256": {
+    "src/audio/HLSAudioSource.js": "5d5e164ca1b0cf7c66d40e02c7636aa879518e34973a921c0a83af2c22c2a074",
+    "src/experiences/shared/ListeningSession.ts": "1cba559213740d88e8a03ec45a87a90593ce7565f564bf6a8a715ba72d1ceadf",
+    "src/experiences/shared/audio/AudioController.ts": "7b678ce6f6c78c05499cd2b77696da52bd6090d9b79ac2ae38b1da580e0f829c",
+    "src/labs/experiences.js": "eb048604dc65a03f6ecfb95d7f44cb62272f67aa7cbd88701a1f1f549524927e",
+    "src/labs/ExperienceModal.js": "40624b7649eafdc741b834750447bc26e9ffd6c0998939a3de3b72b8bbf33fc7",
+    "webpack.config.js": "48dbfd0045cdcded87ebfc773c5459146d4f08b8447f6f11cdc82f1d3e50ab9a",
+    "playwright.suites.cjs": "f6fe1815e5cefc37d4502c430b60cf4037c009aa5085e5c9ff412363ff32ab11",
+    "e2e/audio-research.spec.cjs": "db4c613912713709042ee7cef94eab506ebfe1e943351fd9e15e804fb17854d5",
+    "e2e/helpers/research-module.cjs": "6ea3fd74b4121b376a7600c4c277dac24598714f99ab95a3dab18837e5061e1d",
+    "test/audio-research.test.mjs": "38c5a2e136f2cff99549986e6a3a9219977700e459929fec92235d3975a0d0dd",
+    "scripts/audio-research-evidence.mjs": "bd63d7726b394ab3fc34ac5391f1af38a554823d7de43cd4f3a871953d5bae76",
+    "src/experiences/shared/audio/research/AudioClock.ts": "75cc615347b3cb86f3f99462f6119fcab5a9c1f713291865b536d8a0674a1866",
+    "src/experiences/shared/audio/research/ResearchAudio.ts": "db91cd08a80ea475702e5b44d8bc440bb7cc771b15bf57a18ffbb8c7a25f7e1a",
+    "src/experiences/shared/audio/research/ResearchHost.tsx": "fc9cad64c588ce6a6861a6cf9fd87abbc7c6e42977d6efd2ede2f6f514b32d72",
+    "src/experiences/shared/audio/research/materials.manifest.json": "e7e29c3e5fc22acdb0e53d76500be9834270c205de8433a0535c164285f1ab3d",
+    "src/experiences/shared/audio/research/materials.ts": "bf3fee5d07b5a1829aa19ec8c40b08e197e0764338eb69522676020e0d37e3ea",
+    "src/experiences/shared/audio/research/reference.ts": "48025e90fadcec6939c9cae74a092f543ebc7e7c573ed3e46e3caab0741c8e15",
+    "src/experiences/shared/audio/research/research.css": "3f5d60cacb157e2a8989ec2ffc2c4ea644b7dc52f5c59e99c16a7c46b5e8e379",
+    "src/audio/worklets/ResearchProcessor/research.js": "cb122c0b9b006a9dd6073527c037916372fa6c04c50a25095c24be35d4fe7c3a",
+    "src/experiences/audio-reference/index.tsx": "8d034317d8816408f05b429f5bbe8b72baf7ac2aa3e3c18838afabf9faf0fe67",
+    "src/experiences/audio-reference/poster.svg": "e4fd5dda010dad2ca5a324f4deb42298b38aaf9637252f47c25a68c18e3db77c"
+  }
+}

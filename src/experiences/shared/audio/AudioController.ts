@@ -1,6 +1,7 @@
 import HLSAudioSource from '../../../audio/HLSAudioSource.js';
 import type {AudioFrame, PlaybackSnapshot} from './contracts.ts';
 import {emptyAudioFrame, FeatureExtractor} from './FeatureExtractor.ts';
+import {ResearchAudio} from './research/ResearchAudio.ts';
 
 const SAMPLE_INTERVAL = 1 / 30;
 const PLAYHEAD_JITTER = 0.25;
@@ -18,10 +19,16 @@ export class AudioController {
   private volume = 1;
   private disposed = false;
   featureSequence = 0;
+  readonly research?:ResearchAudio;
 
-  constructor(url: string) {
+  constructor(url: string, options:{research?:boolean}={}) {
     this.source = new HLSAudioSource(url);
+    if(options.research){
+      this.research=new ResearchAudio(()=>this.snapshot());
+      this.source.enableResearch((context:AudioContext,input:AudioNode)=>this.research!.attach(context,input));
+    }
     this.source.notify = () => {
+      this.research?.sync(this.snapshot());
       if (this.source.media && this.source.media.volume !== this.volume) {
         this.source.media.volume = this.volume;
       }
@@ -118,6 +125,7 @@ export class AudioController {
     this.clearAnalysis();
     this.source.pause();
     this.source.dispose();
+    this.research?.dispose();
   }
 }
 

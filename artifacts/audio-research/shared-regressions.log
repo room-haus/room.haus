@@ -1,0 +1,28 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser:labs
+> playwright test --config=playwright.labs.config.cjs e2e/audio-research.spec.cjs e2e/listening-toys.spec.cjs e2e/underlevel.spec.cjs --grep gesture start|missing Web Audio|failed download when reopened|sound-first controls reflow --workers=1
+
+
+Running 12 tests using 1 worker
+
+(node:7369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › e2e/audio-research.spec.cjs:61:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (1.2s)
+  ✓   2 [chromium] › e2e/listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks (1.7s)
+  ✓   3 [chromium] › e2e/listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label (1.4s)
+  ✓   4 [chromium] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened (1.4s)
+(node:7410) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [android] › e2e/audio-research.spec.cjs:61:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (1.3s)
+  ✓   6 [android] › e2e/listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks (1.6s)
+  ✓   7 [android] › e2e/listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label (1.7s)
+  ✓   8 [android] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened (1.4s)
+(node:7469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [mobile-webkit] › e2e/audio-research.spec.cjs:61:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (1.5s)
+  ✓  10 [mobile-webkit] › e2e/listening-toys.spec.cjs:33:1 › gesture start, keyboard and buttons retain one unaltered mix; reset never seeks (1.5s)
+  ✓  11 [mobile-webkit] › e2e/listening-toys.spec.cjs:85:1 › missing Web Audio retains playback with honest ambient label (1.1s)
+  ✓  12 [mobile-webkit] › e2e/underlevel.spec.cjs:294:1 › Underlevel retries a failed download when reopened (1.5s)
+
+  12 passed (20.0s)

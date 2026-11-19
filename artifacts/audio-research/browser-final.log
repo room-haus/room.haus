@@ -1,0 +1,38 @@
+npm warn Unknown user config ""save-exact". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> room-haus@1.0.0 test:browser:labs
+> playwright test --config=playwright.labs.config.cjs e2e/audio-research.spec.cjs --workers=1
+
+
+Running 21 tests using 1 worker
+
+(node:6660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › e2e/audio-research.spec.cjs:18:1 › reference processor changes real output; Original, Stop and Reset preserve one source transport (1.2s)
+  ✓   2 [chromium] › e2e/audio-research.spec.cjs:33:1 › pause, seek, hidden tab, failure and retry require deliberate re-arm; close/reopen releases owner (3.7s)
+  ✓   3 [chromium] › e2e/audio-research.spec.cjs:55:1 › unavailable processing preserves native playback and explains disabled controls (1.1s)
+  ✓   4 [chromium] › e2e/audio-research.spec.cjs:60:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (691ms)
+  ✓   5 [chromium] › e2e/audio-research.spec.cjs:69:1 › real guarded output has one dry path, measurable processing, finite bounds, capture cancellation and silent additions after stop (1.9s)
+  ✓   6 [chromium] › e2e/audio-research.spec.cjs:100:1 › failed worklet initialization keeps one measured audible Original path (623ms)
+  -   7 [chromium] › e2e/audio-research.spec.cjs:109:1 › native WebKit HLS retains native output and exposes capabilities separately from playback
+(node:6763) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [android] › e2e/audio-research.spec.cjs:18:1 › reference processor changes real output; Original, Stop and Reset preserve one source transport (1.2s)
+  ✓   9 [android] › e2e/audio-research.spec.cjs:33:1 › pause, seek, hidden tab, failure and retry require deliberate re-arm; close/reopen releases owner (3.6s)
+  ✓  10 [android] › e2e/audio-research.spec.cjs:55:1 › unavailable processing preserves native playback and explains disabled controls (628ms)
+  ✓  11 [android] › e2e/audio-research.spec.cjs:60:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (788ms)
+  ✓  12 [android] › e2e/audio-research.spec.cjs:69:1 › real guarded output has one dry path, measurable processing, finite bounds, capture cancellation and silent additions after stop (1.9s)
+  ✓  13 [android] › e2e/audio-research.spec.cjs:100:1 › failed worklet initialization keeps one measured audible Original path (639ms)
+  -  14 [android] › e2e/audio-research.spec.cjs:109:1 › native WebKit HLS retains native output and exposes capabilities separately from playback
+(node:6784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  -  15 [mobile-webkit] › e2e/audio-research.spec.cjs:18:1 › reference processor changes real output; Original, Stop and Reset preserve one source transport
+  ✓  16 [mobile-webkit] › e2e/audio-research.spec.cjs:33:1 › pause, seek, hidden tab, failure and retry require deliberate re-arm; close/reopen releases owner (4.0s)
+  ✓  17 [mobile-webkit] › e2e/audio-research.spec.cjs:55:1 › unavailable processing preserves native playback and explains disabled controls (1.6s)
+  ✓  18 [mobile-webkit] › e2e/audio-research.spec.cjs:60:1 › sound-first controls reflow at 390/768/1440 and 200% text, with reduced motion and keyboard (1.0s)
+  ✓  19 [mobile-webkit] › e2e/audio-research.spec.cjs:69:1 › real guarded output has one dry path, measurable processing, finite bounds, capture cancellation and silent additions after stop (2.1s)
+  -  20 [mobile-webkit] › e2e/audio-research.spec.cjs:100:1 › failed worklet initialization keeps one measured audible Original path
+  ✓  21 [mobile-webkit] › e2e/audio-research.spec.cjs:109:1 › native WebKit HLS retains native output and exposes capabilities separately from playback (1.5s)
+
+  4 skipped
+  17 passed (32.5s)

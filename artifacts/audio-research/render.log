@@ -1,0 +1,5 @@
+(node:7641) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/src/experiences/shared/audio/research/materials.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"renders":[{"mode":"original","rms":0.03785591033017526,"peak":0.375},{"mode":"processed","rms":0.037013676163617455,"peak":0.2801874279975891}],"directory":"/Users/pmarko.alt/.codex/worktrees/room-listening-prototypes/room.haus/artifacts/audio-research"}

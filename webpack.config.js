@@ -83,6 +83,7 @@ module.exports = (_env, argv) => ({
         to: 'assets/' + family + '-license.[contenthash:12].txt',
       })),
       {from: path.join(src, 'audio/worklets/OnsetWorkletProcessor'), to: 'worklets', info: {minimized: true}},
+      {from: path.join(src, 'audio/worklets/ResearchProcessor'), to: 'worklets', info: {minimized: true}},
       {from: path.join(modelRoot, 'CD/*.{jpg,png}'), to: 'models/CD/[name][ext]'},
       {from: path.join(src, 'babylon/textures/environment.dds'), to: 'models/CD/environment.dds'},
       {from: path.join(modelRoot, 'MX018/environment.dds'), to: 'models/MX018/environment.dds'},

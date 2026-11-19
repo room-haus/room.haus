@@ -12,7 +12,7 @@ export class ListeningSession {
   private seeking=false;
   private seekListener=()=>{ this.seeking=true; this.audio.clearAnalysis(false); this.onSeek?.(this.audio.snapshot().time); };
   private soughtListener=()=>{ this.seeking=false; this.previousTime=this.audio.snapshot().time; this.audio.clearAnalysis(false); this.onSeek?.(this.previousTime); };
-  constructor(url:string) { this.audio=new AudioController(url); }
+  constructor(url:string,options:{research?:boolean}={}) { this.audio=new AudioController(url,options); }
   play() { this.audio.play(); this.bind(); }
   pause() { this.audio.pause(); }
   seek(time:number) { this.audio.seek(time); this.previousTime=time; this.onSeek?.(time); }

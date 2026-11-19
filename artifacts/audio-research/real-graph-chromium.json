@@ -1,0 +1,33 @@
+{
+  "original": 0.07071066193700584,
+  "processed": 0.0010537392162720217,
+  "bypass": 0.07071066186862303,
+  "stopped": 0.07071066167921372,
+  "voices": 16,
+  "acceptsRetiringOverflow": false,
+  "armsDuringBuffering": false,
+  "capturesDuringBuffering": false,
+  "cancelled": true,
+  "failure": false,
+  "modeAfterFailure": "original",
+  "peak": 0.9800000190734863,
+  "finite": true,
+  "capabilities": {
+    "processing": true,
+    "layering": true,
+    "capture": true,
+    "capturing": true,
+    "mode": "processed",
+    "reason": "Processed · effects are armed.",
+    "peak": 0.98,
+    "rms": 0.9612210378556735,
+    "headroomDb": -6.0206,
+    "voices": 0,
+    "modules": 1,
+    "scheduled": 0,
+    "generation": 54,
+    "bpm": 120,
+    "tempoSet": false,
+    "anchored": false
+  }
+}
