@@ -1,7 +1,11 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import {ResearchHost} from '../shared/audio/research/ResearchHost.tsx';
 import type {ResearchAudio} from '../shared/audio/research/ResearchAudio.ts';
 import {delaySeconds,spaceDefaults,spaceProcessor} from './processor.ts';
+import {TakeEditor} from '../takes/TakeEditor.tsx';
+import type {LoadPassage, SourceOverview} from '../takes/TakeEditor.tsx';
+import type {RecipeV1} from '../takes/recipe.mjs';
+import {normalizeRecipe, SPACE_TAKE_DEFAULTS} from '../takes/recipe.mjs';
 import './space.css';
 
 const configure=(research:ResearchAudio)=>{research.install('processor',spaceProcessor);research.update('processor',spaceDefaults);research.setLevel(.5);};
@@ -20,6 +24,47 @@ function SpaceControls({research,disabled}:{research:ResearchAudio;disabled:bool
     <p className="research-note">{delay?'Filtered repeats: 80 Hz–6.5 kHz, feedback capped at 48%.':'Close / air: two generated responses, 0.18 / 0.9 seconds. Decay blends their tails.'} The dry mix stays present. Delay / Reverb chooses the effect; Processed turns it on. Compare sparse gaps with dense transients; more space can hide detail.</p>
   </div>;
 }
-export default function AudioSpace({onClose}:{onClose:()=>void}){
+function ContinuousStudy({onClose}:{onClose:()=>void}){
   return <ResearchHost title="Space & echoes" description="Press Play source, then Processed to hear filtered echoes or a compact reverb. Raise Effect level to explore the space, then compare with Original. Listen for intimacy and rhythmic space, and for the point where detail starts to blur." onClose={onClose} configure={configure} showReferenceTools={false} controls={props=><SpaceControls {...props}/>}/>;
+}
+
+
+const loadPassage: LoadPassage = async (passage, signal) => {
+  const query = new URLSearchParams(Object.entries(passage).map(([key,value]) => [key,String(value)]));
+  const response = await fetch('/v1/passage?' + query, {signal});
+  if (!response.ok || !response.headers.get('content-type')?.includes('application/octet-stream')) throw Error('The selected PCM passage is unavailable.');
+  return response.arrayBuffer();
+};
+type Catalog = {sources: SourceOverview[]; limits: {maxPassageFrames: number; maxGestures: number}};
+
+export default function AudioSpace({onClose}: {onClose: () => void}) {
+  const [retained, setRetained] = useState<RecipeV1>();
+  const [study, setStudy] = useState(false), [catalog, setCatalog] = useState<Catalog>();
+  const [failure, setFailure] = useState(false), [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    if (study) return;
+    const controller = new AbortController();
+    void (async () => {
+      setFailure(false);
+      try {
+        const response = await fetch('/v1/catalog', {signal:controller.signal});
+        if (!response.ok) throw Error('Catalog unavailable');
+        const result: Catalog = await response.json();
+        if (!result.sources?.some(s => s.id === 'MX029') || !result.limits) throw Error('Missing MX029');
+        if (!controller.signal.aborted) setCatalog(result);
+      } catch { if (!controller.signal.aborted) setFailure(true); }
+    })();
+    return () => controller.abort();
+  }, [attempt, study]);
+  if (study) return <><div className="space-study-link"><button autoFocus onClick={() => setStudy(false)}>Back to echo take</button></div>
+    <ContinuousStudy onClose={onClose}/></>;
+  const source = catalog?.sources.find(s => s.id === 'MX029');
+  const header = <header className="take-header"><span>ROOM / AUDIO LABS</span><button onClick={onClose}>Back to Labs</button></header>;
+  return <>{catalog && source ? <TakeEditor header={header} source={source} {...catalog.limits} loadPassage={loadPassage} onDraftChange={setRetained} draft={retained ?? normalizeRecipe({
+    schema:1, experiment:'audio-space', rendererVersion:1, parentId:null, gestures:[], initialSettings:SPACE_TAKE_DEFAULTS,
+    passage:{sourceId:source.id, revision:source.revision, ...source.curatedRange}
+  })}/> : <article className="take-launch">{header}<section><h1>Space &amp; echoes</h1>
+    <p role="status">{failure ? 'The MX029 take source is unavailable.' : 'Opening MX029…'}</p>
+    {failure && <button onClick={() => setAttempt(n => n+1)}>Retry source</button>}</section></article>}
+    <div className="space-study-link"><button onClick={() => setStudy(true)}>Open continuous delay and reverb study</button></div></>;
 }

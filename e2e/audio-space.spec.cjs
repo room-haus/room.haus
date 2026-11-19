@@ -2,8 +2,9 @@ const {test,expect}=require('@playwright/test');
 const {moduleUrl}=require('./helpers/research-module.cjs');
 const {fixture}=require('./helpers/rally-media.cjs');
 const path=require('node:path'),fs=require('node:fs');
+const study=page=>page.getByRole('button',{name:'Open continuous delay and reverb study'}).click();
 const panel=page=>page.locator('[data-audio-research]');
-async function open(page){await fixture(page);await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(panel(page)).toBeVisible();}
+async function open(page){await fixture(page);await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await study(page);await expect(panel(page)).toBeVisible();}
 
 test('default delay and reverb returns have a useful level against the actual diagnostic loop',async({page})=>{
   await page.goto('/labs/');
@@ -73,7 +74,7 @@ test('space controls share transport, manual clock, reset and close lifecycle',a
     await expect(panel(page)).toHaveAttribute('data-playing','true');
   }
   await page.getByRole('button',{name:'Back to Labs'}).click();await expect(page.getByRole('button',{name:'Open Space & echoes ↗'})).toBeFocused();expect(await page.evaluate(()=>window.__rallyMedia.every(m=>m.paused&&!m.getAttribute('src')))).toBe(true);
-  await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(panel(page)).toHaveAttribute('data-mode','original');
+  await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await study(page);await expect(panel(page)).toHaveAttribute('data-mode','original');
 });
 
 test('layout, keyboard and reduced motion at 390/768/1440 and enlarged text',async({page})=>{
@@ -84,7 +85,7 @@ test('layout, keyboard and reduced motion at 390/768/1440 and enlarged text',asy
 });
 
 test('failed space chunk retries on reopening',async({page})=>{
-  await fixture(page);let fail=true;await page.route(/\/audio-space\.[^/]+\.js$/,r=>fail?r.abort():r.continue());await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(page.getByRole('alert')).toContainText('could not load');await page.getByRole('button',{name:'Back to Labs'}).click();fail=false;await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(panel(page)).toBeVisible();
+  await fixture(page);let fail=true;await page.route(/\/audio-space\.[^/]+\.js$/,r=>fail?r.abort():r.continue());await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(page.getByRole('alert')).toContainText('could not load');await page.getByRole('button',{name:'Back to Labs'}).click();fail=false;await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await study(page);await expect(panel(page)).toBeVisible();
 });
 
 for(const failure of ['no-audio','guard'])test(`${failure} leaves native Original audible`,async({page})=>{
@@ -137,7 +138,7 @@ test('source failure retry and replacement stay Original and release the prior s
 
 test('keyboard launcher and explicit generated source process through the host on every browser',async({page})=>{
   await page.addInitScript(()=>sessionStorage.setItem('room-labs-session','open'));
-  await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).focus();await page.keyboard.press('Enter');
+  await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).focus();await page.keyboard.press('Enter');await study(page);
   await page.getByRole('combobox',{name:'Listening source'}).selectOption('loop');await page.getByRole('button',{name:'Play source',exact:true}).click();
   await expect(panel(page)).toHaveAttribute('data-capable','true');await page.getByRole('button',{name:'Processed',exact:true}).click();await expect(panel(page)).toHaveAttribute('data-mode','processed');
   await page.getByRole('button',{name:'Reverb',exact:true}).click();await expect.poll(()=>panel(page).getAttribute('data-output-rms').then(Number)).toBeGreaterThan(.00001);
