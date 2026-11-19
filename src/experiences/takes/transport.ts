@@ -1,3 +1,4 @@
+import {decodePCM} from './pcm.ts';
 import type {RecipeV1, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
 import {renderTake} from './render.mjs';
 import {SPACE_TAKE_OUTPUT_GAIN, SPACE_TAKE_PROCESSOR_NAME, SPACE_TAKE_WORKLET_URL} from './space-render.mjs';
@@ -8,16 +9,6 @@ export type TransportEvents = {
   update: () => void;
   finish: (gestures: SpaceGesture[], error?: string) => void;
 };
-
-function audioBuffer(context: AudioContext, pcm: ArrayBuffer) {
-  const data = new DataView(pcm);
-  const buffer = context.createBuffer(2, pcm.byteLength / 4, RATE);
-  for (let channel = 0; channel < 2; channel++) {
-    const samples = buffer.getChannelData(channel);
-    for (let frame = 0; frame < samples.length; frame++) samples[frame] = data.getInt16(frame * 4 + channel * 2, true) / 32768;
-  }
-  return buffer;
-}
 
 export class TakeTransport {
   private context = new AudioContext();
@@ -46,7 +37,7 @@ export class TakeTransport {
     const ctx = this.context;
     await ctx.resume();
     if (this.closed) return;
-    const raw = audioBuffer(ctx, this.pcm);
+    const raw = decodePCM(this.pcm);
     const source = ctx.createBufferSource();
     source.buffer = raw;
     this.sources.push(source);
@@ -60,7 +51,7 @@ export class TakeTransport {
       const rendered = renderTake(this.recipe, {pcm: new Uint8Array(this.pcm), sampleRate: RATE, channels: 2,
         frameCount: this.length, format: 's16le'});
       const performed = ctx.createBufferSource();
-      performed.buffer = audioBuffer(ctx, rendered.take.buffer as ArrayBuffer);
+      performed.buffer = decodePCM(rendered.take.buffer as ArrayBuffer);
       performed.connect(this.take);
       this.sources.push(performed);
     } else {

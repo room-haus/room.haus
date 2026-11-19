@@ -1,6 +1,6 @@
 import {createHash, randomBytes} from 'node:crypto';
 import {readPassage} from './passage.mjs';
-import {normalizeRecipe, validateRecipe} from '../../src/experiences/takes/recipe.mjs';
+import {normalizePassage, normalizeRecipe, validateRecipe, TAKE_RECIPE_SCHEMA, SPACE_TAKE_EXPERIMENT, SPACE_TAKE_RENDERER_VERSION} from '../../src/experiences/takes/recipe.mjs';
 import {renderTake} from '../../src/experiences/takes/render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE} from '../../src/experiences/takes/source.mjs';
 
@@ -20,6 +20,15 @@ export class TakeError extends Error {
 
 const unavailable = () => new TakeError(503, 'The saved audio is temporarily unavailable.');
 const missing = () => new TakeError(404, 'Take or preparation unavailable.');
+
+// A previously published pair can still be served from its stable PCM envelope
+// when this editor cannot interpret the performance that created it.
+function newerSpaceRecipe(recipe) {
+  return recipe?.experiment === SPACE_TAKE_EXPERIMENT &&
+    Number.isSafeInteger(recipe.schema) && recipe.schema >= TAKE_RECIPE_SCHEMA &&
+    Number.isSafeInteger(recipe.rendererVersion) && recipe.rendererVersion >= SPACE_TAKE_RENDERER_VERSION &&
+    (recipe.schema > TAKE_RECIPE_SCHEMA || recipe.rendererVersion > SPACE_TAKE_RENDERER_VERSION);
+}
 
 function references(record, scope, id) {
   const fields = scope === 'takes' ? {id, parentId: record.recipe.parentId} : {preparationId: id};
@@ -44,8 +53,12 @@ export function takeRepository({catalog, sourceStore, store}) {
     try {
       // Treat malformed stored records as unavailable, including paths/digests.
       if (record.id !== id) throw unavailable();
-      const recipe = normalizeRecipe(record.recipe, limits);
-      const frames = recipe.passage.endFrame - recipe.passage.startFrame;
+      const recipe = record.recipe;
+      if (recipe.parentId !== null && !validId(recipe.parentId)) throw unavailable();
+      const passage = scope === 'takes' && newerSpaceRecipe(recipe)
+        ? normalizePassage(recipe.passage) : normalizeRecipe(recipe, limits).passage;
+      const frames = passage.endFrame - passage.startFrame;
+      if (frames > limits.maxPassageFrames) throw unavailable();
       for (const mode of modes) {
         const ref = record[mode];
         if (!ref || !/^[a-f0-9]{64}$/.test(ref.sha256) || ref.frameCount !== frames ||
@@ -80,6 +93,7 @@ export function takeRepository({catalog, sourceStore, store}) {
       if (!validId(input.parentId)) throw new RangeError('Invalid parent take ID.');
       try {
         parent = await saved('takes', input.parentId);
+        if (newerSpaceRecipe(parent.recipe)) throw new RangeError('A newer editor is required to vary this take.');
       } catch (error) {
         if (error.status === 404) throw new RangeError('Parent take unavailable.');
         throw error;

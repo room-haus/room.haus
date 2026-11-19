@@ -9,6 +9,8 @@ const checks = [
   ...entrancePages.map(({path, title}) => [path, 200, title]),
   ['/mixes/', 200, 'Mixes'],
   ['/releases/', 200, 'Releases'],
+  ['/takes/', 200, 'Echo take'],
+  ['/takes?id=0123456789abcdef0123456789abcdef', 200, 'Echo take', '/takes/'],
   ['/labs/', 200, 'Labs'],
   ['/labs', 200, 'Labs', '/labs/'],
   ['/underlevel/', 404],

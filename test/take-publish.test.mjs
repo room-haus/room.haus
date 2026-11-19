@@ -202,3 +202,17 @@ test('a malformed committed record or changed same-size PCM yields an unavailabl
   assert.equal((await get(origin, path)).status, 503);
   assert.equal((await get(origin, manifest.take.url)).status, 503);
 });
+
+test('a published Space render from a newer editor stays playable through the real API', async t => {
+  const {origin,storeDir,recipe} = await setup(t);
+  const prep = await prepare(origin,recipe), parent = await publish(origin,prep.preparationId);
+  const file = join(storeDir,'takes',parent.id);
+  const record = JSON.parse(await readFile(file));
+  // Represent an immutable record written by a subsequent compatible media service.
+  record.recipe.rendererVersion = 2;
+  await writeFile(file,JSON.stringify(record));
+  const manifest = await json(await get(origin,'/v1/takes/'+parent.id),200);
+  assert.equal(manifest.recipe.rendererVersion,2);
+  for (const mode of ['dry','take']) assert.equal(hash(await bytes(origin,manifest[mode].url)),prep[mode].sha256);
+  assert.equal((await post(origin,'/v1/preparations',{...recipe,parentId:parent.id})).status,400);
+});

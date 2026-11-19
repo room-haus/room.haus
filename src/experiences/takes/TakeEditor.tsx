@@ -5,6 +5,7 @@ import {editGesture, replaceTakePassage} from './edits.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
 import {TakeTransport} from './transport.ts';
 import {PassageWave, stamp, Timeline, Waveform} from './Timeline.tsx';
+import {usePlaybackOwner} from './PlaybackScope.tsx';
 import './takes.css';
 
 export type Bounds = {startFrame: number; endFrame: number};
@@ -75,6 +76,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
   const [position, setPosition] = useState(0);
   const [, redraw] = useState(0);
   const update = useCallback(() => redraw(n => n + 1), []);
+  const output = usePlaybackOwner();
   const owner = useRef<TakeTransport | null>(null);
   const request = useRef<AbortController | null>(null);
   const padOwner = useRef<string | number | null>(null);
@@ -125,7 +127,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
       const transport = new TakeTransport(recorded, pcm, recording, recording ? 0 : position, {
         update, finish: (gestures, failure) => {
           if (owner.current !== transport) return;
-          owner.current = null; padOwner.current = null;
+          output.release(); owner.current = null; padOwner.current = null;
           if (failure) setError(failure + ' Your earlier edits are saved in this draft.');
           else if (gestures.length && samePassage(recorded.passage, current.current.passage)) {
             change(normalizeRecipe({...current.current, gestures: [...current.current.gestures, ...gestures]}));
@@ -133,6 +135,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
           update();
         },
       });
+      output.claim(() => transport.end());
       owner.current = transport; update();
       void transport.start().catch(e => transport.fail(message(e)));
     } catch (e) { setError(message(e)); }
@@ -169,7 +172,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
   const settings = recipe.initialSettings, busy = Boolean(player) || loading;
   return <article className="take-editor">
     {header}
-    <div className="take-body"><h1>Space &amp; echoes</h1>
+    <div className="take-body">{recipe.parentId ? <h2 className="take-edit-title">Edit your variation</h2> : <h1>Space &amp; echoes</h1>}
     <p className="take-byline">{recipe.passage.sourceId} / Saad Ashraf <span>· {recipe.parentId ? 'Variation' : 'Echo take'}</span></p>
     <div className="take-meter"><span>{stamp(frame)}</span><span>/ {stamp(length)}</span></div>
     <PassageWave pcm={pcm} recipe={recipe} frame={frame} select={setPosition} move={(id,startFrame) => apply({type:'move',id,startFrame})} disabled={busy}/>

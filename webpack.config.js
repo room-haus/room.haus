@@ -11,7 +11,7 @@ const modelRoot = path.join(src, 'babylon/models');
 
 const site = (_env, argv) => ({
   name: 'site',
-  entry: {main: './src/index.js', labs: './src/labs/index.js'},
+  entry: {main: './src/index.js', labs: './src/labs/index.js', takes: './src/experiences/takes/TakePage.tsx'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
   output: {
@@ -33,6 +33,7 @@ const site = (_env, argv) => ({
     },
     historyApiFallback: {
       rewrites: [
+        {from: /^\/takes\/?$/, to: '/takes/index.html'},
         {from: /^\/labs\/?$/, to: '/labs/index.html'},
         {from: /^\/ss-2026\/?$/, to: '/fw-2026/index.html'},
         ...entrancePages.map(({path}) => ({from: new RegExp('^' + path.slice(0, -1) + '/?$'), to: path + 'index.html'})),
@@ -89,6 +90,12 @@ const site = (_env, argv) => ({
       {from: path.join(src, 'babylon/textures/environment.dds'), to: 'models/CD/environment.dds'},
       {from: path.join(modelRoot, 'MX018/environment.dds'), to: 'models/MX018/environment.dds'},
     ]}),
+    new HtmlWebpackPlugin({
+      filename: 'takes/index.html',
+      chunks: ['takes'],
+      template: './src/experiences/takes/index.html',
+      favicon: './src/favicon.png',
+    }),
     new HtmlWebpackPlugin({
       filename: 'labs/index.html',
       chunks: ['labs'],
