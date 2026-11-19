@@ -1,5 +1,13 @@
 # Public and internal browser coverage
 
+Task 06 adds 18 deliberately internal structural-intervention cases. Fresh
+inventory: **174 public + 303 Labs = 477**, zero overlap or omissions. Focused
+Task 06 + shared-foundation execution passed **35 with 4 intentional platform
+skips**; all 18 Task 06 cases passed. The full 477-case suite was not run.
+Local WAVs, controls and measurements are in ignored `artifacts/audio-structure/`.
+See [`audio-research/structural-intervention.md`](audio-research/structural-intervention.md)
+for source invariance, cancellation/deadline evidence and listening limits.
+
 Normal pull-request and master CI runs public-site E2E only. Internal Labs E2E is an explicit development check and an optional manual CI run. All unit/mechanics tests, both TypeScript checks, lint, dependency policy, build and HTTP route/assets checks remain automatic across the whole repository.
 
 | Command | Scope |

@@ -1,0 +1,7 @@
+.structure-experiment .research-control-grid{grid-template-columns:minmax(9rem,1fr) minmax(0,3fr) minmax(10rem,1fr)}
+.structure-experiment .research-control-grid>label{align-content:start}
+.structure-controls{max-width:48rem}.structure-controls label{margin-block:1rem}
+.structure-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-block:1.5rem}.structure-action{flex:1 1 9rem;touch-action:none;user-select:none}
+.structure-capture{border-block:1px solid #c7c8bd;padding-block:1rem;margin-top:1rem}
+.structure-controls [role=status]{min-height:3em}.structure-controls output{font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.structure-experiment .research-control-grid{grid-template-columns:minmax(0,1fr)}}

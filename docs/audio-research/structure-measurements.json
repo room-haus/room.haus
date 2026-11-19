@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-19",
+  "base": "254426f",
+  "method": "Real shared source-ring capture of the generated 120 BPM diagnostic loop. Actual production controller/processor and finite one-shot material rendered offline with the shared-equivalent dry/wet, layer and headroom gains. Guard and voice admission tested separately in the actual ResearchAudio graph. Four seconds; intervention .5–1.5 seconds; same advancing source and no normalization. Offline cleanup timer is deliberately not run: the audio envelope alone must restore unity.",
+  "listening": "No human listening review. These are audition candidates and measured continuity evidence, not claims of expressive musical success.",
+  "capture": {
+    "seconds": 0.125,
+    "channels": 2,
+    "sampleRate": 24000,
+    "sourcePosition": 0.798
+  },
+  "chunks": [
+    {
+      "file": "audio-structure.1caa297a5cae.js",
+      "bytes": 21072,
+      "gzipBytes": 7359
+    }
+  ],
+  "renders": [
+    {
+      "kind": "original",
+      "strength": 0.5,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.04006224664314408,
+      "returnMaxError": 0,
+      "file": "reference-original.wav",
+      "sha256": "a032a2b02ef6d1561bc976aa3edad4f8fab2a0d5baf2e3de78fdb016b7b48e59"
+    },
+    {
+      "kind": "stutter",
+      "strength": 0.5,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.037177201318820456,
+      "returnMaxError": 0,
+      "file": "reference-stutter-0.5.wav",
+      "sha256": "8b0175f87b2d36a066e02428b4da3d4e2f4d6559855909feb8ba2088e57e0751"
+    },
+    {
+      "kind": "thin",
+      "strength": 0.5,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.03831465474197006,
+      "returnMaxError": 0,
+      "file": "reference-thin-0.5.wav",
+      "sha256": "fc033a71e4743a723ff0ff4a905a45383c6d1971fbc0be650464c93549630e55"
+    },
+    {
+      "kind": "fill",
+      "strength": 0.5,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.03721129891343509,
+      "returnMaxError": 0,
+      "file": "reference-fill-0.5.wav",
+      "sha256": "b9df8563eb4e3c7210a51665129a18c5adcf2ac66332d9d208d43a066edb9673"
+    },
+    {
+      "kind": "stutter",
+      "strength": 1,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.03616443995091739,
+      "returnMaxError": 0,
+      "file": "reference-stutter-1.wav",
+      "sha256": "31daa2c48920277849253529711a3c9ef523607dbfb2996dd3b2dda2a12c2e49"
+    },
+    {
+      "kind": "thin",
+      "strength": 1,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.03741123986123538,
+      "returnMaxError": 0,
+      "file": "reference-thin-1.wav",
+      "sha256": "e2d38374ff1fd50aeeeccb9383704d651b2fc876ea82fe644d51f7ffdf4faba2"
+    },
+    {
+      "kind": "fill",
+      "strength": 1,
+      "seconds": 4,
+      "interventionStart": 0.5,
+      "interventionEnd": 1.5,
+      "peak": 0.375,
+      "rms": 0.036304229870798815,
+      "returnMaxError": 0,
+      "file": "reference-fill-1.wav",
+      "sha256": "e2ccde0c9d999e5362a8fa1822dcd3cd1e979529bd61e5e7618690e689e74f7a"
+    }
+  ]
+}
