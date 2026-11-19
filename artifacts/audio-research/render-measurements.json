@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "original",
+    "rate": 48000,
+    "peak": 0.375,
+    "rms": 0.03785591033017526,
+    "diagnostics": {
+      "processing": true,
+      "layering": true,
+      "capture": true,
+      "capturing": true,
+      "mode": "original",
+      "reason": "Effects stopped; hearing Original.",
+      "peak": 0,
+      "rms": 0,
+      "headroomDb": -6.0206,
+      "voices": 0,
+      "modules": 0,
+      "scheduled": 0,
+      "generation": 174,
+      "bpm": 120,
+      "tempoSet": false,
+      "anchored": false
+    },
+    "samples": 206400
+  },
+  {
+    "mode": "processed",
+    "rate": 48000,
+    "peak": 0.2801874279975891,
+    "rms": 0.037013676163617455,
+    "diagnostics": {
+      "processing": true,
+      "layering": true,
+      "capture": true,
+      "capturing": true,
+      "mode": "processed",
+      "reason": "Processed · effects are armed.",
+      "peak": 0,
+      "rms": 0,
+      "headroomDb": -6.0206,
+      "voices": 0,
+      "modules": 1,
+      "scheduled": 0,
+      "generation": 2,
+      "bpm": 120,
+      "tempoSet": false,
+      "anchored": false
+    },
+    "samples": 206400
+  }
+]

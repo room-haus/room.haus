@@ -1,0 +1,23 @@
+{
+  "name": "ROOM research 909-inspired approximations v1",
+  "provenance": "Original deterministic synthesis authored locally for ROOM on 2026-11-18. No sampled hardware or third-party recordings.",
+  "license": "MIT, same as repository LICENSE",
+  "originalFilenames": null,
+  "generator": "materials.ts: makeSamples, makeReference; deterministic LCG seed 909",
+  "format": "24000 Hz mono Float32 in memory; generated WAV exports 16-bit PCM",
+  "kit": {
+    "kick": "0.65s, sine pitch 48+110*exp(-38t) Hz, exp(-10t) amplitude and short noise click",
+    "snare": "0.28s, seeded noise plus 180Hz sine, exp(-20t)",
+    "clap": "0.32s, high-passed noise with attacks at 0/14/28ms",
+    "closed-hat": "0.12s, high-passed noise, exp(-60t)",
+    "open-hat": "0.65s, high-passed noise, exp(-9t)",
+    "rim": "0.12s, 470/1510Hz sine pair, exp(-65t)"
+  },
+  "processing": "All kit samples use a 1ms attack / 5ms release and clamp at ±0.65. Loop clamps at ±0.75. No mastering or hardware authenticity claim.",
+  "references": {
+    "loop": "8 seconds / four bars / 120 BPM; kick/snare/clap/hats/rim pattern explicitly in makeReference",
+    "tone": "8 seconds / 440 Hz sine / peak0.3 /10ms edges",
+    "noise": "8 seconds / seeded white noise / peak0.25 /10ms edges"
+  },
+  "budget": "No network samples or dependencies. Runtime lazy code target <40KB gzip. Kit ≤110KB PCM16 total. Each selected reference ≤385KB WAV and0.77MB Float32; only selected source retained. Rolling capture ≤8s stereo at≤96kHz (6.144MB ring), one outstanding read and≤16 voices. Generated evidence files stay local in artifacts/audio-research/materials."
+}

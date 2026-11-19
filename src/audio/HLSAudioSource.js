@@ -23,6 +23,12 @@ export default class HLSAudioSource {
     this.notify?.(this.snapshot);
   }
 
+  // Explicit opt-in, configured by the existing Labs owner before first play.
+  enableResearch(factory) {
+    if (this.media) throw new Error('Configure research before opening the source.');
+    this.researchFactory = factory;
+  }
+
   loading() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => this.fail('The stream took too long to respond.'), 20000);
@@ -71,6 +77,7 @@ export default class HLSAudioSource {
       },
       waiting: () => { if (!media.paused) this.loading(); },
       ended: () => this.update({playing: false, status: 'ended'}),
+      seeking: () => this.researchGraph?.stop('Source seeking; effects stopped.'),
       error: () => this.fail('The stream could not be played.'),
     };
     Object.entries(events).forEach(([event, fn]) => media.addEventListener(event, fn));
@@ -90,7 +97,15 @@ export default class HLSAudioSource {
         this.frequency = new Uint8Array(this.analyser.frequencyBinCount);
         this.waveform = new Uint8Array(this.analyser.fftSize);
         this.input = this.context.createMediaElementSource(media);
-        this.input.connect(this.context.destination);
+        if (this.researchFactory) {
+          try { this.researchGraph = this.researchFactory(this.context, this.input); }
+          catch {
+            // Roll back a failed insertion before restoring the single original path.
+            this.researchGraph?.detach();
+            this.input.disconnect();
+            this.input.connect(this.context.destination);
+          }
+        } else this.input.connect(this.context.destination);
         this.input.connect(this.analyser);
         this.bandOptions.forEach((options, name) => this.makeBand(name, options));
         if (this.workletRequested) this.startWorklet();
@@ -131,6 +146,7 @@ export default class HLSAudioSource {
   }
 
   pause() {
+    this.researchGraph?.stop('Source paused; effects stopped.');
     this.wantsPlay = false;
     this.attempt++;
     clearTimeout(this.timeout);
@@ -144,6 +160,7 @@ export default class HLSAudioSource {
 
   seek(seconds) {
     if (!Number.isFinite(seconds)) return;
+    this.researchGraph?.stop('Source seeking; effects stopped.');
     if (!this.media || this.snapshot.duration <= 0) {
       this.pendingTime = Math.max(0, seconds);
       this.update({time: this.pendingTime});
@@ -222,6 +239,8 @@ export default class HLSAudioSource {
   }
 
   releaseMedia() {
+    this.researchGraph?.detach();
+    this.researchGraph = null;
     clearTimeout(this.timeout);
     this.attempt++;
     this.wantsPlay = false;
