@@ -152,6 +152,19 @@ export function validateRecipe(input, catalog, parent, limits) {
   return recipe;
 }
 
+/** Reachable capture intervals in first-trigger order. A digest alone omits provenance.
+ * @param {MemoryRecipeV1} recipe */
+export function reachableFragmentRefs(recipe) {
+  const intervals = new Map();
+  for (const {fragmentRef} of recipe.gestures) {
+    const key = fragmentRef.startFrame + '/' + fragmentRef.endFrame;
+    const existing = intervals.get(key);
+    if (existing && existing.sha256 !== fragmentRef.sha256) throw new RangeError('Conflicting capture digests for the same interval.');
+    if (!existing) intervals.set(key, fragmentRef);
+  }
+  return [...intervals.values()];
+}
+
 /** @param {unknown} recipe */
 export function serializeRecipe(recipe) {
   return JSON.stringify(normalizeRecipe(recipe));

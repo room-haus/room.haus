@@ -3,7 +3,8 @@
 import assert from 'node:assert/strict';
 import {createHash, randomUUID} from 'node:crypto';
 import {parseArgs} from 'node:util';
-import {SPACE_TAKE_DEFAULTS} from '../src/experiences/takes/recipe.mjs';
+import {normalizeFragmentRef, verifyFragmentBytes} from '../src/experiences/takes/fragment-asset.mjs';
+import {reachableFragmentRefs, SPACE_TAKE_DEFAULTS} from '../src/experiences/takes/recipe.mjs';
 
 export async function checkTakeService({origin, id, write = false}) {
   const url = new URL(origin);
@@ -41,6 +42,21 @@ export async function checkTakeService({origin, id, write = false}) {
       assert.equal(bytes.byteLength, ref.byteLength);
       digests[mode] = createHash('sha256').update(bytes).digest('hex');
       assert.equal(digests[mode], ref.sha256);
+    }
+    if (record.recipe.experiment === 'audio-memory') {
+      const refs = reachableFragmentRefs(record.recipe);
+      assert.equal(record.fragments?.length, refs.length);
+      digests.fragments = [];
+      for (const [i, ref] of refs.entries()) {
+        const asset = record.fragments[i];
+        assert.deepEqual(normalizeFragmentRef(asset, record.recipe.passage), ref);
+        assert.equal(asset.url, base + '/fragments/' + ref.sha256);
+        assert.equal(asset.byteLength, ref.frameCount * 4);
+        const response = await request(asset.url, 200);
+        assert.equal(response.headers.get('content-type'), 'application/octet-stream');
+        await verifyFragmentBytes(ref, record.recipe.passage, new Uint8Array(await response.arrayBuffer()));
+        digests.fragments.push(ref.sha256);
+      }
     }
     return digests;
   }

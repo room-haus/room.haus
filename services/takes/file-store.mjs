@@ -1,3 +1,4 @@
+import {fragmentTable} from './fragment-table.mjs';
 import {createHash, randomUUID} from 'node:crypto';
 import {link, mkdir, open, readFile, readdir, stat, unlink} from 'node:fs/promises';
 import {existsSync, mkdirSync, readdirSync} from 'node:fs';
@@ -118,10 +119,11 @@ export async function reclaimTakeStaging(root) {
     const preparations = new Set(await keys(root, 'preparations', id));
     const protectedPreparations = new Set();
     const retainedAudio = new Set();
-    function retainPair(record) {
+    function retainAssets(record) {
       if (!valid(record?.dry?.sha256, digest) || !valid(record?.take?.sha256, digest)) throw Error('Invalid audio references; cleanup stopped.');
       retainedAudio.add(record.dry.sha256);
       retainedAudio.add(record.take.sha256);
+      for (const ref of fragmentTable(record)) retainedAudio.add(ref.sha256);
     }
     for (const key of await keys(root, 'requests', digest)) {
       const binding = JSON.parse(await store.read('requests/' + key));
@@ -132,7 +134,7 @@ export async function reclaimTakeStaging(root) {
       if (!preparations.has(binding.preparationId)) {
         const committed = JSON.parse(await store.read('takes/' + binding.id));
         if (committed?.id !== binding.id) throw Error('Incomplete binding lacks its preparation; cleanup stopped.');
-        retainPair(committed);
+        retainAssets(committed);
       }
     }
 
@@ -143,7 +145,7 @@ export async function reclaimTakeStaging(root) {
       if (prep?.id !== key || !Number.isSafeInteger(prep.expiresAt) ||
           !valid(prep.dry?.sha256, digest) || !valid(prep.take?.sha256, digest)) throw Error('Invalid preparation; cleanup stopped.');
       if (prep.expiresAt <= now && !protectedPreparations.has(key)) expired.push(key);
-      else retainPair(prep);
+      else retainAssets(prep);
     }
 
     for (const key of expired) await unlink(join(root, 'preparations', key));

@@ -1,4 +1,4 @@
-# Local Space take service
+# Local take service
 
 The filesystem service binds to loopback. The catalog advertises a 30-second passage and 24 throws. Either endpoint can fall anywhere within the pinned MX029 revision. The service and editor validate both caps. A saved take can still play if a later editor supports fewer frames or throws, or encounters an unfamiliar Space recipe version. Its stable manifest carries validated stereo PCM references and indicates whether the current policy permits a variation.
 
@@ -31,6 +31,21 @@ On November 19, 2026, Node 24.22.3 prepared the dense 15-minute MX029 passage at
 The stress recipe places all 24 sends within the first 240 ms using maximum delay, feedback, wet level and stereo width. This keeps their feedback tails active together. The 30-second cap kept a single cold preparation below two seconds here and the pair below 12 MB. The same 30-second recipe ran through the bundled worklet in a 48 kHz stereo OfflineAudioContext on desktop-host mobile profiles. Pixel 7 Chromium took 1,845 ms and iPhone 13 WebKit took 1,113 ms. Both produced 1,440,000 frames and a peak difference of 0.12107 full scale from the common-gain original. Physical-device real-time deadlines, hardware memory pressure, network delivery and listening quality need separate measurement.
 
 Every request body is limited to 64 KiB on the JSON write routes. Each handler admits four active requests and up to 60 POST attempts per rolling minute. Reads do not consume write quota. A busy handler returns HTTP 429. Rendering is synchronous in the local Node process, so a dense prepare can delay reads. The measured RSS is for one preparation. A host serving simultaneous sessions needs its own worker isolation, load measurements and aggregate admission policy.
+
+## Memory materials
+
+A Memory preparation accepts the recipe's gestures. It verifies each reachable capture interval against the pinned passage or the parent’s immutable PCM. Preparation and published responses include a `fragments` array in first-trigger order. Each row contains the absolute fragment reference, its byte length and a same-origin binary URL scoped to the preparation or take ID. Intervals with identical samples retain separate rows and share one content-addressed object. The service stores raw interleaved stereo PCM16 before the render gain or treatment. The manifest is written after every referenced object passes its digest and length checks.
+
+The local catalog advertises at most 2,048 scheduled Memory events and 18,432,000 bytes for the decoded stereo captures or cached treatment windows. Sixteen voices may sound at once. The service checks these limits before loading passage samples. Read-only checks by take ID fetch and verify every fragment. A later missing fragment fails its binary GET independently of the saved render pair, and a damaged fragment table disables editing.
+
+On November 19, 2026, Node 24.22.3 prepared two 30-second takes in separate temporary stores using 24 distinct two-second captures from the pinned dense MX029 passage. Each retained 9,216,000 bytes of raw capture PCM. Cold and warm timings describe the first and second service preparations in each process. Process RSS includes creation of the source fixture for the requests.
+
+| Treatment | Scheduled events | Peak voices | First prepare (ms) | Repeat (ms) | Peak process RSS (MiB) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Repeat | 120 | 16 | 797 | 615 | 189 |
+| Dissolve | 2,048 | 16 | 726 | 560 | 148 |
+
+Run `node scripts/benchmark-take-memory.mjs .cache/take-source repeat` and repeat with `dissolve`. These single-process measurements cover local preparation. Device playback and hosted capacity require separate measurements.
 
 ## Retention and the backend handoff
 

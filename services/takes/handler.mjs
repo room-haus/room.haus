@@ -57,6 +57,8 @@ export function takeHandler(repository, {now = () => performance.now()} = {}) {
         if (path === '/v1/passage') return send(200, (await repository.passage(selection(url.searchParams))).pcm, true);
         const asset = /^\/v1\/(preparations|takes)\/([a-f0-9]{32})\/(dry|take)$/.exec(path);
         if (asset) return send(200, await repository.audio(asset[1], asset[2], asset[3]), true);
+        const fragment = /^\/v1\/(preparations|takes)\/([a-f0-9]{32})\/fragments\/([a-f0-9]{64})$/.exec(path);
+        if (fragment) return send(200, await repository.fragment(fragment[1], fragment[2], fragment[3]), true);
         const manifest = /^\/v1\/takes\/([a-f0-9]{32})$/.exec(path);
         if (manifest) return send(200, await repository.take(manifest[1]));
       } else if (req.method === 'POST') {

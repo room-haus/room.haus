@@ -9,9 +9,9 @@ const guard = sample => Math.max(-SPACE_TAKE_GUARD, Math.min(SPACE_TAKE_GUARD, s
  * Canonical 48 kHz frames relative to the passage. startFrame is the button press.
  * Tick zero sounds 25 ms later. A live caller uses these event frames directly.
  * Each trigger owns its tick index, including when audition starts mid-passage.
- * @param {import('./recipe.mjs').MemoryGesture[]} gestures @param {number} frameCount
+ * @param {import('./recipe.mjs').MemoryGesture[]} gestures @param {number} frameCount @param {number} [maxEvents]
  */
-export function memorySchedule(gestures, frameCount) {
+export function memorySchedule(gestures, frameCount, maxEvents = Infinity) {
   const events = [];
   for (const g of gestures) {
     const length = g.fragmentRef.frameCount;
@@ -24,6 +24,7 @@ export function memorySchedule(gestures, frameCount) {
       const frames = grain === -1 ? length : grainRange(length, RATE, grain).frames;
       // The initial voice may end at the gesture boundary. Later ticks require a full window.
       if (tick > 0 && at + frames > stop) continue;
+      if (events.length >= maxEvents) throw new RangeError('Too many fragment events.');
       events.push({gestureId: g.id, sha256: g.fragmentRef.sha256, grain, startFrame: at,
         endFrame: Math.min(at + frames, stop), gain: g.level * (grain === -1 ? .5 : .36)});
     }
@@ -36,6 +37,21 @@ export function memorySchedule(gestures, frameCount) {
     ends.push(event.endFrame);
   }
   return events;
+}
+
+/** Check full stereo decode and the actual cached stereo windows before loading samples. */
+export function checkMemoryBudget(recipe, {maxFragmentDecodedBytes, maxFragmentEvents}) {
+  const frames = new Map(recipe.gestures.map(({fragmentRef: ref}) => [ref.sha256, ref.frameCount]));
+  const schedule = memorySchedule(recipe.gestures, recipe.passage.endFrame - recipe.passage.startFrame, maxFragmentEvents);
+  const windows = new Map();
+  for (const {sha256, grain} of schedule) {
+    const length = frames.get(sha256);
+    windows.set(sha256 + '/' + grain, grain === -1 ? length : grainRange(length, RATE, grain).frames);
+  }
+  const stereoFloatBytes = sizes => [...sizes.values()].reduce((sum, n) => sum + n * 8, 0);
+  if (Math.max(stereoFloatBytes(frames), stereoFloatBytes(windows)) > maxFragmentDecodedBytes) {
+    throw new RangeError('Too many decoded fragment bytes.');
+  }
 }
 
 /** Decode and window only the material and grain indices used by this performance. */
