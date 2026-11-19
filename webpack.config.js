@@ -9,7 +9,8 @@ const sections = [{path: '/mixes/', title: 'S/S 2017-2019'}, ...entrancePages.sl
 const src = path.join(__dirname, 'src');
 const modelRoot = path.join(src, 'babylon/models');
 
-module.exports = (_env, argv) => ({
+const site = (_env, argv) => ({
+  name: 'site',
   entry: {main: './src/index.js', labs: './src/labs/index.js'},
   target: 'web',
   devtool: argv.mode === 'development' ? 'cheap-module-source-map' : false,
@@ -130,3 +131,23 @@ module.exports = (_env, argv) => ({
   },
   stats: 'errors-warnings',
 });
+
+module.exports = (env, argv) => [
+  site(env, argv),
+  {
+    // AudioWorkletGlobalScope has no DOM, development socket or shared site runtime.
+    name: 'space-take-worklet',
+    dependencies: ['site'],
+    target: false,
+    devtool: false,
+    entry: './src/experiences/takes/space-worklet.mjs',
+    output: {
+      path: path.join(__dirname, 'dist'),
+      publicPath: '/',
+      filename: 'worklets/space-take-v1.js',
+      chunkFormat: false,
+      chunkLoading: false,
+    },
+    stats: 'errors-warnings',
+  },
+];

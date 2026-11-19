@@ -1,10 +1,11 @@
 import {requireSourcePassage, TAKE_SOURCE_SAMPLE_RATE} from './source.mjs';
+import {SPACE_DELAY_CALIBRATION_V1} from '../audio-space/delay-calibration.mjs';
 
 export const TAKE_RECIPE_SCHEMA = 1;
 export const SPACE_TAKE_EXPERIMENT = 'audio-space';
 export const SPACE_TAKE_RENDERER_VERSION = 1;
 export const SPACE_TAKE_MAX_DELAY_FRAMES = 1.5 * TAKE_SOURCE_SAMPLE_RATE;
-export const SPACE_TAKE_MAX_FEEDBACK = 0.48;
+export const SPACE_TAKE_MAX_FEEDBACK = SPACE_DELAY_CALIBRATION_V1.maxFeedback;
 
 /** @typedef {{sourceId: string, revision: string, startFrame: number, endFrame: number}} TakePassage */
 /** @typedef {{delayFrames: number, feedback: number, wetLevel: number, stereoWidth: number}} SpaceTakeSettings */
@@ -54,22 +55,26 @@ function normalizeSettings(settings) {
   return {delayFrames, feedback: feedback + 0, wetLevel: wetLevel + 0, stereoWidth: stereoWidth + 0};
 }
 
+/** @param {unknown} gesture @param {number} length @returns {SpaceGesture} */
+export function normalizeSpaceGesture(gesture, length) {
+  const {id, startFrame, endFrame, settings} = gesture ?? {};
+  if (!stableId(id)) throw new RangeError('Invalid gesture ID.');
+  if (!frame(startFrame) || !frame(endFrame) || startFrame >= endFrame || endFrame > length) {
+    throw new RangeError('Keep the whole echo throw inside the passage.');
+  }
+  return {id, startFrame: startFrame + 0, endFrame, settings: normalizeSettings(settings)};
+}
+
 /** @param {unknown[]} gestures @param {number} length @returns {SpaceGesture[]} */
 function normalizeGestures(gestures, length) {
   const ids = new Set();
-  const ordered = Array.from(gestures, gesture => {
-    const {id, startFrame, endFrame, settings} = gesture ?? {};
-    if (!stableId(id)) throw new RangeError('Invalid gesture ID.');
-    if (ids.has(id)) throw new RangeError(`Duplicate gesture ID: ${id}.`);
-    ids.add(id);
-    if (!frame(startFrame) || !frame(endFrame) || startFrame >= endFrame || endFrame > length) {
-      throw new RangeError('Keep the whole echo throw inside the passage.');
-    }
-    return {id, startFrame: startFrame + 0, endFrame, settings: normalizeSettings(settings)};
-  }).sort((a, b) => a.startFrame - b.startFrame);
+  const ordered = Array.from(gestures, gesture => normalizeSpaceGesture(gesture, length))
+    .sort((a, b) => a.startFrame - b.startFrame);
 
   let lastEnd = 0;
   for (const gesture of ordered) {
+    if (ids.has(gesture.id)) throw new RangeError(`Duplicate gesture ID: ${gesture.id}.`);
+    ids.add(gesture.id);
     if (gesture.startFrame < lastEnd) throw new RangeError('Echo throws cannot overlap while sending.');
     lastEnd = gesture.endFrame;
   }
