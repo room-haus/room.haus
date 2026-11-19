@@ -18,8 +18,9 @@ export class TakeTransport {
   private sources: AudioBufferSourceNode[] = [];
   private node?: AudioWorkletNode;
   private startTime = 0;
+  private startContextFrame = 0;
   private length: number;
-  private recent?: {since: number};
+  private recent?: {since: number; wall: number; initialOutput: number; lastOutput: number};
   private held?: SpaceGesture;
   private gestures: SpaceGesture[] = [];
   private pending = new Set<string>();
@@ -71,6 +72,7 @@ export class TakeTransport {
       if (this.closed) return;
     }
     const startContextFrame = Math.ceil((ctx.currentTime + .12) * ctx.sampleRate);
+    this.startContextFrame = startContextFrame;
     this.startTime = startContextFrame / ctx.sampleRate;
     if (!this.offset) {
       this.node = new AudioWorkletNode(ctx, SPACE_TAKE_PROCESSOR_NAME, {numberOfInputs: 1, numberOfOutputs: 1,
@@ -96,24 +98,41 @@ export class TakeTransport {
     this.events.update();
   }
 
+  private sourcePosition(outputFrame: number) {
+    const elapsed = Math.max(0, outputFrame - this.startContextFrame);
+    return Math.min(this.length, this.offset + Math.floor(elapsed * RATE / this.context.sampleRate));
+  }
+  private presentedOutputFrame() {
+    const ctx = this.context;
+    const rendered = Math.round(ctx.currentTime * ctx.sampleRate);
+    const stamp = ctx.getOutputTimestamp?.().contextTime;
+    if (stamp !== undefined && Number.isFinite(stamp) && stamp >= 0) {
+      return Math.min(rendered, Math.round(stamp * ctx.sampleRate));
+    }
+    // Some engines expose only the rendering head. Subtract the graph and device
+    // latency, reserving 100 ms when the engine reports no latency estimate.
+    const latency = (ctx.baseLatency || 0) + (ctx.outputLatency || 0);
+    return Math.max(0, rendered - Math.ceil((latency || .1) * ctx.sampleRate));
+  }
   positionFrame() {
     if (!this.ready) return this.offset;
-    return Math.max(this.offset, Math.min(this.length, this.offset + Math.floor((this.context.currentTime - this.startTime) * RATE)));
+    return this.sourcePosition(Math.round(this.context.currentTime * this.context.sampleRate));
   }
   armRecent() {
     this.checkClock();
     if (!this.ready || this.ending) throw Error('Start listening before arming a capture.');
-    this.recent = {since: this.positionFrame()};
+    const output = this.presentedOutputFrame();
+    this.recent = {since: this.sourcePosition(output), wall: performance.now(), initialOutput: output, lastOutput: output};
     this.events.update();
   }
   recentFrames() {
     if (!this.recent || !this.ready || this.ending || this.context.state !== 'running') return 0;
-    return Math.min(4 * RATE, Math.max(0, this.positionFrame() - this.recent.since));
+    return Math.min(4 * RATE, Math.max(0, this.sourcePosition(this.presentedOutputFrame()) - this.recent.since));
   }
   async captureRecent(lengthFrames: number) {
     this.checkClock();
     const listening = this.recent;
-    const end = this.positionFrame();
+    const end = this.sourcePosition(this.presentedOutputFrame());
     if (!listening || !this.ready || this.ending || end - listening.since < lengthFrames) {
       throw Error('Listen continuously for the full capture window and try again.');
     }
@@ -130,6 +149,15 @@ export class TakeTransport {
     if (this.context.state !== 'running' || audio < this.clock.audio || Math.abs((wall - this.clock.wall) / 1000 - (audio - this.clock.audio)) > .35) {
       this.fail('The audio clock was interrupted.');
       return;
+    }
+    if (this.recent) {
+      const output = this.presentedOutputFrame();
+      const elapsed = (output - this.recent.initialOutput) / this.context.sampleRate;
+      if (output < this.recent.lastOutput || Math.abs((wall - this.recent.wall) / 1000 - elapsed) > .35) {
+        this.fail('The presentation clock was interrupted.');
+        return;
+      }
+      this.recent.lastOutput = output;
     }
     this.clock = {wall, audio};
     if (this.held && this.positionFrame() >= this.held.endFrame) this.held = undefined;

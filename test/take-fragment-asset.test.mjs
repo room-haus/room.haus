@@ -72,7 +72,7 @@ test('source format, complete bounds, silence, provenance and content digest are
   }
 });
 
-async function device(t) {
+async function device(t, {rate = 44100, latencyFrames = 0, timestamp = true} = {}) {
   const {TakeTransport} = await import('../src/experiences/takes/transport.ts');
   const {source} = fixture();
   const frames = 6 * 48000;
@@ -82,7 +82,9 @@ async function device(t) {
   const node = () => ({gain:{}, connect(){}, disconnect(){}, start(){}, stop(){}});
   const classes = {
     AudioContext: class {
-      currentTime = 0; sampleRate = 44100; state = 'running';
+      currentTime = 0; sampleRate = rate; state = 'running';
+      baseLatency = .02; outputLatency = .03;
+      getOutputTimestamp = timestamp ? () => ({contextTime: Math.max(0, this.currentTime - latencyFrames / rate), performanceTime: wall}) : undefined;
       constructor() { ctx = this; }
       createGain = node; createBufferSource = node;
       audioWorklet = {addModule: async () => {}};
@@ -104,7 +106,7 @@ async function device(t) {
     bytes.buffer, true, 0, {update(){},finish(_gestures, message){ error = message; }});
   await transport.start();
   transport.armRecent();
-  return {transport, error:() => error, advance(outputFrames, extraWall = 0) {
+  return {transport, ctx, error:() => error, advance(outputFrames, extraWall = 0) {
     ctx.currentTime += outputFrames / ctx.sampleRate;
     wall += outputFrames / ctx.sampleRate * 1000 + extraWall;
   }};
@@ -143,3 +145,38 @@ test('a clock stall between capture and hash completion rejects the old material
   assert.match(error(), /clock/i);
   assert.equal(transport.recentFrames(), 0);
 });
+
+for (const [rate, cursor, expected] of [[44100, 6027, 800], [48000, 5761, 1]]) {
+  test('presented hardware frames map exactly to source frames at ' + rate, async t => {
+    const latencyFrames = 1024;
+    const {transport, advance} = await device(t, {rate, latencyFrames});
+    advance(cursor + latencyFrames);
+    assert.equal(transport.recentFrames(), expected);
+    transport.dispose();
+  });
+}
+
+test('fallback capture cursor accounts for reported graph and device latency', async t => {
+  const {transport, advance} = await device(t, {rate:48000, timestamp:false});
+  advance(5760 + 2400 + 12000);
+  assert.deepEqual((await transport.captureRecent(12000)).ref, ref);
+  transport.dispose();
+});
+
+for (const stall of ['render', 'presentation']) {
+  test('short polls during a cumulative ' + stall + ' stall invalidate a pending capture', async t => {
+    const {transport, ctx, advance, error} = await device(t);
+    advance(5292 + 11025);
+    const pending = transport.captureRecent(12000);
+    const timestamp = ctx.getOutputTimestamp();
+    if (stall === 'presentation') ctx.getOutputTimestamp = () => timestamp;
+    for (let poll = 0; poll < 9; poll++) {
+      if (stall === 'render') advance(0, 50);
+      else advance(2205);
+      transport.checkClock();
+    }
+    await assert.rejects(pending, /interrupt|stale/i);
+    assert.match(error(), /clock/i);
+    assert.equal(transport.recentFrames(), 0);
+  });
+}
