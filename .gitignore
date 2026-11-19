@@ -14,3 +14,6 @@ yarn-error.log
 
 /test-results/
 /playwright-report/
+
+# Regenerated audio research renders, source cache, screenshots and run reports.
+/artifacts/audio-processing/

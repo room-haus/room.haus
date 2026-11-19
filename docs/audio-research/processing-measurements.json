@@ -1,0 +1,773 @@
+{
+  "recorded": "2026-11-18",
+  "note": "Historical baseline measurements before generated-artifact cleanup. Scripts and tests write fresh runs to ignored artifacts/audio-processing/. No human or acoustic listening review.",
+  "sourceHashes": {
+    "src/experiences/audio-processing/processor.ts": "2a402fcd6445ca69380a8c9461e25295c8fd293f360a090f8caac598a9507197",
+    "src/experiences/audio-processing/index.tsx": "2f983fcc6a369d3d9c68e483cf0d94e6ae48f771c1bec02c927bd165caf3e262",
+    "src/experiences/audio-processing/processing.css": "19251afc4645ee0f21282d9750f7f3e27f0902b85b42ab45a2e440b7dc3d3813",
+    "src/experiences/shared/audio/research/ResearchAudio.ts": "d93477350f2699128ed54d7a93e71d384e13a68b6e1552f7c4f41d243efb9cb1",
+    "src/experiences/shared/audio/research/ResearchHost.tsx": "0c59ceca7778f76ba4b1732ff4ee9cad2ae4bc000cb81c82d2759d64eaeae627",
+    "src/labs/experiences.js": "0030975cca7bd2ad6eb6375b8bfd35ee7dd0f218e04d1017c2ee2d5ff376952a",
+    "e2e/audio-processing.spec.cjs": "b20fdd7cb277ea71dd81ca3516234d8d2349faf4a87b62e59e1a5bd7c85dd9ad",
+    "test/audio-processing.test.mjs": "728bfadca94f7c9de908932b0a0c328df5fc34f9a2db98e785fe677744f26d56",
+    "scripts/audio-processing-evidence.mjs": "c70dfc4267a789613d0d410943e9e5dec623e749ada2a168dcb59d2272970feb"
+  },
+  "renders": {
+    "playlistUrl": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+    "playlistSha256": "f1a2b3878263afb5eb24b18975bb1da4f6048b9fb8563c76514ef111b608b933",
+    "note": "Raw output is unnormalized. Comparison copies attenuate Original to Processed RMS for local audition only; no LUFS/perceptual matching claim. Offline examples and actual shared captures are distinguished. No human listening review.",
+    "renders": [
+      {
+        "name": "reference-loop",
+        "mode": "original",
+        "settings": {
+          "name": "original"
+        },
+        "rate": 24000,
+        "peak": 0.3749961853027344,
+        "rms": 0.0383066438651106,
+        "finite": true,
+        "path": "reference-loop-original.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "6bdd3f8b707b45fad8dc9bfe2a41fb987d3d4a4573afd349faad72453a29b0ed",
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "reference-loop",
+        "mode": "processed",
+        "settings": {
+          "name": "processed",
+          "cutoff": 8000,
+          "saturation": 0.2,
+          "movement": 0,
+          "level": 0.5
+        },
+        "rate": 24000,
+        "peak": 0.30584847927093506,
+        "rms": 0.03241781819512268,
+        "finite": true,
+        "path": "reference-loop-processed.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "a36a309871648030cb76c19034e7a08c4de059b01c32be7aaa4445d01beb9b94",
+        "rmsDifferenceDb": -1.4498064352552
+      },
+      {
+        "name": "reference-loop",
+        "mode": "obscured",
+        "settings": {
+          "name": "obscured",
+          "cutoff": 450,
+          "saturation": 1,
+          "movement": 1,
+          "level": 1
+        },
+        "rate": 24000,
+        "peak": 0.24030832946300507,
+        "rms": 0.031223005248459987,
+        "finite": true,
+        "path": "reference-loop-obscured.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "d28c6786506da0a2480aba14666538997c5063dd1a8d8f72257fdf9ef8b64cd0",
+        "rmsDifferenceDb": -1.7759880406802433
+      },
+      {
+        "name": "mx029-006",
+        "mode": "original",
+        "settings": {
+          "name": "original"
+        },
+        "rate": 24000,
+        "peak": 0.4087371826171875,
+        "rms": 0.0986324932114421,
+        "finite": true,
+        "path": "mx029-006-original.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "b411df2be6855ed3aa259ec37e1bd3eba0bd735905f11a1449e65af635b504c3",
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-006",
+        "mode": "processed",
+        "settings": {
+          "name": "processed",
+          "cutoff": 8000,
+          "saturation": 0.2,
+          "movement": 0,
+          "level": 0.5
+        },
+        "rate": 24000,
+        "peak": 0.36173367500305176,
+        "rms": 0.08763677417826245,
+        "finite": true,
+        "path": "mx029-006-processed.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "09768a21d3c316172fff2a5e7d4a709d1689b67df54f9d815273c65071ad12b4",
+        "rmsDifferenceDb": -1.0266725605669424
+      },
+      {
+        "name": "mx029-006",
+        "mode": "obscured",
+        "settings": {
+          "name": "obscured",
+          "cutoff": 450,
+          "saturation": 1,
+          "movement": 1,
+          "level": 1
+        },
+        "rate": 24000,
+        "peak": 0.18059860169887543,
+        "rms": 0.06343611498084774,
+        "finite": true,
+        "path": "mx029-006-obscured.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "b985e6f4ffe2e72301a5f97f58947e8336369917d223617912089287c74cd3a4",
+        "rmsDifferenceDb": -3.8336686729596754
+      },
+      {
+        "name": "mx029-090",
+        "mode": "original",
+        "settings": {
+          "name": "original"
+        },
+        "rate": 24000,
+        "peak": 0.5,
+        "rms": 0.12745265690362848,
+        "finite": true,
+        "path": "mx029-090-original.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "cebc5ffb807b91924510d008ba44c1676b3a82b7d72afe50748715f115f68eff",
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-090",
+        "mode": "processed",
+        "settings": {
+          "name": "processed",
+          "cutoff": 8000,
+          "saturation": 0.2,
+          "movement": 0,
+          "level": 0.5
+        },
+        "rate": 24000,
+        "peak": 0.4382753372192383,
+        "rms": 0.1083309333085605,
+        "finite": true,
+        "path": "mx029-090-processed.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "7b9234b98f171da0d31c71d15a61898236dab251c74871907e63432f86c9fed8",
+        "rmsDifferenceDb": -1.4119281705854627
+      },
+      {
+        "name": "mx029-090",
+        "mode": "obscured",
+        "settings": {
+          "name": "obscured",
+          "cutoff": 450,
+          "saturation": 1,
+          "movement": 1,
+          "level": 1
+        },
+        "rate": 24000,
+        "peak": 0.18740232288837433,
+        "rms": 0.08869517258713376,
+        "finite": true,
+        "path": "mx029-090-obscured.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "55d1c1f02f82db98c989e7a6857907cc98dd9f06f9bbf8e8434da2caaf29da54",
+        "rmsDifferenceDb": -3.148978203274652
+      },
+      {
+        "name": "mx029-210",
+        "mode": "original",
+        "settings": {
+          "name": "original"
+        },
+        "rate": 24000,
+        "peak": 0.49488815665245056,
+        "rms": 0.08449779715246293,
+        "finite": true,
+        "path": "mx029-210-original.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "ee6ff02b5aef8db7814e56487c8c20d39e0df6fbf3d7e5acbb7a49b4eb7c4510",
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-210",
+        "mode": "processed",
+        "settings": {
+          "name": "processed",
+          "cutoff": 8000,
+          "saturation": 0.2,
+          "movement": 0,
+          "level": 0.5
+        },
+        "rate": 24000,
+        "peak": 0.4448484778404236,
+        "rms": 0.07159163105623823,
+        "finite": true,
+        "path": "mx029-210-processed.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "b98a823f71fd8a8ab6f4fb927fd737d9f82203f5428dab931ff78a97d879298a",
+        "rmsDifferenceDb": -1.4396626025276285
+      },
+      {
+        "name": "mx029-210",
+        "mode": "obscured",
+        "settings": {
+          "name": "obscured",
+          "cutoff": 450,
+          "saturation": 1,
+          "movement": 1,
+          "level": 1
+        },
+        "rate": 24000,
+        "peak": 0.21539776027202606,
+        "rms": 0.05550238281234023,
+        "finite": true,
+        "path": "mx029-210-obscured.wav",
+        "seconds": 8,
+        "graph": "offline",
+        "sha256": "2453554a365c0ac32d6f2948c21f3d545c57706af5a909da8b074090490f9ada",
+        "rmsDifferenceDb": -3.6506751712592216
+      },
+      {
+        "name": "shared-reference",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.3749961853027344,
+        "rms": 0.03863890066868942,
+        "finite": true,
+        "path": "shared-reference-original.wav",
+        "seconds": 4.3,
+        "graph": "shared",
+        "sha256": "d5dd46501b9b1b05c016ac0c0136a88c1419cc479de882a2b22f16df0b624683",
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "shared-reference",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.30558323860168457,
+        "rms": 0.03272086477381496,
+        "finite": true,
+        "path": "shared-reference-processed.wav",
+        "seconds": 4.298666666666667,
+        "graph": "shared",
+        "sha256": "916a82ce90b284033770cc37f9533d27a30cd63b285d3a14dedc30441c537cec",
+        "rmsDifferenceDb": -1.443999771728569
+      },
+      {
+        "name": "reference-loop",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.317348557127989,
+        "rms": 0.03241781819512268,
+        "trimDb": -1.4498064352552,
+        "graph": "offline-comparison",
+        "path": "reference-loop-comparison-original.wav",
+        "sha256": "a42d3d47a9b2973175cf35cd3f00c3fbb3db964e39d0fd15cd575dec024a5b69",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "reference-loop",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.30584847927093506,
+        "rms": 0.03241781819512268,
+        "trimDb": 0,
+        "graph": "offline-comparison",
+        "path": "reference-loop-comparison-processed.wav",
+        "sha256": "a36a309871648030cb76c19034e7a08c4de059b01c32be7aaa4445d01beb9b94",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-006",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.3631704624407309,
+        "rms": 0.08763677417826245,
+        "trimDb": -1.0266725605669424,
+        "graph": "offline-comparison",
+        "path": "mx029-006-comparison-original.wav",
+        "sha256": "395657215992e40aa5690a74efaed0b1841403ca15f4773a4d0e3e64a9f31eb7",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-006",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.36173367500305176,
+        "rms": 0.08763677417826245,
+        "trimDb": 0,
+        "graph": "offline-comparison",
+        "path": "mx029-006-comparison-processed.wav",
+        "sha256": "09768a21d3c316172fff2a5e7d4a709d1689b67df54f9d815273c65071ad12b4",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-090",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.42498499419464203,
+        "rms": 0.1083309333085605,
+        "trimDb": -1.4119281705854627,
+        "graph": "offline-comparison",
+        "path": "mx029-090-comparison-original.wav",
+        "sha256": "c9507e57d927004fac26a650d3801718fc3fcbce4fb9ea9309c63bd1ebfdeabd",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-090",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.4382753372192383,
+        "rms": 0.1083309333085605,
+        "trimDb": 0,
+        "graph": "offline-comparison",
+        "path": "mx029-090-comparison-processed.wav",
+        "sha256": "7b9234b98f171da0d31c71d15a61898236dab251c74871907e63432f86c9fed8",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-210",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.4192991003213551,
+        "rms": 0.07159163105623823,
+        "trimDb": -1.4396626025276285,
+        "graph": "offline-comparison",
+        "path": "mx029-210-comparison-original.wav",
+        "sha256": "14d6793df7437b25bbc02426e02fc2c731e6d3d11d5c848d9145f876aa3a7002",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "mx029-210",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.4448484778404236,
+        "rms": 0.07159163105623823,
+        "trimDb": 0,
+        "graph": "offline-comparison",
+        "path": "mx029-210-comparison-processed.wav",
+        "sha256": "b98a823f71fd8a8ab6f4fb927fd737d9f82203f5428dab931ff78a97d879298a",
+        "seconds": 8,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "shared-reference",
+        "mode": "original",
+        "rate": 24000,
+        "peak": 0.3175607809134756,
+        "rms": 0.03272086477381496,
+        "trimDb": -1.443999771728569,
+        "graph": "shared-comparison",
+        "path": "shared-reference-comparison-original.wav",
+        "sha256": "bdd605e76056b0349ab9addbe6c275944d2e1b2a0546aff9c859102f1260d0e4",
+        "seconds": 4.3,
+        "rmsDifferenceDb": 0
+      },
+      {
+        "name": "shared-reference",
+        "mode": "processed",
+        "rate": 24000,
+        "peak": 0.30558323860168457,
+        "rms": 0.03272086477381496,
+        "trimDb": 0,
+        "graph": "shared-comparison",
+        "path": "shared-reference-comparison-processed.wav",
+        "sha256": "916a82ce90b284033770cc37f9533d27a30cd63b285d3a14dedc30441c537cec",
+        "seconds": 4.298666666666667,
+        "rmsDifferenceDb": 0
+      }
+    ]
+  },
+  "dsp": {
+    "chromium": {
+      "identityMaxError": 0,
+      "tones": [
+        {
+          "hz": 100,
+          "db": -0.086184406449574
+        },
+        {
+          "hz": 1000,
+          "db": -6.020599913279624
+        },
+        {
+          "hz": 8000,
+          "db": -37.907626690951155
+        }
+      ],
+      "saturation": {
+        "rms": 0.331729790035155,
+        "peak": 0.3912103772163391,
+        "finite": true,
+        "thirdRatio": 0.1890572233839892
+      },
+      "noiseRatio": 0.19965220689486213,
+      "transitionMaxStep": 0.00016868114471435547,
+      "stepIndex": 48012,
+      "transitionNearby": [
+        0.6984838247299194,
+        0.6983153223991394,
+        0.6981469988822937,
+        0.6979783177375793,
+        0.6978099942207336,
+        0.6976414918899536,
+        0.6974730491638184
+      ],
+      "extremes": [
+        {
+          "rms": 0.12350630478859287,
+          "peak": 0.8999799489974976,
+          "finite": true
+        },
+        {
+          "rms": 0.1369568304577522,
+          "peak": 0.8999799489974976,
+          "finite": true
+        },
+        {
+          "rms": 0.11016053482207694,
+          "peak": 0.8887302279472351,
+          "finite": true
+        },
+        {
+          "rms": 0.12336264051950462,
+          "peak": 0.8887302279472351,
+          "finite": true
+        },
+        {
+          "rms": 0.6363961041485482,
+          "peak": 0.8999999761581421,
+          "finite": true
+        },
+        {
+          "rms": 0.6361663946713975,
+          "peak": 0.8999809622764587,
+          "finite": true
+        },
+        {
+          "rms": 0.3355876299429402,
+          "peak": 0.8887500166893005,
+          "finite": true
+        },
+        {
+          "rms": 0.3355543753731941,
+          "peak": 0.8887311816215515,
+          "finite": true
+        }
+      ],
+      "movementRatio": 1.1516851325908233
+    },
+    "android": {
+      "identityMaxError": 0,
+      "tones": [
+        {
+          "hz": 100,
+          "db": -0.086184406449574
+        },
+        {
+          "hz": 1000,
+          "db": -6.020599913279624
+        },
+        {
+          "hz": 8000,
+          "db": -37.907626690951155
+        }
+      ],
+      "saturation": {
+        "rms": 0.331729790035155,
+        "peak": 0.3912103772163391,
+        "finite": true,
+        "thirdRatio": 0.1890572233839892
+      },
+      "noiseRatio": 0.19965220689486213,
+      "transitionMaxStep": 0.00016868114471435547,
+      "stepIndex": 48012,
+      "transitionNearby": [
+        0.6984838247299194,
+        0.6983153223991394,
+        0.6981469988822937,
+        0.6979783177375793,
+        0.6978099942207336,
+        0.6976414918899536,
+        0.6974730491638184
+      ],
+      "extremes": [
+        {
+          "rms": 0.12350630478859287,
+          "peak": 0.8999799489974976,
+          "finite": true
+        },
+        {
+          "rms": 0.1369568304577522,
+          "peak": 0.8999799489974976,
+          "finite": true
+        },
+        {
+          "rms": 0.11016053482207694,
+          "peak": 0.8887302279472351,
+          "finite": true
+        },
+        {
+          "rms": 0.12336264051950462,
+          "peak": 0.8887302279472351,
+          "finite": true
+        },
+        {
+          "rms": 0.6363961041485482,
+          "peak": 0.8999999761581421,
+          "finite": true
+        },
+        {
+          "rms": 0.6361663946713975,
+          "peak": 0.8999809622764587,
+          "finite": true
+        },
+        {
+          "rms": 0.3355876299429402,
+          "peak": 0.8887500166893005,
+          "finite": true
+        },
+        {
+          "rms": 0.3355543753731941,
+          "peak": 0.8887311816215515,
+          "finite": true
+        }
+      ],
+      "movementRatio": 1.1516851325908233
+    },
+    "mobile-webkit": {
+      "identityMaxError": 0,
+      "tones": [
+        {
+          "hz": 100,
+          "db": -0.08618446971483348
+        },
+        {
+          "hz": 1000,
+          "db": -6.020599871029248
+        },
+        {
+          "hz": 8000,
+          "db": -37.90762669561821
+        }
+      ],
+      "saturation": {
+        "rms": 0.33172981636601057,
+        "peak": 0.3912104070186615,
+        "finite": true,
+        "thirdRatio": 0.18905723836576038
+      },
+      "noiseRatio": 0.19965219309008872,
+      "transitionMaxStep": 0.0001691579818725586,
+      "stepIndex": 49152,
+      "transitionNearby": [
+        0.5064362287521362,
+        0.506267786026001,
+        0.5060993432998657,
+        0.5059301853179932,
+        0.5057617425918579,
+        0.5055932998657227,
+        0.5054247975349426
+      ],
+      "extremes": [
+        {
+          "rms": 0.12350630197115446,
+          "peak": 0.8999797701835632,
+          "finite": true
+        },
+        {
+          "rms": 0.13695682809327858,
+          "peak": 0.8999797701835632,
+          "finite": true
+        },
+        {
+          "rms": 0.11016053028305292,
+          "peak": 0.8887298703193665,
+          "finite": true
+        },
+        {
+          "rms": 0.12336263628330171,
+          "peak": 0.8887298703193665,
+          "finite": true
+        },
+        {
+          "rms": 0.6363961041485482,
+          "peak": 0.8999999761581421,
+          "finite": true
+        },
+        {
+          "rms": 0.6361663944920248,
+          "peak": 0.8999807834625244,
+          "finite": true
+        },
+        {
+          "rms": 0.33558765287094544,
+          "peak": 0.8887498378753662,
+          "finite": true
+        },
+        {
+          "rms": 0.3355543967724722,
+          "peak": 0.8887308835983276,
+          "finite": true
+        }
+      ],
+      "movementRatio": 1.1516851326826358
+    }
+  },
+  "sharedOutput": {
+    "chromium": {
+      "original": 0.07071066191977961,
+      "processed": 0.0012729142465874256,
+      "bypass": 0.07071066275628317,
+      "stop": 0.07071066302309652,
+      "invalid": 0.036613563414351104,
+      "created": 3,
+      "stopped": 3,
+      "closed": true
+    },
+    "android": {
+      "original": 0.07071066191977961,
+      "processed": 0.0012701074954018694,
+      "bypass": 0.07071066207891816,
+      "stop": 0.07071066317838934,
+      "invalid": 0.036613563209077334,
+      "created": 3,
+      "stopped": 3,
+      "closed": true
+    },
+    "mobile-webkit": {
+      "original": 0.07070302952380152,
+      "processed": 0.0012694063343628803,
+      "bypass": 0.07071066267230014,
+      "stop": 0.0707106636774403,
+      "invalid": 0.03661356473808936,
+      "created": 3,
+      "stopped": 3,
+      "closed": true
+    }
+  },
+  "mixPlayback": {
+    "browser": "headless Chromium, real configured CDN HLS, reduced motion",
+    "passages": [
+      {
+        "requestedTime": 60,
+        "processed": {
+          "time": 60.388934,
+          "rate": 1,
+          "source": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8"
+        },
+        "original": {
+          "time": 60.503094,
+          "rate": 1
+        }
+      },
+      {
+        "requestedTime": 900,
+        "processed": {
+          "time": 900.63188,
+          "rate": 1,
+          "source": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8"
+        },
+        "original": {
+          "time": 900.727102,
+          "rate": 1
+        }
+      },
+      {
+        "requestedTime": 2100,
+        "processed": {
+          "time": 2100.880347,
+          "rate": 1,
+          "source": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8"
+        },
+        "original": {
+          "time": 2101.078554,
+          "rate": 1
+        }
+      }
+    ],
+    "owners": {
+      "media": 1,
+      "contexts": 1
+    },
+    "released": true,
+    "errors": [],
+    "note": "Actual playback/processing check; no human or acoustic listening review."
+  },
+  "passageProfiles": [
+    {
+      "segment": 6,
+      "monoRms": 0.1823553783838844,
+      "crestDb": 11.763837267933301,
+      "energyAbove2kFraction": 0.02034059100744559
+    },
+    {
+      "segment": 90,
+      "monoRms": 0.24770749167207157,
+      "crestDb": 11.02220710007301,
+      "energyAbove2kFraction": 0.07581852770104665
+    },
+    {
+      "segment": 210,
+      "monoRms": 0.1614969652819332,
+      "crestDb": 14.847558399705832,
+      "energyAbove2kFraction": 0.20197194299712934
+    }
+  ],
+  "comparisonVerification": [
+    {
+      "original": "mx029-006-comparison-original.wav",
+      "processed": "mx029-006-comparison-processed.wav",
+      "encodedRmsDifferenceDb": -1.0914842563222045e-06
+    },
+    {
+      "original": "shared-reference-comparison-original.wav",
+      "processed": "shared-reference-comparison-processed.wav",
+      "encodedRmsDifferenceDb": 8.431536295246011e-06
+    },
+    {
+      "original": "mx029-090-comparison-original.wav",
+      "processed": "mx029-090-comparison-processed.wav",
+      "encodedRmsDifferenceDb": 4.194618437147186e-06
+    },
+    {
+      "original": "mx029-210-comparison-original.wav",
+      "processed": "mx029-210-comparison-processed.wav",
+      "encodedRmsDifferenceDb": -7.230355020893304e-07
+    },
+    {
+      "original": "reference-loop-comparison-original.wav",
+      "processed": "reference-loop-comparison-processed.wav",
+      "encodedRmsDifferenceDb": -2.3883505535604418e-05
+    }
+  ],
+  "browserSuiteInventory": {
+    "public": 165,
+    "labs": 195,
+    "all": 360,
+    "overlap": [],
+    "omissions": [],
+    "extra": []
+  }
+}

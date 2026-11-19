@@ -1,0 +1,27 @@
+{
+  "playlistUrl": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029.m3u8",
+  "playlistSha256": "f1a2b3878263afb5eb24b18975bb1da4f6048b9fb8563c76514ef111b608b933",
+  "passages": [
+    {
+      "segment": 6,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-006.ts",
+      "segmentSha256": "537d794f639000b50bfc32b57e094c482f3fa8c7c7e26ea36065a63dc803e481",
+      "mediaTime": 60.006224,
+      "seconds": 8
+    },
+    {
+      "segment": 90,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-090.ts",
+      "segmentSha256": "bc787d99aa958f1d16e5e0f0854938000025304cdf60c3bdeb32b15e1b2c28a3",
+      "mediaTime": 900.0933599999997,
+      "seconds": 8
+    },
+    {
+      "segment": 210,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-210.ts",
+      "segmentSha256": "a7ad3e5afd63c0d80a790434787f3999987a8edfc584c89aabd996e1b1158ea4",
+      "mediaTime": 2100.2178399999952,
+      "seconds": 8
+    }
+  ]
+}
