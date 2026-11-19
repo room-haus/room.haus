@@ -4,10 +4,14 @@ import {
   TAKE_SOURCE_BYTES_PER_FRAME,
   TAKE_SOURCE_CHANNELS,
   TAKE_SOURCE_FORMAT,
+  TAKE_SOURCE_SAMPLE_RATE,
 } from '../../src/experiences/takes/source.mjs';
 
 export async function readPassage(catalog, request, store) {
   const source = requireSourcePassage(catalog, request);
+  if (source.sampleRate !== TAKE_SOURCE_SAMPLE_RATE) {
+    throw new Error('Invalid source sample rate');
+  }
   if (source.channels !== TAKE_SOURCE_CHANNELS) {
     throw new Error('Invalid source channel count');
   }

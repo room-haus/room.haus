@@ -7,15 +7,18 @@ import {join} from 'node:path';
 
 import {readPassage} from '../services/takes/passage.mjs';
 
-// An asymmetric continuous decode, in signed 16-bit little-endian stereo.
-const continuous = Buffer.from(
-  '0080ff7f 0100feff 2c01a8fd f00000f0 d4fe2b01 0080ffff'.replaceAll(' ', ''),
-  'hex',
-);
-const expected = Array.from({length: 6}, (_, frame) => [
-  continuous.readInt16LE(frame * 4),
-  continuous.readInt16LE(frame * 4 + 2),
-]);
+// An uncompressed 48 kHz stereo WAV with six unsigned 8-bit frames.
+const wav = Buffer.from([
+  '52494646 30000000 57415645',
+  '666d7420 10000000 0100 0200 80bb0000 00770100 0200 0800',
+  '64617461 0c000000 00ff 817f 827e 8070 7f81 0180',
+].join(' ').replaceAll(' ', ''), 'hex');
+const dataOffset = wav.indexOf('data') + 4;
+const sampleCount = wav.readUInt32LE(dataOffset);
+const continuous = Buffer.alloc(sampleCount * 2);
+for (let sample = 0; sample < sampleCount; sample++) {
+  continuous.writeInt16LE((wav[dataOffset + 4 + sample] - 128) * 256, sample * 2);
+}
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const chunks = new Map();
 const source = {
@@ -48,10 +51,10 @@ const bounds = (startFrame, endFrame, revision = source.revision) => ({
   endFrame,
 });
 
-for (const [description, startFrame, endFrame] of [
-  ['first frame', 0, 1],
-  ['frames across two chunks', 1, 4],
-  ['final frame', 5, 6],
+for (const [description, startFrame, endFrame, expected] of [
+  ['first frame', 0, 1, [[-32768, 32512]]],
+  ['frames across two chunks', 1, 4, [[256, -256], [512, -512], [0, -4096]]],
+  ['final frame', 5, 6, [[-32512, 0]]],
 ]) {
   test(`a passage reads the ${description} from the continuous stereo decode`, async () => {
     const passage = await readPassage(catalog, bounds(startFrame, endFrame), store);
@@ -65,7 +68,7 @@ for (const [description, startFrame, endFrame] of [
       pcm.readInt16LE(frame * 4),
       pcm.readInt16LE(frame * 4 + 2),
     ]);
-    assert.deepEqual(decoded, expected.slice(startFrame, endFrame));
+    assert.deepEqual(decoded, expected);
   });
 }
 
@@ -84,6 +87,12 @@ test('invalid passage endpoints and unknown revisions fail before reading a chun
   ]) {
     await assert.rejects(readPassage(catalog, invalid, unreadable), RangeError);
   }
+});
+
+test('a source revision with a noncanonical sample rate fails before reading a chunk', async () => {
+  const wrongRate = [{...source, sampleRate: 44_100}];
+  const unreadable = {readChunk: () => assert.fail('an invalid catalog read a chunk')};
+  await assert.rejects(readPassage(wrongRate, bounds(0, 1), unreadable), /Invalid source sample rate/);
 });
 
 test('a chunk with the wrong contents fails even when it has the expected length', async () => {
@@ -114,8 +123,8 @@ test('the source index preserves PCM digests and signed stereo peaks across chun
   const files = await Promise.all(index.chunks.map(chunk => readFile(join(output, chunk.sha256 + '.pcm'))));
   assert.deepEqual(Buffer.concat(files), continuous);
   assert.deepEqual(index.peaks, [
-    {framesPerPeak: 3, values: [[-32768, 300, -600, 32767], [-32768, 240, -4096, 299]]},
-    {framesPerPeak: 6, values: [[-32768, 300, -4096, 32767]]},
+    {framesPerPeak: 3, values: [[-32768, 512, -512, 32512], [-32512, 0, -4096, 256]]},
+    {framesPerPeak: 6, values: [[-32768, 512, -4096, 32512]]},
   ]);
 });
 
