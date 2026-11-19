@@ -298,13 +298,53 @@ test('the live monitor changes between the performed waveform and dry waveform w
   await expect(rows(page)).toHaveCount(1);
 });
 
-test('touch cancellation releases the running Memory voice and keeps the recorded trigger', async ({page}) => {
+test('scrolling through settings keeps the pass running and canceling a performance touch releases it', async ({
+  page,
+}, info) => {
   await maker(page);
   await button(page, 'Record').click();
   await button(page, 'Capture fragment').click();
-  await button(page, 'Trigger fragment').click();
+  const perform = button(page, 'Trigger fragment');
+  await perform.click();
   await expect(rows(page)).toHaveCount(1);
-  await button(page, 'Trigger fragment').dispatchEvent('pointercancel', {pointerId: 10, pointerType: 'touch'});
+  const summary = page.locator('summary').filter({hasText: 'Capture and trigger settings'});
+  await summary.scrollIntoViewIfNeeded();
+  if (info.project.name === 'android') {
+    const client = await page.context().newCDPSession(page);
+    await page.evaluate(() => {
+      window.canceledTouches = [];
+      document.addEventListener('pointercancel', (event) =>
+        window.canceledTouches.push([event.target.tagName, event.isTrusted]),
+      );
+    });
+    const touch = async (target, cancel) => {
+      await target.scrollIntoViewIfNeeded();
+      const box = await target.boundingBox();
+      const x = box.x + box.width / 2,
+        y = box.y + box.height / 2;
+      await client.send('Input.dispatchTouchEvent', {type: 'touchStart', touchPoints: [{x, y}]});
+      if (!cancel) {
+        for (const delta of [12, 40, 85])
+          await client.send('Input.dispatchTouchEvent', {type: 'touchMove', touchPoints: [{x, y: y - delta}]});
+      }
+      await client.send('Input.dispatchTouchEvent', {type: cancel ? 'touchCancel' : 'touchEnd', touchPoints: []});
+    };
+    await touch(summary, false);
+    await expect.poll(() => page.evaluate(() => window.canceledTouches)).toContainEqual(['SUMMARY', true]);
+    await expect(button(page, 'Stop')).toBeEnabled({timeout: 1000});
+    await touch(perform, true);
+    await expect.poll(() => page.evaluate(() => window.canceledTouches)).toContainEqual(['BUTTON', true]);
+    await client.detach();
+  } else {
+    const pointer = {pointerId: 10, pointerType: 'touch', isPrimary: true, button: 0};
+    await summary.dispatchEvent('pointerdown', pointer);
+    await summary.dispatchEvent('pointercancel', pointer);
+    await expect(button(page, 'Stop')).toBeEnabled({timeout: 1000});
+    await perform.dispatchEvent('pointerdown', pointer);
+    await perform.dispatchEvent('pointercancel', {...pointer, pointerId: 11});
+    await expect(button(page, 'Stop')).toBeEnabled({timeout: 1000});
+    await perform.dispatchEvent('pointercancel', pointer);
+  }
   await expect(button(page, 'Record')).toBeEnabled({timeout: 1200});
   await expect(rows(page)).toHaveCount(1);
 });
@@ -341,4 +381,71 @@ test('enlarged phone text preserves each playhead time and wraps the controls', 
   const record = await button(page, 'Record').boundingBox(),
     capture = await button(page, 'Capture fragment').boundingBox();
   expect(capture.y).toBeGreaterThan(record.y);
+});
+
+async function delayTriggerAck(page) {
+  await page.addInitScript(() => {
+    const Native = window.AudioWorkletNode;
+    window.AudioWorkletNode = class extends Native {
+      constructor(ctx, name, options) {
+        super(ctx, name, options);
+        if (name !== 'room-memory-take-v1') return;
+        this.port.addEventListener('message', (event) => {
+          if (event.data.type !== 'trigger' || window.ackReleased) return;
+          event.stopImmediatePropagation();
+          window.releaseAck = () => {
+            window.ackReleased = true;
+            this.port.dispatchEvent(new MessageEvent('message', {data: event.data}));
+          };
+        });
+      }
+    };
+  });
+}
+
+test('a trigger awaiting worklet acknowledgement keeps its exact capture through the next capture and replay', async ({
+  page,
+}) => {
+  await delayTriggerAck(page);
+  await maker(page);
+  await button(page, 'Record').click();
+  const capture = button(page, 'Capture fragment'),
+    retained = page.getByLabel('Retained fragment');
+  await capture.click();
+  await expect(retained).toBeVisible();
+  const first = await retained.textContent();
+  await button(page, 'Trigger fragment').click();
+  await expect.poll(() => page.evaluate(() => typeof window.releaseAck)).toBe('function');
+  await expect(capture).toBeDisabled();
+  await capture.evaluate((control) => control.click());
+  await expect(retained).toHaveText(first);
+  await page.evaluate(() => window.releaseAck());
+  await expect(rows(page)).toHaveCount(1);
+  await capture.click();
+  await expect(retained).not.toHaveText(first);
+  await button(page, 'Stop').click();
+  await button(page, 'Play passage').click();
+  await expect(button(page, 'Hear original')).toBeEnabled({timeout: 1500});
+  await expect(rows(page).getByLabel('Capture source')).toHaveText(first);
+  await expect(page.getByRole('alert')).toHaveCount(0);
+});
+
+test('stopping a pass with an unacknowledged trigger releases capture and ignores its late acknowledgement', async ({
+  page,
+}) => {
+  await delayTriggerAck(page);
+  await maker(page);
+  await button(page, 'Record').click();
+  const capture = button(page, 'Capture fragment');
+  await capture.click();
+  await button(page, 'Trigger fragment').click();
+  await expect.poll(() => page.evaluate(() => typeof window.releaseAck)).toBe('function');
+  await expect(capture).toBeDisabled();
+  await button(page, 'Stop').click();
+  await button(page, 'Record').click();
+  await page.evaluate(() => window.releaseAck());
+  await expect(capture).toBeEnabled();
+  await expect(rows(page)).toHaveCount(0);
+  await button(page, 'Trigger fragment').click();
+  await expect(rows(page)).toHaveCount(1);
 });

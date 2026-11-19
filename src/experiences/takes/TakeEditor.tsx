@@ -130,13 +130,11 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
 
   useEffect(() => {
     const release = () => { padOwner.current = null; if (current.current.experiment === 'audio-memory') owner.current?.end(); else owner.current?.release(); };
-    const cancelMemory = () => { if (current.current.experiment === 'audio-memory') owner.current?.end(); };
     const hidden = () => { if (document.hidden && (owner.current?.recording || current.current.experiment === 'audio-memory')) owner.current?.fail('Recording was interrupted.'); };
     window.addEventListener('blur', release);
     document.addEventListener('visibilitychange', hidden);
-    document.addEventListener('pointercancel', cancelMemory);
     const timer = setInterval(() => { if (owner.current?.ready) { owner.current.checkClock(); update(); } }, 50);
-    return () => { clearInterval(timer); window.removeEventListener('blur', release); document.removeEventListener('visibilitychange', hidden); document.removeEventListener('pointercancel', cancelMemory); };
+    return () => { clearInterval(timer); window.removeEventListener('blur', release); document.removeEventListener('visibilitychange', hidden); };
   }, [update]);
   const player = owner.current;
   const start = (recording: boolean) => {

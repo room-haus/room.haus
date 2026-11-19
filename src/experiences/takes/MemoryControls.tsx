@@ -127,11 +127,31 @@ export function MemoryControls({
     [pending, setPending] = useState(false),
     [retry, setRetry] = useState(false);
   const operation = useRef(0);
+  const pressed = useRef<{player: TakeTransport; pointerId: number} | null>(null);
+  function releasePointer(event: React.PointerEvent<HTMLButtonElement>) {
+    if (pressed.current?.pointerId === event.pointerId) pressed.current = null;
+  }
+  const performancePointer = {
+    onPointerDown(event: React.PointerEvent<HTMLButtonElement>) {
+      if (player?.recording && event.isPrimary && event.button === 0)
+        pressed.current = {player, pointerId: event.pointerId};
+    },
+    onPointerUp: releasePointer,
+    onPointerLeave: releasePointer,
+    onPointerCancel(event: React.PointerEvent<HTMLButtonElement>) {
+      const contact = pressed.current;
+      if (contact && contact.player === player && contact.pointerId === event.pointerId) {
+        pressed.current = null;
+        stop();
+      }
+    },
+  };
   useEffect(() => {
     setPending(false);
     setRetry(false);
     return () => {
       operation.current++;
+      pressed.current = null;
     };
   }, [player]);
   const fragment = session.retained;
@@ -142,7 +162,7 @@ export function MemoryControls({
     );
   const ready = Boolean(player?.recording && player?.ready && player.recentFrames() >= length * RATE);
   async function capture() {
-    if (!player || pending) return;
+    if (!player || player.triggerPending || pending) return;
     const token = ++operation.current;
     setPending(true);
     report('');
@@ -161,7 +181,7 @@ export function MemoryControls({
     }
   }
   function trigger() {
-    if (!player || !fragment) return;
+    if (!player || !fragment || pending || player.triggerPending) return;
     const gesture = fragmentTrigger(recipe, fragment, player.positionFrame(), settings);
     try {
       check({type: 'add', gesture});
@@ -181,10 +201,14 @@ export function MemoryControls({
             Record
           </button>
         )}
-        <button disabled={!ready || pending} onClick={() => void capture()}>
+        <button
+          {...performancePointer}
+          disabled={!ready || player?.triggerPending || pending}
+          onClick={() => void capture()}>
           {retry ? 'Retry capture' : 'Capture fragment'}
         </button>
         <button
+          {...performancePointer}
           disabled={!player?.recording || !player.ready || player.triggerPending || pending || !fragment}
           onClick={trigger}>
           Trigger fragment
@@ -193,17 +217,19 @@ export function MemoryControls({
       <p role="status">
         {pending
           ? 'Reading recent audio…'
-          : player?.recording
-            ? ready
-              ? 'Ready to capture'
-              : 'Listening for recent audio…'
-            : player
-              ? 'Playing'
-              : enabled
-                ? 'Ready to record'
-                : loading
-                  ? 'Loading passage…'
-                  : 'Passage unavailable'}
+          : player?.triggerPending
+            ? 'Placing trigger…'
+            : player?.recording
+              ? ready
+                ? 'Ready to capture'
+                : 'Listening for recent audio…'
+              : player
+                ? 'Playing'
+                : enabled
+                  ? 'Ready to record'
+                  : loading
+                    ? 'Loading passage…'
+                    : 'Passage unavailable'}
         {player?.ready && ' · Hearing ' + player.sounding(recipe.gestures)}
       </p>
       <p className="take-hint">
