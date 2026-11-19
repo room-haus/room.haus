@@ -1,0 +1,6 @@
+.processing-controls{display:grid;gap:1rem}
+.processing-controls label>span{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+.research-host .processing-movement{display:flex;align-items:center;gap:.75rem;min-height:44px;cursor:pointer}
+.processing-movement input{width:1.25rem;accent-color:#2448c4;flex-shrink:0}
+.processing-controls .research-note{margin:0}
+.research-host:has(.processing-controls) .research-control-grid>label{align-self:start}

@@ -5,7 +5,7 @@ Normal pull-request and master CI runs public-site E2E only. Internal Labs E2E i
 | Command | Scope |
 | --- | --- |
 | `npm run test:browser:public` | Public entrance, artwork/archive, player, navigation/history, loading/failure, waveform, accessibility and static-page behavior, on all three configured browsers. |
-| `npm run test:browser:labs` | Labs login/navigation and six geometry studies, Underlevel, shared listening host, Hanging Balance, Endless Rally and Odd Ensemble, on all three browsers. |
+| `npm run test:browser:labs` | Labs login/navigation and six geometry studies, Underlevel, shared listening host, Tone & texture processing, Hanging Balance, Endless Rally and Odd Ensemble, on all three browsers. |
 | `npm run test:browser` | Complete suite; retained for explicit local integration checks and backward compatibility. |
 
 Build first (`npm run build`) and install browsers (`npx playwright install chromium webkit`). The commands manage the built preview server. Use `ROOM_TEST_ORIGIN=http://127.0.0.1:4206` to select an isolated local port; every suite uses the same origin and browser projects. Pass `-- --project=chromium` or an individual spec after an npm command for a focused development run.
@@ -22,4 +22,12 @@ Build first (`npm run build`) and install browsers (`npx playwright install chro
 
 The split does not remove tests or reduce their browser coverage when selected. A complete test-list comparison must show that public and Labs inventories do not overlap and their union equals the complete suite. Long live-media soaks, device benchmarks and qualitative art review remain explicit development/release-readiness work; E2E success does not replace them.
 
-Current verified inventory (18 November 2026, including the audio foundation): 174 public cases and174 internal Labs cases,348 total, with no overlap or omissions. The21 new audio-research cases are deliberately internal in `playwright.suites.cjs`; focused execution passed17 with4 expected platform skips. The last complete pre-split run passed316 with11 intentional platform skips; that is historical evidence, not a full run of the expanded inventory. Automatic CI still selects174 public cases. Hosted time savings are not measured. The inventory comparison is recorded in `artifacts/audio-research/suite-inventory.json`.
+Task 00's recorded inventory (18 November 2026, including the audio foundation): 174 public cases and174 internal Labs cases,348 total, with no overlap or omissions. The21 new audio-research cases are deliberately internal in `playwright.suites.cjs`; focused execution passed17 with4 expected platform skips. The last complete pre-split run passed316 with11 intentional platform skips; that is historical evidence, not a full run of the expanded inventory. Hosted time savings are not measured. That snapshot is recorded in `artifacts/audio-research/suite-inventory.json`.
+
+Task 01 adds 24 deliberately internal processing cases. Fresh inventory against
+the actual rebased checkout is 165 public + 195 Labs = 360, with zero overlap or
+omissions. Automatic CI selects the 165 public cases. Processing and foundation
+focused execution passed 40 with 5 intentional platform skips. This is not a full
+run of all 360 cases. Recorded inventory: the `browserSuiteInventory` field in
+`docs/audio-research/processing-measurements.json`. Processing WAVs, screenshots,
+source caches and fresh run reports are ignored in `artifacts/audio-processing/`.

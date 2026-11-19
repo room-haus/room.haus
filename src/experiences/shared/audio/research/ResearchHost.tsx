@@ -10,9 +10,10 @@ export interface ResearchHostProps {
   title:string;description:string;onClose:()=>void;
   configure:(research:ResearchAudio)=>void;
   controls?:(props:{research:ResearchAudio;disabled:boolean})=>ReactNode;
+  showReferenceTools?:boolean;
 }
 /** Sound-first presentation of the same ListeningSession and modal, with no renderer. */
-export function ResearchHost({title,description,onClose,configure,controls}:ResearchHostProps){
+export function ResearchHost({title,description,onClose,configure,controls,showReferenceTools=true}:ResearchHostProps){
   const [source,setSource]=useState('mix'),[session,setSession]=useState<ListeningSession|null>(null);
   const [,refresh]=useState(0),[resetCount,setResetCount]=useState(0),[captureUrl,setCaptureUrl]=useState('');
   const [capturing,setCapturing]=useState(false);
@@ -30,11 +31,11 @@ export function ResearchHost({title,description,onClose,configure,controls}:Rese
     <header className="research-header"><span className="research-eyebrow">ROOM / AUDIO RESEARCH</span><button onClick={onClose}><span aria-hidden="true">← </span>Back to Labs</button></header>
     <h1>{title}</h1><p className="research-intro">{description}</p>
     <section className="research-source" aria-label="Source playback">
-      <label>Listening source<select aria-label="Listening source" value={source} onChange={event=>{research?.stop();setCapturing(false);setCaptureUrl('');setSource(event.target.value);}}>
+      <label>Listening source<select aria-label="Listening source" value={source} onChange={event=>{research?.stop();setCapturing(false);setCaptureUrl('');setResetCount(n=>n+1);setSource(event.target.value);}}>
         <option value="mix">MX029 · Saad Ashraf / original mix</option><option value="loop">Generated diagnostic loop · 120 BPM</option><option value="tone">Generated 440 Hz reference</option><option value="noise">Generated noise reference</option>
       </select></label>
       <button className="research-primary" disabled={!session} onClick={()=>{if(playing||playback?.status==='loading')session!.pause();else session!.play();refresh(n=>n+1);}}>{playback?.status==='loading'?'Cancel loading':playing?'Pause source':playback?.error?'Retry source':'Play source'}</button>
-      <label className="research-position"><span>Source position <output>{stamp(playback?.time||0)} / {stamp(playback?.duration||0)}</output></span><input aria-label="Source position" type="range" min="0" max={playback?.duration||1} step=".1" value={Math.min(playback?.time||0,playback?.duration||1)} disabled={!playback?.duration} onChange={event=>session!.seek(Number(event.target.value))}/></label>
+      <label className="research-position"><span>Source position <output>{stamp(playback?.time||0)} / {stamp(playback?.duration||0)}</output></span><input aria-label="Source position" type="range" min="0" max={playback?.duration||1} step=".1" value={Math.min(playback?.time||0,playback?.duration||1)} disabled={!playback?.duration} onChange={event=>{session!.seek(Number(event.target.value));refresh(n=>n+1);}}/></label>
     </section>
     <section className="research-comparison" aria-label="Listening comparison">
       <div className="research-buttons"><button aria-pressed={!armed} onClick={()=>research?.original()}>Original</button><button aria-pressed={armed} disabled={disabled} onClick={()=>research?.arm()}>Processed</button><button onClick={()=>{research?.reset();if(research)configure(research);setResetCount(n=>n+1);setCapturing(false);setCaptureUrl('');}}>Reset effect</button><button className="research-stop" onClick={()=>{research?.stop();setCapturing(false);}}>Stop effects</button></div>
@@ -46,7 +47,7 @@ export function ResearchHost({title,description,onClose,configure,controls}:Rese
       {research&&<div key={'controls'+resetCount}>{controls?.({research,disabled})}</div>}
       <div><span className="research-eyebrow">OUTPUT / SAME HEADROOM IN BOTH MODES</span><p className="research-meter">{diagnostics?.peak?`${(20*Math.log10(diagnostics.peak)).toFixed(1)} dBFS peak`:'— dBFS peak'}</p><p className="research-note">Fixed −6 dB headroom. Guard ceiling −0.18 dBFS. Peak is sampled, not a loudness match.</p></div>
     </section>
-    <section className="research-control-grid research-tools" aria-label="Shared reference tools">
+    {showReferenceTools&&<section className="research-control-grid research-tools" aria-label="Shared reference tools">
       <div><h2>Clock check</h2><label>Manual tempo (BPM)<input aria-label="Manual tempo (BPM)" type="number" min="40" max="240" defaultValue="120" disabled={disabled} onChange={event=>research?.clock.setTempo(Number(event.target.value))}/></label>
         <div className="research-buttons"><button disabled={disabled||!armed} onClick={()=>research?.clock.tap(playback!.time)}>Tap tempo</button><button disabled={disabled||!armed} onClick={()=>{research!.clock.setTempo(research!.clock.bpm);research!.clock.anchor(playback!.time);const buffer=toBuffer(research!.context!,makeSamples('rim'));research!.clock.repeat(1,at=>research!.playBuffer(buffer,at,.15));}}>Anchor quiet pulse</button></div>
         <p className="research-note">{diagnostics?.bpm.toFixed(1)} BPM · {diagnostics?.anchored?'phase anchored':'phase unset'}. Anchor starts a quiet manual pulse. No automatic beat grid.</p></div>
@@ -55,7 +56,7 @@ export function ResearchHost({title,description,onClose,configure,controls}:Rese
         const owner=research!,buffer=await owner.capture(1);if(!buffer||owner!==session?.audio.research)return;
         setCaptureUrl(URL.createObjectURL(new Blob([wavBytes(buffer.getChannelData(0),buffer.sampleRate).buffer as ArrayBuffer],{type:'audio/wav'})));
       }}>Read last second</button></div>{captureUrl&&<a href={captureUrl} download="room-source-capture.wav">Save source capture ↓</a>}<p className="research-note">Opt-in, pre-effect, four-second ring. Read exports mono for this check. Interruptions erase it.</p></div>
-    </section>
+    </section>}
     <details className="research-diagnostics"><summary>Capabilities and diagnostics</summary><pre>{JSON.stringify({...diagnostics,source,status:playback?.status},null,2)}</pre></details>
   </article>;
 }

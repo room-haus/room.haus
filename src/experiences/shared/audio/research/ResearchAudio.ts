@@ -13,7 +13,10 @@ type Snapshot={status:string;time:number;playing:boolean};
 const bounded=(value:number,min:number,max:number,fallback=0)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
 export function ramp(param:AudioParam,value:number,time:number,duration=.015){
   if(!Number.isFinite(value))return;
-  if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(time);else{param.cancelScheduledValues(time);param.setValueAtTime(param.value,time);}
+  if(param.cancelAndHoldAtTime)param.cancelAndHoldAtTime(time);else param.cancelScheduledValues(time);
+  // Also anchor a completed ramp: cancelAndHold need not add an event when
+  // nothing is pending, so the next ramp could otherwise start at the old end.
+  param.setValueAtTime(param.value,time);
   param.linearRampToValueAtTime(value,time+duration);
 }
 

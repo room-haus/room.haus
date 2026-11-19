@@ -3,8 +3,11 @@ import balancePoster from '../experiences/hanging-balance/assets/poster.svg';
 import ensemblePoster from '../experiences/odd-ensemble/assets/poster.svg';
 import rallyPoster from '../experiences/endless-rally/assets/poster.svg';
 import audioPoster from '../experiences/audio-reference/poster.svg';
+import processingPoster from '../experiences/audio-processing/poster.svg';
 // Static loader functions preserve named lazy chunks and allow retry on reopening.
 export const experiences = [
+  {id:'audio-processing',category:'audio-experiments',title:'Tone & texture',description:'A small filter, soft saturation and slow movement. Compare the character with the original recording.',poster:processingPoster,
+    load:()=>import(/* webpackChunkName: "audio-processing" */ '../experiences/audio-processing')},
   {id:'audio-reference',category:'audio-experiments',title:'Audio routing check',description:'Development reference for Original, a reversible processor and one quiet kit hit. Shared audio foundation, not a themed experiment.',poster:audioPoster,
     load:()=>import(/* webpackChunkName: "audio-reference" */ '../experiences/audio-reference')},
   {id:'underlevel',title:'The Underlevel',description:'A passive-first audiovisual dungeon. Let MX029 guide you from the corridor into the hall.',poster:underlevelPoster,

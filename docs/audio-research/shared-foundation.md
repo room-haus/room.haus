@@ -166,6 +166,16 @@ Preview: `http://127.0.0.1:4217/labs/#audio-experiments`, then Open Audio routin
 
 ### Implementation choices and known limits
 
+Task 01 local follow-on: `ResearchHost` adds optional `showReferenceTools` (default
+true), and source replacement remounts its controls to match configured defaults.
+The labelled seek refreshes its controlled slider immediately to avoid restoring
+the prior playhead on a subsequent change event; source transport APIs are unchanged.
+`ramp` now explicitly anchors the current value after cancel/hold, preventing a
+later completed-ramp update from starting at an old event time. Signatures and
+routing are unchanged; real-render regression and capability evidence are in
+[`processing.md`](processing.md). Other modules should continue using the shared
+helper rather than implementing their own automation/lifecycle owner.
+
 - One processor slot and one layer slot, not a plugin system. Modules use ordinary Web Audio nodes and must enforce their own feedback/decay/oscillator bounds.
 - Generated reference sources are explicitly selected; the configured mix is never silently replaced.
 - Ramps are15ms; there is no limiter lookahead or LUFS matching. The sampled peak meter can miss inter-block/intersample peaks. Guard clipping is checked independently.
