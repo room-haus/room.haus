@@ -1,0 +1,6 @@
+.space-controls,.space-clock{display:grid;gap:1rem}
+.space-controls label>span{display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.research-host .space-stereo{display:flex;align-items:center;gap:.75rem;min-height:44px}
+.space-stereo input{width:1.25rem;flex-shrink:0;accent-color:#2448c4}
+.space-controls .research-note{margin:0}
+.research-host:has(.space-controls) .research-control-grid>label{align-self:start}

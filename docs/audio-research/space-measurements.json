@@ -1,0 +1,1074 @@
+{
+  "date": "2026-11-18",
+  "graph": "Actual insert in aligned OfflineAudioContext with the shared linear balance and fixed 0.5 headroom. No guard in offline renders; all peaks must stay below 0.98. Actual guarded output independently tested in e2e/audio-space.spec.cjs.",
+  "audition": "No human listening review. Raw renders unnormalized; comparison files attenuated to lowest body RMS per passage, never boosted. Not LUFS matching.",
+  "sources": [
+    {
+      "segment": 6,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-006.ts",
+      "segmentSha256": "537d794f639000b50bfc32b57e094c482f3fa8c7c7e26ea36065a63dc803e481",
+      "mediaTime": 60.006224,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-space/room.haus/artifacts/audio-space/passages/mx029-006-source.wav"
+    },
+    {
+      "segment": 90,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-090.ts",
+      "segmentSha256": "bc787d99aa958f1d16e5e0f0854938000025304cdf60c3bdeb32b15e1b2c28a3",
+      "mediaTime": 900.0933599999997,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-space/room.haus/artifacts/audio-space/passages/mx029-090-source.wav"
+    },
+    {
+      "segment": 210,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-210.ts",
+      "segmentSha256": "a7ad3e5afd63c0d80a790434787f3999987a8edfc584c89aabd996e1b1158ea4",
+      "mediaTime": 2100.2178399999952,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-space/room.haus/artifacts/audio-space/passages/mx029-210-source.wav"
+    }
+  ],
+  "renders": [
+    {
+      "name": "reference-loop",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "rate": 24000,
+      "peak": 0.3749961853027344,
+      "rms": 0.03426250386890504,
+      "finite": true,
+      "bodyRms": 0.0383066438651106,
+      "tailRms": 0,
+      "tailPeak": 0,
+      "crestDb": 19.815054914828337,
+      "path": "reference-loop-original.wav",
+      "seconds": 10,
+      "sha256": "920aed90387a46b461883e5f0f703af9e84ba0908d8470746ea82cfff29bf302",
+      "bodyRmsDifferenceDb": 0
+    },
+    {
+      "name": "reference-loop",
+      "mode": "delay",
+      "settings": {
+        "name": "delay",
+        "mode": 0,
+        "time": 0.4444444444444444,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.3756617307662964,
+      "rms": 0.034278165154313825,
+      "finite": true,
+      "bodyRms": 0.03832415331688982,
+      "tailRms": 1.1041143409092828e-05,
+      "tailPeak": 0.000223607785301283,
+      "crestDb": 19.82648772340378,
+      "path": "reference-loop-delay.wav",
+      "seconds": 10,
+      "sha256": "051959cee0e1cc8683b309eb10c99bc7508badec25bc398107d03a7b7a0af202",
+      "bodyRmsDifferenceDb": 0.003969296262513363
+    },
+    {
+      "name": "reference-loop",
+      "mode": "reverb",
+      "settings": {
+        "name": "reverb",
+        "mode": 1,
+        "time": 0.45,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.37508174777030945,
+      "rms": 0.03427382766683459,
+      "finite": true,
+      "bodyRms": 0.03831930423776972,
+      "tailRms": 2.369194682818955e-06,
+      "tailPeak": 5.583673555520363e-05,
+      "crestDb": 19.814166320321895,
+      "path": "reference-loop-reverb.wav",
+      "seconds": 10,
+      "sha256": "53a326e28505930f61616fb8a965be6b5ed88289b98c307fa7e6b532afb7964d",
+      "bodyRmsDifferenceDb": 0.0028702183377066048
+    },
+    {
+      "name": "reference-loop",
+      "mode": "long-echo",
+      "settings": {
+        "name": "long-echo",
+        "mode": 0,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.3753972351551056,
+      "rms": 0.034338874770772305,
+      "finite": true,
+      "bodyRms": 0.038391845027552544,
+      "tailRms": 0.00023779010763871328,
+      "tailPeak": 0.004692142829298973,
+      "crestDb": 19.80504171622819,
+      "path": "reference-loop-long-echo.wav",
+      "seconds": 10,
+      "sha256": "bae666414b9b1b0c99d15468e1ca744420194bd693ee999f43f123b71eb4d830",
+      "bodyRmsDifferenceDb": 0.01929759527464604
+    },
+    {
+      "name": "reference-loop",
+      "mode": "air-heavy",
+      "settings": {
+        "name": "air-heavy",
+        "mode": 1,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.3753986358642578,
+      "rms": 0.034308121433417285,
+      "finite": true,
+      "bodyRms": 0.038357645163097455,
+      "tailRms": 1.4547120680802736e-05,
+      "tailPeak": 0.00026531191542744637,
+      "crestDb": 19.812815056949194,
+      "path": "reference-loop-air-heavy.wav",
+      "seconds": 10,
+      "sha256": "32ec93d7a9ecdd1462f2dd72cfa3d718c91ff72c466183dc498a0bc62691ecb9",
+      "bodyRmsDifferenceDb": 0.011556663909050274
+    },
+    {
+      "name": "mx029-006",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "rate": 24000,
+      "peak": 0.4087371826171875,
+      "rms": 0.08821958384442843,
+      "finite": true,
+      "bodyRms": 0.0986324932114421,
+      "tailRms": 0,
+      "tailPeak": 0,
+      "crestDb": 12.34848271587164,
+      "path": "mx029-006-original.wav",
+      "seconds": 10,
+      "sha256": "c1b32e081355eab048ceb2e7c651a1de402f250886e0fa6d826058a72b660aba",
+      "bodyRmsDifferenceDb": 0
+    },
+    {
+      "name": "mx029-006",
+      "mode": "delay",
+      "settings": {
+        "name": "delay",
+        "mode": 0,
+        "time": 0.4444444444444444,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.41517195105552673,
+      "rms": 0.08834192290233657,
+      "finite": true,
+      "bodyRms": 0.09875407662671527,
+      "tailRms": 0.0034649832373148674,
+      "tailPeak": 0.027188608422875404,
+      "crestDb": 12.473459447408889,
+      "path": "mx029-006-delay.wav",
+      "seconds": 10,
+      "sha256": "fffb91743f05ed4536da271b225f03f6c9dbd0a87fec531fe96d0e31cf9ffe69",
+      "bodyRmsDifferenceDb": 0.010700426693762586
+    },
+    {
+      "name": "mx029-006",
+      "mode": "reverb",
+      "settings": {
+        "name": "reverb",
+        "mode": 1,
+        "time": 0.45,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.41846224665641785,
+      "rms": 0.08874480483792288,
+      "finite": true,
+      "bodyRms": 0.0992193244776065,
+      "tailRms": 0.000551841858269788,
+      "tailPeak": 0.010055714286863804,
+      "crestDb": 12.501200330209771,
+      "path": "mx029-006-reverb.wav",
+      "seconds": 10,
+      "sha256": "aba54b008827534036d2dc747be0b4ad8292be549889540703b4aa641f78fc5c",
+      "bodyRmsDifferenceDb": 0.05152509206777928
+    },
+    {
+      "name": "mx029-006",
+      "mode": "long-echo",
+      "settings": {
+        "name": "long-echo",
+        "mode": 0,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.4275752305984497,
+      "rms": 0.08935255324382202,
+      "finite": true,
+      "bodyRms": 0.09976534025789997,
+      "tailRms": 0.010339312784289045,
+      "tailPeak": 0.06345165520906448,
+      "crestDb": 12.640657010574687,
+      "path": "mx029-006-long-echo.wav",
+      "seconds": 10,
+      "sha256": "94a51ccdc2a94b2bb3eba662e000113b32ecc55a5a05e00d59da655a482c9233",
+      "bodyRmsDifferenceDb": 0.09919353644749794
+    },
+    {
+      "name": "mx029-006",
+      "mode": "air-heavy",
+      "settings": {
+        "name": "air-heavy",
+        "mode": 1,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.4425094723701477,
+      "rms": 0.08965404301245711,
+      "finite": true,
+      "bodyRms": 0.10023060319383467,
+      "tailRms": 0.002131167754567733,
+      "tailPeak": 0.02887924574315548,
+      "crestDb": 12.898444553541005,
+      "path": "mx029-006-air-heavy.wav",
+      "seconds": 10,
+      "sha256": "e90a6982db8b024b1ef13233741baf5070e32b23add8359c5ff7f0f438bd6dec",
+      "bodyRmsDifferenceDb": 0.13960665418176668
+    },
+    {
+      "name": "mx029-090",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "rate": 24000,
+      "peak": 0.5,
+      "rms": 0.11399712189978846,
+      "finite": true,
+      "bodyRms": 0.12745265690362848,
+      "tailRms": 0,
+      "tailPeak": 0,
+      "crestDb": 11.87242222093121,
+      "path": "mx029-090-original.wav",
+      "seconds": 10,
+      "sha256": "3bacc3351c7592de288a0c3c9cb5b01ad42a1f9e5c52543d2f84ef4bfe746f17",
+      "bodyRmsDifferenceDb": 0
+    },
+    {
+      "name": "mx029-090",
+      "mode": "delay",
+      "settings": {
+        "name": "delay",
+        "mode": 0,
+        "time": 0.4444444444444444,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.501688539981842,
+      "rms": 0.11419731882618742,
+      "finite": true,
+      "bodyRms": 0.12767252819101177,
+      "tailRms": 0.0020100539091209334,
+      "tailPeak": 0.02920345962047577,
+      "crestDb": 11.886734443292044,
+      "path": "mx029-090-delay.wav",
+      "seconds": 10,
+      "sha256": "c01737c70e914daa43751a49c587b9084617038104c2c7bae37c65ef8ffc3041",
+      "bodyRmsDifferenceDb": 0.014971302883313144
+    },
+    {
+      "name": "mx029-090",
+      "mode": "reverb",
+      "settings": {
+        "name": "reverb",
+        "mode": 1,
+        "time": 0.45,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.5018188953399658,
+      "rms": 0.11388757991451623,
+      "finite": true,
+      "bodyRms": 0.1273298242723596,
+      "tailRms": 0.0006063802527631523,
+      "tailPeak": 0.014425944536924362,
+      "crestDb": 11.91233740745985,
+      "path": "mx029-090-reverb.wav",
+      "seconds": 10,
+      "sha256": "c1addcad6628b979570ca82d68f8c58b73d0da8046de9c29bbd7b036bca51f43",
+      "bodyRmsDifferenceDb": -0.008375071605317034
+    },
+    {
+      "name": "mx029-090",
+      "mode": "long-echo",
+      "settings": {
+        "name": "long-echo",
+        "mode": 0,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.5310977697372437,
+      "rms": 0.11489646537984573,
+      "finite": true,
+      "bodyRms": 0.12841267773711565,
+      "tailRms": 0.006835610392947002,
+      "tailPeak": 0.08110237121582031,
+      "crestDb": 12.331331508743757,
+      "path": "mx029-090-long-echo.wav",
+      "seconds": 10,
+      "sha256": "7153dff8fcf088c17a8b1f04276c1460482f736ee900d08ad667c967c707c0a5",
+      "bodyRmsDifferenceDb": 0.0651801788793056
+    },
+    {
+      "name": "mx029-090",
+      "mode": "air-heavy",
+      "settings": {
+        "name": "air-heavy",
+        "mode": 1,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.504909098148346,
+      "rms": 0.114478796672626,
+      "finite": true,
+      "bodyRms": 0.1279873345698403,
+      "tailRms": 0.001985748447115855,
+      "tailPeak": 0.039234861731529236,
+      "crestDb": 11.92092403647739,
+      "path": "mx029-090-air-heavy.wav",
+      "seconds": 10,
+      "sha256": "e67178c9781a1087dce3a3023b2addec9d01f41a57c8dfa2f7c3ab0aebb93b71",
+      "bodyRmsDifferenceDb": 0.036362027389742355
+    },
+    {
+      "name": "mx029-210",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "rate": 24000,
+      "peak": 0.49488815665245056,
+      "rms": 0.07557712735275812,
+      "finite": true,
+      "bodyRms": 0.08449779715246293,
+      "tailRms": 0,
+      "tailPeak": 0,
+      "crestDb": 15.35323347170839,
+      "path": "mx029-210-original.wav",
+      "seconds": 10,
+      "sha256": "48652d5c504a79a1cf29e26a14424b75306b7614c4e339f801881907d359c2a1",
+      "bodyRmsDifferenceDb": 0
+    },
+    {
+      "name": "mx029-210",
+      "mode": "delay",
+      "settings": {
+        "name": "delay",
+        "mode": 0,
+        "time": 0.4444444444444444,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.49600499868392944,
+      "rms": 0.07571484661500069,
+      "finite": true,
+      "bodyRms": 0.08464677024908902,
+      "tailRms": 0.0018404171430349795,
+      "tailPeak": 0.03549272567033768,
+      "crestDb": 15.357513226063626,
+      "path": "mx029-210-delay.wav",
+      "seconds": 10,
+      "sha256": "13ccd991fc8ab88dbaed1a2bd6d8ecf27feb79b82c93445e0f7b6a7ab3069578",
+      "bodyRmsDifferenceDb": 0.01530009778964692
+    },
+    {
+      "name": "mx029-210",
+      "mode": "reverb",
+      "settings": {
+        "name": "reverb",
+        "mode": 1,
+        "time": 0.45,
+        "feedback": 0.35,
+        "stereo": 1,
+        "level": 0.5
+      },
+      "rate": 24000,
+      "peak": 0.49649059772491455,
+      "rms": 0.07578248521401657,
+      "finite": true,
+      "bodyRms": 0.08472721893218083,
+      "tailRms": 0.00034469426808218627,
+      "tailPeak": 0.00876553263515234,
+      "crestDb": 15.357761540360526,
+      "path": "mx029-210-reverb.wav",
+      "seconds": 10,
+      "sha256": "355408f2e96883ba7a533b1383522571b9195f1f769844c223778c9d7f312a67",
+      "bodyRmsDifferenceDb": 0.0235512872289319
+    },
+    {
+      "name": "mx029-210",
+      "mode": "long-echo",
+      "settings": {
+        "name": "long-echo",
+        "mode": 0,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.5069764852523804,
+      "rms": 0.07632656781789193,
+      "finite": true,
+      "bodyRms": 0.08529207779612306,
+      "tailRms": 0.005456247352902299,
+      "tailPeak": 0.0646267831325531,
+      "crestDb": 15.481582436950873,
+      "path": "mx029-210-long-echo.wav",
+      "seconds": 10,
+      "sha256": "8f1a29c0b048ed3ac758e4066ef5d63d41ecccc2377aeadbb005d69fddc6d936",
+      "bodyRmsDifferenceDb": 0.08126614547678011
+    },
+    {
+      "name": "mx029-210",
+      "mode": "air-heavy",
+      "settings": {
+        "name": "air-heavy",
+        "mode": 1,
+        "time": 1,
+        "feedback": 1,
+        "stereo": 1,
+        "level": 1
+      },
+      "rate": 24000,
+      "peak": 0.5009846091270447,
+      "rms": 0.07608437929443915,
+      "finite": true,
+      "bodyRms": 0.08506228498584224,
+      "tailRms": 0.0013396100367574022,
+      "tailPeak": 0.02362915314733982,
+      "crestDb": 15.401746784638728,
+      "path": "mx029-210-air-heavy.wav",
+      "seconds": 10,
+      "sha256": "7f07d858c6c98ddbc2868511a036ad63cd5953224c0f0c2622fb7c77d945f9bc",
+      "bodyRmsDifferenceDb": 0.0578331535919462
+    }
+  ],
+  "dsp": {
+    "chromium": {
+      "single": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.04728974774479866,
+        "echo2": 0,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.01052745178523538
+      },
+      "max": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.04728974774479866,
+        "echo2": 0.012885131873190403,
+        "late": 1.629585147821772e-29,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.012182407292042
+      },
+      "long": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 1.6,
+        "echo1": 0,
+        "echo2": 0,
+        "late": 3.851145720545901e-06,
+        "finite": true,
+        "difference": 0.7159464145914991,
+        "tailEnergy": 0.013674646951773133
+      },
+      "stereo": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.06383243203163147,
+        "echo2": 0.008697464130818844,
+        "late": 0,
+        "finite": true,
+        "difference": 0.5098804674002325,
+        "tailEnergy": 0.012223878707174906
+      },
+      "reverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0011723920470103621,
+        "echo2": 0.00018123567861039191,
+        "late": 0,
+        "finite": true,
+        "difference": 3.3763842021698234,
+        "tailEnergy": 0.005033851081940589
+      },
+      "monoReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0012444192543625832,
+        "echo2": 0.00018002372235059738,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.0045478171057174565
+      },
+      "shortReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 7.061659061946557e-07,
+        "echo2": 9.425608487071899e-14,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.0004890788466204027
+      }
+    },
+    "android": {
+      "single": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.04728974774479866,
+        "echo2": 0,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.01052745178523538
+      },
+      "max": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.04728974774479866,
+        "echo2": 0.012885131873190403,
+        "late": 1.629585147821772e-29,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.012182407292042
+      },
+      "long": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 1.6,
+        "echo1": 0,
+        "echo2": 0,
+        "late": 3.851145720545901e-06,
+        "finite": true,
+        "difference": 0.7159464145914991,
+        "tailEnergy": 0.013674646951773133
+      },
+      "stereo": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.06383243203163147,
+        "echo2": 0.008697464130818844,
+        "late": 0,
+        "finite": true,
+        "difference": 0.5098804674002325,
+        "tailEnergy": 0.012223878707174906
+      },
+      "reverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0011723920470103621,
+        "echo2": 0.00018123567861039191,
+        "late": 0,
+        "finite": true,
+        "difference": 3.3763842021698234,
+        "tailEnergy": 0.005033851081940589
+      },
+      "monoReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0012444192543625832,
+        "echo2": 0.00018002372235059738,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.0045478171057174565
+      },
+      "shortReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 7.061659061946557e-07,
+        "echo2": 9.425608487071899e-14,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.0004890788466204027
+      }
+    },
+    "mobile-webkit": {
+      "single": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.047286827117204666,
+        "echo2": 0,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.010527066461295425
+      },
+      "max": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.047286827117204666,
+        "echo2": 0.012884899973869324,
+        "late": 1.6290668018328335e-29,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.012181955667410293
+      },
+      "long": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 1.6,
+        "echo1": 0,
+        "echo2": 0,
+        "late": 3.851146175293252e-06,
+        "finite": true,
+        "difference": 0.7159327801629072,
+        "tailEnergy": 0.013674221532251403
+      },
+      "stereo": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.3,
+        "echo1": 0.0638296902179718,
+        "echo2": 0.008697307668626308,
+        "late": 0,
+        "finite": true,
+        "difference": 0.5098764214155067,
+        "tailEnergy": 0.012223480142907974
+      },
+      "reverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0011723913485184312,
+        "echo2": 0.00018123528570868075,
+        "late": 0,
+        "finite": true,
+        "difference": 3.3763778973929037,
+        "tailEnergy": 0.005033831928957963
+      },
+      "monoReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 0.0012444155290722847,
+        "echo2": 0.00018002332944888622,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.004547800257941801
+      },
+      "shortReverb": {
+        "dry": [
+          1,
+          1
+        ],
+        "first": 0.121,
+        "echo1": 7.061638598315767e-07,
+        "echo2": 9.233447882152357e-14,
+        "late": 0,
+        "finite": true,
+        "difference": 0,
+        "tailEnergy": 0.0004890771260743731
+      }
+    }
+  },
+  "sharedOutput": {
+    "chromium": {
+      "original": 0.07078244996462095,
+      "zeroLevel": 0.07067703325539798,
+      "bypass": 0.07074746726561326,
+      "tails": [
+        {
+          "mode": 0,
+          "action": "original",
+          "before": 0.00939602393264494,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014791666666666667,
+          "modules": 0
+        },
+        {
+          "mode": 0,
+          "action": "stop",
+          "before": 0.00939602393264494,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014791666666666667,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "original",
+          "before": 0.004023022989494267,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014604166666666666,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "stop",
+          "before": 0.004023022989494267,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014604166666666666,
+          "modules": 0
+        }
+      ],
+      "diagnostics": {
+        "processing": true,
+        "layering": true,
+        "capture": true,
+        "capturing": true,
+        "mode": "original",
+        "reason": "Effects stopped; hearing Original.",
+        "peak": 0,
+        "rms": 0,
+        "headroomDb": -6.0206,
+        "voices": 0,
+        "modules": 0,
+        "scheduled": 0,
+        "generation": 50,
+        "bpm": 120,
+        "tempoSet": false,
+        "anchored": false
+      },
+      "closed": true
+    },
+    "android": {
+      "original": 0.07078244996462095,
+      "zeroLevel": 0.07063758268107746,
+      "bypass": 0.07074746726561326,
+      "tails": [
+        {
+          "mode": 0,
+          "action": "original",
+          "before": 0.00939602393264494,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014833333333333334,
+          "modules": 0
+        },
+        {
+          "mode": 0,
+          "action": "stop",
+          "before": 0.009304461346124412,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014729166666666666,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "original",
+          "before": 0.004023022989494267,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014604166666666666,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "stop",
+          "before": 0.004023022989494267,
+          "after": 0,
+          "lastNonzeroSeconds": 0.009270833333333334,
+          "modules": 0
+        }
+      ],
+      "diagnostics": {
+        "processing": true,
+        "layering": true,
+        "capture": true,
+        "capturing": true,
+        "mode": "original",
+        "reason": "Effects stopped; hearing Original.",
+        "peak": 0,
+        "rms": 0,
+        "headroomDb": -6.0206,
+        "voices": 0,
+        "modules": 0,
+        "scheduled": 0,
+        "generation": 50,
+        "bpm": 120,
+        "tempoSet": false,
+        "anchored": false
+      },
+      "closed": true
+    },
+    "mobile-webkit": {
+      "original": 0.07076371950815219,
+      "zeroLevel": 0.07067703231735453,
+      "bypass": 0.07076814360891066,
+      "tails": [
+        {
+          "mode": 0,
+          "action": "original",
+          "before": 0.009395914052096915,
+          "after": 0,
+          "lastNonzeroSeconds": 0.012125,
+          "modules": 0
+        },
+        {
+          "mode": 0,
+          "action": "stop",
+          "before": 0.00930435267069559,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014791666666666667,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "original",
+          "before": 0.0039275634912425686,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014708333333333334,
+          "modules": 0
+        },
+        {
+          "mode": 1,
+          "action": "stop",
+          "before": 0.004116222865654525,
+          "after": 0,
+          "lastNonzeroSeconds": 0.014604166666666666,
+          "modules": 0
+        }
+      ],
+      "diagnostics": {
+        "processing": true,
+        "layering": true,
+        "capture": true,
+        "capturing": true,
+        "mode": "original",
+        "reason": "Effects stopped; hearing Original.",
+        "peak": 0,
+        "rms": 0,
+        "headroomDb": -6.0206,
+        "voices": 0,
+        "modules": 0,
+        "scheduled": 0,
+        "generation": 46,
+        "bpm": 120,
+        "tempoSet": false,
+        "anchored": false
+      },
+      "closed": true
+    }
+  },
+  "live": {
+    "chromium": {
+      "name": "chromium",
+      "source": "Actual MX029 CDN HLS, no media fixtures",
+      "errors": [],
+      "capable": "true",
+      "mode": "processed",
+      "rms": 0.01614785551667154,
+      "status": "Processed \u00b7 effects are armed.",
+      "media": [
+        {
+          "time": 1.453537,
+          "paused": false,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "cleanup": {
+        "media": true,
+        "contexts": true
+      }
+    },
+    "android": {
+      "name": "android",
+      "source": "Actual MX029 CDN HLS, no media fixtures",
+      "errors": [],
+      "capable": "true",
+      "mode": "processed",
+      "rms": 0.016858073912178567,
+      "status": "Processed \u00b7 effects are armed.",
+      "media": [
+        {
+          "time": 1.462857,
+          "paused": false,
+          "rate": 1
+        }
+      ],
+      "contexts": [
+        "running"
+      ],
+      "cleanup": {
+        "media": true,
+        "contexts": true
+      }
+    },
+    "mobile-webkit": {
+      "name": "mobile-webkit",
+      "source": "Actual MX029 CDN HLS, no media fixtures",
+      "errors": [],
+      "capable": "false",
+      "mode": "original",
+      "rms": 0,
+      "status": "Processing unavailable for this source/browser. Original playback is preserved.",
+      "media": [
+        {
+          "time": 1.0273516630568629,
+          "paused": false,
+          "rate": 1
+        }
+      ],
+      "contexts": [],
+      "cleanup": {
+        "media": true,
+        "contexts": true
+      }
+    }
+  },
+  "lazyBundle": [
+    {
+      "file": "audio-space.8097762cced6.js",
+      "bytes": 17487,
+      "gzip": 6165
+    }
+  ],
+  "browserSuiteInventory": {
+    "all": 399,
+    "public": 174,
+    "labs": 225,
+    "overlap": 0,
+    "omissions": 0
+  },
+  "sourceHashes": {
+    "src/experiences/audio-space/processor.ts": "212cd55c3e1ea03764f2a35e1952b46013f404cd7363465a3f17934318ebc19d",
+    "src/experiences/audio-space/index.tsx": "214c68ff2f0b89cb3bd241f77da8ec508c304ff6b119ed30969ba511180c0bc8",
+    "src/experiences/audio-space/space.css": "e4f6c758e29964fd867008f3449941dcd63af927a490b5fc09466b34b19dc898",
+    "src/experiences/audio-space/impulses.manifest.json": "318369f0dfba2e99d23ab464b6410909f04bee3ae8d173302a5c2179c9b36d26"
+  },
+  "validation": {
+    "node": {
+      "passed": 128,
+      "failed": 0
+    },
+    "chromiumAndroid": {
+      "passed": 18,
+      "failed": 0
+    },
+    "combinedFinal": {
+      "passed": 19,
+      "failed": 2,
+      "interrupted": 1,
+      "notRun": 5
+    },
+    "webKitPointer": "Fails before experiment loads; reproduced on pre-space 4c1a92d Task01 build. No final green WebKit UI matrix.",
+    "humanAudition": "Not performed; acceptance open",
+    "typechecks": true,
+    "lint": true,
+    "build": true,
+    "dependencyPolicy": true,
+    "npmAuditVulnerabilities": 0,
+    "routes": 99,
+    "assets": 94,
+    "independentReview": "No remaining actionable experiment issue after canonical option fix; shared WebKit input dependency subsequently reproduced.",
+    "webKitFocusedFinal": {
+      "passed": 2,
+      "failed": 1,
+      "note": "Offline DSP and actual guarded tail/dry gain pass. Keyboard activation opens host, but subsequent pointer input still times out; UI qualification remains blocked by baseline-reproduced native WebKit input issue."
+    },
+    "finalKeyboardChromiumAndroid": {
+      "passed": 2,
+      "failed": 0
+    }
+  }
+}

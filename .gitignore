@@ -17,3 +17,4 @@ yarn-error.log
 
 # Regenerated audio research renders, source cache, screenshots and run reports.
 /artifacts/audio-processing/
+/artifacts/audio-space/
