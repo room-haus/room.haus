@@ -8,8 +8,11 @@ import spacePoster from '../experiences/audio-space/poster.svg';
 import rhythmPoster from '../experiences/audio-rhythm/poster.svg';
 import atmospherePoster from '../experiences/audio-atmosphere/poster.svg';
 import memoryPoster from '../experiences/audio-memory/poster.svg';
+import structurePoster from '../experiences/audio-structure/poster.svg';
 // Static loader functions preserve named lazy chunks and allow retry on reopening.
 export const experiences = [
+  {id:'audio-structure',category:'audio-experiments',title:'Structural intervention',description:'Hold a brief repeat, rhythmic thinning or sparse fill. Release into the recording’s current position.',poster:structurePoster,
+    load:()=>import(/* webpackChunkName: "audio-structure" */ '../experiences/audio-structure')},
   {id:'audio-memory',category:'audio-experiments',title:'Memory & fragments',description:'Capture a recent moment and hear it over what follows. Compare repetition with granular dissolution.',poster:memoryPoster,
     load:()=>import(/* webpackChunkName: "audio-memory" */ '../experiences/audio-memory')},
   {id:'audio-atmosphere',category:'audio-experiments',title:'Atmospheric layers',description:'Filtered air and a manually tuned held tone. Listen for a change of setting, then for lost detail.',poster:atmospherePoster,
