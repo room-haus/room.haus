@@ -28,8 +28,10 @@ try{
         else{module=spaceProcessor({context,own:n=>{nodes.push(n);return n;},clock:{bpm:120,tempoSet:true}});module.update(mode);const dry=context.createGain(),wet=context.createGain();dry.gain.value=1-mode.level;wet.gain.value=mode.level;source.connect(dry);dry.connect(headroom);source.connect(module.input);module.output.connect(wet);wet.connect(headroom);}
         source.start();const rendered=await context.startRendering(),channels=[0,1].map(i=>Array.from(rendered.getChannelData(i)));module?.dispose();nodes.forEach(n=>n.disconnect());
         const body=channels.map(c=>c.slice(0,buffer.length)),tail=channels.map(c=>c.slice(buffer.length));
+        const reference=body.map((_c,c)=>Array.from(buffer.getChannelData(Math.min(c,buffer.numberOfChannels-1)),v=>v*.5));
+        const returnRms=stats(body.map((channel,c)=>channel.map((v,i)=>v-reference[c][i]))).rms,referenceRms=stats(reference).rms;
         const windows=[];for(let i=0;i<buffer.length;i+=rate/20)windows.push(stats(body.map(c=>c.slice(i,i+rate/20))).rms);
-        results.push({name,mode:mode.name,settings:mode,rate,...stats(channels),bodyRms:stats(body).rms,tailRms:stats(tail).rms,tailPeak:stats(tail).peak,crestDb:20*Math.log10(stats(body).peak/stats(body).rms),windows,channels});
+        results.push({name,mode:mode.name,settings:mode,rate,...stats(channels),bodyRms:stats(body).rms,returnRms,returnToDryDb:returnRms?20*Math.log10(returnRms/referenceRms):null,tailRms:stats(tail).rms,tailPeak:stats(tail).peak,crestDb:20*Math.log10(stats(body).peak/stats(body).rms),windows,channels});
       }
     }
     return results;

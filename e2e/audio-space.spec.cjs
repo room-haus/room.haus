@@ -5,6 +5,28 @@ const path=require('node:path'),fs=require('node:fs');
 const panel=page=>page.locator('[data-audio-research]');
 async function open(page){await fixture(page);await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await expect(panel(page)).toBeVisible();}
 
+test('default delay and reverb returns have a useful level against the actual diagnostic loop',async({page})=>{
+  await page.goto('/labs/');
+  const urls={processor:moduleUrl(path.resolve(__dirname,'../src/experiences/audio-space/processor.ts')),materials:moduleUrl(path.resolve(__dirname,'../src/experiences/shared/audio/research/materials.ts'))};
+  const results=await page.evaluate(async urls=>{
+    const {spaceProcessor,spaceDefaults}=await import(urls.processor),{makeReference}=await import(urls.materials),rate=24000,input=makeReference('loop');
+    const rms=data=>Math.sqrt(data.reduce((s,v)=>s+v*v,0)/data.length),results=[];
+    for(const mode of [0,1])for(const level of [.5,1]){
+      const context=new OfflineAudioContext(2,input.length+rate*2,rate),nodes=[],module=spaceProcessor({context,own:n=>{nodes.push(n);return n;},clock:{bpm:120,tempoSet:false}});
+      module.update({...spaceDefaults,mode});
+      const source=context.createBufferSource();source.buffer=context.createBuffer(1,input.length,rate);source.buffer.copyToChannel(input,0);
+      const dry=context.createGain(),wet=context.createGain(),sum=context.createGain();dry.gain.value=1-level;wet.gain.value=level;sum.gain.value=.5;
+      source.connect(dry);dry.connect(sum);source.connect(module.input);module.output.connect(wet);wet.connect(sum);sum.connect(context.destination);source.start();
+      const buffer=await context.startRendering(),out=buffer.getChannelData(0),difference=out.slice(0,input.length).map((v,i)=>v-input[i]*.5);
+      results.push({mode,level,wetToDry:rms(difference)/(rms(input)*.5),peak:out.reduce((p,v)=>Math.max(p,Math.abs(v)),0),finite:out.every(Number.isFinite)});
+      module.dispose?.();nodes.forEach(n=>n.disconnect());
+    }
+    return results;
+  },urls);
+  fs.mkdirSync('artifacts/audio-space',{recursive:true});fs.writeFileSync(`artifacts/audio-space/return-level-${test.info().project.name}.json`,JSON.stringify(results,null,2));
+  for(const r of results){expect(r.finite).toBe(true);expect(r.peak).toBeLessThan(.95);expect(r.wetToDry).toBeGreaterThanOrEqual(r.level===.5?.1:.2);}
+});
+
 test('real insert impulse timing, feedback extremes, finite decay, stereo and mono',async({page})=>{
   await page.goto('/labs/');
   const result=await page.evaluate(async url=>{
