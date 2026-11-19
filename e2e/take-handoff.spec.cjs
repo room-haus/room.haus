@@ -130,12 +130,19 @@ test('a cold listener compares a saved take, moves the throw and forwards a dist
   await checkAudio(page, original);
   const seek = saved.getByRole('slider', {name: 'Playback position'});
   await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(1000);
-  const prev = Number(await seek.inputValue());
-  await button(saved, 'Original').click();
-  await expect(button(saved, 'Original')).toHaveAttribute('aria-pressed', 'true');
-  await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(prev);
-  await button(saved, 'Take').click();
-  expect(await page.evaluate(() => window.scheduled.length)).toBe(2);
+  for (const [mode, key, other] of [['Original', 'Enter', 'Take'], ['Take', 'Space', 'Original']]) {
+    const choice = button(saved, mode);
+    await choice.focus();
+    await expect(choice).toBeFocused();
+    const before = Number(await seek.inputValue());
+    await page.keyboard.press(key);
+    await expect(choice).toHaveAttribute('aria-pressed', 'true');
+    await expect(button(saved, other)).toHaveAttribute('aria-pressed', 'false');
+    expect(Number(await seek.inputValue())).toBeGreaterThanOrEqual(before);
+    await expect.poll(async () => Number(await seek.inputValue())).toBeGreaterThan(before);
+    // Both references keep their original scheduled start on the same transport.
+    expect(await page.evaluate(() => window.scheduled.length)).toBe(2);
+  }
   await button(saved, 'Pause').click();
   await seek.evaluate((input) => {
     Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, '57840');
