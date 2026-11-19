@@ -4,8 +4,11 @@ import ensemblePoster from '../experiences/odd-ensemble/assets/poster.svg';
 import rallyPoster from '../experiences/endless-rally/assets/poster.svg';
 import audioPoster from '../experiences/audio-reference/poster.svg';
 import processingPoster from '../experiences/audio-processing/poster.svg';
+import spacePoster from '../experiences/audio-space/poster.svg';
 // Static loader functions preserve named lazy chunks and allow retry on reopening.
 export const experiences = [
+  {id:'audio-space',category:'audio-experiments',title:'Space & echoes',description:'Filtered delay, compact reverb and a restrained stereo return. Listen for depth, then compare with Original.',poster:spacePoster,
+    load:()=>import(/* webpackChunkName: "audio-space" */ '../experiences/audio-space')},
   {id:'audio-processing',category:'audio-experiments',title:'Tone & texture',description:'A small filter, soft saturation and slow movement. Compare the character with the original recording.',poster:processingPoster,
     load:()=>import(/* webpackChunkName: "audio-processing" */ '../experiences/audio-processing')},
   {id:'audio-reference',category:'audio-experiments',title:'Audio routing check',description:'Development reference for Original, a reversible processor and one quiet kit hit. Shared audio foundation, not a themed experiment.',poster:audioPoster,

@@ -1,0 +1,13 @@
+{
+  "license": "MIT (same as this repository)",
+  "source": "Original deterministic generated noise responses, not measured rooms or hardware samples",
+  "generator": "processor.ts makeImpulse(sampleRate, seconds)",
+  "originalFilenames": ["ir-0.18.wav", "ir-0.9.wav"],
+  "seedPerChannel": [773, 1770],
+  "algorithm": "LCG 1664525/1013904223; bipolar noise; exp(-9.21034*t/duration); last 2% faded to zero; each channel L2 energy 0.8",
+  "profiles": [{"name":"close", "seconds":0.18}, {"name":"air", "seconds":0.9}],
+  "channels": 2,
+  "processing": "No direct impulse. Convolver normalization disabled. Input high-pass 80Hz, low-pass 7000Hz. Pre-delay 5–45ms; close/air gains sum to one; return gain 0.9. Optional side width 35%.",
+  "runtime": "Generated once per module at the shared context sample rate; two bounded buffers; released on owner disposal. No IR downloads.",
+  "localExports": "artifacts/audio-space/ir-0.18.wav and ir-0.9.wav, stereo PCM16 at 24kHz"
+}
