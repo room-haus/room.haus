@@ -1,15 +1,26 @@
 # Listening to a shared MX029 echo take
 
-The local preview contains two eight-second performances of MX029 by Saad Ashraf. Each version has a saved Original and Take. Press Play take, then switch between Original and Take while the passage plays. Open the variation in its own tab to compare the placement of the echo.
+The local preview contains two eight-second passages from MX029 by Saad Ashraf. Each version has a saved Original and Take. Press Play take, then switch between Original and Take while the passage plays. Open the variation in its own tab to compare the placement of the echo.
+
+**Listen first at the maker defaults (50% wet).** Use these pairs for the two independent listening responses.
+
+| Passage in the mix | First performance | Variation |
+|---|---|---|
+| Curated, around 35 minutes | [Play first performance](http://127.0.0.1:4391/takes/?id=993330fb3832893e20ad3f12ee7c7ab2) | [Play variation](http://127.0.0.1:4391/takes/?id=7f8f90e8a14450fbd41fcfa2ff043ec9) |
+| Dense, around 15 minutes | [Play first performance](http://127.0.0.1:4391/takes/?id=277002404ebbb2ae1e5626ba949a74b0) | [Play variation](http://127.0.0.1:4391/takes/?id=a356c77649e32eeead298a46fb9a08be) |
+
+**Listening prompt.** For each passage, which hit changes when you switch from Original to Take? What happens to the next hit as the echo fades? Give the approximate time within the eight seconds, your listening device and your own words before reading the measurements below. Two listeners should respond independently.
+
+Choose **Make a variation** to move the throw. Set its start, click **Move**, then **Prepare take**. Play the prepared take and choose **Publish take** to get a new link. The first performance keeps its own link. The existing delay/reverb experiment is available from Labs → Space & echoes → Open continuous delay and reverb study.
+
+## Optional elevated examples (80% wet)
+
+These earlier links use the same passages and throw positions with a louder return. Listen after recording the default-setting responses.
 
 | Passage in the mix | First performance | Variation |
 |---|---|---|
 | Curated, around 35 minutes | [Play first performance](http://127.0.0.1:4391/takes/?id=001812c4ca2955766a961b5aa168102a) | [Play variation](http://127.0.0.1:4391/takes/?id=21e1432c05ceb53781fb46a125c87b64) |
 | Dense, around 15 minutes | [Play first performance](http://127.0.0.1:4391/takes/?id=bb2b4d49c37bb390a3440ca6e91329eb) | [Play variation](http://127.0.0.1:4391/takes/?id=03b5707856c53e2957bda76bb4043faa) |
-
-**Listening prompt.** For each passage, which hit changes when you switch from Original to Take? What happens to the next hit as the echo fades? Give the approximate time within the eight seconds, your listening device and your own words before reading the measurements below. Two listeners should respond independently.
-
-Choose **Make a variation** to move the throw. Set its start, click **Move**, then **Prepare take**. Play the prepared take and choose **Publish take** to get a new link. The first performance keeps its own link. The existing delay/reverb experiment is available from Labs → Space & echoes → Open continuous delay and reverb study.
 
 ## Run the local preview
 
@@ -20,7 +31,7 @@ PORT=4391 ROOM_TAKE_SOURCE_DIR=.cache/take-source \
   ROOM_TAKE_STORE_DIR=.cache/handoff-local-store node scripts/serve.mjs
 ```
 
-Open [the local Labs maker](http://127.0.0.1:4391/labs/#audio-experiments) or one of the saved links above. The server binds to loopback. These links resolve on the preview Mac. A fresh checkout also needs `npm ci`, `node scripts/prepare-take-source.mjs` and `npm run build`. The four existing IDs require this Mac’s retained store. A new store generates its own IDs.
+Open [the local Labs maker](http://127.0.0.1:4391/labs/#audio-experiments) or one of the saved links above. The server binds to loopback. These links resolve on the preview Mac. A fresh checkout also needs `npm ci`, `node scripts/prepare-take-source.mjs` and `npm run build`. The eight existing IDs require this Mac’s retained store. A new store generates its own IDs.
 
 ## Source and passage checks
 
@@ -40,26 +51,28 @@ The consecutive Original frames straddling the HLS boundary are (−10293, −98
 
 ## Measurements on the saved listening pairs
 
-The data below were measured from the published PCM on port 4391. Both outputs share a 0.5 dry gain. Each variation moves its parent’s throw by 500 ms. The delay is 202 ms, feedback 0.168, wet level 0.8 and stereo width 0. Peaks use full-scale units. Return RMS measures the difference between Take and Original over both channels and all eight seconds. Relative return energy is 10 log10 of summed squared difference divided by summed squared Original.
+Both levels use the same 0.5 dry gain, 202 ms delay, 0.168 feedback and zero stereo width. Each variation moves its parent’s throw by 500 ms. Return RMS measures Take minus Original across both channels of the published eight-second PCM. Relative energy is 10 log10 of summed squared return divided by summed squared Original. Absolute peaks for Original and Take at both settings were 0.49792 on the curated passage and 0.50000 on the dense passage.
 
-| Passage and version | Throw starts in passage | Original peak | Take peak | Return RMS | Return energy relative to Original |
+| Passage and version | Throw starts | Default 50% return RMS | Default relative energy | Elevated 80% return RMS | Elevated relative energy |
 |---|---:|---:|---:|---:|---:|
-| Curated first performance | 1.312 s | 0.49792 | 0.49792 | 0.005485 | −23.80 dB |
-| Curated variation | 1.812 s | 0.49792 | 0.49792 | 0.005953 | −23.09 dB |
-| Dense first performance | 2.910 s | 0.50000 | 0.50000 | 0.003776 | −30.57 dB |
-| Dense variation | 3.410 s | 0.50000 | 0.50000 | 0.004020 | −30.03 dB |
+| Curated first performance | 1.312 s | 0.003428 | −27.88 dB | 0.005485 | −23.80 dB |
+| Curated variation | 1.812 s | 0.003721 | −27.17 dB | 0.005953 | −23.09 dB |
+| Dense first performance | 2.910 s | 0.002360 | −34.65 dB | 0.003776 | −30.57 dB |
+| Dense variation | 3.410 s | 0.002512 | −34.11 dB | 0.004020 | −30.03 dB |
+
+The default returns measure about 4.08 dB below the elevated returns. The dense first performance has the lowest relative return energy at both levels.
 
 The original continuous study used the generated diagnostic loop and sustained sends for its calibration. Its half-level delay return/dry RMS was 0.13708 (−17.26 dB) and reverb was 0.13130 (−17.64 dB). The table above measures short throws on music. [Continuous Space calibration](space-and-echoes.md)
 
 ## Local verification, November 19, 2026
 
-The maker and shared player ran on an Apple silicon Mac with macOS 26.6.2, Node 24.16.0 and Playwright 1.65.1. All four saved listening links above opened with empty storage, played and switched Original/Take in desktop Chromium 159.0.8154.6 and emulated iPhone 13 WebKit 27.2. A desktop Chromium maker prepared and auditioned a take. A fresh mobile WebKit context opened the forwarded link, switched Original/Take on the running clock, moved a throw, auditioned the child and published it. Fresh sessions reopened both versions. Their scheduled stereo buffers matched the respective audition digests, and their manifests retained the original passage and lineage. A lost publication reply recovered the same child ID on retry. Desktop Chromium and the Android Chromium profile also completed the round trip. On all three profiles, the listener focused Original and pressed Enter, then focused Take and pressed Space. Both selection states changed while the playhead advanced on the same scheduled audio pair. The keyboard handoff passed on both real MX029 and the transient fixture (six round trips).
+The maker and shared player ran on an Apple silicon Mac with macOS 26.6.2, Node 24.16.0 and Playwright 1.65.1. The four elevated links and the four default links opened with empty storage, played and switched Original/Take in desktop Chromium 159.0.8154.6 and emulated iPhone 13 WebKit 27.2. A desktop Chromium maker prepared and auditioned a take. A fresh mobile WebKit context opened the forwarded link, switched Original/Take on the running clock, moved a throw, auditioned the child and published it. Fresh sessions reopened both versions. Their scheduled stereo buffers matched the respective audition digests, and their manifests retained the original passage and lineage. A lost publication reply recovered the same child ID on retry. Desktop Chromium and the Android Chromium profile also completed the round trip. On all three profiles, the listener focused Original and pressed Enter, then focused Take and pressed Space. Both selection states changed while the playhead advanced on the same scheduled audio pair. The keyboard handoff passed on both real MX029 and the transient fixture (six round trips).
 
-The three focused Labs specs passed 63 checks across desktop Chromium, Pixel 7 emulation and iPhone 13 WebKit emulation. At 390 × 844 the paper-colored maker shows the waveform, Play passage, Record and Echo together. The tests cover keyboard recording/editing, pointer drag, the mobile comparison controls and switching to the existing continuous study with the draft intact. All 30 continuous-study checks passed here, including the previously reported WebKit launcher/control cases. The underlying live worklet matched prepared impulse output at 48 kHz within half a PCM16 unit. At 44.1 kHz measured onset differences stayed below 0.15 ms and return-energy differences below 0.3 dB. The public fixture additionally checks that the first changed frame moved from 57,696 to 81,696 after the 500 ms edit.
+The three focused Labs specs cover desktop Chromium, Pixel 7 emulation and iPhone 13 WebKit emulation. All three profiles passed the static-host regression at 390 × 844. With the catalog returning HTTP 404, the continuous-study button fits entirely in the first viewport and supports keyboard navigation into the study. At 390 × 844 the paper-colored maker shows the waveform, Play passage, Record and Echo together. The tests cover keyboard recording/editing, pointer drag, the mobile comparison controls and switching to the existing continuous study with the draft intact. All 30 continuous-study checks passed here, including the previously reported WebKit launcher/control cases. The underlying live worklet matched prepared impulse output at 48 kHz within half a PCM16 unit. At 44.1 kHz measured onset differences stayed below 0.15 ms and return-energy differences below 0.3 dB. The public fixture additionally checks that the first changed frame moved from 57,696 to 81,696 after the 500 ms edit.
 
 The repository gates passed dependency policy, lint, both typechecks and all 188 Node tests. Webpack built both entries and generated 89 public pages. The built HTTP server passed 101 route and 97 asset checks. The final public suite passed 190 tests, with nine real-source cases and two touch-profile hover cases skipped. The separate real-source run passed all 24 applicable cases, including the nine skipped boundary cases, and skipped three fixture-only tail measurements. The isolated fixture handoff run passed all 18 applicable cases.
 
-For the public and Labs suites, Playwright starts its own built HTTP server. Use an empty store and a separate port to preserve the four preview links. To repeat the full real-source handoff and boundary checks from the built checkout:
+For the public and Labs suites, Playwright starts its own built HTTP server. Use an empty store and a separate port to preserve the eight preview links. To repeat the full real-source handoff and boundary checks from the built checkout:
 
 ```sh
 ROOM_TAKE_SOURCE_DIR=.cache/take-source ROOM_TAKE_STORE_DIR="$(mktemp -d)" \

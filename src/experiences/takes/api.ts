@@ -26,6 +26,7 @@ class ServiceError extends Error {
     super(message);
   }
 }
+export const serviceMissing = (error: unknown) => error instanceof ServiceError && error.status === 404;
 export const expired = (error: unknown) => error instanceof ServiceError && error.status === 410;
 export const failureText = (e: unknown) => (e instanceof Error ? e.message : 'The request could not be completed.');
 const validId = (id: unknown): id is string => typeof id === 'string' && /^[a-f0-9]{32}$/.test(id);

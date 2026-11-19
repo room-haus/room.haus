@@ -1,6 +1,6 @@
 import {chromium,webkit,devices} from '@playwright/test';
 import {writeFileSync,mkdirSync} from 'node:fs';
-const root='artifacts/audio-space';mkdirSync(root,{recursive:true});
+const root=process.env.ROOM_AUDIO_SPACE_ARTIFACT_DIR||'artifacts/audio-space';mkdirSync(root,{recursive:true});
 for(const [name,type,options] of [['chromium',chromium,{viewport:{width:1440,height:1500}}],['android',chromium,devices['Pixel 7']],['mobile-webkit',webkit,devices['iPhone 13']]]){
   if(process.env.ROOM_AUDIO_SPACE_PROJECT&&process.env.ROOM_AUDIO_SPACE_PROJECT!==name)continue;
   const browser=await type.launch({headless:true}),context=await browser.newContext(options),page=await context.newPage(),errors=[];
@@ -12,7 +12,9 @@ for(const [name,type,options] of [['chromium',chromium,{viewport:{width:1440,hei
   });
   let evidence={name,source:'Actual MX029 CDN HLS, no media fixtures',errors};
   try{
-    await page.goto((process.env.ROOM_TEST_ORIGIN||'http://127.0.0.1:4232')+'/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();await page.getByRole('button',{name:'Play source',exact:true}).click();
+    await page.goto((process.env.ROOM_TEST_ORIGIN||'http://127.0.0.1:4232')+'/labs/#audio-experiments');await page.getByRole('button',{name:'Open Space & echoes ↗'}).click();
+    await page.getByRole('button',{name:'Open continuous delay and reverb study'}).click();
+    await page.getByRole('button',{name:'Play source',exact:true}).click();
     await page.waitForFunction(()=>Number(window.__spaceMedia[0]?.currentTime)>1,null,{timeout:30000});
     const host=page.locator('[data-audio-research]');const capable=await host.getAttribute('data-capable');
     if(capable==='true'){
@@ -26,6 +28,7 @@ for(const [name,type,options] of [['chromium',chromium,{viewport:{width:1440,hei
     }
     await page.getByRole('button',{name:'Back to Labs'}).click();
     evidence.cleanup=await page.evaluate(()=>({media:window.__spaceMedia.every(m=>m.paused&&!m.getAttribute('src')),contexts:window.__spaceContexts.every(c=>c.state==='closed')}));
-  }catch(error){evidence.failure=error.message;}
+    if(errors.length || !evidence.cleanup.media || !evidence.cleanup.contexts)throw Error('Page or playback cleanup failed.');
+  }catch(error){evidence.failure=error.message;process.exitCode=1;}
   finally{writeFileSync(`${root}/live-${name}.json`,JSON.stringify(evidence,null,2));console.log(JSON.stringify(evidence));await browser.close();}
 }

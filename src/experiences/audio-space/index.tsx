@@ -3,7 +3,7 @@ import {ResearchHost} from '../shared/audio/research/ResearchHost.tsx';
 import type {ResearchAudio} from '../shared/audio/research/ResearchAudio.ts';
 import {delaySeconds,spaceDefaults,spaceProcessor} from './processor.ts';
 import {TakeEditor} from '../takes/TakeEditor.tsx';
-import {getCatalog, loadPassage} from '../takes/api.ts';
+import {getCatalog, loadPassage, serviceMissing} from '../takes/api.ts';
 import type {Catalog} from '../takes/api.ts';
 import {renderPublication} from '../takes/Publication.tsx';
 import {PlaybackScope} from '../takes/PlaybackScope.tsx';
@@ -35,17 +35,17 @@ function ContinuousStudy({onClose}:{onClose:()=>void}){
 export default function AudioSpace({onClose}: {onClose: () => void}) {
   const [retained, setRetained] = useState<RecipeV1>();
   const [study, setStudy] = useState(false), [catalog, setCatalog] = useState<Catalog>();
-  const [failure, setFailure] = useState(false), [attempt, setAttempt] = useState(0);
+  const [failure, setFailure] = useState<'missing' | 'retry'>(), [attempt, setAttempt] = useState(0);
   useEffect(() => {
     if (study) return;
     const controller = new AbortController();
     void (async () => {
-      setFailure(false);
+      setFailure(undefined);
       try {
         const result = await getCatalog(controller.signal);
         if (!result.sources?.some(s => s.id === 'MX029') || !result.limits) throw Error('Missing MX029');
         if (!controller.signal.aborted) setCatalog(result);
-      } catch { if (!controller.signal.aborted) setFailure(true); }
+      } catch (error) { if (!controller.signal.aborted) setFailure(serviceMissing(error) ? 'missing' : 'retry'); }
     })();
     return () => controller.abort();
   }, [attempt, study]);
@@ -53,11 +53,13 @@ export default function AudioSpace({onClose}: {onClose: () => void}) {
     <ContinuousStudy onClose={onClose}/></>;
   const source = catalog?.sources.find(s => s.id === 'MX029');
   const header = <header className="take-header"><span>ROOM / AUDIO LABS</span><button onClick={onClose}>Back to Labs</button></header>;
+  const studyButton = <button onClick={() => setStudy(true)}>Open continuous delay and reverb study</button>;
   return <PlaybackScope>{catalog && source ? <TakeEditor renderPublication={renderPublication} header={header} source={source} {...catalog.limits} loadPassage={loadPassage} onDraftChange={setRetained} draft={retained ?? normalizeRecipe({
     schema:1, experiment:'audio-space', rendererVersion:1, parentId:null, gestures:[], initialSettings:SPACE_TAKE_DEFAULTS,
     passage:{sourceId:source.id, revision:source.revision, ...source.curatedRange}
   })}/> : <article className="take-launch">{header}<section><h1>Space &amp; echoes</h1>
     <p role="status">{failure ? 'The MX029 take source is unavailable.' : 'Opening MX029…'}</p>
-    {failure && <button onClick={() => setAttempt(n => n+1)}>Retry source</button>}</section></article>}
-    <div className="space-study-link"><button onClick={() => setStudy(true)}>Open continuous delay and reverb study</button></div></PlaybackScope>;
+    {studyButton}
+    {failure === 'retry' && <button onClick={() => setAttempt(n => n+1)}>Retry source</button>}</section></article>}
+    {catalog && source && <div className="space-study-link">{studyButton}</div>}</PlaybackScope>;
 }

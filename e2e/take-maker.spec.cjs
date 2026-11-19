@@ -271,3 +271,35 @@ test('drag a one-frame throw at the very end using the fully visible handle', as
   await page.mouse.move(wb.x + wb.width + 3,y,{steps:8}); await page.mouse.up();
   await expect(handle).toHaveAttribute('aria-valuenow',String(length-1));
 });
+
+test('static Space offers a visible keyboard route into the continuous study', async ({page, browserName}) => {
+  const {spawn} = require('node:child_process');
+  const {once} = require('node:events');
+  const server = spawn(process.execPath, ['scripts/serve.mjs'], {
+    env: {...process.env, PORT: '0', ROOM_TAKE_FIXTURE: '0', ROOM_TAKE_SOURCE_DIR: ''},
+    stdio: ['ignore', 'pipe', 'inherit'],
+  });
+  try {
+    const [line] = await once(server.stdout, 'data');
+    const origin = String(line).trim().split(' ').at(-1);
+    await page.setViewportSize({width: 390, height: 844});
+    await page.addInitScript(() => sessionStorage.setItem('room-labs-session', 'open'));
+    await page.goto(origin + '/labs/#audio-experiments');
+    const catalog = page.waitForResponse(response => response.url().endsWith('/v1/catalog'));
+    await button(page, 'Open Space & echoes ↗').click();
+    expect((await catalog).status()).toBe(404);
+    const study = button(page, 'Open continuous delay and reverb study');
+    await expect(study).toBeInViewport({ratio: 1, timeout: 3000});
+    await expect(button(page, 'Retry source')).toHaveCount(0);
+    await button(page, 'Back to Labs').focus();
+    // WebKit's default keyboard settings use Option-Tab to include buttons.
+    await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab');
+    await expect(study).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(button(page, 'Play source')).toBeVisible();
+    await button(page, 'Back to Labs').click();
+    await expect(button(page, 'Open Space & echoes ↗')).toBeVisible();
+  } finally {
+    server.kill();
+  }
+});
