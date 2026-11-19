@@ -15,41 +15,9 @@ const test = base.extend({
   }, {scope: 'worker'}],
 });
 
-const button = (page, name) => page.getByRole('button', {name, exact: true});
+const {button, compare, review, fresh, checkAudio, prepare, publish, manifest} = require('./helpers/take-handoff.cjs');
 const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
-const link = (page) => page.getByRole('link', {name: 'Open shared take'});
-const compare = (page) => page.getByRole('region', {name: 'Saved performance'});
-const review = (page) => page.getByRole('region', {name: 'Prepared performance'});
 
-// Observe the actual AudioBuffers scheduled by the page, after PCM decoding.
-// The audio graph and the service are real. Restrict the run to local resources.
-async function fresh(browser, baseURL, options) {
-  const context = await browser.newContext({...options, baseURL});
-  await context.route('**/*', (route) =>
-    new URL(route.request().url()).origin === new URL(baseURL).origin ? route.continue() : route.abort(),
-  );
-  await context.addInitScript(() => {
-    window.scheduled = [];
-    const native = AudioBufferSourceNode.prototype.start;
-    AudioBufferSourceNode.prototype.start = function (when, offset, ...rest) {
-      const buffer = this.buffer;
-      const mode = document.querySelector('[aria-label="Saved performance"] [aria-pressed=true]')?.textContent;
-      const entry = {when, offset, mode, frames: buffer.length, context: this.context, hash: null};
-      window.scheduled.push(entry);
-      queueMicrotask(async () => {
-        const bytes = new DataView(new ArrayBuffer(buffer.length * 4));
-        for (let ch = 0; ch < 2; ch++) {
-          const samples = buffer.getChannelData(ch);
-          for (let i = 0; i < samples.length; i++) bytes.setInt16(i * 4 + ch * 2, Math.round(samples[i] * 32768), true);
-        }
-        const hash = await crypto.subtle.digest('SHA-256', bytes.buffer);
-        entry.hash = Array.from(new Uint8Array(hash), (n) => n.toString(16).padStart(2, '0')).join('');
-      });
-      return native.call(this, when, offset, ...rest);
-    };
-  });
-  return context;
-}
 async function maker(page) {
   await page.goto('/labs/#audio-experiments');
   await page.getByLabel('Username').fill('admin');
@@ -59,44 +27,6 @@ async function maker(page) {
   await page.getByLabel('Timeline position (seconds)').fill('1');
   await button(page, 'Add throw').click();
 }
-async function checkAudio(page, reference) {
-  await expect
-    .poll(() =>
-      page.evaluate(() =>
-        window.scheduled
-          .slice(-2)
-          .map((e) => e.hash)
-          .sort(),
-      ),
-    )
-    .toEqual([reference.take.sha256, reference.dry.sha256].sort());
-  const aligned = await page.evaluate(() => {
-    const [a, b] = window.scheduled.slice(-2);
-    return a.when === b.when && a.offset === b.offset && a.context === b.context && a.frames === b.frames;
-  });
-  expect(aligned).toBe(true);
-}
-async function prepare(page) {
-  const response = page.waitForResponse((r) => r.url().endsWith('/v1/preparations') && r.status() === 201);
-  await button(page, 'Prepare take').click();
-  const prepared = await (await response).json();
-  await expect(button(page, 'Publish take')).toBeDisabled();
-  await button(review(page), 'Play take').click();
-  await checkAudio(page, prepared);
-  await expect(button(page, 'Publish take')).toBeEnabled();
-  return prepared;
-}
-async function publish(page) {
-  await button(page, 'Publish take').click();
-  await expect(link(page)).toBeVisible();
-  return new URL(await link(page).getAttribute('href'), page.url());
-}
-async function manifest(request, url) {
-  const res = await request.get(new URL('/v1/takes/' + url.searchParams.get('id'), url).href);
-  expect(res.ok()).toBe(true);
-  return res.json();
-}
-
 test('a cold listener compares a saved take, moves the throw and forwards a distinct immutable child', async ({
   browser,
   baseURL,
