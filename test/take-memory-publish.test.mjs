@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {readFile, readdir, rename, rm, writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {test} from 'node:test';
@@ -293,4 +295,35 @@ test('offline cleanup preserves staged bytes when an active preparation loses it
   await writeFile(file, JSON.stringify({...record, fragments:[], recipe:{...recipe, gestures:[]}}));
   await assert.rejects(reclaimTakeStaging(storeDir), /checksum/i);
   assert.deepEqual(await readFile(join(storeDir, 'prepared-audio', a.ref.sha256)), a.pcm);
+});
+
+test('the independent pair verifier rejects a rehashed truncated dissolve and missing later repeats', async t => {
+  const {origin, storeDir, recipe} = await fixture(t);
+  const first = {...recipe.gestures[0], treatment: 'repeat'};
+  const parent = await publish(origin, (await prepare(origin, {...recipe, gestures: [first]})).preparationId);
+  const moved = {...first, treatment: 'dissolve', startFrame: 12000, endFrame: 60000};
+  const child = await publish(origin, (await prepare(origin, {...recipe, parentId: parent.id, gestures: [moved]})).preparationId);
+  const links = [parent, child].map(r => origin + '/takes/?id=' + r.id);
+  const check = () => promisify(execFile)(process.execPath, ['scripts/check-fragment-handoff.mjs', ...links]);
+  await check();
+
+  // Write only to the private temporary store. Rehash each fake so the server
+  // serves its bytes normally, and the standalone signal oracle must reject it.
+  for (const [record, cut, treatment] of [[child, moved.startFrame + 1200 + 3000, 'dissolve'], [parent, 13200, 'repeat']]) {
+    const file = join(storeDir, 'takes', record.id);
+    const original = await readFile(file);
+    const saved = JSON.parse(original);
+    const take = await bytes(origin, '/v1/takes/' + record.id + '/take');
+    const dry = await bytes(origin, '/v1/takes/' + record.id + '/dry');
+    assert.ok(!dry.subarray(cut * 4).equals(take.subarray(cut * 4)), 'fixture contains later wet voices');
+    dry.copy(take, cut * 4, cut * 4);
+    saved.take.sha256 = hash(take);
+    await writeFile(join(storeDir, 'audio', saved.take.sha256), take);
+    await writeFile(file, JSON.stringify(saved));
+    try {
+      await assert.rejects(check(), e => e.stderr.includes('wrong ' + treatment + ' sample at frame'));
+    } finally {
+      await writeFile(file, original);
+    }
+  }
 });

@@ -108,53 +108,89 @@ async function inspect(link) {
   return {record, gesture, fragment, dry, take};
 }
 
-// Both v1 treatments start with the head of the captured sound, 25 ms after
-// the trigger. Repeat ramps for 15 ms. Dissolve applies a Hann window to the
-// first 200 ms grain. Predict the first isolated voice directly from the raw
-// samples, through common output gain and PCM16 rounding (±1 LSB for float32).
-function measure({record, gesture: g, fragment, dry, take}, source) {
-  const first = [null, null],
-    last = [null, null],
-    peak = [0, 0],
-    firstVoicePeak = [0, 0];
-  const at = g.startFrame + 1200;
+// Independently evaluate the v1 seeded grain picker with unsigned integer
+// arithmetic. Each 62.5 ms tick selects one of eight offsets in the capture.
+function grainIndex(tick) {
+  if (tick === 0) return 0;
+  let seed = BigInt(tick) + 0x529an;
+  for (let round = 0; round < 2; round++) {
+    seed = BigInt.asUintN(32, (seed ^ (seed >> 16n)) * 0x45d9f3bn);
+  }
+  const choice = Number((seed ^ (seed >> 16n)) >> 29n);
+  const scan = Math.min(7, Math.floor((1200 + tick * 3000) / 72000));
+  return Math.min(7, Math.max(0, scan + (choice % 3) - 1));
+}
+
+function expectedLayer(g, fragment, frames) {
+  assert.ok(Number.isInteger(g.startFrame) && g.startFrame >= 0);
+  assert.ok(Number.isInteger(g.endFrame) && g.endFrame > g.startFrame && g.endFrame <= frames);
+  assert.ok(Number.isInteger(g.density) && g.density >= 1 && g.density <= 8);
+  assert.ok(Number.isFinite(g.level) && g.level > 0 && g.level <= 1);
+  assert.equal(g.seedVersion, 1);
   const repeat = g.treatment === 'repeat';
-  const length = repeat ? g.fragmentRef.frameCount : Math.min(9600, g.fragmentRef.frameCount);
-  const isolated = Math.min(length, g.endFrame - at, repeat ? length : Math.ceil(8 / g.density) * 3000);
-  assert.ok(isolated > 0);
-  for (let i = 0; i < dry.length / stride; i++) {
-    const age = i - at;
-    const checkVoice = age >= 0 && age < isolated;
-    const window = !checkVoice
-      ? 0
-      : repeat
+  const captureLength = fragment.length / stride;
+  const length = repeat ? captureLength : Math.min(9600, captureLength);
+  const ticksPerVoice = repeat
+    ? Math.ceil((captureLength / 3000) * (1 + (8 - g.density) / 4))
+    : Math.ceil(8 / g.density);
+  const gain = g.level * (repeat ? 0.5 : 0.36);
+  const duration = Math.min(12 * rate, g.endFrame - g.startFrame);
+  // Work in signed PCM units. Explicit Float32 window and accumulation steps
+  // reproduce v1 rounding independently of its block mixer and planar buffers.
+  const wet = new Float32Array(duration * 2);
+  const offsets = [];
+  for (let tick = 0; ; tick += ticksPerVoice) {
+    const onset = 1200 + tick * 3000;
+    const played = Math.min(length, duration - onset);
+    if (played <= 0 || (tick > 0 && played < length)) break;
+    const offset = repeat ? 0 : Math.round(((captureLength - length) * grainIndex(tick)) / 7);
+    offsets.push(offset);
+    for (let age = 0; age < played; age++) {
+      const envelope = repeat
         ? Math.min(1, age / 720, (length - 1 - age) / 720)
         : (1 - Math.cos((2 * Math.PI * age) / (length - 1))) / 2;
-    const cutoff = g.endFrame - at < length ? Math.min(1, (g.endFrame - 1 - i) / 720) : 1;
+      const voiceGain = played < length ? gain * Math.min(1, (played - 1 - age) / 720) : gain;
+      for (let ch = 0; ch < 2; ch++) {
+        const sample = fragment.readInt16LE((offset + age) * stride + ch * 2);
+        wet[(onset + age) * 2 + ch] += Math.fround(sample * envelope) * voiceGain;
+      }
+    }
+  }
+  return {wet, offsets};
+}
+
+function measure({record, gesture: g, fragment, dry, take}, source) {
+  const frames = dry.length / stride;
+  const {wet, offsets} = expectedLayer(g, fragment, frames);
+  const first = [null, null],
+    last = [null, null],
+    peak = [0, 0];
+  // Verify the entire passage, including silent gaps and the last grain's
+  // release. Reconstruct both channels at common gain and the v1 peak guard.
+  const guard = Math.floor(0.98 * 32768);
+  for (let i = 0; i < frames; i++) {
     for (let ch = 0; ch < 2; ch++) {
-      const offset = i * stride + 2 * ch;
-      const raw = source.readInt16LE(offset),
-        d = dry.readInt16LE(offset),
-        t = take.readInt16LE(offset);
+      const byte = i * stride + ch * 2;
+      const raw = source.readInt16LE(byte),
+        d = dry.readInt16LE(byte),
+        t = take.readInt16LE(byte);
       assert.equal(d, Math.round(raw / 2) || 0, 'dry PCM sample differs at ' + i + '/' + ch);
-      const wet = Math.abs(t - d);
-      if (wet) {
-        assert.ok(i >= at && i < g.endFrame, 'wet signal outside trigger at ' + i);
+      const layer = wet[(i - g.startFrame) * 2 + ch] ?? 0;
+      const expected = Math.min(guard, Math.max(-guard, Math.round(Math.fround((raw + layer) / 2)))) || 0;
+      if (t !== expected) {
+        assert.fail(`wrong ${g.treatment} sample at frame ${i}, channel ${ch}: expected ${expected}, got ${t}`);
+      }
+      const added = Math.abs(t - d);
+      if (added) {
         first[ch] ??= i;
         last[ch] = i;
-        peak[ch] = Math.max(peak[ch], wet);
-      }
-      if (checkVoice) {
-        const captured = fragment.readInt16LE(age * stride + ch * 2);
-        const expected = Math.round((raw + captured * window * cutoff * g.level * (repeat ? 0.5 : 0.36)) / 2);
-        assert.ok(Math.abs(t - expected) <= 1, 'wrong first ' + g.treatment + ' voice at ' + i + '/' + ch);
-        firstVoicePeak[ch] = Math.max(firstVoicePeak[ch], wet);
+        peak[ch] = Math.max(peak[ch], added);
       }
     }
   }
   assert.ok(
-    firstVoicePeak.every((v) => v > 1),
-    'both channels must contain measurable first-voice audio',
+    peak.every((v) => v > 1),
+    'both channels must contain measurable added audio',
   );
   return {
     id: record.id,
@@ -164,7 +200,8 @@ function measure({record, gesture: g, fragment, dry, take}, source) {
     firstWetFrame: first,
     lastWetFrame: last,
     peakAddedPCM16: peak,
-    firstVoiceCheckedFrames: isolated,
+    checkedStereoFrames: frames,
+    voiceSourceOffsets: offsets,
     drySha256: digest(dry),
     takeSha256: digest(take),
   };
