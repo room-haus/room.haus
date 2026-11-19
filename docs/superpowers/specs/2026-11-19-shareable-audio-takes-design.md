@@ -9,7 +9,7 @@ A maker hears a snare, holds Echo, and sends a link. A second person opens it on
 ## Agreed scope
 
 - Anyone with a link, including a forwarded link, can listen, compare, edit a copy and share it without signing in. A take opens directly on a listener-facing route outside the Labs login.
-- Start with one curated excerpt ready to play. The maker can select a different source range from a shareable ROOM mix. The chosen start and end govern preview, shared playback and comparison alike.
+- MX029 is the pilot mix. Start with a curated excerpt ready to play. Makers can choose and share a passage from anywhere in MX029, from the opening frame through the end of the mix. The chosen start and end govern preview, shared playback and comparison alike.
 - Each take uses one experiment. The maker performs gestures by ear, then can add, move or remove them on a timeline. A variation starts with the original passage and gestures.
 - Deliver Space & echoes end to end first. Use Memory & fragments to test captured material second. The remaining four experiments, multiple simultaneous experiments and live collaboration are later work.
 
@@ -48,19 +48,20 @@ In a 390 × 844 Chromium viewport in the existing Space experiment, Effect level
 
 The existing Labs UI uses a tab-local gate and the site publishes a static build. Anonymous publishing requires durable storage and a service that validates a take and issues its link. Shareable sources must be explicitly identified and available as versioned, processable audio on supported editing devices. Derive public audio from those sources and supported gesture records. Keep the source identity, draft and error visible when editing or saving fails. Handle partially stored assets and duplicate requests before exposing the link. An unavailable take should open an explicit unavailable state.
 
-For the pilot, use a ROOM-maintained catalog with a shareable flag per source revision and a curated range. The existing [MX029 measurement fixtures](../../../scripts/fixtures/audio-processing-passages.json) give candidate listening passages. Confirm which recording ROOM can offer for anonymous replay and derivative takes before publishing it. Store shared assets independently of either browser session. Derive both audio references and fragment assets from validated, in-range source material so the anonymous publishing endpoint accepts only performances over the eligible catalog.
+For the pilot, mark the entire selected MX029 source revision as shareable in the ROOM catalog. Store its curated range independently of the eligible source bounds. Use the same versioned source for excerpts that cross HLS segment boundaries. Store shared assets independently of either browser session. Derive both audio references and fragment assets from validated, in-range source material so the anonymous publishing endpoint accepts only performances over the eligible catalog.
 
 **Proposed pilot defaults.** Use the echo throw as the first Space gesture. Store settings at press time. A second recording pass adds gestures to the draft. Use a single active send and reject overlapping throws visibly during placement or editing. Confine a variation to its inherited passage. Keep captured Memory material within the shareable range during this pilot. The builder can choose waveform rendering, storage provider, encoder, render location and route syntax after demonstrating that preview and published playback agree. Set and document measured duration, gesture-count and publish limits before opening anonymous writes.
 
 **Entry points proposed for review.** Start a new performance inside the existing Labs playground. Open a received link directly in a public player with the full variation editor a single action away. That public route must support publishing a child without a Labs session. A public gallery or separate blank-take landing page can be considered later.
 
-**Open content decision.** ROOM needs to name the initial shareable recording and the eligible range (the whole mix or a specified interval). The MX029 research notes explicitly retain its catalog/source rights. A generated research loop can exercise the mechanics while the team selects the real pilot mix. Cross-device musical acceptance uses the selected ROOM recording.
+**Curated opening passage.** Start the Space listening pilot at 35:00.218–35:08.218 in MX029, an eight-second range pinned in the [measurement fixtures](../../../scripts/fixtures/audio-processing-passages.json). It has more quiet windows than the measured passage at 15:00, making it a promising place to hear a throw decay. Confirm that choice by ear in the two-listener test. Keep 15:00.093–15:08.093 as the denser comparison. Published takes retain their chosen range if the curated default changes.
 
 ## Acceptance before expanding
 
 | Check | Evidence |
 | --- | --- |
 | Cold, forwarded handoff | A fresh browser on a second device can open, play, compare, change and publish from a forwarded link with no prior Labs session. The two links resolve independently after closing both browsers. |
+| Full-mix selection | Open the curated excerpt, then create takes at the start of MX029, across a segment boundary outside the curated excerpt, and ending on the final frame. Reopen each link on a second device and check the saved in/out points and both audio references against the selected source frames. |
 | Exact range and gesture | Test with known impulses at and around the boundaries. Dry and performed files start and end at the selected frames. A throw on hit three moves to hit four in the child. Prior repeats are audible when seeking into a tail. A/B switching keeps position. |
 | Musical usefulness | Two listeners try a sparse and a dense real-mix passage independently. Each identifies what changed, on which hit, and whether repeats obscure the next hit. Compare the dry gain, peak and return energy alongside those judgments. Revise defaults if either listener needs coaching to find or hear the throw. |
 | Record-first UX | On phone and keyboard, go from the curated excerpt to a recorded throw, then add, move and remove gestures. Cancel a press, replay and recover from a failed publish without losing earlier edits. |
