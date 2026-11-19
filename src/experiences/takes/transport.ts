@@ -1,3 +1,4 @@
+import {captureFragment} from './fragment-asset.mjs';
 import {decodePCM} from './pcm.ts';
 import type {RecipeV1, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
 import {renderTake} from './render.mjs';
@@ -18,6 +19,7 @@ export class TakeTransport {
   private node?: AudioWorkletNode;
   private startTime = 0;
   private length: number;
+  private recent?: {since: number};
   private held?: SpaceGesture;
   private gestures: SpaceGesture[] = [];
   private pending = new Set<string>();
@@ -28,8 +30,18 @@ export class TakeTransport {
   ready = false;
   original = false;
 
-  constructor(private recipe: RecipeV1, private pcm: ArrayBuffer, readonly recording: boolean,
-    private offset: number, private events: TransportEvents) {
+  private recipe: RecipeV1;
+  private pcm: ArrayBuffer;
+  readonly recording: boolean;
+  private offset: number;
+  private events: TransportEvents;
+
+  constructor(recipe: RecipeV1, pcm: ArrayBuffer, recording: boolean, offset: number, events: TransportEvents) {
+    this.recipe = recipe;
+    this.pcm = pcm;
+    this.recording = recording;
+    this.offset = offset;
+    this.events = events;
     this.length = recipe.passage.endFrame - recipe.passage.startFrame;
   }
 
@@ -88,10 +100,34 @@ export class TakeTransport {
     if (!this.ready) return this.offset;
     return Math.max(this.offset, Math.min(this.length, this.offset + Math.floor((this.context.currentTime - this.startTime) * RATE)));
   }
+  armRecent() {
+    this.checkClock();
+    if (!this.ready || this.ending) throw Error('Start listening before arming a capture.');
+    this.recent = {since: this.positionFrame()};
+    this.events.update();
+  }
+  recentFrames() {
+    if (!this.recent || !this.ready || this.ending || this.context.state !== 'running') return 0;
+    return Math.min(4 * RATE, Math.max(0, this.positionFrame() - this.recent.since));
+  }
+  async captureRecent(lengthFrames: number) {
+    this.checkClock();
+    const listening = this.recent;
+    const end = this.positionFrame();
+    if (!listening || !this.ready || this.ending || end - listening.since < lengthFrames) {
+      throw Error('Listen continuously for the full capture window and try again.');
+    }
+    const passage = this.recipe.passage;
+    const captured = await captureFragment({pcm: new Uint8Array(this.pcm), sampleRate: RATE, channels: 2,
+      frameCount: this.length, format: 's16le'}, passage, passage.startFrame + end, lengthFrames);
+    this.checkClock();
+    if (this.recent !== listening) throw Error('Capture interrupted. Listen and try again.');
+    return captured;
+  }
   checkClock() {
     if (!this.ready || this.ending || !this.clock) return;
     const wall = performance.now(), audio = this.context.currentTime;
-    if (Math.abs((wall - this.clock.wall) / 1000 - (audio - this.clock.audio)) > .35) {
+    if (this.context.state !== 'running' || audio < this.clock.audio || Math.abs((wall - this.clock.wall) / 1000 - (audio - this.clock.audio)) > .35) {
       this.fail('The audio clock was interrupted.');
       return;
     }
@@ -149,6 +185,7 @@ export class TakeTransport {
   }
   end(natural = false) {
     if (this.closed || this.ending) return;
+    this.recent = undefined;
     if (!this.ready) return this.complete();
     if (!natural) this.release();
     this.held = undefined;
@@ -170,6 +207,7 @@ export class TakeTransport {
   dispose() {
     if (this.closed) return;
     this.closed = true;
+    this.recent = undefined;
     this.ready = false;
     clearTimeout(this.deadline);
     this.context.onstatechange = null;

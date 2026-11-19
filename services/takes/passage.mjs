@@ -1,3 +1,4 @@
+import {normalizeFragmentRef, verifyFragmentBytes} from '../../src/experiences/takes/fragment-asset.mjs';
 import {createHash} from 'node:crypto';
 import {
   requireSourcePassage,
@@ -50,4 +51,11 @@ export async function readPassage(catalog, request, store) {
   }
 
   return {pcm, sampleRate: source.sampleRate, channels: source.channels, frameCount, format: TAKE_SOURCE_FORMAT};
+}
+
+export async function reconstructFragment(catalog, passage, input, store) {
+  requireSourcePassage(catalog, passage);
+  const ref = normalizeFragmentRef(input, passage);
+  const {pcm} = await readPassage(catalog, ref, store);
+  return verifyFragmentBytes(ref, passage, pcm);
 }
