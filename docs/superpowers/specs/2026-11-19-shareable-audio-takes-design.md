@@ -1,6 +1,6 @@
 # Shareable takes in the ROOM audio playground
 
-Design for review · 19 November 2026
+Approved design · 19 November 2026
 
 ## The listening test
 
