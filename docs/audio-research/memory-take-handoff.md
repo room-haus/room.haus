@@ -60,6 +60,12 @@ The public browser test also ran against an offline fixture with independently g
 
 After restarting the local service with the same store, both desktop Chromium and mobile WebKit reopened all four real-source links with empty storage and no creator. All eight cold openings passed the scheduled-buffer and gain checks. Both standalone pair reports matched their pre-restart values. The eight previously shared Space takes retained their original dry and performed PCM hashes. Two local negative controls shifted the capture coordinates by one frame and changed a single right-channel sample in the first dissolve grain with an updated render digest. Each failed the corresponding independent sample check. A third read-only check replaced the desktop-maker child’s Take with Original from frame 271,200 onward and supplied a matching new digest. The complete waveform check rejected the missing tail. The automated fixture regression also removes later repeats from a multi-repeat parent and verifies rejection.
 
+## Local regression checks
+
+All 220 unit tests and 117 focused Labs browser tests passed. The full public browser suite passed 193 tests. It skipped nine checks requiring the real master and two desktop hover checks on touch profiles. The separate real-MX029 Space suite passed 24 tests, including those nine master checks, and skipped three fixture-only signal cases. Dependency policy, lint, both TypeScript checks, the production build, and verification of 101 routes and 97 assets passed.
+
+Run the two pair-verifier commands in sequence on this preview. The local service admits four simultaneous requests. Running two complete verifiers concurrently returned HTTP 429 on one asset request. The same verification passed immediately when run alone.
+
 ## Listening and device evidence
 
 The waveform, capture identity, timing, browser routing and restart checks used local software. Physical mobile Safari, a hosted preview, and human listening remain untested. No listener has yet identified the captured sound or described the difference in timing and treatment by ear. For a listening pass, compare the two Take versions to Original and describe the sound that returns, when it returns, and what changes during the two-second gesture.
