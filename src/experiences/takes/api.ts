@@ -1,12 +1,15 @@
 import {decodePCM} from './pcm.ts';
-import type {RecipeV1, TakePassage} from './recipe.mjs';
+import type {MemoryRecipeV1, RecipeV1, TakePassage} from './recipe.mjs';
+import {fragmentTable} from './fragment-table.mjs';
+import {verifyFragmentBytes} from './fragment-asset.mjs';
 import {normalizePassage, serializeRecipe} from './recipe.mjs';
 import type {LoadPassage, SourceOverview} from './TakeEditor.tsx';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE, TAKE_SOURCE_BYTES_PER_FRAME as STRIDE} from './source.mjs';
 
-export type Catalog = {sources: SourceOverview[]; limits: {maxPassageFrames: number; maxGestures: number}};
+export type Catalog = {sources: SourceOverview[]; limits: {maxPassageFrames: number; maxGestures: number; maxFragmentEvents: number; maxFragmentDecodedBytes: number}};
 export type AudioPair = {original: AudioBuffer; take: AudioBuffer};
-export type SavedTake = {editable?: boolean; id: string; parentId: string | null; recipe: unknown; passage: TakePassage; audio: AudioPair};
+type Envelope = References & {editable?: boolean; id: string; parentId: string | null; recipe: {passage: unknown; experiment?: string}};
+export type SavedTake = Envelope & {passage: TakePassage; audio: AudioPair};
 type Descriptor = {
   url: string;
   sha256: string;
@@ -16,7 +19,7 @@ type Descriptor = {
   channels: number;
   format: string;
 };
-type References = {dry: Descriptor; take: Descriptor};
+type References = {dry: Descriptor; take: Descriptor; fragments?: (Descriptor & {startFrame:number; endFrame:number})[]};
 
 class ServiceError extends Error {
   constructor(
@@ -33,7 +36,7 @@ const validId = (id: unknown): id is string => typeof id === 'string' && /^[a-f0
 
 async function json<T>(url: string, signal: AbortSignal, body?: unknown): Promise<T> {
   const response = await fetch(url, {
-    signal,
+    signal, cache:'no-store',
     ...(body === undefined
       ? {}
       : {
@@ -75,7 +78,7 @@ async function reference(ref: Descriptor, expectedPath: string, frames: number, 
   ) {
     throw Error('The saved audio description is invalid.');
   }
-  const response = await fetch(ref.url, {signal, redirect: 'error'});
+  const response = await fetch(ref.url, {signal, redirect: 'error', cache:'no-store'});
   if (!response.ok || !response.headers.get('content-type')?.includes('application/octet-stream'))
     throw Error('The saved audio is unavailable.');
   const data = await response.arrayBuffer();
@@ -100,15 +103,40 @@ async function references(
   ]);
   return {original, take};
 }
-export async function getTake(id: string | null, signal: AbortSignal): Promise<SavedTake> {
+export async function getEnvelope(id:string, signal:AbortSignal) {
   if (!validId(id)) throw Error('This link is missing a valid take ID.');
-  const path = '/v1/takes/' + id;
-  const result = await json<References & {editable?: boolean; id: string; parentId: string | null; recipe: {passage: unknown}}>(
-    path,
-    signal,
-  );
+  const result = await json<Envelope>('/v1/takes/' + id, signal);
   if (result.id !== id || !(result.parentId === null || validId(result.parentId)))
     throw Error('The saved take is unavailable.');
+  return result;
+}
+
+export async function getMaterials(recipe: MemoryRecipeV1, envelope: References, base: string, signal: AbortSignal) {
+  const materials = new Map<string,Uint8Array>();
+  const rows = fragmentTable({recipe, fragments:envelope.fragments});
+  for (const [index, ref] of rows.entries()) {
+    try {
+      const url = base + '/fragments/' + ref.sha256;
+      if (envelope.fragments?.[index].url !== url) throw Error('Invalid fragment address.');
+      const existing = materials.get(ref.sha256);
+      if (existing) {
+        if (existing.byteLength !== ref.byteLength) throw Error('Conflicting fragment length.');
+        continue;
+      }
+      const response = await fetch(url, {signal, redirect:'error', cache:'no-store'});
+      if (!response.ok || !response.headers.get('content-type')?.includes('application/octet-stream')) throw Error('Fragment unavailable.');
+      const {pcm} = await verifyFragmentBytes(ref, recipe.passage, new Uint8Array(await response.arrayBuffer()));
+      signal.throwIfAborted();
+      materials.set(ref.sha256, pcm);
+    } catch (e) {
+      throw Error('Editing capture ' + ref.sha256.slice(0,12) + ' at source frame ' + ref.startFrame + ' is unavailable. ' + failureText(e));
+    }
+  }
+  return materials;
+}
+export async function getTake(id: string | null, signal: AbortSignal): Promise<SavedTake> {
+  const result = await getEnvelope(id ?? '', signal);
+  const path = '/v1/takes/' + result.id;
   const passage = normalizePassage(result.recipe?.passage);
   return {...result, passage, audio: await references(result, path, passage, signal)};
 }
@@ -117,18 +145,27 @@ export async function prepareTake(recipe: RecipeV1, signal: AbortSignal) {
   if (!validId(result.preparationId) || serializeRecipe(result.recipe) !== serializeRecipe(recipe)) {
     throw Error('The service returned a different draft. Prepare this take again.');
   }
-  const audio = await references(result, '/v1/preparations/' + result.preparationId, recipe.passage, signal);
-  return {id: result.preparationId, audio, requestId: crypto.randomUUID()};
+  const base = '/v1/preparations/' + result.preparationId;
+  const [audio] = await Promise.all([references(result, base, recipe.passage, signal),
+    recipe.experiment === 'audio-memory' && getMaterials(recipe, result, base, signal)]);
+  return {id: result.preparationId, audio, dryHash:result.dry.sha256, takeHash:result.take.sha256, requestId: crypto.randomUUID()};
 }
 export async function publishTake(
-  preparationId: string,
-  requestId: string,
-  parentId: string | null,
+  prepared: Awaited<ReturnType<typeof prepareTake>>,
+  recipe: RecipeV1,
   signal: AbortSignal,
 ) {
-  const result = await json<{id: string; parentId: string | null}>('/v1/takes', signal, {preparationId, requestId});
-  if (!validId(result.id) || result.parentId !== parentId)
+  const result = await json<{id: string; parentId: string | null}>('/v1/takes', signal, {preparationId:prepared.id, requestId:prepared.requestId});
+  if (!validId(result.id) || result.parentId !== recipe.parentId)
     throw Error('The service could not confirm this publication.');
+  if (recipe.experiment === 'audio-memory') {
+    const saved = await getTake(result.id, signal);
+    if (saved.editable === false || serializeRecipe(saved.recipe) !== serializeRecipe(recipe)
+      || saved.dry.sha256 !== prepared.dryHash || saved.take.sha256 !== prepared.takeHash) {
+      throw Error('The published performance could not be verified.');
+    }
+    await getMaterials(recipe, saved, '/v1/takes/' + result.id, signal);
+  }
   return takeURL(result.id);
 }
 export function takeURL(id: string) {

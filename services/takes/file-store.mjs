@@ -1,5 +1,5 @@
 import {performanceDigest, readPreparationProof} from './preparation-proof.mjs';
-import {fragmentTable} from './fragment-table.mjs';
+import {fragmentTable} from '../../src/experiences/takes/fragment-table.mjs';
 import {createHash, randomUUID} from 'node:crypto';
 import {link, mkdir, open, readFile, readdir, stat, unlink} from 'node:fs/promises';
 import {existsSync, mkdirSync, readdirSync} from 'node:fs';

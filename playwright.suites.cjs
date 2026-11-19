@@ -7,6 +7,7 @@ const labsSpecs = [
   '**/audio-space.spec.cjs',
   '**/take-space-signal.spec.cjs',
   '**/take-maker.spec.cjs',
+  '**/take-memory-maker.spec.cjs',
   '**/audio-processing.spec.cjs',
   '**/audio-research.spec.cjs',
   '**/labs.spec.cjs',

@@ -147,11 +147,11 @@ module.exports = (env, argv) => [
     dependencies: ['site'],
     target: false,
     devtool: false,
-    entry: './src/experiences/takes/space-worklet.mjs',
+    entry: {'space-take-v1':'./src/experiences/takes/space-worklet.mjs', 'memory-take-v1':'./src/experiences/takes/memory-worklet.mjs'},
     output: {
       path: path.join(__dirname, 'dist'),
       publicPath: '/',
-      filename: 'worklets/space-take-v1.js',
+      filename: 'worklets/[name].js',
       chunkFormat: false,
       chunkLoading: false,
     },

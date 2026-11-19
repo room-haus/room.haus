@@ -53,3 +53,14 @@
 .take-shared {display:flex;align-items:center;flex-wrap:wrap;gap:.75rem}
 .take-shared input {flex-basis:100%;padding:.5rem}
 .take-editor a {color:#193da5}
+.take-editor select { min-height:44px; min-width:0; font:inherit; color:inherit; background:#f4f3ec; border:1px solid #979f90 }
+.take-timeline .take-proof,.take-timeline .take-row { flex-basis:100%; width:100%; margin:0 }
+.take-proof summary { font-variant-numeric:tabular-nums; }
+.take-proof code { overflow-wrap:anywhere }
+
+.take-timeline li > button[aria-pressed] { width:100%; text-align:left; font-variant-numeric:tabular-nums }
+.take-timeline li > button[aria-pressed=true] { border-color:#2448c4; color:#1839a5 }
+
+.take-meter { flex-wrap:wrap }
+.take-meter span { white-space:nowrap }
+.take-memory-actions { grid-template-columns:repeat(auto-fit,minmax(min(100%,6.5em),1fr)) }

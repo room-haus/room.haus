@@ -4,7 +4,7 @@ const {fixture}=require('./helpers/rally-media.cjs');
 const path=require('node:path'),fs=require('node:fs');
 const root='artifacts/audio-memory',panel=p=>p.locator('[data-audio-research]');
 const urls=()=>({owner:moduleUrl(path.resolve(__dirname,'../src/experiences/shared/audio/research/ResearchAudio.ts')),memory:moduleUrl(path.resolve(__dirname,'../src/experiences/audio-memory/fragment.ts'))});
-async function open(page){await fixture(page);await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await expect(panel(page)).toBeVisible();}
+async function open(page){await fixture(page);await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await page.getByRole('button',{name:'Open live fragment study'}).click();await expect(panel(page)).toBeVisible();}
 
 test('actual capture and guarded playback bound replacement memory, voices, stalls and all cancellation paths',async({page})=>{
   await page.goto('/labs/');
@@ -82,11 +82,11 @@ test('host captures selected source, clears on interruptions and preserves nativ
     await listen.click();await expect(capture).toBeEnabled();await capture.click();await expect(memory).toHaveAttribute('data-ready','true');await page.getByRole('slider',{name:'Source position'}).fill('30');await expect(memory).toHaveAttribute('data-bytes','0');
   }
   await page.getByRole('button',{name:'Back to Labs'}).click();await expect(page.getByRole('button',{name:'Open Memory & fragments ↗'})).toBeFocused();expect(await page.evaluate(()=>window.__rallyMedia.every(m=>m.paused&&!m.getAttribute('src')))).toBe(true);
-  await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await expect(page.locator('[data-memory]')).toHaveAttribute('data-bytes','0');
+  await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await page.getByRole('button',{name:'Open live fragment study'}).click();await expect(page.locator('[data-memory]')).toHaveAttribute('data-bytes','0');
 });
 
 test('explicit generated reference works with keyboard and responsive controls',async({page})=>{
-  await page.addInitScript(()=>sessionStorage.setItem('room-labs-session','open'));await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).focus();await page.keyboard.press('Enter');
+  await page.addInitScript(()=>sessionStorage.setItem('room-labs-session','open'));await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).focus();await page.keyboard.press('Enter');await page.getByRole('button',{name:'Open live fragment study'}).click();
   await page.getByRole('combobox',{name:'Listening source'}).selectOption('loop');await page.getByRole('button',{name:'Play source',exact:true}).click();await page.getByRole('button',{name:'Start recent listening',exact:true}).click();await page.getByRole('button',{name:'Capture fragment',exact:true}).click();await expect(page.locator('[data-memory]')).toHaveAttribute('data-ready','true');
   await page.getByRole('combobox',{name:'Treatment'}).selectOption('1');await page.getByRole('slider',{name:'Repetition / density'}).focus();await page.keyboard.press('ArrowRight');await expect(page.getByRole('slider',{name:'Repetition / density'})).toHaveValue('4');await page.getByRole('button',{name:'Play fragment',exact:true}).click();
   const retained=await page.locator('[data-memory]').getAttribute('data-bytes');await page.getByRole('combobox',{name:'Treatment'}).selectOption('0');await expect(page.locator('[data-memory]')).toHaveAttribute('data-bytes',retained);
@@ -96,6 +96,6 @@ test('explicit generated reference works with keyboard and responsive controls',
 });
 
 test('missing Web Audio retains original and failed lazy download retries on reopening',async({page})=>{
-  await page.addInitScript(()=>{window.AudioContext=undefined;window.webkitAudioContext=undefined;});await fixture(page);let failed=false;await page.route(/audio-memory.*\.js/,r=>{if(!failed){failed=true;return r.abort();}return r.continue();});await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await expect(page.getByText(/could not load|couldn’t load|unable to load/i)).toBeVisible();await page.getByRole('button',{name:/Back to Labs|Close/i}).first().click();await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();
+  await page.addInitScript(()=>{window.AudioContext=undefined;window.webkitAudioContext=undefined;});await fixture(page);let failed=false;await page.route(/audio-memory.*\.js/,r=>{if(!failed){failed=true;return r.abort();}return r.continue();});await page.goto('/labs/#audio-experiments');await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await expect(page.getByText(/could not load|couldn’t load|unable to load/i)).toBeVisible();await page.getByRole('button',{name:/Back to Labs|Close/i}).first().click();await page.getByRole('button',{name:'Open Memory & fragments ↗'}).click();await page.getByRole('button',{name:'Open live fragment study'}).click();
   await page.getByRole('button',{name:'Play source',exact:true}).click();await expect(panel(page)).toHaveAttribute('data-playing','true');await expect(page.getByRole('button',{name:'Start recent listening',exact:true})).toBeDisabled();await expect(page.getByText(/Source capture unavailable/)).toBeVisible();
 });

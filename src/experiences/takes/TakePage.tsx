@@ -1,12 +1,13 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {getTake, getCatalog, loadPassage, failureText, takeURL} from './api.ts';
+import {getTake, getCatalog, getMaterials, getEnvelope, loadPassage, failureText, takeURL} from './api.ts';
 import type {Catalog, SavedTake} from './api.ts';
 import {ComparePlayer} from './ComparePlayer.tsx';
 import type {CompareHandle} from './ComparePlayer.tsx';
 import {TakeEditor} from './TakeEditor.tsx';
 import {forkTake} from './edits.mjs';
-import {normalizeRecipe} from './recipe.mjs';
+import type {MemorySession} from './MemoryControls.tsx';
+import {normalizeRecipe, serializeRecipe} from './recipe.mjs';
 import {stamp} from './Timeline.tsx';
 import {renderPublication} from './Publication.tsx';
 import {PlaybackScope} from './PlaybackScope.tsx';
@@ -15,14 +16,30 @@ import './takes.css';
 
 function Listener({saved}: {saved: SavedTake}) {
   const draft = useMemo(() => {
-    if (saved.editable === false) return null;
+    if (saved.editable === false && saved.recipe.experiment !== 'audio-memory') return null;
     try {
       const recipe = normalizeRecipe(saved.recipe);
-      return recipe.experiment === 'audio-space' ? forkTake({id: saved.id, recipe}) : null;
+      return forkTake({id:saved.id, recipe});
     } catch {
       return null;
     }
   }, [saved]);
+  const memory = saved.recipe.experiment === 'audio-memory';
+  const [session, setSession] = useState<MemorySession>();
+  const [materialFailure, setMaterialFailure] = useState(''), [materialAttempt, retryMaterial] = useState(0);
+  useEffect(() => {
+    if (draft?.experiment !== 'audio-memory') return;
+    const controller = new AbortController();
+    const {signal} = controller;
+    void (async () => {
+      const envelope = materialAttempt ? await getEnvelope(saved.id, signal) : saved;
+      if (serializeRecipe(envelope.recipe) !== serializeRecipe(saved.recipe)) throw Error('The saved recipe has changed.');
+      const materials = await getMaterials(draft, envelope, '/v1/takes/' + saved.id, signal);
+      if (envelope.editable === false) throw Error('The saved fragment recipe is unavailable for editing.');
+      if (!signal.aborted) setSession({materials,retained:draft.gestures[0]?.fragmentRef});
+    })().catch(e => { if (!signal.aborted) setMaterialFailure(failureText(e)); });
+    return () => controller.abort();
+  }, [draft, saved, materialAttempt]);
   const comparison = useRef<CompareHandle>(null);
   const [catalog, setCatalog] = useState<Catalog>(),
     [editing, setEditing] = useState(false);
@@ -52,9 +69,9 @@ function Listener({saved}: {saved: SavedTake}) {
   return (
     <>
       <section className="take-body take-listener">
-        <h1>Space &amp; echoes</h1>
+        <h1>{memory ? 'Memory & fragments' : 'Space & echoes'}</h1>
         <p className="take-byline">
-          {passage.sourceId} / Saad Ashraf <span>· {saved.parentId ? 'Variation' : 'Echo take'}</span>
+          {passage.sourceId} / Saad Ashraf <span>· {saved.parentId ? 'Variation' : memory ? 'Fragment take' : 'Echo take'}</span>
         </p>
         <ComparePlayer ref={comparison} label="Saved performance" {...saved.audio} />
         <div className="take-bounds">
@@ -67,10 +84,14 @@ function Listener({saved}: {saved: SavedTake}) {
           </p>
         )}
         {draft ? (
-          !editing && <button onClick={begin}>Make a variation</button>
+          !editing && <button disabled={memory && !session} onClick={begin}>Make a variation</button>
         ) : (
           <p role="status">You can listen to this saved version. Editing is unavailable for this take.</p>
         )}
+        {memory && draft && !session && (materialFailure ? <>
+          <p role="alert" className="take-error">{materialFailure}</p>
+          <button onClick={() => {setMaterialFailure(''); retryMaterial(n => n+1);}}>Retry material</button>
+        </> : <p role="status">Verifying captured audio…</p>)}
         {editing &&
           !catalog &&
           (failure ? (
@@ -92,6 +113,7 @@ function Listener({saved}: {saved: SavedTake}) {
       </section>
       {editing && source && catalog && draft && (
         <TakeEditor
+          memorySession={session}
           source={source}
           draft={draft}
           loadPassage={loadPassage}

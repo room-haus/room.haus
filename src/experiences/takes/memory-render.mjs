@@ -70,7 +70,7 @@ function prepareVoice(pcm, grain) {
  * @param {import('./recipe.mjs').MemoryGesture[]} gestures @param {number} frameCount
  * @param {ReadonlyMap<string, Uint8Array>} materials Verified raw PCM keyed by SHA-256.
  */
-export function createMemoryRender(gestures, frameCount, materials) {
+export function prepareMemoryEvents(gestures, frameCount, materials, windows = new Map()) {
   const schedule = memorySchedule(gestures, frameCount);
   for (const {fragmentRef} of gestures) {
     const pcm = materials?.get(fragmentRef.sha256);
@@ -78,12 +78,19 @@ export function createMemoryRender(gestures, frameCount, materials) {
       throw new RangeError('A referenced fragment material is missing or has the wrong length.');
     }
   }
-  const windows = new Map();
-  const events = schedule.map(event => {
+  const triggerFrames = new Map(gestures.map(g => [g.id,g.startFrame]));
+  return schedule.map(event => {
     const key = event.sha256 + '/' + event.grain;
     if (!windows.has(key)) windows.set(key, prepareVoice(materials.get(event.sha256), event.grain));
-    return {...event, channels: windows.get(key)};
+    return {...event, triggerFrame:triggerFrames.get(event.gestureId), channels: windows.get(key)};
   });
+}
+
+export function createMemoryRender(gestures, frameCount, materials) {
+  return createMemoryMixer(prepareMemoryEvents(gestures, frameCount, materials), frameCount);
+}
+
+export function createMemoryMixer(events, frameCount) {
   let position = 0, nextEvent = 0, active = [];
   return {
     seek(frame) {
@@ -99,7 +106,6 @@ export function createMemoryRender(gestures, frameCount, materials) {
     dispose() {
       events.length = 0;
       active.length = 0;
-      windows.clear();
     },
     processBlock(left, right, dryLeft, dryRight, takeLeft, takeRight, from = 0, to = takeLeft.length) {
       const end = position + to - from;

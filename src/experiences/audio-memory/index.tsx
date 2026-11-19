@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {ResearchHost} from '../shared/audio/research/ResearchHost.tsx';
 import type {ResearchAudio} from '../shared/audio/research/ResearchAudio.ts';
 import {MemoryFragment,memorySettings} from './fragment.ts';
+import {TakeLauncher} from '../takes/TakeLauncher.tsx';
 import './memory.css';
 
 const fragments=new WeakMap<ResearchAudio,MemoryFragment>();
@@ -30,6 +31,10 @@ function MemoryControls({research,disabled,readMediaTime,sourceLabel}:{research:
     <p className="research-note">Original, Stop effects, Reset, pause, seek, source change and close erase the fragment. The mix continues at its normal position under the layer. Compare a sparse short capture with a dense one; listen for recurring detail becoming competition.</p>
   </div>;
 }
-export default function AudioMemory({onClose}:{onClose:()=>void}){
+function LiveStudy({onClose}:{onClose:()=>void}){
   return <div className="memory-experiment"><ResearchHost title="Memory & fragments" description="Can the recording’s recent history become a complementary layer? Play the source, start recent listening, capture a moment, then compare repetition with granular dissolution." onClose={onClose} configure={configure} showReferenceTools={false} armLabel={null} processedLabel="Memory enabled · see fragment state" levelLabel="Layer level" controls={props=><MemoryControls {...props}/>}/></div>;
+}
+
+export default function AudioMemory({onClose}: {onClose:() => void}) {
+  return <TakeLauncher experiment="audio-memory" onClose={onClose} study={<LiveStudy onClose={onClose}/>}/>;
 }

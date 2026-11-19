@@ -4,7 +4,7 @@ import {normalizePassage, normalizeRecipe, validateRecipe, reachableFragmentRefs
 import {verifyFragmentBytes} from '../../src/experiences/takes/fragment-asset.mjs';
 import {checkMemoryBudget} from '../../src/experiences/takes/memory-render.mjs';
 import {performanceDigest, readPreparationProof} from './preparation-proof.mjs';
-import {fragmentTable} from './fragment-table.mjs';
+import {fragmentTable} from '../../src/experiences/takes/fragment-table.mjs';
 import {renderTake} from '../../src/experiences/takes/render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE} from '../../src/experiences/takes/source.mjs';
 

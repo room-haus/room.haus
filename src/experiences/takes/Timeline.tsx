@@ -1,5 +1,5 @@
 import React, {useMemo, useRef, useState} from 'react';
-import type {SpaceRecipeV1, SpaceGesture} from './recipe.mjs';
+import type {RecipeV1, SpaceRecipeV1, SpaceGesture, MemoryGesture} from './recipe.mjs';
 import {editGesture} from './edits.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
 
@@ -31,7 +31,7 @@ export function Timeline({recipe, maxGestures, disabled, position, setPosition, 
   </section>;
 }
 
-function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGesture; index: number; length: number; disabled: boolean; move: (startFrame: number) => void}) {
+function ThrowHandle({gesture, index, length, disabled, move, select}: {select?: () => void; gesture: SpaceGesture | MemoryGesture; index: number; length: number; disabled: boolean; move: (startFrame: number) => void}) {
   const [preview, setPreview] = useState<number>();
   const drag = useRef<{id: number; originX: number; width: number} | null>(null);
   const clamp = (n: number) => Math.max(0, Math.min(length - (gesture.endFrame - gesture.startFrame), Math.round(n)));
@@ -41,10 +41,10 @@ function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGe
   const percentage = frame / length * 100 + '%';
   return <><i aria-hidden="true" className="take-throw" style={{left:'min(calc(100% - 1px), ' + percentage + ')',
     width:(gesture.endFrame - gesture.startFrame) / length * 100 + '%'}}/>
-    <button type="button" role="slider" className="take-handle" aria-label={'Move throw ' + (index + 1)}
+    <button type="button" role="slider" className="take-handle" aria-label={('fragmentRef' in gesture ? 'Move trigger ' : 'Move throw ') + (index + 1)}
     aria-valuemin={0} aria-valuemax={length - (gesture.endFrame - gesture.startFrame)} aria-valuenow={frame} aria-valuetext={stamp(frame)}
     style={{left: 'clamp(0px, calc(' + percentage + ' - 22px), calc(100% - 44px))'}} disabled={disabled}
-    onPointerDown={e => { if (e.button !== 0 || drag.current) return;
+    onFocus={select} onPointerDown={e => { if (e.button !== 0 || drag.current) return; select?.();
       e.currentTarget.setPointerCapture(e.pointerId);
       drag.current = {id:e.pointerId, originX:e.clientX, width:e.currentTarget.parentElement!.getBoundingClientRect().width};
     }}
@@ -56,7 +56,7 @@ function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGe
     <span aria-hidden="true">{index + 1}</span></button></>;
 }
 
-export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?: ArrayBuffer; recipe: SpaceRecipeV1; frame: number; select: (f: number) => void; move: (id: string, startFrame: number) => void; disabled: boolean}) {
+export function PassageWave({pcm, recipe, frame, select, move, disabled, selectGesture}: {selectGesture?: (id:string) => void; pcm?: ArrayBuffer; recipe: RecipeV1; frame: number; select: (f: number) => void; move: (id: string, startFrame: number) => void; disabled: boolean}) {
   const length = recipe.passage.endFrame - recipe.passage.startFrame;
   const levels = useMemo(() => {
     if (!pcm) return [];
@@ -74,6 +74,6 @@ export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?:
     <b style={{left: frame / length * 100 + '%'}}/>
     <input type="range" aria-label="Audition position" min="0" max={length - 1} step="1" value={Math.min(frame, length - 1)}
       aria-valuetext={stamp(frame)} disabled={disabled} onChange={e => select(Number(e.target.value))}/>
-    {recipe.gestures.map((g, i) => <ThrowHandle key={g.id} gesture={g} index={i} length={length} disabled={disabled} move={startFrame => move(g.id, startFrame)}/>)}
+    {recipe.gestures.map((g, i) => <ThrowHandle key={g.id} select={selectGesture && (() => selectGesture(g.id))} gesture={g} index={i} length={length} disabled={disabled} move={startFrame => move(g.id, startFrame)}/>)}
   </div>;
 }

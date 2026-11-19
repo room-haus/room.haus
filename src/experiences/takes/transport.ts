@@ -1,6 +1,7 @@
 import {captureFragment} from './fragment-asset.mjs';
 import {decodePCM} from './pcm.ts';
-import type {SpaceRecipeV1, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
+import type {RecipeV1, MemoryGesture, SpaceGesture, SpaceTakeSettings} from './recipe.mjs';
+import {prepareMemoryEvents, memorySchedule} from './memory-render.mjs';
 import {renderTake} from './render.mjs';
 import {SPACE_TAKE_OUTPUT_GAIN, SPACE_TAKE_PROCESSOR_NAME, SPACE_TAKE_WORKLET_URL} from './space-render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
@@ -8,6 +9,7 @@ import {TAKE_SOURCE_SAMPLE_RATE as RATE} from './source.mjs';
 const commandLead = .045;
 export type TransportEvents = {
   update: () => void;
+  trigger?: (gesture: MemoryGesture) => void;
   finish: (gestures: SpaceGesture[], error?: string) => void;
 };
 
@@ -31,14 +33,19 @@ export class TakeTransport {
   ready = false;
   original = false;
 
-  private recipe: SpaceRecipeV1;
+  private recipe: RecipeV1;
+  private materials: ReadonlyMap<string, Uint8Array>;
+  private windows = new Map();
+  private waiting = new Map<string, MemoryGesture>();
+  private memoryEvents: ReturnType<typeof memorySchedule> = [];
   private pcm: ArrayBuffer;
   readonly recording: boolean;
   private offset: number;
   private events: TransportEvents;
 
-  constructor(recipe: SpaceRecipeV1, pcm: ArrayBuffer, recording: boolean, offset: number, events: TransportEvents) {
+  constructor(recipe: RecipeV1, pcm: ArrayBuffer, recording: boolean, offset: number, events: TransportEvents, materials: ReadonlyMap<string, Uint8Array> = new Map()) {
     this.recipe = recipe;
+    this.materials = materials;
     this.pcm = pcm;
     this.recording = recording;
     this.offset = offset;
@@ -50,13 +57,55 @@ export class TakeTransport {
     const ctx = this.context;
     await ctx.resume();
     if (this.closed) return;
+    this.dry.gain.value = 0;
+    this.dry.connect(ctx.destination);
+    this.take.connect(ctx.destination);
+    if (this.recipe.experiment === 'audio-memory') {
+      await ctx.audioWorklet.addModule('/worklets/memory-take-v1.js');
+      if (this.closed) return;
+      const events = this.prepareMemory(this.recipe.gestures);
+      this.memoryEvents = events;
+      this.node = new AudioWorkletNode(ctx, 'room-memory-take-v1', {numberOfInputs: 0, numberOfOutputs: 2,
+        outputChannelCount: [2, 2], processorOptions: {pcm: this.pcm, events, offset: this.offset}});
+      this.node.connect(this.dry, 0);
+      this.node.connect(this.take, 1);
+      this.node.onprocessorerror = () => this.fail('Fragment playback was interrupted.');
+      this.node.port.onmessage = ({data}) => {
+        if (this.closed) return;
+        if (data.type === 'ended') return this.end(true);
+        if (data.type === 'rejected') return this.fail('Fragment timing was interrupted. Record the trigger again.');
+        const gesture = this.waiting.get(data.id);
+        if (!gesture) return;
+        this.waiting.delete(data.id);
+        this.events.trigger?.(gesture);
+        this.events.update();
+      };
+      this.scheduleStart();
+      this.node.port.postMessage({type: 'start', frame: this.startContextFrame});
+    } else {
+      await this.startSpace();
+      if (this.closed) return;
+    }
+    this.clock = {wall: performance.now(), audio: ctx.currentTime};
+    ctx.onstatechange = () => {
+      if (!this.closed && ctx.state !== 'running') this.fail('The audio clock was interrupted.');
+    };
+    this.sources.forEach(input => input.start(this.startTime, this.offset / RATE));
+    this.ready = true;
+    this.events.update();
+  }
+
+  private scheduleStart() {
+    this.startContextFrame = Math.ceil((this.context.currentTime + .12) * this.context.sampleRate);
+    this.startTime = this.startContextFrame / this.context.sampleRate;
+  }
+
+  private async startSpace() {
+    const ctx = this.context;
     const raw = decodePCM(this.pcm);
     const source = ctx.createBufferSource();
     source.buffer = raw;
     this.sources.push(source);
-    this.dry.gain.value = 0;
-    this.dry.connect(ctx.destination);
-    this.take.connect(ctx.destination);
     source.connect(this.dry);
 
     if (this.offset) {
@@ -71,9 +120,8 @@ export class TakeTransport {
       await ctx.audioWorklet.addModule(SPACE_TAKE_WORKLET_URL);
       if (this.closed) return;
     }
-    const startContextFrame = Math.ceil((ctx.currentTime + .12) * ctx.sampleRate);
-    this.startContextFrame = startContextFrame;
-    this.startTime = startContextFrame / ctx.sampleRate;
+    this.scheduleStart();
+    const startContextFrame = this.startContextFrame;
     if (!this.offset) {
       this.node = new AudioWorkletNode(ctx, SPACE_TAKE_PROCESSOR_NAME, {numberOfInputs: 1, numberOfOutputs: 1,
         outputChannelCount: [2], processorOptions: {startContextFrame, frameCount: this.length,
@@ -89,15 +137,35 @@ export class TakeTransport {
       this.node.connect(this.take);
     }
     source.onended = () => this.end(true);
-    this.clock = {wall: performance.now(), audio: ctx.currentTime};
-    ctx.onstatechange = () => {
-      if (!this.closed && ctx.state !== 'running') this.fail('The audio clock was interrupted.');
-    };
-    this.sources.forEach(input => input.start(this.startTime, this.offset / RATE));
-    this.ready = true;
+  }
+  private prepareMemory(gestures:MemoryGesture[]) {
+    const installed = new Set(this.windows.keys());
+    const events = prepareMemoryEvents(gestures, this.length, this.materials, this.windows);
+    return events.map(event => {
+      const key = event.sha256 + '/' + event.grain;
+      if (installed.has(key)) return {...event, channels:undefined};
+      installed.add(key);
+      return event;
+    });
+  }
+  triggerMemory(gesture: MemoryGesture) {
+    if (this.recipe.experiment !== 'audio-memory' || !this.recording || !this.ready || this.ending || this.waiting.size) {
+      throw Error('Wait until the recorder is ready.');
+    }
+    const events = this.prepareMemory([gesture]);
+    this.waiting.set(gesture.id, gesture);
+    this.memoryEvents.push(...events);
+    this.node!.port.postMessage({type:'trigger', id:gesture.id, events});
     this.events.update();
   }
-
+  get triggerPending() { return this.waiting.size > 0; }
+  sounding(gestures: MemoryGesture[]) {
+    if (this.original) return 'Original';
+    const frame = this.sourcePosition(this.presentedOutputFrame());
+    const ids = new Set(this.memoryEvents.filter(event => event.startFrame <= frame && frame < event.endFrame).map(e => e.gestureId));
+    const modes = new Set(gestures.filter(g => ids.has(g.id)).map(g => g.treatment));
+    return modes.size ? [...modes].join(' + ') : 'Passage';
+  }
   private sourcePosition(outputFrame: number) {
     const elapsed = Math.max(0, outputFrame - this.startContextFrame);
     return Math.min(this.length, this.offset + Math.floor(elapsed * RATE / this.context.sampleRate));
@@ -166,7 +234,7 @@ export class TakeTransport {
     return Math.max(0, Math.min(this.length, Math.ceil((this.context.currentTime + commandLead - this.startTime) * RATE)));
   }
   press(settings: SpaceTakeSettings, maxGestures: number) {
-    if (!this.recording || !this.ready || this.ending || this.held) return;
+    if (this.recipe.experiment !== 'audio-space' || !this.recording || !this.ready || this.ending || this.held) return;
     const existing = [...this.recipe.gestures, ...this.gestures];
     if (existing.length >= maxGestures) throw Error('The throw limit for this take has been reached.');
     const startFrame = this.scheduledFrame();
@@ -193,6 +261,7 @@ export class TakeTransport {
     this.events.update();
   }
   echoState() {
+    if (this.recipe.experiment !== 'audio-space') return 'Listening';
     const frame = this.positionFrame();
     if (this.held) return 'Sending';
     const gestures = [...this.recipe.gestures, ...this.gestures];
@@ -205,7 +274,7 @@ export class TakeTransport {
   compare() {
     this.original = !this.original;
     const now = this.context.currentTime;
-    for (const [gain, target] of [[this.dry.gain, this.original ? SPACE_TAKE_OUTPUT_GAIN : 0],
+    for (const [gain, target] of [[this.dry.gain, this.original ? (this.recipe.experiment === 'audio-memory' ? 1 : SPACE_TAKE_OUTPUT_GAIN) : 0],
       [this.take.gain, this.original ? 0 : 1]] as const) {
       gain.cancelScheduledValues(now); gain.setValueAtTime(gain.value, now); gain.linearRampToValueAtTime(target, now + .012);
     }
@@ -235,6 +304,7 @@ export class TakeTransport {
   dispose() {
     if (this.closed) return;
     this.closed = true;
+    this.waiting.clear(); this.windows.clear(); this.memoryEvents = [];
     this.recent = undefined;
     this.ready = false;
     clearTimeout(this.deadline);

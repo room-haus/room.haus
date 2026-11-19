@@ -6,7 +6,7 @@ import {TAKE_SOURCE_BYTES_PER_FRAME, TAKE_SOURCE_CHANNELS, TAKE_SOURCE_FORMAT, T
 const blockSize = 1024;
 const fullScale = 32768;
 const guardPCM = Math.floor(SPACE_TAKE_GUARD * fullScale);
-const quantize = value => Math.max(-guardPCM, Math.min(guardPCM, Math.round(value * fullScale)));
+export const quantize = value => Math.max(-guardPCM, Math.min(guardPCM, Math.round(value * fullScale)));
 
 /** @typedef {{pcm: Uint8Array, sampleRate: number, channels: number, frameCount: number, format: string}} SourcePCM */
 

@@ -27,7 +27,7 @@ function Publication({recipe, busy}: Parameters<PublicationControls>[0]) {
           setAuditioned(false);
         }
       } else if (prepared) {
-        const url = await publishTake(prepared.id, prepared.requestId, recipe.parentId, controller.signal);
+        const url = await publishTake(prepared, recipe, controller.signal);
         if (!controller.signal.aborted) setLink(url);
       }
     } catch (e) {
