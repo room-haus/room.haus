@@ -38,9 +38,12 @@ function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGe
   const fromPointer = (clientX: number) => clamp(gesture.startFrame + (clientX - drag.current!.originX) * length / drag.current!.width);
   const frame = preview ?? gesture.startFrame;
   const cancel = () => { drag.current = null; setPreview(undefined); };
-  return <button type="button" role="slider" className="take-handle" aria-label={'Move throw ' + (index + 1)}
+  const percentage = frame / length * 100 + '%';
+  return <><i aria-hidden="true" className="take-throw" style={{left:'min(calc(100% - 1px), ' + percentage + ')',
+    width:(gesture.endFrame - gesture.startFrame) / length * 100 + '%'}}/>
+    <button type="button" role="slider" className="take-handle" aria-label={'Move throw ' + (index + 1)}
     aria-valuemin={0} aria-valuemax={length - (gesture.endFrame - gesture.startFrame)} aria-valuenow={frame} aria-valuetext={stamp(frame)}
-    style={{left: (frame / length * 100) + '%'}} disabled={disabled}
+    style={{left: 'clamp(0px, calc(' + percentage + ' - 22px), calc(100% - 44px))'}} disabled={disabled}
     onPointerDown={e => { if (e.button !== 0 || drag.current) return;
       e.currentTarget.setPointerCapture(e.pointerId);
       drag.current = {id:e.pointerId, originX:e.clientX, width:e.currentTarget.parentElement!.getBoundingClientRect().width};
@@ -50,7 +53,7 @@ function ThrowHandle({gesture, index, length, disabled, move}: {gesture: SpaceGe
     onPointerCancel={cancel} onLostPointerCapture={cancel}
     onKeyDown={e => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       e.preventDefault(); move(clamp(frame + (e.key === 'ArrowRight' ? 1 : -1) * (e.shiftKey ? RATE / 10 : RATE / 100))); }}>
-    <span aria-hidden="true">{index + 1}</span></button>;
+    <span aria-hidden="true">{index + 1}</span></button></>;
 }
 
 export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?: ArrayBuffer; recipe: RecipeV1; frame: number; select: (f: number) => void; move: (id: string, startFrame: number) => void; disabled: boolean}) {
@@ -68,7 +71,6 @@ export function PassageWave({pcm, recipe, frame, select, move, disabled}: {pcm?:
   }, [pcm]);
   return <div className="take-wave" role="group" aria-label="Selected passage waveform">
     {levels.length > 0 && <Waveform levels={levels}/>}
-    {recipe.gestures.map(g => <i key={g.id} style={{left: g.startFrame / length * 100 + '%', width: (g.endFrame - g.startFrame) / length * 100 + '%'}}/>)}
     <b style={{left: frame / length * 100 + '%'}}/>
     <input type="range" aria-label="Audition position" min="0" max={length - 1} step="1" value={Math.min(frame, length - 1)}
       aria-valuetext={stamp(frame)} disabled={disabled} onChange={e => select(Number(e.target.value))}/>

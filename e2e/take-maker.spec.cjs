@@ -206,3 +206,68 @@ test('switch between the maker and the continuous study with the same draft', as
   await expect(button(page,'Play passage')).toBeEnabled();
   await expect(page.getByRole('list',{name:'Echo throws'}).getByRole('listitem')).toHaveCount(1);
 });
+
+test('trim the In handle independently and reposition the trimmed range from the overview', async ({page}) => {
+  await setup(page);
+  await page.locator('summary').filter({hasText:'Choose passage'}).click();
+  const newStart = curatedRange.startFrame + rate;
+  await page.getByLabel('In handle').fill(String(newStart));
+  await expect(page.getByLabel('Out frame')).toHaveValue(String(curatedRange.endFrame), {timeout:1000});
+  await page.getByLabel('Mix position').fill(String(90*rate));
+  await expect(page.getByLabel('In frame')).toHaveValue(String(90*rate));
+  await expect(page.getByLabel('Out frame')).toHaveValue(String(97*rate));
+  await page.getByLabel('Start at mix time').fill('12:00');
+  await button(page,'Set start').click();
+  await expect(page.getByLabel('Out frame')).toHaveValue(String(727*rate));
+});
+
+test('a pending range change cannot replace the passage during a recorded pass', async ({page}) => {
+  await setup(page);
+  await button(page,'Add throw').click();
+  await page.locator('summary').filter({hasText:'Choose passage'}).click();
+  await button(page,'Dense range').click();
+  await button(page,'Load passage').click();
+  const replace = button(page,'Start new draft');
+  await expect(replace).toBeEnabled();
+  await button(page,'Record').click();
+  await expect(button(page,'Echo')).toBeEnabled();
+  await expect(replace).toBeDisabled({timeout:1000});
+  await replace.evaluate(el => el.click());
+  await expect(page.getByText('IN 35:00.013')).toBeVisible();
+  await page.waitForTimeout(550);
+  const pad = button(page,'Echo');
+  await pad.focus(); await page.keyboard.down('Space'); await page.waitForTimeout(150); await page.keyboard.up('Space');
+  await button(page,'Stop').click();
+  const throws = page.getByRole('list',{name:'Echo throws'}).getByRole('listitem');
+  await expect(throws).toHaveCount(2);
+  await replace.click();
+  await expect(page.getByText('IN 15:00.005')).toBeVisible();
+  await expect(throws).toHaveCount(0);
+});
+
+test('drag a one-frame throw at the very end using the fully visible handle', async ({page}) => {
+  await setup(page);
+  const length = curatedRange.endFrame - curatedRange.startFrame;
+  await page.getByLabel('Timeline position (seconds)').fill('8');
+  await button(page,'Add throw').click();
+  const handle = page.getByRole('slider',{name:'Move throw 1'});
+  const wave = page.getByRole('group',{name:'Selected passage waveform'});
+  await wave.scrollIntoViewIfNeeded();
+  const hb = await handle.boundingBox(), wb = await wave.boundingBox();
+  expect(hb.width).toBeGreaterThanOrEqual(44);
+  expect(hb.x + hb.width).toBeLessThanOrEqual(wb.x + wb.width);
+  await expect(handle).toHaveAttribute('aria-valuenow',String(length-1));
+  const marker = await wave.locator('.take-throw').boundingBox();
+  expect(Math.abs(wb.x + wb.width - marker.x)).toBeLessThanOrEqual(2.5);
+  // Use integral CSS pixels so each browser receives the same pointer delta.
+  const x = Math.round(hb.x + hb.width/2), y = Math.round(hb.y + hb.height/2);
+  const delta = Math.round(wb.width/2);
+  await page.mouse.move(x,y); await page.mouse.down();
+  await page.mouse.move(x - delta,y,{steps:8}); await page.mouse.up();
+  const expectedFrame = Math.round(length - 1 - delta * length / wb.width);
+  await expect(handle).toHaveAttribute('aria-valuenow',String(expectedFrame));
+  const moved = await handle.boundingBox();
+  await page.mouse.move(moved.x + moved.width/2,y); await page.mouse.down();
+  await page.mouse.move(wb.x + wb.width + 3,y,{steps:8}); await page.mouse.up();
+  await expect(handle).toHaveAttribute('aria-valuenow',String(length-1));
+});

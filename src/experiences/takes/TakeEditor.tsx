@@ -56,7 +56,7 @@ function PassageRange({source, passage, apply, disabled, maxFrames}: {source: So
     {rangeError && <p role="alert">{rangeError}</p>}
     <div className="take-row">{(['startFrame', 'endFrame'] as const).map((key, i) => <label key={key}>{i ? 'Out' : 'In'} · {stamp(range[key])}
       <input type="range" aria-label={i ? 'Out handle' : 'In handle'} min="0" max={source.totalFrames} step="1" value={range[key]} disabled={disabled}
-        onChange={e => i ? setRange({...range, endFrame: Number(e.target.value)}) : shift(Number(e.target.value))}/>
+        onChange={e => choose({...range, [key]: Number(e.target.value)})}/>
       <span>{i ? 'Out frame' : 'In frame'}</span><input type="number" aria-label={i ? 'Out frame' : 'In frame'} min="0" max={source.totalFrames} step="1" value={range[key]} disabled={disabled}
         onChange={e => choose({...range, [key]: Number(e.target.value)})}/></label>)}</div>
     <div className="take-row"><button disabled={disabled} onClick={() => choose(source.curatedRange)}>Curated range</button>
@@ -82,17 +82,24 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
   const stop = () => owner.current?.end();
 
   const load = async (next: RecipeV1) => {
+    if (owner.current) return;
+    const previous = current.current;
     request.current?.abort();
     const controller = new AbortController();
     request.current = controller;
     setError(''); setLoading(true);
     try {
       const result = await loadPassage(next.passage, controller.signal);
-      if (controller.signal.aborted) return;
+      if (controller.signal.aborted || owner.current || current.current !== previous) return;
       if (result.byteLength !== (next.passage.endFrame - next.passage.startFrame) * 4) throw Error('The selected passage arrived incomplete. Retry the passage.');
       setPCM(result); setPosition(0); change(next);
     } catch (e) { if (!controller.signal.aborted) setError(message(e)); }
-    finally { if (!controller.signal.aborted) setLoading(false); }
+    finally {
+      if (request.current === controller) {
+        request.current = null;
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }
   };
 
   useEffect(() => {
@@ -111,15 +118,18 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
   }, [update]);
   const player = owner.current;
   const start = (recording: boolean) => {
-    if (!pcm || owner.current) return;
+    if (!pcm || owner.current || request.current) return;
+    const recorded = current.current;
     setError('');
     try {
-      const transport = new TakeTransport(current.current, pcm, recording, recording ? 0 : position, {
+      const transport = new TakeTransport(recorded, pcm, recording, recording ? 0 : position, {
         update, finish: (gestures, failure) => {
           if (owner.current !== transport) return;
           owner.current = null; padOwner.current = null;
           if (failure) setError(failure + ' Your earlier edits are saved in this draft.');
-          else if (gestures.length) change(normalizeRecipe({...current.current, gestures: [...current.current.gestures, ...gestures]}));
+          else if (gestures.length && samePassage(recorded.passage, current.current.passage)) {
+            change(normalizeRecipe({...current.current, gestures: [...current.current.gestures, ...gestures]}));
+          }
           update();
         },
       });
@@ -137,6 +147,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
     padOwner.current = null; owner.current?.release();
   };
   const rangeChange = (bounds: Bounds, confirmed = false) => {
+    if (owner.current) return;
     const passage = {...recipe.passage, ...bounds};
     setError('');
     if (bounds.endFrame > source.totalFrames || bounds.endFrame - bounds.startFrame > maxPassageFrames) {
@@ -182,7 +193,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
     {recipe.parentId === null && <PassageRange key={recipe.passage.startFrame + '/' + recipe.passage.endFrame} source={source} passage={recipe.passage}
       maxFrames={maxPassageFrames} disabled={Boolean(player)} apply={rangeChange}/>}
     {confirm && <div className="take-confirm"><p>Start a new draft for this passage? It will replace the current throws.</p>
-      <button onClick={() => rangeChange(confirm, true)}>Start new draft</button> <button onClick={() => setConfirm(undefined)}>Keep draft</button></div>}
+      <button disabled={busy} onClick={() => rangeChange(confirm, true)}>Start new draft</button> <button onClick={() => setConfirm(undefined)}>Keep draft</button></div>}
     <details className="take-settings"><summary>Echo settings</summary>
       {([{k:'delayFrames',label:'Delay (ms)',max:1500,scale:48,step:1,min:1},{k:'feedback',label:'Feedback (%)',max:48,scale:.01,step:1,min:0},
         {k:'wetLevel',label:'Echo level (%)',max:100,scale:.01,step:1,min:0},{k:'stereoWidth',label:'Stereo width (%)',max:100,scale:.01,step:1,min:0}] as const).map(({k,label,max,scale,step,min}) =>
