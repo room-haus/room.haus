@@ -99,7 +99,12 @@ test('incomplete Memory publication survives offline cleanup and concurrent retr
   await expire(storeDir, other.preparationId);
   await rm(join(storeDir, 'audio', a.ref.sha256));
   await close();
+  const orphanProof = join(storeDir, 'preparation-proofs', '9'.repeat(32));
+  await writeFile(orphanProof, '0'.repeat(64));
   assert.equal((await reclaimTakeStaging(storeDir)).expiredPreparations, 1);
+  await assert.rejects(readFile(orphanProof), {code:'ENOENT'});
+  await assert.rejects(readFile(join(storeDir, 'preparation-proofs', other.preparationId)), {code:'ENOENT'});
+  assert.equal((await readFile(join(storeDir, 'preparation-proofs', shared.preparationId))).length, 64);
   assert.deepEqual(await readFile(join(storeDir, 'prepared-audio', a.ref.sha256)), a.pcm);
   await assert.rejects(readFile(join(storeDir, 'prepared-audio', b.ref.sha256)), {code: 'ENOENT'});
   const [one, two] = await Promise.all([start(t, storeDir), start(t, storeDir)]);
@@ -212,4 +217,80 @@ test('each descriptor length must verify even when multiple intervals claim the 
   await writeFile(file, JSON.stringify(record));
   assert.equal((await post(origin, '/v1/takes', {preparationId: prep.preparationId, requestId: 'bad-length'})).status, 503);
   await assert.rejects(readdir(join(storeDir, 'takes')), {code: 'ENOENT'});
+});
+
+test('publication pins the auditioned recipe and all asset mappings before first use and across interrupted retries', async t => {
+  const {origin, storeDir, recipe, b} = await fixture(t);
+  const mutations = {
+    unsupported: record => { record.recipe.gestures[0].treatment = 'unknown'; },
+    supported: record => { record.recipe.gestures[0].treatment = 'repeat'; },
+    swappedRender: record => { record.take = record.dry; },
+    swappedCapture: (record, other) => {
+      record.fragments = other.fragments;
+      for (const gesture of record.recipe.gestures) gesture.fragmentRef = b.ref;
+    },
+  };
+  const other = await prepare(origin, {...recipe, gestures: recipe.gestures.map(g => ({...g, fragmentRef: b.ref}))});
+  const stagedOther = JSON.parse(await readFile(join(storeDir, 'preparations', other.preparationId)));
+  for (const bound of [true, false]) {
+    const prep = await prepare(origin, recipe);
+    const file = join(storeDir, 'preparations', prep.preparationId);
+    const pristine = await readFile(file);
+    const input = {preparationId: prep.preparationId, requestId: 'pinned-' + bound};
+    const bindingFile = join(storeDir, 'requests', hash(input.requestId));
+    if (bound) {
+      const performed = join(storeDir, 'prepared-audio', prep.take.sha256);
+      await rename(performed, performed + '.fault');
+      assert.equal((await post(origin, '/v1/takes', input)).status, 503);
+      await rename(performed + '.fault', performed);
+    }
+    for (const [name, change] of Object.entries(mutations)) {
+      const record = JSON.parse(pristine);
+      change(record, stagedOther);
+      await writeFile(file, JSON.stringify(record));
+      assert.equal((await post(origin, '/v1/takes', input)).status, 503, 'bound=' + bound + ' mutation=' + name);
+      if (bound) {
+        const binding = JSON.parse(await readFile(bindingFile));
+        assert.equal((await get(origin, '/v1/takes/' + binding.id)).status, 404);
+      } else {
+        await assert.rejects(readFile(bindingFile), {code:'ENOENT'});
+      }
+    }
+    if (bound) {
+      // Even replacing both private records with a different complete, internally
+      // consistent preparation cannot replace the performance pinned by the request.
+      const proofFile = join(storeDir, 'preparation-proofs', prep.preparationId);
+      const originalProof = await readFile(proofFile);
+      await writeFile(file, JSON.stringify({...stagedOther, id:prep.preparationId}));
+      await writeFile(proofFile, await readFile(join(storeDir, 'preparation-proofs', other.preparationId)));
+      assert.equal((await post(origin, '/v1/takes', input)).status, 503);
+      await writeFile(proofFile, originalProof);
+    }
+    await writeFile(file, pristine);
+    const {id} = await publish(origin, input.preparationId, input.requestId);
+    assert.deepEqual((await readTake(origin, id)).recipe, recipe);
+  }
+});
+
+test('a private record rewritten using legacy fields cannot replace a newly auditioned performance', async t => {
+  const {origin, storeDir, recipe} = await fixture(t);
+  const prep = await prepare(origin, recipe);
+  const file = join(storeDir, 'preparations', prep.preparationId);
+  const {id, expiresAt, dry, take, fragments} = JSON.parse(await readFile(file));
+  const changed = {...recipe, gestures: recipe.gestures.map(g => ({...g, id:g.id + '-changed'}))};
+  await writeFile(file, JSON.stringify({id, expiresAt, dry, take, fragments, recipe: changed}));
+  // These renamed gestures sound identical. Re-rendering alone cannot detect the substitution.
+  const input = {preparationId:id, requestId:'rewritten'};
+  assert.equal((await post(origin, '/v1/takes', input)).status, 503);
+});
+
+test('offline cleanup preserves staged bytes when an active preparation loses its fragment references', async t => {
+  const {origin, storeDir, close, recipe, a} = await fixture(t);
+  const prep = await prepare(origin, recipe);
+  await close();
+  const file = join(storeDir, 'preparations', prep.preparationId);
+  const record = JSON.parse(await readFile(file));
+  await writeFile(file, JSON.stringify({...record, fragments:[], recipe:{...recipe, gestures:[]}}));
+  await assert.rejects(reclaimTakeStaging(storeDir), /checksum/i);
+  assert.deepEqual(await readFile(join(storeDir, 'prepared-audio', a.ref.sha256)), a.pcm);
 });

@@ -215,3 +215,29 @@ test('HTTP retries a bound interrupted publication after process exit, expiry an
     store.close();
   }
 });
+
+test('pre-checksum Space binding verifies its saved render and recovers after expiry under tighter limits', async t => {
+  const {origin, storeDir, recipe, close} = await setup(t);
+  const prep = await prepare(origin, recipe);
+  const preparationId = 'a'.repeat(32);
+  const id = 'b'.repeat(32);
+  const requestId = 'legacy-space-pending';
+  const {dry, take} = JSON.parse(await readFile(join(storeDir, 'preparations', prep.preparationId)));
+  const legacy = {id: preparationId, recipe, dry, take, expiresAt: 0};
+  await close();
+  const store = fileStore(storeDir);
+  const repo = takeRepository({...fixtureSource(), store, writeLimits:{maxPassageFrames:100, maxGestures:0}});
+  try {
+    await store.putIfAbsent('requests/' + hash(requestId), JSON.stringify({id, preparationId}));
+    await store.putIfAbsent('preparations/' + preparationId, JSON.stringify({...legacy, recipe:{...recipe, gestures:[]}}));
+    await assert.rejects(repo.publish({preparationId, requestId}), {status:503});
+    assert.equal(await store.read('takes/' + id), null);
+    await writeFile(join(storeDir, 'preparations', preparationId), JSON.stringify(legacy));
+    const saved = await repo.publish({preparationId, requestId});
+    assert.deepEqual(saved, {id, parentId:null});
+    assert.deepEqual((await repo.take(id)).recipe, recipe);
+    assert.deepEqual(await repo.publish({preparationId, requestId}), saved);
+  } finally {
+    store.close();
+  }
+});

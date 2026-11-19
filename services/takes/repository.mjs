@@ -3,6 +3,7 @@ import {readPassage} from './passage.mjs';
 import {normalizePassage, normalizeRecipe, validateRecipe, reachableFragmentRefs, MEMORY_TAKE_EXPERIMENT, SPACE_TAKE_EXPERIMENT} from '../../src/experiences/takes/recipe.mjs';
 import {verifyFragmentBytes} from '../../src/experiences/takes/fragment-asset.mjs';
 import {checkMemoryBudget} from '../../src/experiences/takes/memory-render.mjs';
+import {performanceDigest, readPreparationProof} from './preparation-proof.mjs';
 import {fragmentTable} from './fragment-table.mjs';
 import {renderTake} from '../../src/experiences/takes/render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE} from '../../src/experiences/takes/source.mjs';
@@ -158,8 +159,35 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
       await stage(ref, bytes);
       record[mode] = ref;
     }
+    record.performanceSha256 = performanceDigest(record);
+    if (!await store.putIfAbsent('preparation-proofs/' + id, record.performanceSha256)) throw unavailable();
     if (!await store.putIfAbsent('preparations/' + id, JSON.stringify(record))) throw unavailable();
     return references(record, 'preparations', id, fragments);
+  }
+
+  // Pre-checksum private records have no independent recipe fingerprint. Replay a
+  // pending legacy preparation against its source and immutable inputs before
+  // accepting one. Existing committed pairs never need their source for a retry.
+  async function verifyLegacyPreparation(record) {
+    try {
+      const parent = record.recipe.parentId ? await saved('takes', record.recipe.parentId) : null;
+      const recipe = validateRecipe(record.recipe, catalog, parent, limits);
+      if (recipe.experiment === MEMORY_TAKE_EXPERIMENT) checkMemoryBudget(recipe, limits);
+      const refs = fragmentTable(record);
+      const source = await readPassage(catalog, recipe.passage, sourceStore);
+      const materials = await loadMaterials(refs, parent, recipe, source);
+      const render = renderTake(recipe, source, materials);
+      for (const mode of modes) if (hash(render[mode]) !== record[mode].sha256) throw unavailable();
+    } catch {
+      throw unavailable();
+    }
+  }
+
+  async function verifyPreparation(record) {
+    const digest = await readPreparationProof(store, record);
+    if (digest !== null) return digest;
+    await verifyLegacyPreparation(record);
+    return performanceDigest(record);
   }
 
   // Resume each stage using its durable output. The first successful binding owns
@@ -177,9 +205,10 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
         if (error.status === 404) throw expired();
         throw error;
       });
+      const performanceSha256 = await verifyPreparation(preparation);
       checkWritePolicy(preparation.recipe);
       fragmentTable(preparation);
-      await store.putIfAbsent(key, JSON.stringify({preparationId, id: opaqueId()}));
+      await store.putIfAbsent(key, JSON.stringify({preparationId, id: opaqueId(), performanceSha256}));
       binding = await document(key);
     }
     if (!binding || !validId(binding.id) || !validId(binding.preparationId)) throw unavailable();
@@ -192,6 +221,11 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
       if (error.status !== 404) throw error;
     }
     const record = committed ?? await saved('preparations', preparationId, true);
+    if (binding.performanceSha256 !== undefined) {
+      if (performanceDigest(record) !== binding.performanceSha256) throw unavailable();
+    } else if (!committed) {
+      await verifyPreparation(record);
+    }
     const assets = [...fragmentTable(record), ...modes.map(mode => record[mode])];
     for (const ref of assets) {
       if (await verifiedAudio('audio', ref)) continue;

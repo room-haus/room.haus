@@ -1,3 +1,4 @@
+import {performanceDigest, readPreparationProof} from './preparation-proof.mjs';
 import {fragmentTable} from './fragment-table.mjs';
 import {createHash, randomUUID} from 'node:crypto';
 import {link, mkdir, open, readFile, readdir, stat, unlink} from 'node:fs/promises';
@@ -117,7 +118,7 @@ export async function reclaimTakeStaging(root) {
     const digest = /^[a-f0-9]{64}$/;
     const valid = (value, pattern) => typeof value === 'string' && pattern.test(value);
     const preparations = new Set(await keys(root, 'preparations', id));
-    const protectedPreparations = new Set();
+    const protectedPreparations = new Map();
     const retainedAudio = new Set();
     function retainAssets(record) {
       if (!valid(record?.dry?.sha256, digest) || !valid(record?.take?.sha256, digest)) throw Error('Invalid audio references; cleanup stopped.');
@@ -128,12 +129,18 @@ export async function reclaimTakeStaging(root) {
     for (const key of await keys(root, 'requests', digest)) {
       const binding = JSON.parse(await store.read('requests/' + key));
       if (!valid(binding?.id, id) || !valid(binding?.preparationId, id)) throw Error('Invalid publication binding; cleanup stopped.');
-      protectedPreparations.add(binding.preparationId);
+      const pinned = protectedPreparations.get(binding.preparationId);
+      if (binding.performanceSha256 !== undefined && (!valid(binding.performanceSha256, digest) ||
+          (pinned !== undefined && pinned !== binding.performanceSha256))) throw Error('Invalid publication checksum; cleanup stopped.');
+      protectedPreparations.set(binding.preparationId, binding.performanceSha256 ?? pinned);
       // A previous release may have removed an expired private manifest after
       // commit. Preserve the pair needed to recover a partially missing commit.
       if (!preparations.has(binding.preparationId)) {
         const committed = JSON.parse(await store.read('takes/' + binding.id));
         if (committed?.id !== binding.id) throw Error('Incomplete binding lacks its preparation; cleanup stopped.');
+        if (binding.performanceSha256 !== undefined && binding.performanceSha256 !== performanceDigest(committed)) {
+          throw Error('Committed performance checksum mismatch; cleanup stopped.');
+        }
         retainAssets(committed);
       }
     }
@@ -145,11 +152,27 @@ export async function reclaimTakeStaging(root) {
       if (prep?.id !== key || !Number.isSafeInteger(prep.expiresAt) ||
           !valid(prep.dry?.sha256, digest) || !valid(prep.take?.sha256, digest)) throw Error('Invalid preparation; cleanup stopped.');
       if (prep.expiresAt <= now && !protectedPreparations.has(key)) expired.push(key);
-      else retainAssets(prep);
+      else {
+        const proof = await readPreparationProof(store, prep);
+        const pinned = protectedPreparations.get(key);
+        if (pinned !== undefined && pinned !== (proof ?? performanceDigest(prep))) throw Error('Bound preparation checksum mismatch; cleanup stopped.');
+        retainAssets(prep);
+      }
     }
 
-    for (const key of expired) await unlink(join(root, 'preparations', key));
+    for (const key of expired) {
+      await unlink(join(root, 'preparations', key));
+      preparations.delete(key);
+    }
     let reclaimedBytes = 0;
+    // A crash between proof and preparation writes can leave an orphan proof.
+    for (const key of await keys(root, 'preparation-proofs', id)) {
+      if (preparations.has(key)) continue;
+      const path = join(root, 'preparation-proofs', key);
+      const {size} = await stat(path);
+      await unlink(path);
+      reclaimedBytes += size;
+    }
     for (const key of await keys(root, 'prepared-audio', digest)) {
       const path = join(root, 'prepared-audio', key);
       // All active and bound reads can fall back to the verified immutable copy.
@@ -164,7 +187,7 @@ export async function reclaimTakeStaging(root) {
     // These private UUID temporaries never become references. A process can
     // leave one behind if it dies before or after linking the finished key.
     const temporary = /^\.[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
-    for (const collection of ['preparations', 'prepared-audio']) {
+    for (const collection of ['preparations', 'prepared-audio', 'preparation-proofs']) {
       for (const key of await keys(root, collection, temporary)) {
         const path = join(root, collection, key);
         const {size} = await stat(path);

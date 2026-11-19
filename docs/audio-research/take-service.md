@@ -49,7 +49,7 @@ Run `node scripts/benchmark-take-memory.mjs .cache/take-source repeat` and repea
 
 ## Retention and the backend handoff
 
-Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry, including after cleanup has removed the private manifest. The maker retains the edited recipe and must prepare and audition it again before publishing. A previously bound request can finish after expiry or a subsequent reduction in write limits. Retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
+Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry, including after cleanup has removed the private manifest. The maker retains the edited recipe and must prepare and audition it again before publishing. A previously bound request can finish after expiry or a subsequent reduction in write limits. The service writes an independent SHA-256 checksum of the recipe, both render descriptors and the reachable fragment table before returning a new preparation. First publication checks that checksum and pins it to the durable request binding. An interrupted retry must match the pinned performance. Cleanup verifies live and bound references before deleting staged PCM and reclaims orphaned preparation checksums. For pending records created before checksums existed, the service replays the bounded legacy recipe against its source and checks both render digests. Retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
 
 ```sh
 node scripts/reclaim-take-staging.mjs .cache/local-takes
