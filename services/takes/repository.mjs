@@ -56,7 +56,7 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
       if (record.id !== id) throw unavailable();
       const recipe = record.recipe;
       if (recipe.parentId !== null && !validId(recipe.parentId)) throw unavailable();
-      const passage = scope === 'takes' ? publishedPassage(recipe) : normalizeRecipe(recipe, writeLimits).passage;
+      const passage = publishedPassage(recipe);
       const frames = passage.endFrame - passage.startFrame;
       if (!Number.isSafeInteger(frames * 4)) throw unavailable();
       for (const mode of modes) {
@@ -125,7 +125,8 @@ export function takeRepository({catalog, sourceStore, store, writeLimits = limit
     const key = 'requests/' + hash(requestId);
     let binding = await document(key);
     if (!binding) {
-      await saved('preparations', preparationId);
+      const preparation = await saved('preparations', preparationId);
+      normalizeRecipe(preparation.recipe, writeLimits);
       await store.putIfAbsent(key, JSON.stringify({preparationId, id: opaqueId()}));
       binding = await document(key);
     }

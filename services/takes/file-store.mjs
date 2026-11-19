@@ -1,9 +1,11 @@
 import {createHash, randomUUID} from 'node:crypto';
-import {link, mkdir, open, readFile, readdir, unlink} from 'node:fs/promises';
+import {link, mkdir, open, readFile, readdir, stat, unlink} from 'node:fs/promises';
+import {existsSync, mkdirSync, readdirSync} from 'node:fs';
+import {DatabaseSync} from 'node:sqlite';
 import {dirname, join} from 'node:path';
 
 // Keys consist entirely of an internal collection and an opaque ID or digest.
-export function fileStore(root) {
+function records(root) {
   function pathFor(key) {
     if (!/^[a-z-]+\/[a-f0-9]{32,64}$/.test(key)) throw Error('Invalid storage key');
     return join(root, key);
@@ -51,32 +53,125 @@ export function fileStore(root) {
   };
 }
 
-// Permanent objects are immutable. Every staged read can fall back to the same
-// verified permanent digest, including active previews sharing an expired take.
-export async function reclaimExpiredDuplicates(root) {
-  const store = fileStore(root);
-  const entries = await readdir(join(root, 'preparations')).catch(error => {
-    if (error.code === 'ENOENT') return [];
+
+// An empty SQLite database supplies shared/exclusive OS file locks across local
+// processes. Process exit releases its lock, including after an abrupt shutdown.
+const lockFile = '.take-store-lock.sqlite';
+function lock(root, exclusive) {
+  const db = new DatabaseSync(join(root, lockFile));
+  try {
+    db.exec(exclusive ? 'BEGIN EXCLUSIVE' : 'BEGIN; SELECT count(*) FROM sqlite_schema');
+    return db;
+  } catch (error) {
+    db.close();
+    if (error.errcode === 5 || error.errcode === 6) throw Error('Take store is in use. Retry after maintenance or service shutdown.');
     throw error;
-  });
-  let reclaimedBytes = 0;
-  for (const id of entries) {
-    if (!/^[a-f0-9]{32}$/.test(id)) continue;
-    const record = JSON.parse(await store.read('preparations/' + id));
-    if (record?.id !== id || !Number.isSafeInteger(record.expiresAt) || record.expiresAt > Date.now()) continue;
-    for (const {sha256} of [record.dry, record.take]) {
-      if (!/^[a-f0-9]{64}$/.test(sha256)) continue;
-      const staged = await store.read('prepared-audio/' + sha256);
-      if (!staged) continue;
-      const permanent = await store.read('audio/' + sha256);
-      if (!permanent || !permanent.equals(staged) || createHash('sha256').update(permanent).digest('hex') !== sha256) continue;
-      try {
-        await unlink(join(root, 'prepared-audio', sha256));
-        reclaimedBytes += staged.byteLength;
-      } catch (error) {
-        if (error.code !== 'ENOENT') throw error;
-      }
+  }
+}
+
+export function fileStore(root) {
+  mkdirSync(root, {recursive: true, mode: 0o700});
+  const entries = readdirSync(root);
+  // Existing stores may have a writer running a pre-lock release. Keep serving
+  // those stores, but never opt them into destructive maintenance automatically.
+  const lease = entries.length === 0 || entries.includes(lockFile) ? lock(root, false) : null;
+  const store = records(root);
+  let active = 0;
+  let closed = false;
+  async function run(method, ...args) {
+    if (closed) throw Error('Take store closed.');
+    active++;
+    try {
+      return await store[method](...args);
+    } finally {
+      active--;
     }
   }
-  return {reclaimedBytes};
+  return {
+    read: key => run('read', key),
+    putIfAbsent: (key, bytes) => run('putIfAbsent', key, bytes),
+    close() {
+      if (active) throw Error('Wait for pending store operations before closing.');
+      if (!closed) lease?.close();
+      closed = true;
+    },
+  };
+}
+
+async function keys(root, collection, pattern) {
+  try {
+    return (await readdir(join(root, collection))).filter(key => pattern.test(key));
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+export async function reclaimTakeStaging(root) {
+  if (!existsSync(join(root, lockFile))) throw Error('Offline cleanup requires a store created by the locking service.');
+  const exclusive = lock(root, true);
+  try {
+    const store = records(root);
+    const id = /^[a-f0-9]{32}$/;
+    const digest = /^[a-f0-9]{64}$/;
+    const valid = (value, pattern) => typeof value === 'string' && pattern.test(value);
+    const preparations = new Set(await keys(root, 'preparations', id));
+    const protectedPreparations = new Set();
+    const retainedAudio = new Set();
+    function retainPair(record) {
+      if (!valid(record?.dry?.sha256, digest) || !valid(record?.take?.sha256, digest)) throw Error('Invalid audio references; cleanup stopped.');
+      retainedAudio.add(record.dry.sha256);
+      retainedAudio.add(record.take.sha256);
+    }
+    for (const key of await keys(root, 'requests', digest)) {
+      const binding = JSON.parse(await store.read('requests/' + key));
+      if (!valid(binding?.id, id) || !valid(binding?.preparationId, id)) throw Error('Invalid publication binding; cleanup stopped.');
+      protectedPreparations.add(binding.preparationId);
+      // A previous release may have removed an expired private manifest after
+      // commit. Preserve the pair needed to recover a partially missing commit.
+      if (!preparations.has(binding.preparationId)) {
+        const committed = JSON.parse(await store.read('takes/' + binding.id));
+        if (committed?.id !== binding.id) throw Error('Incomplete binding lacks its preparation; cleanup stopped.');
+        retainPair(committed);
+      }
+    }
+
+    const expired = [];
+    const now = Date.now();
+    for (const key of preparations) {
+      const prep = JSON.parse(await store.read('preparations/' + key));
+      if (prep?.id !== key || !Number.isSafeInteger(prep.expiresAt) ||
+          !valid(prep.dry?.sha256, digest) || !valid(prep.take?.sha256, digest)) throw Error('Invalid preparation; cleanup stopped.');
+      if (prep.expiresAt <= now && !protectedPreparations.has(key)) expired.push(key);
+      else retainPair(prep);
+    }
+
+    for (const key of expired) await unlink(join(root, 'preparations', key));
+    let reclaimedBytes = 0;
+    for (const key of await keys(root, 'prepared-audio', digest)) {
+      const path = join(root, 'prepared-audio', key);
+      // All active and bound reads can fall back to the verified immutable copy.
+      if (retainedAudio.has(key)) {
+        const permanent = await store.read('audio/' + key);
+        if (!permanent || createHash('sha256').update(permanent).digest('hex') !== key) continue;
+      }
+      const {size} = await stat(path);
+      await unlink(path);
+      reclaimedBytes += size;
+    }
+    // These private UUID temporaries never become references. A process can
+    // leave one behind if it dies before or after linking the finished key.
+    const temporary = /^\.[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
+    for (const collection of ['preparations', 'prepared-audio']) {
+      for (const key of await keys(root, collection, temporary)) {
+        const path = join(root, collection, key);
+        const {size} = await stat(path);
+        await unlink(path);
+        reclaimedBytes += size;
+      }
+    }
+    return {expiredPreparations: expired.length, reclaimedBytes};
+  } finally {
+    exclusive.close();
+  }
 }

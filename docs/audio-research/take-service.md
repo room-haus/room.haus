@@ -34,12 +34,16 @@ Every request body is limited to 64 KiB on the JSON write routes. Each handler a
 
 ## Retention and the backend handoff
 
-Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry. A previously bound request can finish after expiry, and retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
+Local preparations expire after 24 hours. A new publication request receives HTTP 410 after expiry. A previously bound request can finish after expiry or a subsequent reduction in write limits. Retries of a committed request return its original ID. Published manifests, PCM, source revisions and request bindings persist independently of the static release.
 
 ```sh
-node scripts/reclaim-take-duplicates.mjs .cache/local-takes
+node scripts/reclaim-take-staging.mjs .cache/local-takes
 ```
 
-This explicit command removes a staged duplicate referenced by an expired preparation only after checking the permanent copy's complete bytes and SHA-256. Previews and concurrent publication can read the same bytes from permanent storage. The command preserves manifests, private-only PCM, pending bindings, immutable published assets and source material. Local storage can therefore grow with unpublished drafts. The command reports bytes reclaimed and runs only when invoked.
+Stop the service processes using that store before running cleanup. New local stores use a shared SQLite file lock for each service lifetime. Cleanup needs the exclusive lock, and a service starting during cleanup must retry. An exiting or killed process releases its lock through the OS. This is a local-filesystem maintenance protocol.
 
-Before enabling hosted anonymous writes, the existing backend owner must supply the deployment environment and durable store, a storage budget and transactional expiry of unreferenced drafts and interrupted work. Route the API independently of static releases, enforce aggregate quotas, constrain CORS and verify independent cross-device reads and retries across service restarts and two static releases. If the host uses expiring asset URLs, verify that reopening the stable take link obtains fresh references after expiry. The loopback service uses same-origin binary GETs.
+Cleanup removes expired unbound preparation manifests, unreferenced staged PCM and partial staging writes. It keeps active manifests and every durable publication binding, including an interrupted publication whose preparation expired. It can remove a staged copy still in use when the immutable permanent object verifies against the same digest. The response reports expired manifests and staged bytes removed. Published manifests, permanent PCM, request bindings and source files sit outside its deletion scope.
+
+The service can still open older stores created before this lock protocol. The maintenance command refuses them because an older process could write without holding the lock. To migrate, take the old service offline, initialize a fresh managed directory with this release, stop the new service, then copy the old data collections into it before switching the configured store path. The existing preview store remains in place.
+
+Before enabling hosted anonymous writes, the existing backend owner must supply the deployment environment and durable store, a storage budget and a retention schedule coordinated with live publication on that backend. Route the API independently of static releases, enforce aggregate quotas, constrain CORS and verify independent cross-device reads and retries across service restarts and two static releases. If the host uses expiring asset URLs, verify that reopening the stable take link obtains fresh references after expiry. The loopback service uses same-origin binary GETs.

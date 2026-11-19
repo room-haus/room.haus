@@ -7,6 +7,11 @@ import {join} from 'node:path';
 import {createInterface} from 'node:readline';
 import {test} from 'node:test';
 import {once} from 'node:events';
+import {createServer} from 'node:http';
+import {fixtureSource} from '../scripts/fixtures/take-service.mjs';
+import {fileStore} from '../services/takes/file-store.mjs';
+import {takeHandler} from '../services/takes/handler.mjs';
+import {takeRepository} from '../services/takes/repository.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const settings = {delayFrames: 2400, feedback: .3, wetLevel: .9, stereoWidth: .2};
@@ -222,7 +227,7 @@ test('repeatable service check defaults to read-only and can reopen an explicit 
   const {checkTakeService} = await import('../scripts/check-take-service.mjs');
   const catalog = await checkTakeService({origin});
   assert.equal(catalog.source, 'MX029');
-  assert.deepEqual(await readdir(storeDir), []);
+  assert.deepEqual(await readdir(storeDir), ['.take-store-lock.sqlite']);
   await assert.rejects(checkTakeService({origin: 'https://example.org', write: true}), /loopback/);
   const checked = await checkTakeService({origin,write: true});
   assert.equal((await readdir(join(storeDir,'takes'))).length, 1);
@@ -230,4 +235,34 @@ test('repeatable service check defaults to read-only and can reopen an explicit 
   const fresh = (await start(t,storeDir)).origin;
   const read = await checkTakeService({origin: fresh,id: checked.id});
   assert.deepEqual(read.digests, checked.digests);
+});
+
+test('HTTP retries a bound interrupted publication after process exit, expiry and stricter policy', async t => {
+  const {origin, storeDir, close, recipe} = await setup(t);
+  const prep = await prepare(origin, recipe);
+  const input = {preparationId: prep.preparationId, requestId: 'retry-stricter'};
+  const staged = join(storeDir, 'prepared-audio', prep.take.sha256);
+  await rename(staged, staged + '.fault');
+  assert.equal((await post(origin, '/v1/takes', input)).status, 503);
+  await close();
+  await rename(staged + '.fault', staged);
+  const manifest = join(storeDir, 'preparations', prep.preparationId);
+  await writeFile(manifest, JSON.stringify({...JSON.parse(await readFile(manifest)), expiresAt: 0}));
+  const store = fileStore(storeDir);
+  const handler = takeHandler(takeRepository({...fixtureSource(), store, writeLimits: {maxPassageFrames: 100, maxGestures: 0}}));
+  const fresh = createServer((req, res) => handler(req, res, new URL(req.url, 'http://localhost')));
+  fresh.listen(0,'127.0.0.1');
+  await once(fresh,'listening');
+  try {
+    const restarted = 'http://127.0.0.1:' + fresh.address().port;
+    const saved = await json(await post(restarted, '/v1/takes', input), 200);
+    const read = await json(await get(restarted, '/v1/takes/' + saved.id), 200);
+    assert.equal(read.editable, false);
+    assert.equal(hash(await bytes(restarted, read.take.url)), prep.take.sha256);
+    assert.deepEqual(await json(await post(restarted, '/v1/takes', input), 200), saved);
+    assert.equal((await post(restarted, '/v1/preparations', recipe)).status, 400);
+  } finally {
+    await new Promise(resolve => fresh.close(resolve));
+    store.close();
+  }
 });

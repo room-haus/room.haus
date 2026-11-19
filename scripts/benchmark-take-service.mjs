@@ -25,11 +25,12 @@ if (!secondsArg) {
     gestures = Number(gesturesArg);
   assert.ok([8, 30, 60].includes(seconds) && [1, limits.maxGestures].includes(gestures));
   const root = await mkdtemp(join(tmpdir(), 'room-benchmark-'));
+  const store = fileStore(root);
   try {
     // Explicit measurement-only ceiling to exercise a rejected 60s candidate.
     const repo = takeRepository({
       ...source,
-      store: fileStore(root),
+      store,
       writeLimits: {...limits, maxPassageFrames: 60 * entry.sampleRate},
     });
     const settings = {
@@ -80,6 +81,7 @@ if (!secondsArg) {
       }),
     );
   } finally {
+    store.close();
     await rm(root, {recursive: true, force: true});
   }
 }
