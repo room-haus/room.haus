@@ -1,5 +1,6 @@
 // Unlaunched Labs surfaces run explicitly; new specs default to public coverage.
 const labsSpecs = [
+  '**/audio-memory.spec.cjs',
   '**/audio-atmosphere.spec.cjs',
   '**/audio-rhythm.spec.cjs',
   '**/audio-space.spec.cjs',
