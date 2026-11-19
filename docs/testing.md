@@ -47,3 +47,11 @@ Atmosphere checks passed18/18; shared-foundation regression checks passed17 with
 guarded-graph, actual MX029 smoke and layout evidence live locally in ignored
 `artifacts/audio-atmosphere/`; findings and listening limits are in
 [`audio-research/atmospheric-layers.md`](audio-research/atmospheric-layers.md).
+
+Task05 adds15 deliberately internal memory/fragment cases (five per browser).
+Fresh inventory: **174 public + 285 Labs = 459**, zero overlap or omissions.
+Memory plus shared-foundation focused execution passed32 with4 intentional
+platform skips; all15 memory cases passed. The full459-case browser suite was
+not run. Local captures, WAVs, control screenshots and new foundation regression
+artifacts are in ignored `artifacts/audio-memory/`. Findings and listening limits:
+[`audio-research/memory-and-fragments.md`](audio-research/memory-and-fragments.md).

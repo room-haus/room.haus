@@ -1,0 +1,215 @@
+{
+  "date": "2026-11-19",
+  "base": "7874d3d",
+  "sources": [
+    {
+      "segment": 6,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-006.ts",
+      "segmentSha256": "537d794f639000b50bfc32b57e094c482f3fa8c7c7e26ea36065a63dc803e481",
+      "mediaTime": 60.006224,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-memory/room.haus/artifacts/audio-memory/passages/mx029-006-source.wav"
+    },
+    {
+      "segment": 90,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-090.ts",
+      "segmentSha256": "bc787d99aa958f1d16e5e0f0854938000025304cdf60c3bdeb32b15e1b2c28a3",
+      "mediaTime": 900.0933599999997,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-memory/room.haus/artifacts/audio-memory/passages/mx029-090-source.wav"
+    },
+    {
+      "segment": 210,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-210.ts",
+      "segmentSha256": "a7ad3e5afd63c0d80a790434787f3999987a8edfc584c89aabd996e1b1158ea4",
+      "mediaTime": 2100.2178399999952,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/room-audio-memory/room.haus/artifacts/audio-memory/passages/mx029-210-source.wav"
+    }
+  ],
+  "captures": [
+    {
+      "source": "reference-loop",
+      "position": 1.238492,
+      "duration": 1,
+      "sampleRate": 24000,
+      "channels": 2,
+      "peak": 0.7499923706054688,
+      "rms": 0.0732304903924057
+    },
+    {
+      "source": "mx029-006",
+      "position": 1.243757,
+      "duration": 1,
+      "sampleRate": 24000,
+      "channels": 2,
+      "peak": 0.702056884765625,
+      "rms": 0.18259858445953325
+    },
+    {
+      "source": "mx029-090",
+      "position": 1.247321,
+      "duration": 1,
+      "sampleRate": 24000,
+      "channels": 2,
+      "peak": 1,
+      "rms": 0.2532723781118253
+    },
+    {
+      "source": "mx029-210",
+      "position": 1.247498,
+      "duration": 1,
+      "sampleRate": 24000,
+      "channels": 2,
+      "peak": 0.9633472561836243,
+      "rms": 0.1782142040924345
+    }
+  ],
+  "renders": [
+    {
+      "source": "reference-loop",
+      "treatment": "original",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.3749961853027344,
+      "rms": 0.03917787815857817,
+      "file": "reference-loop-original.wav",
+      "sha256": "33f3ed0696b5f2270b218b1e0f591adbda2c04f8448354c65676adb6321654cb"
+    },
+    {
+      "source": "reference-loop",
+      "treatment": "repetition",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 6,
+      "level": 0.5,
+      "peak": 0.3749961853027344,
+      "rms": 0.03949460096206321,
+      "file": "reference-loop-repetition.wav",
+      "sha256": "6c0a5322395bac6633fc52f3acbdf91b7cc0123b11c56cc1cf5fac54fe9f2cb1"
+    },
+    {
+      "source": "reference-loop",
+      "treatment": "dissolution",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.3772844672203064,
+      "rms": 0.03920373952575526,
+      "file": "reference-loop-dissolution.wav",
+      "sha256": "c77143690dcffd7871ba2f928f71b678a0dad97298de36c293468a68cc82fbf3"
+    },
+    {
+      "source": "mx029-006",
+      "treatment": "original",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.4087371826171875,
+      "rms": 0.09921163923504472,
+      "file": "mx029-006-original.wav",
+      "sha256": "3959df28ea292327f33202f04af54b793c05bb737b09596dde12b4bdaa095c63"
+    },
+    {
+      "source": "mx029-006",
+      "treatment": "repetition",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 6,
+      "level": 0.5,
+      "peak": 0.4142341613769531,
+      "rms": 0.09950272064910964,
+      "file": "mx029-006-repetition.wav",
+      "sha256": "4b7641426c30e18321fbe2f3bffac4af165c2ae665d5950f2884be77b9bc0838"
+    },
+    {
+      "source": "mx029-006",
+      "treatment": "dissolution",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.408213347196579,
+      "rms": 0.09993561877837256,
+      "file": "mx029-006-dissolution.wav",
+      "sha256": "6538c64754c797bbb395353953e47f1eb40000cadbf7d8e8a9630f8f3bef192c"
+    },
+    {
+      "source": "mx029-090",
+      "treatment": "original",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.5,
+      "rms": 0.12751939504529436,
+      "file": "mx029-090-original.wav",
+      "sha256": "f81a57d06a82631dba15fc8a52f49ae47d1b417c538ac134267c2783f7893062"
+    },
+    {
+      "source": "mx029-090",
+      "treatment": "repetition",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 6,
+      "level": 0.5,
+      "peak": 0.5,
+      "rms": 0.12782871076968974,
+      "file": "mx029-090-repetition.wav",
+      "sha256": "e55c2cb585cbbf9df722ae34b06332843c3647c95fc32c902b08f2a466eaec42"
+    },
+    {
+      "source": "mx029-090",
+      "treatment": "dissolution",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.4818052053451538,
+      "rms": 0.12828678556989384,
+      "file": "mx029-090-dissolution.wav",
+      "sha256": "6736b51a98274c8928936f2fac8eb9f060d9775fa3b2da8629e2b0950b2d5209"
+    },
+    {
+      "source": "mx029-210",
+      "treatment": "original",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.4852142333984375,
+      "rms": 0.08419339133456714,
+      "file": "mx029-210-original.wav",
+      "sha256": "9e2b25a23c0e8013a0f489be566e7ec601ab1f058225454c1c493e42a646c551"
+    },
+    {
+      "source": "mx029-210",
+      "treatment": "repetition",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 6,
+      "level": 0.5,
+      "peak": 0.4887504577636719,
+      "rms": 0.08465328532790622,
+      "file": "mx029-210-repetition.wav",
+      "sha256": "0987e359ea658d35d5f22e5c74fb9d787449b08880070e0646120061e702dd2c"
+    },
+    {
+      "source": "mx029-210",
+      "treatment": "dissolution",
+      "seconds": 6,
+      "fragmentSeconds": 1,
+      "density": 8,
+      "level": 0.5,
+      "peak": 0.4938535690307617,
+      "rms": 0.08449769585687684,
+      "file": "mx029-210-dissolution.wav",
+      "sha256": "ea00c09e128e19e4cbe88c9483dfd0e8930c8ad03a2a4cad9def866c489ef5cd"
+    }
+  ],
+  "method": "Real Chromium MediaElement WAV → shared ResearchAudio source capture. Production MemoryFragment/AudioClock offline renders over six seconds following capture. Source at 0.5 headroom, layer level 0.5 and shared-equivalent layer scale. Guard omitted offline; peaks checked below ceiling. No normalization. No subjective listening review performed."
+}

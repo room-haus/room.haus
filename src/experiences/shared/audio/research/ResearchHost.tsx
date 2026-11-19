@@ -9,7 +9,7 @@ const stamp=(time:number)=>`${Math.floor(time/60)}:${String(Math.floor(time%60))
 export interface ResearchHostProps {
   title:string;description:string;onClose:()=>void;
   configure:(research:ResearchAudio)=>void;
-  controls?:(props:{research:ResearchAudio;disabled:boolean;readMediaTime:()=>number})=>ReactNode;
+  controls?:(props:{research:ResearchAudio;disabled:boolean;readMediaTime:()=>number;sourceLabel:string})=>ReactNode;
   showReferenceTools?:boolean;
   armLabel?:string|null;processedLabel?:string;levelLabel?:string;
 }
@@ -45,7 +45,7 @@ export function ResearchHost({title,description,onClose,configure,controls,showR
     </section>
     <section className="research-control-grid" aria-label="Experiment controls">
       <label>{levelLabel}<input aria-label={levelLabel} type="range" min="0" max="1" step=".05" defaultValue=".5" key={resetCount} disabled={disabled} onChange={event=>research?.setLevel(Number(event.target.value))}/></label>
-      {research&&<div key={'controls'+resetCount}>{controls?.({research,disabled,readMediaTime:()=>session!.snapshot().time})}</div>}
+      {research&&<div key={'controls'+resetCount}>{controls?.({research,disabled,readMediaTime:()=>session!.snapshot().time,sourceLabel:source==='mix'?'MX029 · Saad Ashraf':source==='loop'?'Generated diagnostic loop · 120 BPM':source==='tone'?'Generated 440 Hz reference':'Generated noise reference'})}</div>}
       <div><span className="research-eyebrow">{capable?'OUTPUT / SAME HEADROOM IN BOTH MODES':'OUTPUT / ORIGINAL'}</span><p className="research-meter">{diagnostics?.peak?`${(20*Math.log10(diagnostics.peak)).toFixed(1)} dBFS peak`:'— dBFS peak'}</p><p className="research-note">{capable?'Fixed −6 dB headroom. Guard ceiling −0.18 dBFS. Peak is sampled, not a loudness match.':'Matched output metering unavailable for this source/browser. Original playback is preserved.'}</p></div>
     </section>
     {showReferenceTools&&<section className="research-control-grid research-tools" aria-label="Shared reference tools">

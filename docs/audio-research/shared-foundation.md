@@ -166,6 +166,12 @@ Preview: `http://127.0.0.1:4217/labs/#audio-experiments`, then Open Audio routin
 
 ### Implementation choices and known limits
 
+Task05 adds `sourceLabel:string` to ResearchHost's controls render props. It is
+the selected source's display identity, used beside ephemeral captured material
+in Memory & fragments. Existing controls consumers need no changes; source,
+capture, scheduler, bus and transport ownership are unchanged. See
+[`memory-and-fragments.md`](memory-and-fragments.md) for bounds and actual evidence.
+
 Task03 local follow-on: ResearchHost has optional `armLabel`, `processedLabel`
 and `levelLabel` (existing defaults retained). `armLabel:null` hides generic arming when an experiment provides its own explicit combined start/anchor action. Its controls render props include
 `readMediaTime():number`, which reads the existing session snapshot at the user
