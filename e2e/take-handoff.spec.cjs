@@ -1,6 +1,19 @@
-const {test, expect} = require('@playwright/test');
+const {test: base, expect} = require('@playwright/test');
 const {createHash} = require('node:crypto');
 const path = require('node:path');
+
+// Read-only scenarios can share one immutable take per worker. Creating it
+// afresh for each page would exhaust the local service's anonymous write limit.
+const test = base.extend({
+  savedParent: [async ({playwright}, use, workerInfo) => {
+    const request = await playwright.request.newContext({baseURL: workerInfo.project.use.baseURL});
+    try {
+      await use(await seed(request));
+    } finally {
+      await request.dispose();
+    }
+  }, {scope: 'worker'}],
+});
 
 const button = (page, name) => page.getByRole('button', {name, exact: true});
 const digest = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -88,9 +101,13 @@ test('a cold listener compares a saved take, moves the throw and forwards a dist
   browser,
   baseURL,
   request,
+  playwright,
 }, info) => {
   const options = info.project.use;
-  const sender = await fresh(browser, baseURL, options);
+  // Forward from a desktop Chromium maker to a separate mobile WebKit
+  // engine. Other projects cover the same-profile round trip.
+  const desktop = info.project.name === 'mobile-webkit' ? await playwright.chromium.launch() : null;
+  const sender = await fresh(desktop ?? browser, baseURL, desktop ? {} : options);
   const makerPage = await sender.newPage();
   await maker(makerPage);
   const prepared = await prepare(makerPage);
@@ -101,6 +118,7 @@ test('a cold listener compares a saved take, moves the throw and forwards a dist
   expect(original.recipe.gestures[0].startFrame).toBe(48000);
   expect(original.take.sha256).toBe(prepared.take.sha256);
   await sender.close();
+  await desktop?.close();
 
   const receiver = await fresh(browser, baseURL, options);
   const page = await receiver.newPage();
@@ -184,11 +202,19 @@ test('a cold listener compares a saved take, moves the throw and forwards a dist
       startFrame: start,
       endFrame: start + 12000,
     });
+    const received = {};
     for (const mode of ['dry', 'take']) {
       const response = await request.get(new URL(savedManifest[mode].url, url).href);
       expect(response.ok()).toBe(true);
       const bytes = await response.body();
       expect(digest(bytes)).toBe(preview[mode].sha256);
+      received[mode] = bytes;
+    }
+    if (original.recipe.passage.revision.startsWith('fixture-v1-')) {
+      // Transients occur every half second. The edited send must move the
+      // first returned sample with its hit, preserving all earlier dry PCM.
+      const firstChangedByte = received.take.findIndex((value, i) => value !== received.dry[i]);
+      expect(Math.floor(firstChangedByte / 4)).toBe(start + original.recipe.gestures[0].settings.delayFrames);
     }
     await button(compare(opened), 'Play take').click();
     await checkAudio(opened, preview);
@@ -199,7 +225,7 @@ test('a cold listener compares a saved take, moves the throw and forwards a dist
   console.log('Verified immutable handoff', parent.href, child.href);
 });
 
-async function seed(request) {
+async function seed(request, range) {
   const {sources} = await (await request.get('/v1/catalog')).json(),
     source = sources[0];
   const settings = {delayFrames: 9696, feedback: 0.168, wetLevel: 0.5, stereoWidth: 0};
@@ -209,19 +235,20 @@ async function seed(request) {
     rendererVersion: 1,
     parentId: null,
     initialSettings: settings,
-    passage: {sourceId: source.id, revision: source.revision, ...source.curatedRange},
+    passage: {sourceId: source.id, revision: source.revision, ...(range ?? source.curatedRange)},
     gestures: [{id: 'third', startFrame: 48000, endFrame: 60000, settings}],
   };
-  const prepared = await (await request.post('/v1/preparations', {data: parent})).json();
-  return (
-    await request.post('/v1/takes', {
-      data: {preparationId: prepared.preparationId, requestId: require('node:crypto').randomUUID()},
-    })
-  ).json();
+  const preparation = await request.post('/v1/preparations', {data: parent});
+  await expect(preparation).toBeOK();
+  const prepared = await preparation.json();
+  const published = await request.post('/v1/takes', {
+    data: {preparationId: prepared.preparationId, requestId: require('node:crypto').randomUUID()},
+  });
+  await expect(published).toBeOK();
+  return published.json();
 }
 
-test('a corrupt reference fails closed, then a future edit version remains playable', async ({page, request}) => {
-  const parent = await seed(request);
+test('a corrupt reference fails closed, then a future edit version remains playable', async ({page, savedParent: parent}) => {
   const pattern = '**/v1/takes/' + parent.id;
   await page.route(pattern, async (route) => {
     const manifest = await (await route.fetch()).json();
@@ -245,9 +272,8 @@ test('a corrupt reference fails closed, then a future edit version remains playa
 });
 test('editing during preparation invalidates the review, and source failure leaves the parent playable', async ({
   page,
-  request,
+  savedParent: parent,
 }) => {
-  const parent = await seed(request);
   await page.route('**/v1/catalog', (route) => route.abort(), {times: 1});
   await page.goto('/takes/?id=' + parent.id);
   await button(page, 'Make a variation').click();
@@ -286,10 +312,10 @@ test('keyboard seeking keeps the running clock and outputs the saved echo tail a
   browser,
   baseURL,
   request,
+  savedParent: parent,
 }, info) => {
   const revision = (await (await request.get('/v1/catalog')).json()).sources[0].revision;
   test.skip(!revision.startsWith('fixture-v1-'), 'The signal thresholds measure the explicit two-transient fixture.');
-  const parent = await seed(request);
   const ctx = await fresh(browser, baseURL, info.project.use);
   const page = await ctx.newPage();
   await page.addInitScript(() => {
@@ -349,8 +375,7 @@ test('keyboard seeking keeps the running clock and outputs the saved echo tail a
   await ctx.close();
 });
 
-test('current write limits govern variation while saved playback remains available', async ({page, request}) => {
-  const parent = await seed(request);
+test('current write limits govern variation while saved playback remains available', async ({page, savedParent: parent}) => {
   const pattern = '**/v1/takes/' + parent.id;
   await page.route(pattern, async route => {
     const manifest = await (await route.fetch()).json();
@@ -390,3 +415,43 @@ test('a missing private preparation keeps the draft and requires a fresh auditio
     await context.close();
   }
 });
+
+// Golden samples and full Original digests come from a separate, continuous
+// decode of the pinned playlist, applying the version-one common gain of 0.5.
+// These cases run with ROOM_TAKE_SOURCE_DIR and require no master in CI.
+const realPassages = [
+  {name: 'frame zero', start: 0, dryHash: 'fe6250ff8896a2b708a5baae2e0527f1456b343257fd59cb232a02e2efa69323',
+    samples: [[0, 0, 0], [383999, 387, -1019]]},
+  {name: 'a non-curated HLS boundary', start: 58944000, dryHash: 'ee8d49618a92995a0e9e85b807bbf54067c0d8625b9c56e6c4b396d7a2bb69f8',
+    samples: [[0, -83, -1289], [96356, -10293, -9872], [96357, -10326, -10360], [383999, -7194, -6534]]},
+  {name: 'the final MX029 frame', start: 176641220, dryHash: '2186d7732752a656c8dd8b880f7904543072cf576da0a19b58a63e84ed485657',
+    samples: [[0, -2162, -7632], [383999, 0, 0]]},
+];
+
+for (const {name, start, dryHash, samples} of realPassages) {
+  test('published audio matches the continuous MX029 master at ' + name, async ({browser, baseURL, request}, info) => {
+    const {sources} = await (await request.get('/v1/catalog')).json();
+    test.skip(sources[0].revision.startsWith('fixture-v1-'), 'Requires the pinned MX029 source.');
+    expect(sources[0].revision).toBe(require('../scripts/fixtures/mx029-take-source.json').canonicalSha256);
+    const range = {startFrame: start, endFrame: start + 384000};
+    const parent = await seed(request, range);
+    const url = new URL('/takes/?id=' + parent.id, baseURL);
+    const saved = await manifest(request, url);
+    expect(saved.recipe.passage).toMatchObject(range);
+    const dry = await (await request.get(new URL(saved.dry.url, url).href)).body();
+    expect(digest(dry)).toBe(dryHash);
+    for (const [frame, left, right] of samples) {
+      expect([dry.readInt16LE(frame * 4), dry.readInt16LE(frame * 4 + 2)]).toEqual([left, right]);
+    }
+    const context = await fresh(browser, baseURL, info.project.use);
+    try {
+      const page = await context.newPage();
+      await page.goto(url.href);
+      await button(compare(page), 'Play take').click();
+      await checkAudio(page, saved);
+      expect(await page.evaluate(() => window.scheduled.slice(-2).map(entry => entry.frames))).toEqual([384000, 384000]);
+    } finally {
+      await context.close();
+    }
+  });
+}
