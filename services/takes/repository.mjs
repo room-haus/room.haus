@@ -1,6 +1,6 @@
 import {createHash, randomBytes} from 'node:crypto';
 import {readPassage} from './passage.mjs';
-import {normalizePassage, normalizeRecipe, validateRecipe, TAKE_RECIPE_SCHEMA, SPACE_TAKE_EXPERIMENT, SPACE_TAKE_RENDERER_VERSION} from '../../src/experiences/takes/recipe.mjs';
+import {normalizePassage, normalizeRecipe, validateRecipe, SPACE_TAKE_EXPERIMENT} from '../../src/experiences/takes/recipe.mjs';
 import {renderTake} from '../../src/experiences/takes/render.mjs';
 import {TAKE_SOURCE_SAMPLE_RATE} from '../../src/experiences/takes/source.mjs';
 
@@ -23,11 +23,12 @@ const missing = () => new TakeError(404, 'Take or preparation unavailable.');
 
 // A previously published pair can still be served from its stable PCM envelope
 // when this editor cannot interpret the performance that created it.
-function newerSpaceRecipe(recipe) {
-  return recipe?.experiment === SPACE_TAKE_EXPERIMENT &&
-    Number.isSafeInteger(recipe.schema) && recipe.schema >= TAKE_RECIPE_SCHEMA &&
-    Number.isSafeInteger(recipe.rendererVersion) && recipe.rendererVersion >= SPACE_TAKE_RENDERER_VERSION &&
-    (recipe.schema > TAKE_RECIPE_SCHEMA || recipe.rendererVersion > SPACE_TAKE_RENDERER_VERSION);
+function publishedPassage(recipe) {
+  if (recipe?.experiment !== SPACE_TAKE_EXPERIMENT || !Number.isSafeInteger(recipe.schema) ||
+      recipe.schema < 1 || !Number.isSafeInteger(recipe.rendererVersion) || recipe.rendererVersion < 1) {
+    throw unavailable();
+  }
+  return normalizePassage(recipe.passage);
 }
 
 function references(record, scope, id) {
@@ -37,7 +38,7 @@ function references(record, scope, id) {
   return result;
 }
 
-export function takeRepository({catalog, sourceStore, store}) {
+export function takeRepository({catalog, sourceStore, store, writeLimits = limits}) {
   const publicSources = catalog.map(({id, revision, sampleRate, channels, totalFrames, curatedRange, denseRange, peaks}) =>
     ({id, revision, sampleRate, channels, totalFrames, curatedRange, denseRange, peaks}));
 
@@ -55,10 +56,9 @@ export function takeRepository({catalog, sourceStore, store}) {
       if (record.id !== id) throw unavailable();
       const recipe = record.recipe;
       if (recipe.parentId !== null && !validId(recipe.parentId)) throw unavailable();
-      const passage = scope === 'takes' && newerSpaceRecipe(recipe)
-        ? normalizePassage(recipe.passage) : normalizeRecipe(recipe, limits).passage;
+      const passage = scope === 'takes' ? publishedPassage(recipe) : normalizeRecipe(recipe, writeLimits).passage;
       const frames = passage.endFrame - passage.startFrame;
-      if (frames > limits.maxPassageFrames) throw unavailable();
+      if (!Number.isSafeInteger(frames * 4)) throw unavailable();
       for (const mode of modes) {
         const ref = record[mode];
         if (!ref || !/^[a-f0-9]{64}$/.test(ref.sha256) || ref.frameCount !== frames ||
@@ -77,13 +77,13 @@ export function takeRepository({catalog, sourceStore, store}) {
 
   async function verifiedAudio(collection, ref) {
     const pcm = await store.read(collection + '/' + ref.sha256);
-    if (pcm === null) return null;
+    if (pcm === null) return collection === 'prepared-audio' ? verifiedAudio('audio', ref) : null;
     if (pcm.byteLength !== ref.byteLength || hash(pcm) !== ref.sha256) throw unavailable();
     return pcm;
   }
 
   async function passage(selection) {
-    if (selection.endFrame - selection.startFrame > limits.maxPassageFrames) throw new RangeError('This passage is too long.');
+    if (selection.endFrame - selection.startFrame > writeLimits.maxPassageFrames) throw new RangeError('This passage is too long.');
     return readPassage(catalog, selection, sourceStore);
   }
 
@@ -93,13 +93,13 @@ export function takeRepository({catalog, sourceStore, store}) {
       if (!validId(input.parentId)) throw new RangeError('Invalid parent take ID.');
       try {
         parent = await saved('takes', input.parentId);
-        if (newerSpaceRecipe(parent.recipe)) throw new RangeError('A newer editor is required to vary this take.');
+        normalizeRecipe(parent.recipe, writeLimits);
       } catch (error) {
         if (error.status === 404) throw new RangeError('Parent take unavailable.');
         throw error;
       }
     }
-    const recipe = validateRecipe(input, catalog, parent, limits);
+    const recipe = validateRecipe(input, catalog, parent, writeLimits);
     const render = renderTake(recipe, await passage(recipe.passage));
     const id = opaqueId();
     const record = {id, recipe, expiresAt: Date.now() + day};
@@ -159,7 +159,13 @@ export function takeRepository({catalog, sourceStore, store}) {
   async function take(id) {
     const record = await saved('takes', id);
     for (const mode of modes) if (!await verifiedAudio('audio', record[mode])) throw unavailable();
-    return references(record, 'takes', id);
+    let editable = true;
+    try {
+      normalizeRecipe(record.recipe, writeLimits);
+    } catch {
+      editable = false;
+    }
+    return {...references(record, 'takes', id), editable};
   }
 
   async function audio(scope, id, mode) {
@@ -169,5 +175,5 @@ export function takeRepository({catalog, sourceStore, store}) {
     return bytes;
   }
 
-  return {catalog: {sources: publicSources, limits}, passage, prepare, publish, take, audio};
+  return {catalog: {sources: publicSources, limits: writeLimits}, passage, prepare, publish, take, audio};
 }

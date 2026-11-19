@@ -216,3 +216,18 @@ test('a published Space render from a newer editor stays playable through the re
   for (const mode of ['dry','take']) assert.equal(hash(await bytes(origin,manifest[mode].url)),prep[mode].sha256);
   assert.equal((await post(origin,'/v1/preparations',{...recipe,parentId:parent.id})).status,400);
 });
+
+test('repeatable service check defaults to read-only and can reopen an explicit test write after restart', async t => {
+  const {origin,storeDir,close} = await setup(t);
+  const {checkTakeService} = await import('../scripts/check-take-service.mjs');
+  const catalog = await checkTakeService({origin});
+  assert.equal(catalog.source, 'MX029');
+  assert.deepEqual(await readdir(storeDir), []);
+  await assert.rejects(checkTakeService({origin: 'https://example.org', write: true}), /loopback/);
+  const checked = await checkTakeService({origin,write: true});
+  assert.equal((await readdir(join(storeDir,'takes'))).length, 1);
+  await close();
+  const fresh = (await start(t,storeDir)).origin;
+  const read = await checkTakeService({origin: fresh,id: checked.id});
+  assert.deepEqual(read.digests, checked.digests);
+});

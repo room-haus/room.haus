@@ -1,5 +1,5 @@
-import {randomUUID} from 'node:crypto';
-import {link, mkdir, open, readFile, unlink} from 'node:fs/promises';
+import {createHash, randomUUID} from 'node:crypto';
+import {link, mkdir, open, readFile, readdir, unlink} from 'node:fs/promises';
 import {dirname, join} from 'node:path';
 
 // Keys consist entirely of an internal collection and an opaque ID or digest.
@@ -49,4 +49,34 @@ export function fileStore(root) {
       }
     },
   };
+}
+
+// Permanent objects are immutable. Every staged read can fall back to the same
+// verified permanent digest, including active previews sharing an expired take.
+export async function reclaimExpiredDuplicates(root) {
+  const store = fileStore(root);
+  const entries = await readdir(join(root, 'preparations')).catch(error => {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  });
+  let reclaimedBytes = 0;
+  for (const id of entries) {
+    if (!/^[a-f0-9]{32}$/.test(id)) continue;
+    const record = JSON.parse(await store.read('preparations/' + id));
+    if (record?.id !== id || !Number.isSafeInteger(record.expiresAt) || record.expiresAt > Date.now()) continue;
+    for (const {sha256} of [record.dry, record.take]) {
+      if (!/^[a-f0-9]{64}$/.test(sha256)) continue;
+      const staged = await store.read('prepared-audio/' + sha256);
+      if (!staged) continue;
+      const permanent = await store.read('audio/' + sha256);
+      if (!permanent || !permanent.equals(staged) || createHash('sha256').update(permanent).digest('hex') !== sha256) continue;
+      try {
+        await unlink(join(root, 'prepared-audio', sha256));
+        reclaimedBytes += staged.byteLength;
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+      }
+    }
+  }
+  return {reclaimedBytes};
 }

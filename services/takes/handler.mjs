@@ -34,7 +34,9 @@ function selection(query) {
   return {sourceId: query.get('sourceId'), revision: query.get('revision'), startFrame: frame('startFrame'), endFrame: frame('endFrame')};
 }
 
-export function takeHandler(repository) {
+export function takeHandler(repository, {now = () => performance.now()} = {}) {
+  // One local service process shares this rolling window across anonymous writes.
+  const recentWrites = [];
   let active = 0;
   return async (req, res, url) => {
     const send = (status, value, binary = false) => {
@@ -58,6 +60,10 @@ export function takeHandler(repository) {
         const manifest = /^\/v1\/takes\/([a-f0-9]{32})$/.exec(path);
         if (manifest) return send(200, await repository.take(manifest[1]));
       } else if (req.method === 'POST') {
+        const time = now();
+        while (recentWrites.length && recentWrites[0] <= time - 60_000) recentWrites.shift();
+        if (recentWrites.length >= 60) return send(429, {error: 'Write limit reached. Try again in a minute.'});
+        recentWrites.push(time);
         if (path === '/v1/preparations') return send(201, await repository.prepare(await readJson(req)));
         if (path === '/v1/takes') return send(200, await repository.publish(await readJson(req)));
       } else {

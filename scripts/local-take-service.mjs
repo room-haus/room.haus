@@ -4,7 +4,7 @@ import {fileStore} from '../services/takes/file-store.mjs';
 import {takeRepository} from '../services/takes/repository.mjs';
 import {takeHandler} from '../services/takes/handler.mjs';
 
-async function preparedSource(directory) {
+export async function preparedSource(directory) {
   const lock = JSON.parse(await readFile(new URL('./fixtures/mx029-take-source.json', import.meta.url), 'utf8'));
   const catalog = JSON.parse(await readFile(join(directory, 'catalog.json'), 'utf8'));
   if (catalog.length !== 1 || catalog[0].id !== lock.id || catalog[0].revision !== lock.canonicalSha256 ||

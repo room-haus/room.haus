@@ -15,6 +15,7 @@ import './takes.css';
 
 function Listener({saved}: {saved: SavedTake}) {
   const draft = useMemo(() => {
+    if (saved.editable === false) return null;
     try {
       return forkTake({id: saved.id, recipe: normalizeRecipe(saved.recipe)});
     } catch {
@@ -67,7 +68,7 @@ function Listener({saved}: {saved: SavedTake}) {
         {draft ? (
           !editing && <button onClick={begin}>Make a variation</button>
         ) : (
-          <p role="status">This version supports listening. Editing requires a compatible version of ROOM.</p>
+          <p role="status">You can listen to this saved version. Editing is unavailable for this take.</p>
         )}
         {editing &&
           !catalog &&

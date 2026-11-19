@@ -18,16 +18,16 @@ function ThrowRow({gesture, disabled, apply}: {gesture: SpaceGesture; disabled: 
     <button disabled={disabled || !seconds} onClick={() => apply({type: 'move', id: gesture.id, startFrame: Math.round(Number(seconds) * RATE)})}>Move</button>
     <button disabled={disabled} onClick={() => apply({type: 'remove', id: gesture.id})}>Remove</button></li>;
 }
-export function Timeline({recipe, disabled, position, setPosition, apply}: {recipe: RecipeV1; disabled: boolean; position: number;
+export function Timeline({recipe, maxGestures, disabled, position, setPosition, apply}: {recipe: RecipeV1; maxGestures: number; disabled: boolean; position: number;
   setPosition: (frame: number) => void; apply: (op: Parameters<typeof editGesture>[1]) => void}) {
   const length = recipe.passage.endFrame - recipe.passage.startFrame;
   return <section className="take-timeline" aria-label="Timeline"><h2>Throw timeline</h2>
     <div className="take-row"><label>Timeline position (seconds)<input type="number" min="0" max={length / RATE} step=".001" disabled={disabled}
       value={position / RATE} onChange={e => setPosition(Math.min(length - 1, Math.max(0, Math.round(Number(e.target.value) * RATE))))}/></label>
-    <button disabled={disabled} onClick={() => apply({type: 'add', gesture: {id: crypto.randomUUID(), startFrame: position,
+    <button disabled={disabled || recipe.gestures.length >= maxGestures} onClick={() => apply({type: 'add', gesture: {id: crypto.randomUUID(), startFrame: position,
       endFrame: Math.min(length, position + RATE / 4), settings: recipe.initialSettings}})}>Add throw</button></div>
     <ol aria-label="Echo throws">{recipe.gestures.map(g => <ThrowRow key={g.id + g.startFrame} gesture={g} disabled={disabled} apply={apply}/>)}</ol>
-    {!recipe.gestures.length && <p>No throws recorded.</p>}
+    <p>{recipe.gestures.length} of {maxGestures} throws</p>
   </section>;
 }
 

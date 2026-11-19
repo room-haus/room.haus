@@ -348,3 +348,20 @@ test('keyboard seeking keeps the running clock and outputs the saved echo tail a
   expect(await page.evaluate(() => new Set(window.scheduled.map((s) => s.context)).size)).toBe(1);
   await ctx.close();
 });
+
+test('current write limits govern variation while saved playback remains available', async ({page, request}) => {
+  const parent = await seed(request);
+  const pattern = '**/v1/takes/' + parent.id;
+  await page.route(pattern, async route => {
+    const manifest = await (await route.fetch()).json();
+    await route.fulfill({json: {...manifest, editable: false}});
+  });
+  await page.goto('/takes/?id=' + parent.id);
+  await button(compare(page), 'Play take').click();
+  await expect(button(compare(page), 'Pause')).toBeEnabled();
+  await expect(button(page, 'Make a variation')).toHaveCount(0);
+  await page.unroute(pattern);
+  await page.reload();
+  await button(page, 'Make a variation').click();
+  await expect(page.getByText('1 of 24 throws')).toBeVisible();
+});

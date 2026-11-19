@@ -6,7 +6,7 @@ import {TAKE_SOURCE_SAMPLE_RATE as RATE, TAKE_SOURCE_BYTES_PER_FRAME as STRIDE} 
 
 export type Catalog = {sources: SourceOverview[]; limits: {maxPassageFrames: number; maxGestures: number}};
 export type AudioPair = {original: AudioBuffer; take: AudioBuffer};
-export type SavedTake = {id: string; parentId: string | null; recipe: unknown; passage: TakePassage; audio: AudioPair};
+export type SavedTake = {editable?: boolean; id: string; parentId: string | null; recipe: unknown; passage: TakePassage; audio: AudioPair};
 type Descriptor = {
   url: string;
   sha256: string;
@@ -102,7 +102,7 @@ async function references(
 export async function getTake(id: string | null, signal: AbortSignal): Promise<SavedTake> {
   if (!validId(id)) throw Error('This link is missing a valid take ID.');
   const path = '/v1/takes/' + id;
-  const result = await json<References & {id: string; parentId: string | null; recipe: {passage: unknown}}>(
+  const result = await json<References & {editable?: boolean; id: string; parentId: string | null; recipe: {passage: unknown}}>(
     path,
     signal,
   );

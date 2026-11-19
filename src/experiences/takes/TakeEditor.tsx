@@ -203,7 +203,7 @@ export function TakeEditor({draft, source, loadPassage, maxPassageFrames, maxGes
         <label key={k}>{label} <output>{Number((settings[k] / scale).toFixed(2))}</output><input aria-label={label} type="range" min={min} max={max} step={step}
           value={settings[k] / scale} disabled={loading} onChange={e => { const initialSettings: SpaceTakeSettings = {...settings, [k]: Number(e.target.value) * scale}; change({...recipe, initialSettings}); }}/></label>)}
     </details>
-    <Timeline recipe={recipe} disabled={busy} position={position} setPosition={setPosition} apply={apply}/>
+    <Timeline recipe={recipe} maxGestures={maxGestures} disabled={busy} position={position} setPosition={setPosition} apply={apply}/>
     {renderPublication?.({recipe, busy, stop})}
     </div></article>;
 }
