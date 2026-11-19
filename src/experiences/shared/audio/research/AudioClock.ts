@@ -1,5 +1,5 @@
 export const HORIZON = .1;
-type Callback = (audioTime:number, generation:number)=>void;
+type Callback = (audioTime:number, generation:number, gridIndex:number)=>void;
 /** Schedules only the next 100ms; a stalled JS thread never replays old beats. */
 export class AudioClock {
   bpm=120;
@@ -42,7 +42,7 @@ export class AudioClock {
       // At 240 BPM / sixteenths this is at most two events per tick.
       for(let beat=first;beat<=end;beat++){
         job.last=beat;
-        try{job.callback(audio+(this.phase+beat*interval-media),this.generation);}catch{this.cancel();return;}
+        try{job.callback(audio+(this.phase+beat*interval-media),this.generation,beat);}catch{this.cancel();return;}
       }
     }
   }

@@ -5,7 +5,7 @@ Normal pull-request and master CI runs public-site E2E only. Internal Labs E2E i
 | Command | Scope |
 | --- | --- |
 | `npm run test:browser:public` | Public entrance, artwork/archive, player, navigation/history, loading/failure, waveform, accessibility and static-page behavior, on all three configured browsers. |
-| `npm run test:browser:labs` | Labs login/navigation and six geometry studies, Underlevel, shared listening host, Tone & texture processing, Hanging Balance, Endless Rally and Odd Ensemble, on all three browsers. |
+| `npm run test:browser:labs` | Labs login/navigation and six geometry studies, Underlevel, shared listening host, Tone & texture processing, Space & echoes, Additional rhythm, Hanging Balance, Endless Rally and Odd Ensemble, on all three browsers. |
 | `npm run test:browser` | Complete suite; retained for explicit local integration checks and backward compatibility. |
 
 Build first (`npm run build`) and install browsers (`npx playwright install chromium webkit`). The commands manage the built preview server. Use `ROOM_TEST_ORIGIN=http://127.0.0.1:4206` to select an isolated local port; every suite uses the same origin and browser projects. Pass `-- --project=chromium` or an individual spec after an npm command for a focused development run.
@@ -31,3 +31,11 @@ focused execution passed 40 with 5 intentional platform skips. This is not a ful
 run of all 360 cases. Recorded inventory: the `browserSuiteInventory` field in
 `docs/audio-research/processing-measurements.json`. Processing WAVs, screenshots,
 source caches and fresh run reports are ignored in `artifacts/audio-processing/`.
+
+Task03 adds24 deliberately internal rhythm cases (eight per browser project).
+Fresh inventory: **174 public + 252 Labs = 426**, zero overlap or omissions.
+Focused rhythm execution passed24/24; shared foundation/processing/space regression
+execution passed70 with5 intentional platform skips. This is not a run of the full
+426-case suite. Inventory and local screenshots/renders are in ignored
+`artifacts/audio-rhythm/`; findings and limits are in
+[`audio-research/additional-rhythm.md`](audio-research/additional-rhythm.md).
