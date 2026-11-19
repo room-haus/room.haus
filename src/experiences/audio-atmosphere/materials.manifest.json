@@ -1,0 +1,10 @@
+{
+  "license": "MIT (repository LICENSE)",
+  "sources": [
+    {"name":"Unpitched veil","kind":"generated","originalFilename":null,"generator":"shared/audio/research/materials.ts makeReference('noise')","parameters":"Seed 909 LCG; 8 s mono 24 kHz; uniform +/-0.25, 10ms endpoint taper, looped at endpoint silence","processing":"80 Hz high-pass Q .5; 150–5000 Hz low-pass Q .5; 0–600 cents filter motion at .03–.12 Hz; noise amplitude .5*(1-texture)"},
+    {"name":"Held tone","kind":"generated","originalFilename":null,"generator":"Web Audio sine OscillatorNode","parameters":"55–880 Hz manual; amplitude .045*texture; no harmonic inference"},
+    {"name":"Movement","kind":"generated-control-only","generator":"Web Audio sine OscillatorNode","parameters":".03–.12 Hz to noise filter detune only; no destination connection"}
+  ],
+  "bounds":{"audibleSources":2,"modulationSources":1,"nodes":9,"retainedNoiseBytes":768000,"attackSeconds":2,"editRampSeconds":0.75,"reverbSeconds":0,"feedback":0},
+  "referenceComparisons":"Shared generated 909-inspired diagnostic loop and 440 Hz tone; existing verified MX029 passages in scripts/fixtures/audio-processing-passages.json. No new samples or dependencies."
+}

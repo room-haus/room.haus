@@ -1,0 +1,468 @@
+{
+  "date": "2026-11-19",
+  "graph": "Actual layer module in aligned OfflineAudioContext; source unchanged at unity into shared-equivalent 0.5 headroom; layer multiplier level*0.5. Offline guard omitted; peaks checked below .98. Actual shared guarded path covered separately in e2e/audio-atmosphere.spec.cjs.",
+  "listening": "No human subjective listening performed. Reference-tone tuned-440 is manually set unison to known generated 440Hz; untuned-466 is deliberately one semitone above. MX029 tuning candidates are unverified by ear, never key-matched. Comparison copies attenuate to lowest RMS within each passage; no LUFS/perceptual match claim.",
+  "sources": [
+    {
+      "segment": 6,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-006.ts",
+      "segmentSha256": "537d794f639000b50bfc32b57e094c482f3fa8c7c7e26ea36065a63dc803e481",
+      "mediaTime": 60.006224,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/5b3d/room.haus/artifacts/audio-atmosphere/passages/mx029-006-source.wav"
+    },
+    {
+      "segment": 90,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-090.ts",
+      "segmentSha256": "bc787d99aa958f1d16e5e0f0854938000025304cdf60c3bdeb32b15e1b2c28a3",
+      "mediaTime": 900.0933599999997,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/5b3d/room.haus/artifacts/audio-atmosphere/passages/mx029-090-source.wav"
+    },
+    {
+      "segment": 210,
+      "url": "https://roomhauscdnprd.blob.core.windows.net/mixes/MX029/MX029-210.ts",
+      "segmentSha256": "a7ad3e5afd63c0d80a790434787f3999987a8edfc584c89aabd996e1b1158ea4",
+      "mediaTime": 2100.2178399999952,
+      "seconds": 8,
+      "sourceWav": "/Users/pmarko.alt/.codex/worktrees/5b3d/room.haus/artifacts/audio-atmosphere/passages/mx029-210-source.wav"
+    }
+  ],
+  "renders": [
+    {
+      "source": "reference-loop",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "peak": 0.3749961853027344,
+      "rms": 0.0383066438651106,
+      "finite": true,
+      "layerRms": 0,
+      "rate": 24000,
+      "file": "reference-loop-original.wav",
+      "seconds": 8,
+      "sha256": "6bdd3f8b707b45fad8dc9bfe2a41fb987d3d4a4573afd349faad72453a29b0ed",
+      "rmsDifferenceDb": 0,
+      "layerToDryDb": null,
+      "comparisonTrimDb": 0
+    },
+    {
+      "source": "reference-loop",
+      "mode": "veil",
+      "settings": {
+        "name": "veil",
+        "texture": 0,
+        "brightness": 900,
+        "movement": 0.2,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.3834265470504761,
+      "rms": 0.03838880097757481,
+      "finite": true,
+      "layerRms": 0.0029824553895446823,
+      "rate": 24000,
+      "file": "reference-loop-veil.wav",
+      "seconds": 8,
+      "sha256": "0c2c0e41775be1793cd8617894beea27b47aef085791db8cacdc762a8adb022a",
+      "rmsDifferenceDb": 0.018608872698087472,
+      "layerToDryDb": -22.174002954316396,
+      "comparisonTrimDb": -0.0186088726980886
+    },
+    {
+      "source": "reference-loop",
+      "mode": "manual-110",
+      "settings": {
+        "name": "manual-110",
+        "texture": 1,
+        "brightness": 1200,
+        "movement": 0.15,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.38057300448417664,
+      "rms": 0.03852978195008143,
+      "finite": true,
+      "layerRms": 0.003630919098769068,
+      "rate": 24000,
+      "file": "reference-loop-manual-110.wav",
+      "seconds": 8,
+      "sha256": "f87782f398f7ae3e63db90323bc4c83ade50973184b01df494d7cdf8416f4ce1",
+      "rmsDifferenceDb": 0.050448942883713585,
+      "layerToDryDb": -20.465150633459587,
+      "comparisonTrimDb": -0.05044894288371306
+    },
+    {
+      "source": "reference-loop",
+      "mode": "bright-blend",
+      "settings": {
+        "name": "bright-blend",
+        "texture": 0.35,
+        "brightness": 5000,
+        "movement": 1,
+        "tuning": 220,
+        "level": 1
+      },
+      "peak": 0.39370742440223694,
+      "rms": 0.039236299476391845,
+      "finite": true,
+      "layerRms": 0.008651337875426665,
+      "rate": 24000,
+      "file": "reference-loop-bright-blend.wav",
+      "seconds": 8,
+      "sha256": "e8f5686b8033c7602bac3d9bb4fd32377e3b1f099c61f3695176e0b4bc2520b1",
+      "rmsDifferenceDb": 0.20827873188820895,
+      "layerToDryDb": -12.923816610029718,
+      "comparisonTrimDb": -0.20827873188820786
+    },
+    {
+      "source": "reference-tone",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "peak": 0.1499984711408615,
+      "rms": 0.1059755074488075,
+      "finite": true,
+      "layerRms": 0,
+      "rate": 24000,
+      "file": "reference-tone-original.wav",
+      "seconds": 8,
+      "sha256": "ca668d8a4844c8259a99797c41258c625ae584b31d2515fbe1c1edfadf704316",
+      "rmsDifferenceDb": 0,
+      "layerToDryDb": null,
+      "comparisonTrimDb": 0
+    },
+    {
+      "source": "reference-tone",
+      "mode": "veil",
+      "settings": {
+        "name": "veil",
+        "texture": 0,
+        "brightness": 900,
+        "movement": 0.2,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.16099101305007935,
+      "rms": 0.10602874851577342,
+      "finite": true,
+      "layerRms": 0.0029824553873651597,
+      "rate": 24000,
+      "file": "reference-tone-veil.wav",
+      "seconds": 8,
+      "sha256": "d7ba696b81824fe1958b4f03ca12d999191b7ccc2f2edd9b7334d01caa7937a2",
+      "rmsDifferenceDb": 0.004362610924921925,
+      "layerToDryDb": -31.01263097489104,
+      "comparisonTrimDb": -0.0043626109249216
+    },
+    {
+      "source": "reference-tone",
+      "mode": "tuned-440",
+      "settings": {
+        "name": "tuned-440",
+        "texture": 1,
+        "brightness": 1200,
+        "movement": 0.15,
+        "tuning": 440,
+        "level": 0.5
+      },
+      "peak": 0.15562346577644348,
+      "rms": 0.10946107787539591,
+      "finite": true,
+      "layerRms": 0.0036309193097588707,
+      "rate": 24000,
+      "file": "reference-tone-tuned-440.wav",
+      "seconds": 8,
+      "sha256": "c6502a175b01bbd88c3990f3fd23252c9ee9b5f98f9d253dc8f1279546f7402e",
+      "rmsDifferenceDb": 0.2810843114059415,
+      "layerToDryDb": -29.30377814295666,
+      "comparisonTrimDb": -0.2810843114059415
+    },
+    {
+      "source": "reference-tone",
+      "mode": "untuned-466",
+      "settings": {
+        "name": "untuned-466",
+        "texture": 1,
+        "brightness": 5000,
+        "movement": 1,
+        "tuning": 466.16,
+        "level": 0.5
+      },
+      "peak": 0.1556234359741211,
+      "rms": 0.10603983762329605,
+      "finite": true,
+      "layerRms": 0.0036309252067886484,
+      "rate": 24000,
+      "file": "reference-tone-untuned-466.wav",
+      "seconds": 8,
+      "sha256": "af14e7eaa1dfe8fb83859a1212d97360d818c78fb5e77d186080c51e73823e95",
+      "rmsDifferenceDb": 0.005270984635216736,
+      "layerToDryDb": -29.303764036086232,
+      "comparisonTrimDb": -0.005270984635216828
+    },
+    {
+      "source": "mx029-006",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "peak": 0.4087371826171875,
+      "rms": 0.0986324932114421,
+      "finite": true,
+      "layerRms": 0,
+      "rate": 24000,
+      "file": "mx029-006-original.wav",
+      "seconds": 8,
+      "sha256": "b411df2be6855ed3aa259ec37e1bd3eba0bd735905f11a1449e65af635b504c3",
+      "rmsDifferenceDb": 0,
+      "layerToDryDb": null,
+      "comparisonTrimDb": 0
+    },
+    {
+      "source": "mx029-006",
+      "mode": "veil",
+      "settings": {
+        "name": "veil",
+        "texture": 0,
+        "brightness": 900,
+        "movement": 0.2,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.4103350043296814,
+      "rms": 0.09866823567742236,
+      "finite": true,
+      "layerRms": 0.0029824553876718427,
+      "rate": 24000,
+      "file": "mx029-006-veil.wav",
+      "seconds": 8,
+      "sha256": "9839a8fbeb19ac99e54ff1d8205345095e832f041010b6599b86a8e553d6c32e",
+      "rmsDifferenceDb": 0.0031470245451338252,
+      "layerToDryDb": -30.388921103273425,
+      "comparisonTrimDb": -0.003147024545133107
+    },
+    {
+      "source": "mx029-006",
+      "mode": "manual-110",
+      "settings": {
+        "name": "manual-110",
+        "texture": 1,
+        "brightness": 1200,
+        "movement": 0.15,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.40579846501350403,
+      "rms": 0.09869325067023152,
+      "finite": true,
+      "layerRms": 0.003630919099611368,
+      "rate": 24000,
+      "file": "mx029-006-manual-110.wav",
+      "seconds": 8,
+      "sha256": "6901294156b005b1386f6d41f786903e6c17e8152aac0bdf2401a542523d531d",
+      "rmsDifferenceDb": 0.005348846917083861,
+      "layerToDryDb": -28.68006877494734,
+      "comparisonTrimDb": -0.005348846917083983
+    },
+    {
+      "source": "mx029-006",
+      "mode": "bright-blend",
+      "settings": {
+        "name": "bright-blend",
+        "texture": 0.35,
+        "brightness": 5000,
+        "movement": 1,
+        "tuning": 220,
+        "level": 1
+      },
+      "peak": 0.42419466376304626,
+      "rms": 0.09900571669984574,
+      "finite": true,
+      "layerRms": 0.008651337878372516,
+      "rate": 24000,
+      "file": "mx029-006-bright-blend.wav",
+      "seconds": 8,
+      "sha256": "42f1a89e52f439037cc09a25bb1ab22d79922f15babdb826f448fe2e248e4349",
+      "rmsDifferenceDb": 0.03280521398767498,
+      "layerToDryDb": -21.13873475057481,
+      "comparisonTrimDb": -0.03280521398767542
+    },
+    {
+      "source": "mx029-090",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "peak": 0.5,
+      "rms": 0.12745265690362848,
+      "finite": true,
+      "layerRms": 0,
+      "rate": 24000,
+      "file": "mx029-090-original.wav",
+      "seconds": 8,
+      "sha256": "cebc5ffb807b91924510d008ba44c1676b3a82b7d72afe50748715f115f68eff",
+      "rmsDifferenceDb": 0,
+      "layerToDryDb": null,
+      "comparisonTrimDb": 0
+    },
+    {
+      "source": "mx029-090",
+      "mode": "veil",
+      "settings": {
+        "name": "veil",
+        "texture": 0,
+        "brightness": 900,
+        "movement": 0.2,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.5037146806716919,
+      "rms": 0.1274655026945175,
+      "finite": true,
+      "layerRms": 0.002982455373333434,
+      "rate": 24000,
+      "file": "mx029-090-veil.wav",
+      "seconds": 8,
+      "sha256": "55be394a0e422c90dcd66a27cceb41f9473fff0e5af9092496eb0765ddf04ad1",
+      "rmsDifferenceDb": 0.0008753956347879431,
+      "layerToDryDb": -32.61549878547995,
+      "comparisonTrimDb": -0.0008753956347887394
+    },
+    {
+      "source": "mx029-090",
+      "mode": "manual-110",
+      "settings": {
+        "name": "manual-110",
+        "texture": 1,
+        "brightness": 1200,
+        "movement": 0.15,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.5027109384536743,
+      "rms": 0.1274966529223227,
+      "finite": true,
+      "layerRms": 0.0036309191042738238,
+      "rate": 24000,
+      "file": "mx029-090-manual-110.wav",
+      "seconds": 8,
+      "sha256": "86e867f4640918efd8229abbcc339115e3b24bc439d8794f08d51e7151643214",
+      "rmsDifferenceDb": 0.002997808207024087,
+      "layerToDryDb": -30.90664640424218,
+      "comparisonTrimDb": -0.002997808207024797
+    },
+    {
+      "source": "mx029-090",
+      "mode": "bright-blend",
+      "settings": {
+        "name": "bright-blend",
+        "texture": 0.35,
+        "brightness": 5000,
+        "movement": 1,
+        "tuning": 220,
+        "level": 1
+      },
+      "peak": 0.5070943832397461,
+      "rms": 0.12772269621592391,
+      "finite": true,
+      "layerRms": 0.008651337876721404,
+      "rate": 24000,
+      "file": "mx029-090-bright-blend.wav",
+      "seconds": 8,
+      "sha256": "33fd82478998620283ece06e5361d816b841b629c4777480a3b625105c53f334",
+      "rmsDifferenceDb": 0.01838369193140939,
+      "layerToDryDb": -23.365312392680885,
+      "comparisonTrimDb": -0.018383691931410064
+    },
+    {
+      "source": "mx029-210",
+      "mode": "original",
+      "settings": {
+        "name": "original"
+      },
+      "peak": 0.49488815665245056,
+      "rms": 0.08449779715246293,
+      "finite": true,
+      "layerRms": 0,
+      "rate": 24000,
+      "file": "mx029-210-original.wav",
+      "seconds": 8,
+      "sha256": "ee6ff02b5aef8db7814e56487c8c20d39e0df6fbf3d7e5acbb7a49b4eb7c4510",
+      "rmsDifferenceDb": 0,
+      "layerToDryDb": null,
+      "comparisonTrimDb": 0
+    },
+    {
+      "source": "mx029-210",
+      "mode": "veil",
+      "settings": {
+        "name": "veil",
+        "texture": 0,
+        "brightness": 900,
+        "movement": 0.2,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.49620217084884644,
+      "rms": 0.08454041610650055,
+      "finite": true,
+      "layerRms": 0.0029824553845460597,
+      "rate": 24000,
+      "file": "mx029-210-veil.wav",
+      "seconds": 8,
+      "sha256": "d3dcc95f43ecbf7aae84da6194270df5ebb5bfd53fb190f4de18c1593cf41d76",
+      "rmsDifferenceDb": 0.004379879933269947,
+      "layerToDryDb": -29.045428628870013,
+      "comparisonTrimDb": -0.004379879933270771
+    },
+    {
+      "source": "mx029-210",
+      "mode": "manual-110",
+      "settings": {
+        "name": "manual-110",
+        "texture": 1,
+        "brightness": 1200,
+        "movement": 0.15,
+        "tuning": 110,
+        "level": 0.5
+      },
+      "peak": 0.49650099873542786,
+      "rms": 0.08450301197831682,
+      "finite": true,
+      "layerRms": 0.003630919096258906,
+      "rate": 24000,
+      "file": "mx029-210-manual-110.wav",
+      "seconds": 8,
+      "sha256": "da4b5192fdf4ad1b20e51bab750deaab51c767ef825ed3fdbbba87660628138e",
+      "rmsDifferenceDb": 0.0005360376923151221,
+      "layerToDryDb": -27.336576299460383,
+      "comparisonTrimDb": -0.0005360376923159925
+    },
+    {
+      "source": "mx029-210",
+      "mode": "bright-blend",
+      "settings": {
+        "name": "bright-blend",
+        "texture": 0.35,
+        "brightness": 5000,
+        "movement": 1,
+        "tuning": 220,
+        "level": 1
+      },
+      "peak": 0.499335914850235,
+      "rms": 0.08492524713602997,
+      "finite": true,
+      "layerRms": 0.008651337870817205,
+      "rate": 24000,
+      "file": "mx029-210-bright-blend.wav",
+      "seconds": 8,
+      "sha256": "f8386640d04987a5d506c93aaadd3bf17ea47b1fa9a1f5d5acc9c94a011673ba",
+      "rmsDifferenceDb": 0.04382864534705066,
+      "layerToDryDb": -19.79524227465357,
+      "comparisonTrimDb": -0.04382864534705052
+    }
+  ]
+}

@@ -39,3 +39,11 @@ execution passed70 with5 intentional platform skips. This is not a run of the fu
 426-case suite. Inventory and local screenshots/renders are in ignored
 `artifacts/audio-rhythm/`; findings and limits are in
 [`audio-research/additional-rhythm.md`](audio-research/additional-rhythm.md).
+
+Task04 adds18 deliberately internal atmospheric-layer cases (six per browser).
+Fresh inventory: **174 public + 270 Labs = 444**, zero overlap or omissions.
+Atmosphere checks passed18/18; shared-foundation regression checks passed17 with
+4 intentional platform skips. This is not a full run of all444 cases. Render,
+guarded-graph, actual MX029 smoke and layout evidence live locally in ignored
+`artifacts/audio-atmosphere/`; findings and listening limits are in
+[`audio-research/atmospheric-layers.md`](audio-research/atmospheric-layers.md).

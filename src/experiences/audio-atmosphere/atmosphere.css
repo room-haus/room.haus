@@ -1,0 +1,3 @@
+.atmosphere-controls{display:grid;gap:1.1rem}.atmosphere-controls h2{margin:0}.atmosphere-controls output{font-size:.8rem;color:#65685e;font-variant-numeric:tabular-nums}.atmosphere-controls .research-note{margin:0}.atmosphere-controls input[type=number]{font-variant-numeric:tabular-nums}
+.atmosphere-experiment .research-control-grid{align-items:start}
+.atmosphere-experiment{min-height:100%}.atmosphere-experiment .research-control-grid{align-items:start}

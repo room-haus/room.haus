@@ -6,8 +6,11 @@ import audioPoster from '../experiences/audio-reference/poster.svg';
 import processingPoster from '../experiences/audio-processing/poster.svg';
 import spacePoster from '../experiences/audio-space/poster.svg';
 import rhythmPoster from '../experiences/audio-rhythm/poster.svg';
+import atmospherePoster from '../experiences/audio-atmosphere/poster.svg';
 // Static loader functions preserve named lazy chunks and allow retry on reopening.
 export const experiences = [
+  {id:'audio-atmosphere',category:'audio-experiments',title:'Atmospheric layers',description:'Filtered air and a manually tuned held tone. Listen for a change of setting, then for lost detail.',poster:atmospherePoster,
+    load:()=>import(/* webpackChunkName: "audio-atmosphere" */ '../experiences/audio-atmosphere')},
   {id:'audio-rhythm',category:'audio-experiments',title:'Additional rhythm',description:'A few quiet hats, a clap and an optional kick. Align by ear; listen for support and competition.',poster:rhythmPoster,
     load:()=>import(/* webpackChunkName: "audio-rhythm" */ '../experiences/audio-rhythm')},
   {id:'audio-space',category:'audio-experiments',title:'Space & echoes',description:'Filtered delay, compact reverb and a restrained stereo return. Listen for depth, then compare with Original.',poster:spacePoster,
